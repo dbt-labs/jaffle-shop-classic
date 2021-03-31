@@ -16,7 +16,6 @@ Table customers {
   id int PK
   first_name varchar
   last_name varchar
-  email varchar
 }
 
 Ref: orders.user_id > customers.id
