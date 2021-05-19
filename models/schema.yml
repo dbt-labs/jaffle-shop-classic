@@ -10,6 +10,10 @@ models:
         tests:
           - unique
           - not_null
+        meta:
+          measures:
+            total_customers:
+              type: count
 
       - name: first_name
         description: Customer's first name. PII.
@@ -32,12 +36,22 @@ models:
   - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
 
+    meta:
+      joins:
+        - join: customers
+          sql_on: ${customers.customer_id} = ${orders.customer_id}
+
+
     columns:
       - name: order_id
         tests:
           - unique
           - not_null
         description: This is a unique identifier for an order
+        meta:
+          measures:
+            total_orders:
+              type: count
 
       - name: customer_id
         description: Foreign key to the customers table
@@ -49,6 +63,12 @@ models:
 
       - name: order_date
         description: Date (UTC) that the order was placed
+        meta:
+          measures:
+            first_ordered_at:
+              type: min
+            last_ordered_at:
+              type: max
 
       - name: status
         description: '{{ doc("orders_status") }}'
@@ -80,3 +100,36 @@ models:
         description: Amount of the order (AUD) paid for by gift card
         tests:
           - not_null
+
+  - name: payments
+    description: This table has information about individual payments
+
+    meta:
+      joins:
+        - join: orders
+          sql_on: ${orders.order_id} = ${payments.order_id}
+        - join: customers
+          sql_on: ${customers.customer_id} = ${orders.customer_id}
+
+    columns:
+      - name: id
+        description: This is a unique identifier for a payment
+        meta:
+          measures:
+            payment_count:
+              type: count
+              description: count of all payments
+
+      - name: order_id
+        description: Foreign key to the orders table
+
+      - name: payment_method
+        description: Method of payment used, for example credit card
+
+      - name: amount
+        description: Total amount (AUD) of the individual payment
+        meta:
+          measures:
+            total_revenue:
+              type: sum
+              description: Sum of all payments
