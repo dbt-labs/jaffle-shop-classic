@@ -112,7 +112,7 @@ models:
           sql_on: ${customers.customer_id} = ${orders.customer_id}
 
     columns:
-      - name: id
+      - name: payment_id
         description: This is a unique identifier for a payment
         meta:
           measures:
