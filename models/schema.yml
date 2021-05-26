@@ -11,9 +11,9 @@ models:
           - unique
           - not_null
         meta:
-          measures:
+          metrics:
             total_customers:
-              type: count
+              type: count_distinct
 
       - name: first_name
         description: Customer's first name. PII.
@@ -49,8 +49,10 @@ models:
           - not_null
         description: This is a unique identifier for an order
         meta:
-          measures:
+          metrics:
             total_orders:
+              type: count
+            more_orders:
               type: count
 
       - name: customer_id
@@ -64,7 +66,7 @@ models:
       - name: order_date
         description: Date (UTC) that the order was placed
         meta:
-          measures:
+          metrics:
             first_ordered_at:
               type: min
             last_ordered_at:
@@ -115,7 +117,7 @@ models:
       - name: payment_id
         description: This is a unique identifier for a payment
         meta:
-          measures:
+          metrics:
             payment_count:
               type: count
               description: count of all payments
@@ -129,7 +131,7 @@ models:
       - name: amount
         description: Total amount (AUD) of the individual payment
         meta:
-          measures:
+          metrics:
             total_revenue:
               type: sum
               description: Sum of all payments
