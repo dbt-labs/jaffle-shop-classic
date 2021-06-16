@@ -1,13 +1,13 @@
 
 name: 'jaffle_shop'
-version: '0.1'
+version: '0.2'
 profile: 'jaffle_shop'
 config-version: 2
 
 source-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
-data-paths: ["data"]
+data-paths: ["raw"]
 macro-paths: ["macros"]
 
 target-path: "target"
@@ -18,6 +18,13 @@ clean-targets:
 
 models:
   jaffle_shop:
-      materialized: table
-      staging:
-        materialized: view
+      materialized: view
+      marts:
+        materialized: table
+        
+seeds:
+  # https://docs.getdbt.com/reference/seed-configs
+  +quote_columns: true
+  jaffle_shop:
+    +enabled: true
+    +schema: raw
