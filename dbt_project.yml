@@ -18,6 +18,7 @@ clean-targets:
 
 models:
   jaffle_shop:
+      +as_columnstore: False
       materialized: table
       staging:
         materialized: view

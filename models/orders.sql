@@ -25,29 +25,29 @@ order_payments as (
 
     from payments
 
-    group by 1
+    group by order_id
 
 ),
 
 final as (
 
     select
-        orders.order_id,
-        orders.customer_id,
-        orders.order_date,
-        orders.status,
+        o.order_id,
+        o.customer_id,
+        o.order_date,
+        o.status,
 
         {% for payment_method in payment_methods -%}
 
-        order_payments.{{ payment_method }}_amount,
+        op.{{ payment_method }}_amount,
 
         {% endfor -%}
 
-        order_payments.total_amount as amount
+        op.total_amount as amount
 
-    from orders
+    from orders o
 
-    left join order_payments using (order_id)
+    left join order_payments op on o.order_id=op.order_id
 
 )
 
