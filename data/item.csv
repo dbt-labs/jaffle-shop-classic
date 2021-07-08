@@ -1,0 +1,151 @@
+id,order_id,jaffle_type
+1,95,Slow-cooked meat with cheese
+2,14,"Tuna, cheese and mayonnaise"
+3,75,Slow-cooked meat with cheese
+4,72,Mashed potato and gravy
+5,75,"Chicken, pineapple and cheese"
+6,97,Slow-cooked meat with cheese
+7,87,"Chicken, pineapple and cheese"
+8,2,Slow-cooked meat with cheese
+9,35,"Ham, cheese, tomato and avocado"
+10,77,"Ham, cheese, tomato and avocado"
+11,12,Mashed potato and gravy
+12,19,"Tuna, cheese and mayonnaise"
+13,64,"Chicken, pineapple and cheese"
+14,16,"Tuna, cheese and mayonnaise"
+15,68,Slow-cooked meat with cheese
+16,39,Slow-cooked meat with cheese
+17,65,Slow-cooked meat with cheese
+18,68,"Tuna, cheese and mayonnaise"
+19,35,"Chicken, pineapple and cheese"
+20,44,"Chicken, pineapple and cheese"
+21,5,Slow-cooked meat with cheese
+22,76,"Chicken, pineapple and cheese"
+23,47,"Chicken, pineapple and cheese"
+24,61,"Ham, cheese, tomato and avocado"
+25,9,"Tuna, cheese and mayonnaise"
+26,2,Slow-cooked meat with cheese
+27,78,Slow-cooked meat with cheese
+28,3,"Chicken, pineapple and cheese"
+29,11,Slow-cooked meat with cheese
+30,64,Slow-cooked meat with cheese
+31,95,Slow-cooked meat with cheese
+32,50,Slow-cooked meat with cheese
+33,83,"Chicken, pineapple and cheese"
+34,17,"Ham, cheese, tomato and avocado"
+35,99,Slow-cooked meat with cheese
+36,22,Mashed potato and gravy
+37,74,Slow-cooked meat with cheese
+38,45,"Tuna, cheese and mayonnaise"
+39,48,"Ham, cheese, tomato and avocado"
+40,44,Slow-cooked meat with cheese
+41,97,Slow-cooked meat with cheese
+42,90,Slow-cooked meat with cheese
+43,84,Mashed potato and gravy
+44,64,Mashed potato and gravy
+45,67,Slow-cooked meat with cheese
+46,85,"Tuna, cheese and mayonnaise"
+47,25,"Tuna, cheese and mayonnaise"
+48,58,"Chicken, pineapple and cheese"
+49,10,"Ham, cheese, tomato and avocado"
+50,72,"Chicken, pineapple and cheese"
+51,72,Slow-cooked meat with cheese
+52,72,Slow-cooked meat with cheese
+53,31,"Tuna, cheese and mayonnaise"
+54,4,Mashed potato and gravy
+55,37,Mashed potato and gravy
+56,89,Slow-cooked meat with cheese
+57,55,"Tuna, cheese and mayonnaise"
+58,4,"Chicken, pineapple and cheese"
+59,68,"Ham, cheese, tomato and avocado"
+60,53,"Chicken, pineapple and cheese"
+61,41,"Ham, cheese, tomato and avocado"
+62,98,Slow-cooked meat with cheese
+63,17,"Chicken, pineapple and cheese"
+64,37,"Ham, cheese, tomato and avocado"
+65,8,Mashed potato and gravy
+66,23,Slow-cooked meat with cheese
+67,4,Slow-cooked meat with cheese
+68,65,"Tuna, cheese and mayonnaise"
+69,92,"Chicken, pineapple and cheese"
+70,56,"Ham, cheese, tomato and avocado"
+71,56,"Tuna, cheese and mayonnaise"
+72,82,"Chicken, pineapple and cheese"
+73,80,"Ham, cheese, tomato and avocado"
+74,95,"Tuna, cheese and mayonnaise"
+75,53,"Ham, cheese, tomato and avocado"
+76,93,"Chicken, pineapple and cheese"
+77,47,"Chicken, pineapple and cheese"
+78,32,"Tuna, cheese and mayonnaise"
+79,53,Mashed potato and gravy
+80,67,Mashed potato and gravy
+81,68,"Ham, cheese, tomato and avocado"
+82,22,"Tuna, cheese and mayonnaise"
+83,89,"Chicken, pineapple and cheese"
+84,88,"Tuna, cheese and mayonnaise"
+85,43,Mashed potato and gravy
+86,6,"Ham, cheese, tomato and avocado"
+87,99,"Chicken, pineapple and cheese"
+88,43,Slow-cooked meat with cheese
+89,22,"Chicken, pineapple and cheese"
+90,27,"Tuna, cheese and mayonnaise"
+91,5,Mashed potato and gravy
+92,77,Slow-cooked meat with cheese
+93,9,"Ham, cheese, tomato and avocado"
+94,77,"Tuna, cheese and mayonnaise"
+95,27,Slow-cooked meat with cheese
+96,92,"Ham, cheese, tomato and avocado"
+97,64,"Ham, cheese, tomato and avocado"
+98,72,"Tuna, cheese and mayonnaise"
+99,7,"Chicken, pineapple and cheese"
+100,19,"Ham, cheese, tomato and avocado"
+101,46,Slow-cooked meat with cheese
+102,59,Mashed potato and gravy
+103,21,"Tuna, cheese and mayonnaise"
+104,9,"Chicken, pineapple and cheese"
+105,97,Slow-cooked meat with cheese
+106,25,Slow-cooked meat with cheese
+107,37,"Tuna, cheese and mayonnaise"
+108,82,Mashed potato and gravy
+109,92,"Chicken, pineapple and cheese"
+110,97,"Ham, cheese, tomato and avocado"
+111,2,"Chicken, pineapple and cheese"
+112,79,Slow-cooked meat with cheese
+113,65,"Tuna, cheese and mayonnaise"
+114,97,"Tuna, cheese and mayonnaise"
+115,19,Slow-cooked meat with cheese
+116,4,Mashed potato and gravy
+117,42,Slow-cooked meat with cheese
+118,50,Mashed potato and gravy
+119,84,"Tuna, cheese and mayonnaise"
+120,85,Mashed potato and gravy
+121,69,"Ham, cheese, tomato and avocado"
+122,2,"Chicken, pineapple and cheese"
+123,96,"Chicken, pineapple and cheese"
+124,34,"Chicken, pineapple and cheese"
+125,22,Slow-cooked meat with cheese
+126,46,"Tuna, cheese and mayonnaise"
+127,87,"Tuna, cheese and mayonnaise"
+128,57,"Ham, cheese, tomato and avocado"
+129,25,"Chicken, pineapple and cheese"
+130,65,"Chicken, pineapple and cheese"
+131,30,Mashed potato and gravy
+132,45,Mashed potato and gravy
+133,24,"Ham, cheese, tomato and avocado"
+134,89,Slow-cooked meat with cheese
+135,26,"Tuna, cheese and mayonnaise"
+136,5,"Ham, cheese, tomato and avocado"
+137,10,"Tuna, cheese and mayonnaise"
+138,38,Mashed potato and gravy
+139,94,Mashed potato and gravy
+140,17,Mashed potato and gravy
+141,29,"Chicken, pineapple and cheese"
+142,51,Slow-cooked meat with cheese
+143,94,"Chicken, pineapple and cheese"
+144,25,"Tuna, cheese and mayonnaise"
+145,27,"Tuna, cheese and mayonnaise"
+146,91,"Chicken, pineapple and cheese"
+147,28,"Tuna, cheese and mayonnaise"
+148,82,"Ham, cheese, tomato and avocado"
+149,14,Slow-cooked meat with cheese
+150,35,Slow-cooked meat with cheese
