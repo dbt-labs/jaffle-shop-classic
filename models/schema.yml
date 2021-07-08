@@ -21,6 +21,9 @@ models:
       - name: last_name
         description: Customer's last name. PII.
 
+      - name: created
+        description: Timestamp (UTC) when customer was created
+
       - name: first_order
         description: Date (UTC) of a customer's first order
 
