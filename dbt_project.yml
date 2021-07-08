@@ -21,3 +21,9 @@ models:
       materialized: table
       staging:
         materialized: view
+
+seeds:
+  jaffle_shop:
+    raw_customers:
+      +column_types:
+        created: timestamp
