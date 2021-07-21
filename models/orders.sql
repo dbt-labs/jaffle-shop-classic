@@ -52,3 +52,6 @@ final as (
 )
 
 select * from final
+{% if env_var('DBT_CLOUD_RUN_REASON') != 'scheduled' %}
+    where order_date = '2018-03-12'
+{% endif %}
