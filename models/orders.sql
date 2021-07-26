@@ -52,3 +52,7 @@ final as (
 )
 
 select * from final
+
+{% if env_var('DBT_CLOUD_PROJECT_ID') != 'other' %}
+where ORDER_DATE = '2018-03-12'
+{% endif %}
