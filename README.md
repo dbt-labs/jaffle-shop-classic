@@ -1,4 +1,5 @@
 ## Testing dbt project: `jaffle_shop`
+> **NOTE:** this is a fork of the [official repo](https://github.com/dbt-labs/jaffle_shop) with the only difference being the addition of some dockerfiles to make running this project on a local postres db a bit easier. If you don't need/want that you'd probably be better served by the official repo. 
 
 `jaffle_shop` is a fictional ecommerce store. This dbt project transforms raw data from an app database into a customers and orders model ready for analytics.
 
