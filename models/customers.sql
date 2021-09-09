@@ -38,7 +38,8 @@ customer_payments as (
 
     from payments
 
-    left join orders o on o.order_id=p.order_id
+    left join orders on
+         payments.order_id = orders.order_id
 
     group by o.customer_id
 
