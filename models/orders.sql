@@ -47,7 +47,7 @@ final as (
 
     from orders
 
-    left join order_payments op on o.order_id=op.order_id
+    left join order_payments on orders.order_id = order_payments.order_id
 
 )
 
