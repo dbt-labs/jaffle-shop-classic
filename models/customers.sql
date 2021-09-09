@@ -36,7 +36,7 @@ customer_payments as (
         orders.customer_id,
         sum(amount) as total_amount
 
-    from payments p
+    from payments
 
     left join orders o on o.order_id=p.order_id
 
