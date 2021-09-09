@@ -61,7 +61,8 @@ final as (
     left join customer_orders
         on customers.customer_id = customer_orders.customer_id
 
-    left join customer_payments cp on cp.customer_id=c.customer_id
+    left join customer_payments
+        on  customers.customer_id = customer_payments.customer_id
 
 )
 
