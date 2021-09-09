@@ -39,7 +39,7 @@ final as (
 
         {% for payment_method in payment_methods -%}
 
-        op.{{ payment_method }}_amount,
+        order_payments.{{ payment_method }}_amount,
 
         {% endfor -%}
 
