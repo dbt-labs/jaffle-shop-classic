@@ -32,10 +32,10 @@ order_payments as (
 final as (
 
     select
-        o.order_id,
-        o.customer_id,
-        o.order_date,
-        o.status,
+        orders.order_id,
+        orders.customer_id,
+        orders.order_date,
+        orders.status,
 
         {% for payment_method in payment_methods -%}
 
