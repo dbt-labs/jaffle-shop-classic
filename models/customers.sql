@@ -33,7 +33,7 @@ customer_orders as (
 customer_payments as (
 
     select
-        o.customer_id,
+        orders.customer_id,
         sum(amount) as total_amount
 
     from payments p
