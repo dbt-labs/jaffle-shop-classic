@@ -45,7 +45,7 @@ final as (
 
         order_payments.total_amount as amount
 
-    from orders o
+    from orders
 
     left join order_payments op on o.order_id=op.order_id
 
