@@ -26,7 +26,7 @@ customer_orders as (
         count(order_id) as number_of_orders
     from orders
 
-    group by 1
+    group by customer_id
 
 ),
 
@@ -38,9 +38,10 @@ customer_payments as (
 
     from payments
 
-    left join orders using (order_id)
+    left join orders on
+         payments.order_id = orders.order_id
 
-    group by 1
+    group by orders.customer_id
 
 ),
 
@@ -57,9 +58,11 @@ final as (
 
     from customers
 
-    left join customer_orders using (customer_id)
+    left join customer_orders
+        on customers.customer_id = customer_orders.customer_id
 
-    left join customer_payments using (customer_id)
+    left join customer_payments
+        on  customers.customer_id = customer_payments.customer_id
 
 )
 
