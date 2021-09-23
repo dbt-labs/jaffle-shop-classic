@@ -12,7 +12,7 @@ models:
           - not_null
         meta:
           metrics:
-            total_customers:
+            unique_customer_count:
               type: count_distinct
 
       - name: first_name
@@ -23,15 +23,6 @@ models:
 
       - name: created
         description: Timestamp (UTC) when customer was created
-
-      - name: first_order
-        description: Date (UTC) of a customer's first order
-
-      - name: most_recent_order
-        description: Date (UTC) of a customer's most recent order
-
-      - name: number_of_orders
-        description: Count of the number of orders a customer has placed
 
   - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
@@ -50,10 +41,8 @@ models:
         description: This is a unique identifier for an order
         meta:
           metrics:
-            total_orders:
-              type: count
-            more_orders:
-              type: count
+            unique_order_count:
+              type: count_distinct
 
       - name: customer_id
         description: Foreign key to the customers table
@@ -67,9 +56,9 @@ models:
         description: Date (UTC) that the order was placed
         meta:
           metrics:
-            first_ordered_at:
+            date_of_first_order:
               type: min
-            last_ordered_at:
+            date_of_most_recent_order:
               type: max
 
       - name: status
@@ -118,8 +107,8 @@ models:
         description: This is a unique identifier for a payment
         meta:
           metrics:
-            payment_count:
-              type: count
+            unique_payment_count:
+              type: count_distinct
               description: count of all payments
 
       - name: order_id
