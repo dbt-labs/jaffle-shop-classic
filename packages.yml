@@ -1,0 +1,3 @@
+packages:
+  - package: dbt-labs/dbt_external_tables
+    version: 0.7.1
