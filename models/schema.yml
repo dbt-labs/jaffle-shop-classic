@@ -71,6 +71,10 @@ models:
         description: Total amount (AUD) of the order
         tests:
           - not_null
+        meta:
+          metrics:
+            avg_amount:
+              type: average
 
       - name: credit_card_amount
         description: Amount of the order (AUD) paid for by credit card
