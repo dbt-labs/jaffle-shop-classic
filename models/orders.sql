@@ -36,6 +36,7 @@ final as (
         orders.customer_id,
         orders.order_date,
         orders.status,
+        IF(status = 'completed', TRUE, FALSE) AS is_completed,
 
         {% for payment_method in payment_methods -%}
 

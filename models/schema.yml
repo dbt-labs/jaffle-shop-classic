@@ -44,6 +44,10 @@ models:
             unique_order_count:
               type: count_distinct
 
+     - name: is_completed
+       type: boolean
+       description: Boolean indicating if status is completed
+
       - name: customer_id
         description: Foreign key to the customers table
         tests:
