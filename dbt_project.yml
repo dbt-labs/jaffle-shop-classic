@@ -18,7 +18,7 @@ clean-targets:
 
 dispatch:
   - macro_namespace: dbt_external_tables
-    search_order: ['jaffle_shop', 'dbt_external_tables']
+    search_order: ['dbt', 'dbt_external_tables']
 
 models:
   jaffle_shop:
