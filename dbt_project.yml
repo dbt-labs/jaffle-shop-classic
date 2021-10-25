@@ -21,3 +21,8 @@ models:
       materialized: table
       staging:
         materialized: table
+
+seeds:
+  jaffle_shop:
+    +column_types:
+      order_date: TEXT
