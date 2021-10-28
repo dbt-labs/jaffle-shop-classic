@@ -10,6 +10,10 @@ models:
         tests:
           - unique
           - not_null
+        meta:
+          metrics:
+            unique_customer_count:
+              type: count_distinct
 
       - name: first_name
         description: Customer's first name. PII.
@@ -17,20 +21,17 @@ models:
       - name: last_name
         description: Customer's last name. PII.
 
-      - name: first_order
-        description: Date (UTC) of a customer's first order
-
-      - name: most_recent_order
-        description: Date (UTC) of a customer's most recent order
-
-      - name: number_of_orders
-        description: Count of the number of orders a customer has placed
-
-      - name: total_order_amount
-        description: Total value (AUD) of a customer's orders
+      - name: created
+        description: Timestamp (UTC) when customer was created
 
   - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
+
+    meta:
+      joins:
+        - join: customers
+          sql_on: ${customers.customer_id} = ${orders.customer_id}
+
 
     columns:
       - name: order_id
@@ -38,6 +39,10 @@ models:
           - unique
           - not_null
         description: This is a unique identifier for an order
+        meta:
+          metrics:
+            unique_order_count:
+              type: count_distinct
 
       - name: customer_id
         description: Foreign key to the customers table
@@ -49,6 +54,12 @@ models:
 
       - name: order_date
         description: Date (UTC) that the order was placed
+        meta:
+          metrics:
+            date_of_first_order:
+              type: min
+            date_of_most_recent_order:
+              type: max
 
       - name: status
         description: '{{ doc("orders_status") }}'
@@ -60,6 +71,10 @@ models:
         description: Total amount (AUD) of the order
         tests:
           - not_null
+        meta:
+          metrics:
+            avg_amount:
+              type: average
 
       - name: credit_card_amount
         description: Amount of the order (AUD) paid for by credit card
@@ -80,3 +95,36 @@ models:
         description: Amount of the order (AUD) paid for by gift card
         tests:
           - not_null
+
+  - name: payments
+    description: This table has information about individual payments
+
+    meta:
+      joins:
+        - join: orders
+          sql_on: ${orders.order_id} = ${payments.order_id}
+        - join: customers
+          sql_on: ${customers.customer_id} = ${orders.customer_id}
+
+    columns:
+      - name: payment_id
+        description: This is a unique identifier for a payment
+        meta:
+          metrics:
+            unique_payment_count:
+              type: count_distinct
+              description: count of all payments
+
+      - name: order_id
+        description: Foreign key to the orders table
+
+      - name: payment_method
+        description: Method of payment used, for example credit card
+
+      - name: amount
+        description: Total amount (AUD) of the individual payment
+        meta:
+          metrics:
+            total_revenue:
+              type: sum
+              description: Sum of all payments
