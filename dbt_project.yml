@@ -16,6 +16,10 @@ clean-targets:
     - "dbt_modules"
     - "logs"
 
+dispatch:
+  - macro_namespace: dbt_external_tables
+    search_order: ['dbt', 'dbt_external_tables']
+
 models:
   jaffle_shop:
       materialized: table
