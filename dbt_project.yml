@@ -23,6 +23,7 @@ models:
         materialized: table
 
 seeds:
+  +quote_columns: true
   jaffle_shop:
     +column_types:
       order_date: TEXT
