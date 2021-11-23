@@ -1,3 +1,26 @@
+## How to use this project in Lightdash 
+
+### dbt connection:
+
+- type: github
+- personal access token: (follow the [docs instructions](https://docs.lightdash.com/get-started/setup-lightdash/connect-project/#personal-access-token) to get one) 
+- repository: lightdash/jaffle_shop
+- branch: main
+- project directory path: /
+
+### warehouse connection:
+
+First follow [these instructions](./docker/README.md) to run a postgres database for this jaffle shop project.
+
+- type: postgres
+- host: host.docker.internal
+- user: postgres
+- password: password
+- database: postgres
+- schema: jaffle
+- port: 5432
+- ssl: disabled
+
 ## Testing dbt project: `jaffle_shop`
 
 `jaffle_shop` is a fictional ecommerce store. This dbt project transforms raw data from an app database into a customers and orders model ready for analytics.
