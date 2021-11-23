@@ -60,11 +60,12 @@ You can use the following info to connect any tools to your postgres database:
 
 ```yaml
 port: 5432
-host: localhost
+host: localhost ( or 'host.docker.internal' if accessing from another docker container )
 user: postgres
-database: postgres
 password: password
-ssl: false
+database: postgres
+schema: jaffle
+ssl: false ( or 'disabled' )
 ```
 
 ## Step 6. Stop all services
