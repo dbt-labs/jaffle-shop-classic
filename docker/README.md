@@ -52,6 +52,8 @@ select * from jaffle.payments;
 
 If you don't see any data, something went wrong
 
+**To exit** type `Ctrl-d` (that's the control key and `d` together)
+
 ## Step 5. Connect from another tool (like Lightdash!!)
 
 You can use the following info to connect any tools to your postgres database:
