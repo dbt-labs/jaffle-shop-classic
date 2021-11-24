@@ -16,8 +16,8 @@ Docker compose is used to run multiple related services together. In this case, 
 Open up your favourite terminal and clone this repo
 
 ```shell
-git clone git@github.com:lightdash/jaffle-shop
-cd jaffle-shop/docker
+git clone git@github.com:lightdash/jaffle_shop
+cd jaffle_shop/docker
 ```
 
 ## Step 2. Get docker
