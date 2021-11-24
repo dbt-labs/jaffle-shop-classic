@@ -13,12 +13,27 @@ Docker compose is used to run multiple related services together. In this case, 
 
 ## Step 1. Get the code
 
+- Not planning on making any changes to the data models in the Jaffle Shop demo? Check out **option 1.**
+- Planning to make some changes to the data models in the Jaffle Shop demo? Check out **option 2.**
+
+### Option 1:
 Open up your favourite terminal and clone this repo
 
 ```shell
 git clone git@github.com:lightdash/jaffle_shop
 cd jaffle_shop/docker
 ```
+
+### Option 2:
+Fork the Jaffle Shop repo by clicking the `fork` button on the top right of the GitHub screen. 
+
+Open up your favourite terminal and clone your new repo
+
+```shell
+git clone git@github.com:your_profile_name/jaffle_shop # replace your_profile_name with the correct value
+cd jaffle_shop/docker
+```
+
 
 ## Step 2. Get docker
 
