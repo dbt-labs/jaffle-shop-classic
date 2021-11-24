@@ -1,5 +1,13 @@
 ## How to use this project in Lightdash 
 
+### install Lightdash:
+Take advantage of our installation script to easily run Lightdash locally. Check the [documentation page](https://docs.lightdash.com/get-started/setup-lightdash/install-lightdash#deploy-locally-with-our-installation-script) for more details.
+```bash
+git clone https://github.com/lightdash/lightdash
+cd lightdash
+./install.sh
+```
+
 ### dbt connection:
 
 - type: github
