@@ -29,7 +29,7 @@ First follow [these instructions](./docker/README.md) to run a postgres database
 - database: postgres
 - schema: jaffle
 - port: 5432
-- ssl: disabled
+- ssl: disable
 
 ## Testing dbt project: `jaffle_shop`
 
