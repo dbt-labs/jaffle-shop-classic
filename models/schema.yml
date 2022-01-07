@@ -23,7 +23,13 @@ models:
 
       - name: created
         description: Timestamp (UTC) when customer was created
-
+        meta:
+          metrics:
+            date_of_first_created_customer:
+              type: min
+            date_of_most_recent_created_customer:
+              type: max
+              
   - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
 
