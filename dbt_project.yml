@@ -29,7 +29,6 @@ models:
 seeds:
   +quote_columns: true
   jaffle_shop:
-#    +pre-hook: "set firebolt_dont_wait_for_upload_to_s3=1" # WARNING: alpha feature
     +quote_columns: true
     raw_orders:
       +column_types:
