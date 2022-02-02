@@ -13,6 +13,7 @@ What this repo _is not_:
     - a pull request flow
     - CI/CD integrations
 - A demonstration of using dbt for a high-complex project, or a demo of advanced features (e.g. macros, packages, hooks, operations) — we're just trying to keep things simple here!
+- A demonstration of all the dbt-firebolt features. The dbt-firebolt adapter repo can be found [here](https://github.com/firebolt-db/dbt-firebolt)
 
 ### What's in this repo?
 This repo contains [seeds](https://docs.getdbt.com/docs/building-a-dbt-project/seeds) that includes some (fake) raw data from a fictional app.
@@ -32,7 +33,7 @@ All models in this project are configured as dimensions, except the `orders` mod
 
 ### Running this project
 To get up and running with this project:
-1. Install dbt using [these instructions](https://docs.getdbt.com/docs/installation).
+1. Install the dbt-firebolt package using [these instructions](https://github.com/firebolt-db/dbt-firebolt#installation)
 
 2. Clone this repository.
 
@@ -41,7 +42,7 @@ To get up and running with this project:
 $ cd jaffle_shop
 ```
 
-4. Set up a profile called `jaffle_shop` to connect to a data warehouse by following [these instructions](https://docs.getdbt.com/docs/configure-your-profile). If you have access to a data warehouse, you can use those credentials – we recommend setting your [target schema](https://docs.getdbt.com/docs/configure-your-profile#section-populating-your-profile) to be a new schema (dbt will create the schema for you, as long as you have the right privileges). If you don't have access to an existing data warehouse, you can also setup a local postgres database and connect to it in your profile.
+4. Set up a profile called `jaffle_shop` to connect to a data warehouse by following [these instructions](https://docs.getdbt.com/docs/configure-your-profile). To connect to Firebolt from dbt, please see the [dbt documentation on Firebolt profiles](https://docs.getdbt.com/reference/warehouse-profiles/firebolt-profile#connecting-to-firebolt) on how to set it up.
 
 5. Ensure your profile is setup correctly from the command line:
 ```bash
