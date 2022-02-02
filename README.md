@@ -22,7 +22,7 @@ The raw data consists of customers, orders, and payments, with the following ent
 
 ![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
 
-The lineage of all objects involved in this project: 
+The following diagram represents the lineage of all objects involved in this project:
 
 ![Jaffle Shop Lineage](/etc/jaffle_shop_lineage.png)
 
