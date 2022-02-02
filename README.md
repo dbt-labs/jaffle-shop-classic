@@ -21,6 +21,14 @@ The raw data consists of customers, orders, and payments, with the following ent
 
 ![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
 
+The lineage of all objects involved in this project: 
+
+![Jaffle Shop Lineage](/etc/jaffle_shop_lineage.png)
+
+The s3.raw_customers denotes a Firebolt external table referencing data stored in a S3 public bucket. 
+
+All models in this project are configured as dimensions, except the `orders` model, which is configured as a fact table.
+
 
 ### Running this project
 To get up and running with this project:
@@ -40,29 +48,39 @@ $ cd jaffle_shop
 $ dbt debug
 ```
 
-6. Load the CSVs with the demo data set. This materializes the CSVs as tables in your target schema. Note that a typical dbt project **does not require this step** since dbt assumes your raw data is already in your warehouse.
+6. Ensure all dependent packages are installed:
+```bash
+$ dbt deps
+```
+
+7. Run the external table model (raw_customers defined in models/staging/sources_external_tables.yml). The data is in the s3 us-east-1 region. If your database is in another region, please copy the files from s3://firebolt-publishing-public/samples/dbt/ and update the sources_external_tables.yml file
+```bash
+$ dbt run-operation stage_external_sources
+```
+
+8. Load the CSVs with the demo data set. This materializes the CSVs as tables in your target schema. Note that a typical dbt project **does not require this step** since dbt assumes your raw data is already in your warehouse.
 ```bash
 $ dbt seed
 ```
 
-7. Run the models:
+9. Run the models:
 ```bash
 $ dbt run
 ```
 
 > **NOTE:** If this steps fails, it might mean that you need to make small changes to the SQL in the models folder to adjust for the flavor of SQL of your target database. Definitely consider this if you are using a community-contributed adapter.
 
-8. Test the output of the models:
+10. Test the output of the models:
 ```bash
 $ dbt test
 ```
 
-9. Generate documentation for the project:
+11. Generate documentation for the project:
 ```bash
 $ dbt docs generate
 ```
 
-10. View the documentation for the project:
+12. View the documentation for the project:
 ```bash
 $ dbt docs serve
 ```
