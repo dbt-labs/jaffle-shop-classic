@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: s3
+    tables:
+      - name: raw_customers
+        external:
+          url: 's3://firebolt-publishing-public/samples/dbt/'
+          object_pattern: '*raw_customers.csv'
+          type: '(CSV SKIP_HEADER_ROWS=1)'
+        columns:
+          - name: id
+            data_type: int
+          - name: first_name
+            data_type: TEXT
+          - name: last_name
+            data_type: TEXT

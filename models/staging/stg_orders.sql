@@ -1,3 +1,12 @@
+{{
+  config(
+    materialized = 'table',
+    table_type = 'dimension',
+    primary_index = 'order_id'
+    )
+}}
+
+
 with source as (
     {#-
     Normally we would select from the table here, but we are using seeds to load

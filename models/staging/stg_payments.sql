@@ -1,3 +1,11 @@
+{{
+  config(
+    materialized = 'table',
+    table_type = 'dimension',
+    primary_index = 'payment_id'
+    )
+}}
+
 with source as (
     
     {#-

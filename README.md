@@ -13,6 +13,7 @@ What this repo _is not_:
     - a pull request flow
     - CI/CD integrations
 - A demonstration of using dbt for a high-complex project, or a demo of advanced features (e.g. macros, packages, hooks, operations) — we're just trying to keep things simple here!
+- A demonstration of all the dbt-firebolt features. The dbt-firebolt adapter repo can be found [here](https://github.com/firebolt-db/dbt-firebolt)
 
 ### What's in this repo?
 This repo contains [seeds](https://docs.getdbt.com/docs/building-a-dbt-project/seeds) that includes some (fake) raw data from a fictional app.
@@ -21,10 +22,18 @@ The raw data consists of customers, orders, and payments, with the following ent
 
 ![Jaffle Shop ERD](/etc/jaffle_shop_erd.png)
 
+The following diagram represents the lineage of all objects involved in this project:
+
+![Jaffle Shop Lineage](/etc/jaffle_shop_lineage.png)
+
+The s3.raw_customers denotes a Firebolt external table referencing data stored in a S3 public bucket. 
+
+All models in this project are configured as dimensions, except the `orders` model, which is configured as a fact table.
+
 
 ### Running this project
 To get up and running with this project:
-1. Install dbt using [these instructions](https://docs.getdbt.com/docs/installation).
+1. Install the dbt-firebolt package using [these instructions](https://github.com/firebolt-db/dbt-firebolt#installation)
 
 2. Clone this repository.
 
@@ -33,36 +42,46 @@ To get up and running with this project:
 $ cd jaffle_shop
 ```
 
-4. Set up a profile called `jaffle_shop` to connect to a data warehouse by following [these instructions](https://docs.getdbt.com/docs/configure-your-profile). If you have access to a data warehouse, you can use those credentials – we recommend setting your [target schema](https://docs.getdbt.com/docs/configure-your-profile#section-populating-your-profile) to be a new schema (dbt will create the schema for you, as long as you have the right privileges). If you don't have access to an existing data warehouse, you can also setup a local postgres database and connect to it in your profile.
+4. Set up a profile called `jaffle_shop` to connect to a data warehouse by following [these instructions](https://docs.getdbt.com/docs/configure-your-profile). To connect to Firebolt from dbt, please see the [dbt documentation on Firebolt profiles](https://docs.getdbt.com/reference/warehouse-profiles/firebolt-profile#connecting-to-firebolt) on how to set it up.
 
 5. Ensure your profile is setup correctly from the command line:
 ```bash
 $ dbt debug
 ```
 
-6. Load the CSVs with the demo data set. This materializes the CSVs as tables in your target schema. Note that a typical dbt project **does not require this step** since dbt assumes your raw data is already in your warehouse.
+6. Ensure all dependent packages are installed:
+```bash
+$ dbt deps
+```
+
+7. Run the external table model (raw_customers defined in models/staging/sources_external_tables.yml). The data is in the s3 us-east-1 region. If your database is in another region, please copy the files from s3://firebolt-publishing-public/samples/dbt/ and update the sources_external_tables.yml file
+```bash
+$ dbt run-operation stage_external_sources
+```
+
+8. Load the CSVs with the demo data set. This materializes the CSVs as tables in your target schema. Note that a typical dbt project **does not require this step** since dbt assumes your raw data is already in your warehouse.
 ```bash
 $ dbt seed
 ```
 
-7. Run the models:
+9. Run the models:
 ```bash
 $ dbt run
 ```
 
 > **NOTE:** If this steps fails, it might mean that you need to make small changes to the SQL in the models folder to adjust for the flavor of SQL of your target database. Definitely consider this if you are using a community-contributed adapter.
 
-8. Test the output of the models:
+10. Test the output of the models:
 ```bash
 $ dbt test
 ```
 
-9. Generate documentation for the project:
+11. Generate documentation for the project:
 ```bash
 $ dbt docs generate
 ```
 
-10. View the documentation for the project:
+12. View the documentation for the project:
 ```bash
 $ dbt docs serve
 ```
