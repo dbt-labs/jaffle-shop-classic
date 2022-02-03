@@ -1,3 +1,18 @@
+{{
+  config(
+    materialized = 'table',
+    table_type = 'fact',
+    primary_index = ['order_id', 'customer_id'],
+    indexes = [
+      {
+        'type': 'aggregating',
+        'key_column': 'order_id',
+        'aggregation': ['SUM(credit_card_amount)', 'SUM(amount)']
+      }
+    ]
+    )
+}}
+
 {% set payment_methods = ['credit_card', 'coupon', 'bank_transfer', 'gift_card'] %}
 
 with orders as (
