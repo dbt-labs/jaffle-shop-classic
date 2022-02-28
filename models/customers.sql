@@ -30,6 +30,22 @@ customer_orders as (
 
 ),
 
+customer_orders_latest_stg AS (
+  SELECT
+  customer_id,
+  MAX(most_recent_order) OVER(PARTITION BY NULL) AS latest_order
+
+  FROM orders
+),
+
+customer_orders_latest AS (
+  SELECT
+  customer_id,
+  MAX(latest_order) AS latest_order
+
+  FROM customer_orders_latest_stg
+),
+
 customer_payments as (
 
     select
@@ -55,12 +71,16 @@ final as (
         customer_orders.most_recent_order,
         customer_orders.number_of_orders,
         customer_payments.total_amount as customer_lifetime_value
+        DATE_PART('day', customer_orders.first_order - customers.created) days_between_created_and_first_order,
+        DATE_PART('day', customer_orders.most_recent_order - customer_orders_latest.latest_order) AS days_since_last_order,
 
     from customers
 
     left join customer_orders using (customer_id)
 
     left join customer_payments using (customer_id)
+
+    LEFT JOIN customer_orders_latest USING(customer_id)
 
 )
 
