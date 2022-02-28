@@ -17,7 +17,7 @@ with source as (
 
     {% if is_incremental() %}
       -- this filter will only be applied on an incremental run
-      where event_time > (select max(event_time) from {{ this }})
+      where id > (select max(id) from {{ this }})
     {% endif %}
 ),
 
