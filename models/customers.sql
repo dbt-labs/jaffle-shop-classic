@@ -30,20 +30,12 @@ customer_orders as (
 
 ),
 
-customer_orders_latest_stg AS (
-  SELECT
-  customer_id,
-  MAX(most_recent_order) OVER(PARTITION BY NULL) AS latest_order
-
-  FROM orders
-),
-
 customer_orders_latest AS (
   SELECT
   customer_id,
-  MAX(latest_order) AS latest_order
+  MAX(most_recent_order) OVER(PARTITION BY NULL) AS latest_order -- getting the latest order date from all customers
 
-  FROM customer_orders_latest_stg
+  FROM customer_orders
 ),
 
 customer_payments as (
