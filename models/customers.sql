@@ -72,7 +72,7 @@ final as (
         customer_orders.number_of_orders,
         customer_payments.total_amount as customer_lifetime_value,
         DATE_PART('day', customer_orders.first_order - customers.created) days_between_created_and_first_order,
-        DATE_PART('day', customer_orders.most_recent_order - customer_orders_latest.latest_order) AS days_since_last_order,
+        DATE_PART('day', customer_orders.most_recent_order - customer_orders_latest.latest_order) AS days_since_last_order
 
     from customers
 
