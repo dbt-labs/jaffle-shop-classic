@@ -1,3 +1,17 @@
+{{
+  config(
+    materialized = "table",
+    meta = {
+      "continual": {
+        "type": "FeatureSet",
+        "entity": "Customer",
+        "index": "customer_id"
+      }
+    }
+  )  
+}}
+
+
 with customers as (
 
     select * from {{ ref('stg_customers') }}

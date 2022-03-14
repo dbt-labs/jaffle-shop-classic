@@ -9,7 +9,7 @@ jaffle_shop:
       user: sung_c
       password: "{{ env_var('SFPASS') }}"
 
-      database: ANALYTICS
+      database: SUNG_DEMO
       warehouse: TRANSFORMING
       schema: dbt_sung
       threads: 16
