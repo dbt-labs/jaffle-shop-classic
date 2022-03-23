@@ -1,8 +1,9 @@
 {{
   config(
-    materialized = 'table',
-    table_type = 'dimension',
-    primary_index = 'customer_id'
+    materialized = 'incremental',
+    table_type = 'fact',
+    incremental_strategy='append',
+    primary_index='customer_id'
     )
 }}
 
@@ -14,6 +15,10 @@ with source as (
     #}
     select * from {{ source('s3', 'raw_customers') }}
 
+    {% if is_incremental() %}
+      -- this filter will only be applied on an incremental run
+      where id > (select max(customer_id)-3 from {{ this }})
+    {% endif %}
 ),
 
 renamed as (
