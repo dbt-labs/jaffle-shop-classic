@@ -1,8 +1,9 @@
 {{
   config(
-    materialized = 'table',
     table_type = 'dimension',
-    primary_index = 'order_id'
+    primary_index = 'order_id',
+    materialized = 'incremental',
+    incremental_strategy='append'
     )
 }}
 
@@ -13,6 +14,9 @@ with source as (
     our data in this project
     #}
     select * from {{ ref('raw_orders') }}
+    {% if is_incremental() %}
+       where order_date > (select max(order_date) from {{ this }})
+    {% endif %}
 ),
 renamed as (
     select
