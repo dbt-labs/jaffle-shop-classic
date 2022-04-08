@@ -60,6 +60,13 @@ models:
 
       - name: is_completed
         description: Boolean indicating if status is completed
+        meta:
+          metrics:
+            fulfillment_rate:
+              type: average
+              format: percent
+              round: 1
+              sql: 'CASE WHEN ${is_completed} THEN 1 ELSE 0 END'
 
       - name: customer_id
         description: Foreign key to the customers table
@@ -85,33 +92,53 @@ models:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
 
       - name: amount
-        description: Total amount (AUD) of the order
+        description: Total amount (USD) of the order
         tests:
           - not_null
         meta:
           metrics:
-            avg_amount:
+            average_order_size:
               type: average
+              format: usd
+              round: 2
+            total_order_amount:
+              type: sum
+              format: usd
+              round: 2
+          dimension:
+            hidden: true
 
       - name: credit_card_amount
         description: Amount of the order (AUD) paid for by credit card
         tests:
           - not_null
+        meta:
+          dimension:
+            hidden: true
 
       - name: coupon_amount
         description: Amount of the order (AUD) paid for by coupon
         tests:
           - not_null
+        meta:
+          dimension:
+            hidden: true
 
       - name: bank_transfer_amount
         description: Amount of the order (AUD) paid for by bank transfer
         tests:
           - not_null
+        meta:
+          dimension:
+            hidden: true
 
       - name: gift_card_amount
         description: Amount of the order (AUD) paid for by gift card
         tests:
           - not_null
+        meta:
+          dimension:
+            hidden: true
 
   - name: payments
     description: This table has information about individual payments
