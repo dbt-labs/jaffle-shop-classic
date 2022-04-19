@@ -80,3 +80,22 @@ models:
         description: Amount of the order (AUD) paid for by gift card
         tests:
           - not_null
+  - name: aov
+    description: This table has info about aov
+
+    columns:
+      - name: order_date
+        tests:
+          - unique
+          - not_null
+        description: This is the date of an order
+
+      - name: amount
+        description: The total amount of dollars made in the day
+        tests:
+          - not_null
+
+      - name: aov
+        description: average order value 
+        tests:
+          - not_null
