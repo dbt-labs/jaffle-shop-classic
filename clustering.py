@@ -12,4 +12,4 @@ df["cluster_label"] = km_2.labels_
 
 print(df)
 
-write_to_source(df, "result", "order_detailed", mode="overwrite")
+write_to_model(df, mode="overwrite")
