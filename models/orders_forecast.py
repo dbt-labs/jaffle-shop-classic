@@ -8,7 +8,7 @@ from prophet import Prophet
 import sqlalchemy.types as types
 
 
-def make_forecast(dataframe: pd.DataFrame, col: str, periods: int = 30, plot = False):
+def make_forecast(dataframe: pd.DataFrame, col: str, periods: int = 30, plot=False):
     """Make forecast on metric data."""
     dataframe = dataframe[["order_date", col]]
     dataframe = dataframe.rename(columns={"order_date": "ds", col: "y"})
@@ -54,12 +54,10 @@ for cluster in [0, 1, 2]:
         rsuffix=f"_{cluster_col}",
     )
 
-with pd.option_context('display.max_rows', None):
+with pd.option_context("display.max_rows", None):
     # Show all dtypes
     print(joined_forecast.dtypes)
 
-# HACK: have to figure out how to write dates (or datetimes) to the database
-# TODO: The types.DATE did not work when testing for `dtype={"ds": types.DATE}`
 joined_forecast["ds"] = joined_forecast["ds"].map(lambda x: x.strftime("%Y-%m-%d"))
 
 # Generates a table with a BUNCH of columns
