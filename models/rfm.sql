@@ -1,12 +1,12 @@
-{% set cols = ['recency', 'frequency', 'monetary_value'] %}
+{% set cols = ['r', 'f', 'm'] %}
 
-with customers as (
+with rfm_cols as (
 
 	SELECT 
         customer_id,
-        most_recent_order as recency,
-        number_of_orders as frequency,
-        customer_lifetime_value as monetary_value
+        most_recent_order as {{ cols[0] }},
+        number_of_orders as {{ cols[1] }},
+        customer_lifetime_value as {{ cols[2] }}
     FROM  {{ ref('customers') }}
 ),
 
@@ -16,10 +16,10 @@ final as (
     {% for col in cols -%}
     ntile(3) over(order by {{ col }}) as {{ col }},
     {% endfor -%}
-    
+
 
     customer_id
-    FROM customers
+    FROM rfm_cols
 )
 
 SELECT * FROM final
