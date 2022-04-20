@@ -19,7 +19,7 @@ $ pip install fal
 2. Install KModes to run the clustering script.
 
 ```
-$ pip install kmodes
+$ pip install kmodes convertdate pystan prophet plotly kaleido
 ```
 
 3. Run dbt seed

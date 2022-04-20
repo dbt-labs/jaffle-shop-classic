@@ -1,3 +1,8 @@
+"""Cluster orders and upload to data warehouse
+Packages:
+ - kmodes
+"""
+
 import pandas as pd
 from kmodes.kmodes import KModes
 
