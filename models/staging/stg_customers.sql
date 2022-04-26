@@ -9,13 +9,14 @@ with source as (
 ),
 
 renamed as (
-
+    {% if target.name == 'prod' %}s
     select
         id as customer_id,
         first_name,
         last_name
 
     from source
+     {% endif %}
 
 )
 
