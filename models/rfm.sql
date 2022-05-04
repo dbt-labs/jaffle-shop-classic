@@ -10,7 +10,7 @@ with rfm_cols as (
     FROM  {{ ref('customers') }}
 ),
 
-final as (
+rfm_bins as (
     SELECT 
 
     {% for col in cols -%}
@@ -20,7 +20,17 @@ final as (
 
     customer_id
     FROM rfm_cols
+),
+
+final as (
+    SELECT 
+    rfm_bins.*,
+    concat(
+        cast(r as varchar),  cast(f as varchar),  cast(m as varchar)
+    ) as rfm_group
+    from rfm_bins
 )
+
 
 SELECT * FROM final
 
