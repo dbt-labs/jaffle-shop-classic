@@ -4,7 +4,7 @@
     meta = {
       "continual": {
         "type": "FeatureSet",
-        "entity": "Customer",
+        "entity": "customer",
         "index": "customer_id"
       }
     }
