@@ -1,2 +1,2 @@
-dbt-snowflake==1.1.0
+dbt-databricks==1.1.0
 continual
