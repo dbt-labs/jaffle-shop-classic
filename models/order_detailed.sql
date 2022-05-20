@@ -10,12 +10,7 @@ WITH order_attributes AS (
 
 ), final AS (
 
-    SELECT
-        *,
-
-        -- the following column is filled in a fal after script
-        NULL AS cluster_label
-
+    SELECT *
     FROM order_attributes
 
     LEFT JOIN orders

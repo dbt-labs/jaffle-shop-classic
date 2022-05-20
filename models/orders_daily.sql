@@ -4,7 +4,7 @@
 
 WITH orders AS (
 
-    SELECT * FROM {{ ref('order_detailed') }}
+    SELECT * FROM {{ ref('order_detailed_cluster') }}
 
 ),
 

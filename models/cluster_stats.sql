@@ -5,5 +5,5 @@ select
     sum(bank_transfer_amount) as sum_bank_transfer_amount,
     sum(gift_card_amount) as sum_gift_card_amount,
     sum(amount) as sum_amount
-from {{ ref('order_detailed') }} 
+from {{ ref('order_detailed_cluster') }}
 group by cluster_label

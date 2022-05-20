@@ -30,11 +30,8 @@ models:
         description: Total value (AUD) of a customer's orders
 
   - name: order_detailed
-    meta:
-      fal:
-        scripts:
-          after:
-            - clustering.py
+
+  - name: order_detailed_cluster
 
   - name: orders_daily
     description: This table has aggregate data about orders and the detailed attributes, it is aggregated on date

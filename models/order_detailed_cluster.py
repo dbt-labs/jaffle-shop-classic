@@ -7,9 +7,8 @@ import pandas as pd
 from kmodes.kmodes import KModes
 
 
-df = ref("order_detailed")
-columns = ["size", "is_vegan", "is_vegetarian", "is_keto", "shape"]
-df_train = df[columns]
+df: pd.DataFrame = ref("order_detailed")
+df_train = df[["size", "is_vegan", "is_vegetarian", "is_keto", "shape"]]
 
 km_2 = KModes(n_clusters=3, init="Huang")
 km_2.fit_predict(df_train)
