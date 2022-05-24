@@ -8,7 +8,7 @@
         "index": "customer_id",
         "target": "customer_lifetime_value",
         "columns": [
-          {"name": "customer_id", "entity": "Customer"}
+          {"name": "customer_id", "entity": "customer"}
         ]
       }
     }
