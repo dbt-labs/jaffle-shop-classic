@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Setup Python
+      uses: "actions/setup-python@v2"
+      with:
+          python-version: "3.8"
+
+    - name: Install CI Requirements
+      run: "pip install -r requirements-ci.txt"
+
+    - name: Build docs
+      run: "dbt docs generate"
+
+    - name: Generate LookML
+      run: "dbt2looker"
+      
+    - name: Copycat
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.API_TOKEN_GITHUB }}
+        src_path: /lookml/
+        dst_path: /
+        dst_owner: 'geoffkaufman-bicyclehealth'
+        dst_repo_name: 'github-actions-test-inbound'
+        dst_branch: main
+        src_branch: main

@@ -1,0 +1,4 @@
+dbt-bigquery==1.0.0
+sqlfluff==0.10.1
+sqlfluff-templater-dbt==0.10.1
+dbt2looker=0.10.0
