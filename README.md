@@ -33,13 +33,13 @@ $ dbt seed
 Run fal flow
 
 ```bash
-$ fal flow run --experimental-flow
+$ fal flow run --experimental-models
 ## runs the whole graph
 ```
 
 Alternatively run fal flow with [graph selectors](https://docs.getdbt.com/reference/node-selection/graph-operators)
 
 ```bash
-$ fal flow run --experimental-flow --select clustering.py+
-## runs clustering.py and cluster_stats.sql
+$ fal flow run --experimental-models --select order_detailed_cluster.py+
+## runs order_detailed_cluster.py and cluster_stats.sql
 ```
