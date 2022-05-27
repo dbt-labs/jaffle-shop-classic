@@ -1,9 +1,9 @@
 version: 2
-
 models:
   - name: customers
-    description: This table has basic information about a customer, as well as some derived facts based on a customer's orders
-
+    description: >-
+      This table has basic information about a customer, as well as some derived
+      facts based on a customer's orders
     columns:
       - name: customer_id
         description: This is a unique identifier for a customer
@@ -14,13 +14,10 @@ models:
           metrics:
             unique_customer_count:
               type: count_distinct
-
       - name: first_name
         description: Customer's first name. PII.
-
       - name: last_name
         description: Customer's last name. PII.
-
       - name: created
         description: Timestamp (UTC) when customer was created
         meta:
@@ -36,17 +33,23 @@ models:
       - name: days_since_last_order
         description: Number of days since the customers last order
       - name: days_between_created_and_first_order
-        description: Number of days between the customer being created and making their first order
-
+        description: >-
+          Number of days between the customer being created and making their
+          first order
+      - name: number_of_orders
+        description: ""
+      - name: customer_lifetime_value
+        description: ""
+      - name: is_high_value
+        description: ""
   - name: orders
-    description: This table has basic information about orders, as well as some derived facts based on payments
-
+    description: >-
+      This table has basic information about orders, as well as some derived
+      facts based on payments
     meta:
       joins:
         - join: customers
           sql_on: ${customers.customer_id} = ${orders.customer_id}
-
-
     columns:
       - name: order_id
         tests:
@@ -57,7 +60,6 @@ models:
           metrics:
             unique_order_count:
               type: count_distinct
-
       - name: is_completed
         description: Boolean indicating if status is completed
         meta:
@@ -66,8 +68,7 @@ models:
               type: average
               format: percent
               round: 1
-              sql: 'CASE WHEN ${is_completed} THEN 1 ELSE 0 END'
-
+              sql: CASE WHEN ${is_completed} THEN 1 ELSE 0 END
       - name: customer_id
         description: Foreign key to the customers table
         tests:
@@ -75,7 +76,6 @@ models:
           - relationships:
               to: ref('customers')
               field: customer_id
-
       - name: order_date
         description: Date (UTC) that the order was placed
         meta:
@@ -84,13 +84,16 @@ models:
               type: min
             date_of_most_recent_order:
               type: max
-
       - name: status
-        description: '{{ doc("orders_status") }}'
+        description: "{{ doc(\"orders_status\") }}"
         tests:
           - accepted_values:
-              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
-
+              values:
+                - placed
+                - shipped
+                - completed
+                - return_pending
+                - returned
       - name: amount
         description: Total amount (USD) of the order
         tests:
@@ -107,7 +110,6 @@ models:
               round: 2
           dimension:
             hidden: true
-
       - name: credit_card_amount
         description: Amount of the order (AUD) paid for by credit card
         tests:
@@ -115,7 +117,6 @@ models:
         meta:
           dimension:
             hidden: true
-
       - name: coupon_amount
         description: Amount of the order (AUD) paid for by coupon
         tests:
@@ -123,7 +124,6 @@ models:
         meta:
           dimension:
             hidden: true
-
       - name: bank_transfer_amount
         description: Amount of the order (AUD) paid for by bank transfer
         tests:
@@ -131,7 +131,6 @@ models:
         meta:
           dimension:
             hidden: true
-
       - name: gift_card_amount
         description: Amount of the order (AUD) paid for by gift card
         tests:
@@ -139,17 +138,14 @@ models:
         meta:
           dimension:
             hidden: true
-
   - name: payments
     description: This table has information about individual payments
-
     meta:
       joins:
         - join: orders
           sql_on: ${orders.order_id} = ${payments.order_id}
         - join: customers
           sql_on: ${customers.customer_id} = ${orders.customer_id}
-
     columns:
       - name: payment_id
         description: This is a unique identifier for a payment
@@ -158,13 +154,10 @@ models:
             unique_payment_count:
               type: count_distinct
               description: count of all payments
-
       - name: order_id
         description: Foreign key to the orders table
-
       - name: payment_method
         description: Method of payment used, for example credit card
-
       - name: amount
         description: Total amount (AUD) of the individual payment
         meta:
