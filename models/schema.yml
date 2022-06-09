@@ -1,4 +1,11 @@
 version: 2
+metrics:
+  - name: unique_customer_count
+    label: unique_customer_count
+    model: ref('customers')
+    description: Total number of customers
+    type: count_distinct
+    sql: customer_id
 models:
   - name: customers
     description: >-
@@ -10,10 +17,6 @@ models:
         tests:
           - unique
           - not_null
-        meta:
-          metrics:
-            unique_customer_count:
-              type: count_distinct
       - name: first_name
         description: Customer's first name. PII.
       - name: last_name
