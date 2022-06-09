@@ -1,7 +1,7 @@
 version: 2
 metrics:
   - name: unique_customer_count
-    label: unique_customer_count
+    label: Unique customer count
     model: ref('customers')
     description: Total number of customers
     type: count_distinct
