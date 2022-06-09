@@ -31,20 +31,36 @@ models:
               type: max
       - name: first_order
         description: Date of the customers first order
+        meta:
+          dimension:
+            hidden: true
       - name: most_recent_order
         description: Date of the customers most recent order
+        meta:
+          dimension:
+            hidden: true
       - name: days_since_last_order
         description: Number of days since the customers last order
+        meta:
+          dimension:
+            hidden: true
       - name: days_between_created_and_first_order
         description: >-
           Number of days between the customer being created and making their
           first order
+        meta:
+          dimension:
+            hidden: true
       - name: number_of_orders
         description: ""
+        meta:
+          dimension:
+            hidden: true
       - name: customer_lifetime_value
         description: ""
-      - name: is_high_value
-        description: ""
+        meta:
+          dimension:
+            hidden: true
   - name: orders
     description: >-
       This table has basic information about orders, as well as some derived
