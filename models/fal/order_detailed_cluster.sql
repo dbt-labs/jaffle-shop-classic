@@ -1,7 +1,7 @@
 
 {{ config(materialized='ephemeral') }}
 /*
-FAL_GENERATED 4c5fecf57653e134322b04d630e9f935
+FAL_GENERATED c8010249dc44baee07f7f4acb5e0ba40
 
 Script dependencies:
 
@@ -9,4 +9,4 @@ Script dependencies:
 
 */
 
-SELECT * FROM {{ target.schema }}.{{ model.name }}
+SELECT * FROM {{ target.schema }}.{{ model.alias }}
