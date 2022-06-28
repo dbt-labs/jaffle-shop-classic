@@ -1,2 +1,2 @@
 dbt-databricks==1.1.0
-continual==0.5.46
+continual==0.5.54

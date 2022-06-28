@@ -4,7 +4,7 @@
     meta = {
       "continual": {
         "type": "Model",
-        "description": "Predict customer active total spend",
+        "description": "Predict customer active total spend lifetime",
         "index": "customer_id",
         "target": "customer_lifetime_value",
         "columns": [

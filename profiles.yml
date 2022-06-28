@@ -1,9 +1,9 @@
 default:
-  target: dev
+  target: demo
   outputs:
-    dev:
+    demo:
       type: databricks
-      schema: dbt_sung
+      schema: dbt_sung_summit_demo
       host: dbc-c7c89cba-cf9b.cloud.databricks.com
       http_path: /sql/1.0/endpoints/07bb14a8596beb78
       token: "{{ env_var('TOKEN') }}" # Personal Access Token (PAT)
