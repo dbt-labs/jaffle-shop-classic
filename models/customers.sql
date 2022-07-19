@@ -41,8 +41,6 @@ customer_payments as (
     left join orders on
          payments.order_id = orders.order_id
 
-    group by orders.customer_id
-
 ),
 
 final as (
