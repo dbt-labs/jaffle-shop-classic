@@ -13,6 +13,7 @@ df_train = df[["size", "is_vegan", "is_vegetarian", "is_keto", "shape"]]
 km_2 = KModes(n_clusters=3, init="Huang")
 km_2.fit_predict(df_train)
 df["cluster_label"] = km_2.labels_
+df['order_date'] = df['order_date'].astype(str)
 
 print(df)
 

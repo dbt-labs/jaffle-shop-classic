@@ -32,12 +32,18 @@ models:
   - name: order_detailed
 
   - name: order_detailed_cluster
+    meta:
+      fal:
+        runtime: kmodes
 
   - name: orders_daily
     description: This table has aggregate data about orders and the detailed attributes, it is aggregated on date
 
   - name: orders_forecast
     description: fal generated table with orders forecast
+    meta:
+      fal:
+        runtime: prophet
 
   - name: orders_forecast_filter
 

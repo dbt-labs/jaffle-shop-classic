@@ -4,9 +4,21 @@ Packages:
 """
 
 import pandas as pd
-import sqlalchemy.types as types
+from prophet import Prophet
 
-from utils import make_forecast
+
+def make_forecast(dataframe: pd.DataFrame, periods: int = 30):
+    """Make forecast on metric data."""
+    dataframe = dataframe[["ds", "y"]]
+
+    model = Prophet(daily_seasonality=False, yearly_seasonality=False)
+    model.fit(dataframe)
+
+    future = model.make_future_dataframe(periods=periods)
+    forecast = model.predict(future)
+
+    return forecast
+
 
 
 df: pd.DataFrame = ref("orders_daily")
