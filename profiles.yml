@@ -1,0 +1,10 @@
+jaffle_shop:
+ target: databricks_job
+ outputs:
+   databricks_job:
+     type: databricks
+     method: http
+     schema: "default"
+     host: "{{ env_var('DBT_HOST') }}"
+     http_path: "sql/protocolv1/o/{{ env_var('DBT_ORG_ID') }}/{{ env_var('DBT_CLUSTER_ID') }}"
+     token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
