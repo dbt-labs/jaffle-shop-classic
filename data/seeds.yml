@@ -1,0 +1,9 @@
+version: 2
+
+seeds:
+  - name: raw_events
+    config:
+      column_types:
+        timezone_tz: "{{ 'timestamp_tz' if target.type == 'snowflake' else 'timestamp' }}"
+        timezone_ltz: "{{ 'timestamp_ltz' if target.type == 'snowflake' else 'timestamp' }}"
+        timezone_ntz: "{{ 'timestamp_ntz' if target.type == 'snowflake' else 'timestamp' }}"
