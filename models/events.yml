@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: events
+    columns:
+      - name: timestamp_tz
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: timestamp_ntz
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: timestamp_ltz
+        description: ""
+        meta:
+          dimension:
+            type: timestamp
+      - name: date
+        description: ""
+        meta:
+          dimension:
+            type: date
+      - name: event
+        description: ""
+        meta:
+          dimension:
+            type: string
+          metrics:
+            count:
+              type: count
+      - name: event_id
+        description: ""
+        meta:
+          dimension:
+            type: string
