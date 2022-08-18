@@ -16,6 +16,17 @@ metrics:
       - field: is_completed
         operator: '='
         value: 'true'
+  - name: order_customer_count
+    label: Unique customers
+    model: ref('orders')
+    description: Total number of customers that placed orders
+    type: count_distinct
+    sql: customer_id
+  - name: orders_per_customer
+    label: Orders per customer
+    description: Ratio of completed orders per customer
+    type: expression
+    sql: "1.0 * {{ metric('completed_order_count') }} / NULLIF({{ metric('order_customer_count') }}, 0)"
 models:
   - name: customers
     description: >-
