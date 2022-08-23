@@ -60,7 +60,7 @@ customers AS (
 
 ),
 
-final AS (
+customer_report AS (
 
   SELECT 
     customers.customer_id,
@@ -68,7 +68,7 @@ final AS (
     customers.last_name,
     customer_orders.first_order,
     customer_orders.most_recent_order,
-    customer_orders.number_of_orders,
+    customer_orders.number_of_orders AS total_orders,
     amount_per_customer.total_amount AS customer_lifetime_value
   
   FROM customers
@@ -77,8 +77,18 @@ final AS (
   LEFT JOIN amount_per_customer
      ON customers.customer_id = amount_per_customer.customer_id
 
+),
+
+final_with_order AS (
+
+  SELECT * 
+  
+  FROM customer_report
+  
+  ORDER BY total_orders  ASC
+
 )
 
 SELECT * 
 
-FROM final
+FROM final_with_order
