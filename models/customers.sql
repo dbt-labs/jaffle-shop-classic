@@ -85,7 +85,7 @@ final_with_order AS (
   
   FROM customer_report
   
-  ORDER BY total_orders  ASC
+  ORDER BY total_orders  DESC
 
 )
 
