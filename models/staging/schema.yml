@@ -22,7 +22,6 @@ models:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
       - name: customer_id
       - name: order_date
-      - name: status
 
   - name: stg_payments
     columns:
