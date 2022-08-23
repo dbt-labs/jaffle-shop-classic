@@ -32,18 +32,28 @@ customer_orders as (
 
 customer_payments as (
 
-    select
-        orders.customer_id,
-        sum(amount) as total_amount
+    select *
 
     from payments
 
     left join orders on
          payments.order_id = orders.order_id
+
+),
+
+
+amount_per_customer as (
+
+    select
+        orders.customer_id,
+        sum(amount) as total_amount
+
+    from customer_payments
     
     group by orders.customer_id
 
 ),
+
 
 final as (
 
