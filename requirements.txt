@@ -1,0 +1,24 @@
+# basics
+ipython
+requests
+ipykernel
+
+# format
+black[jupyter]
+
+# ~pydata
+pandas
+numpy
+matplotlib
+seaborn
+lightgbm
+distributed
+dask[complete]
+fastparquet
+pyarrow
+
+# tracking
+mlflow
+
+# snowpark
+snowflake-snowpark-python
