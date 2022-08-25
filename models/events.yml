@@ -22,6 +22,9 @@ models:
         meta:
           dimension:
             type: date
+            urls:
+              - label: Open in Google Calendar
+                url: 'https://calendar.google.com/calendar/u/0/r/day/${ value.formatted |split: "-" |join: "/"}'
       - name: event
         description: ""
         meta:
