@@ -5,11 +5,10 @@ version: '0.1'
 
 profile: 'jaffle_shop'
 
-model-paths: ["models"]
-seed-paths: ["seeds"]
-test-paths: ["tests"]
-analysis-paths: ["analysis"]
-macro-paths: ["macros"]
+macro-paths: ["jaffle_shop/macros"]
+model-paths: ["jaffle_shop/models"]
+seed-paths: ["jaffle_shop/seeds"]
+snapshot-paths: ["jaffle_shop/snapshots"]
 
 target-path: "target"
 clean-targets:
@@ -18,6 +17,10 @@ clean-targets:
     - "logs"
 
 require-dbt-version: [">=1.0.0", "<2.0.0"]
+
+dispatch:
+  - macro_namespace: dbt_utils
+    search_order: ['dbt_project_evaluator', 'spark_utils', 'dbt_utils']
 
 models:
   jaffle_shop:

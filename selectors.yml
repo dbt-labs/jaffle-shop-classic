@@ -1,0 +1,15 @@
+selectors:
+  - name: jaffle_shop
+    description: >
+      Run all jaffle shop models and ignore packages.
+    definition:
+      method: fqn
+      value: "*"
+      exclude:
+        - "package:dbt_project_evaluator"
+  - name: dbt_project_evaluator
+    description: >
+      Run all dbt project evaluator models
+    definition:
+      method: package
+      value: "dbt_project_evaluator"
