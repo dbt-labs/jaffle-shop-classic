@@ -1,0 +1,10 @@
+jaffle_shop:
+  target: jaffle_shop
+  outputs:
+    jaffle_shop:
+      type: databricks
+      host: "{{ env_var('DATABRICKS_HOST') }}"
+      token: "{{ env_var('DATABRICKS_TOKEN') }}"
+      schema: "{{ env_var('DATABRICKS_TARGET') }}"
+      http_path: "/sql/1.0/endpoints/{{ env_var('DATABRICKS_ENDPOINT') }}"
+      threads: 300
