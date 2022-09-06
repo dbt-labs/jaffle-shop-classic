@@ -34,4 +34,7 @@ format: build-env
 	pipenv run sqlfluff fix
 
 run-python-tests:
-	pipenv run pytest -vvvvv
+	pipenv run pytest --quiet --show-capture=no --tb=no
+
+run-python-tests-detailed:
+	pipenv run pytest
