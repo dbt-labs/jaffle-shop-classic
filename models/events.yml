@@ -7,6 +7,26 @@ models:
         meta:
           dimension:
             type: timestamp
+            time_intervals:
+              - RAW
+              - MILLISECOND
+              - SECOND
+              - MINUTE
+              - HOUR
+              - DAY
+              - DAY_OF_WEEK_INDEX
+              - DAY_OF_WEEK_NAME
+              - DAY_OF_MONTH_NUM
+              - DAY_OF_YEAR_NUM
+              - WEEK
+              - MONTH
+              - MONTH_NUM
+              - MONTH_NAME
+              - QUARTER
+              - QUARTER_NUM
+              - QUARTER_NAME
+              - YEAR
+              - YEAR_NUM
       - name: timestamp_ntz
         description: ""
         meta:
