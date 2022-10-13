@@ -29,6 +29,16 @@ models:
           - not_null
       - name: first_name
         description: Customer's first name. PII.
+        meta:
+          dimension:
+            type: string
+            urls:
+              - label: "URL from value"
+                url: "https://example.com/company/${value.formatted | url_encode }"
+              - label: "URL from row value"
+                url: "https://example.com/company/${row.customers.customer_id.raw | url_encode }"
+              - label: "Invalid URL with bad reference"
+                url: "https://example.com/company/${row.customer_id.raw | url_encode }"
       - name: last_name
         description: Customer's last name. PII.
       - name: created
