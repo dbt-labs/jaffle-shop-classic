@@ -108,6 +108,9 @@ models:
               format: percent
               round: 1
               sql: CASE WHEN ${is_completed} THEN 1 ELSE 0 END
+              show_underlying_values:
+                - amount
+                - customers.first_name
       - name: customer_id
         description: Foreign key to the customers table
         tests:
