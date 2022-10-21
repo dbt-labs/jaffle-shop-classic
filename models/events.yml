@@ -57,4 +57,28 @@ models:
         description: ""
         meta:
           dimension:
-            type: string
+            type: number
+          metrics:
+            in_gbp:
+              type: sum
+              format: 'gbp'
+            in_eur:
+              type: sum
+              format: 'eur'
+            in_eur_with_round_2:
+              type: sum
+              format: 'eur'
+              round: 2
+            in_eur_with_round_0:
+              type: sum
+              format: 'eur'
+              round: 0
+            in_mi:
+              type: sum
+              format: 'mi'
+            in_km:
+              type: sum
+              format: 'km'
+            in_percent:
+              type: sum
+              format: 'percent'
