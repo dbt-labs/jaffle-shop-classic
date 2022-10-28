@@ -154,6 +154,17 @@ models:
               type: sum
               format: usd
               round: 2
+            total_completed_order_amount:
+              type: sum
+              format: usd
+              round: 2
+              filters:
+                - is_completed: "true"
+            total_non_completed_order_amount:
+              type: number
+              format: usd
+              round: 2
+              sql: ${total_order_amount}-${total_completed_order_amount}
           dimension:
             hidden: true
       - name: credit_card_amount
