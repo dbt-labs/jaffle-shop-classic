@@ -73,6 +73,18 @@ models:
               type: sum
               format: 'eur'
               round: 0
+            with_round_2:
+              type: sum
+              round: 2
+            in_thousands_of_eur:
+              type: sum
+              format: 'eur'
+              compact: thousands
+            in_thousands_of_eur_with_round_0:
+              type: sum
+              format: 'eur'
+              round: 0
+              compact: thousands
             in_mi:
               type: sum
               format: 'mi'
@@ -82,3 +94,12 @@ models:
             in_percent:
               type: sum
               format: 'percent'
+            in_thousands:
+              type: sum
+              compact: k
+            in_millions:
+              type: sum
+              compact: M
+            in_billions:
+              type: sum
+              compact: B
