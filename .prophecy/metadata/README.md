@@ -1,1 +1,1 @@
-# jaffle Repository
+# sql-project Repository
