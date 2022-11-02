@@ -96,13 +96,13 @@ models:
               format: 'percent'
             in_thousands:
               type: sum
-              compact: K
+              compact: thousands
             in_millions:
               type: sum
-              compact: M
+              compact: millions
             in_billions:
               type: sum
-              compact: G
+              compact: billions
             in_trillions:
               type: sum
-              compact: T
+              compact: trillions
