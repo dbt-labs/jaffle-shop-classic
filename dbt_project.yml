@@ -21,6 +21,12 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
   jaffle_shop:
-      materialized: table
+    original_code:
+      +materialized: table
       staging:
-        materialized: view
+        + materialized: view
+    example:
+      ephemeral:
+        +materialized: ephemeral
+      incremental:
+        +materialized: incremental
