@@ -4,10 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-dbt-core = "==1.1.0"
+dbt-core = "==1.3.0"
 dbt-databricks = {extras = ["odbc"]}
-sqlfluff = "1.0.0"
-sqlfluff-templater-dbt = "*"
 pytest-mock = "*"
 glob2 = "*"
 
