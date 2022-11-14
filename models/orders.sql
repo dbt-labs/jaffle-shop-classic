@@ -1,5 +1,5 @@
 
-
+{% set payment_methods = ['credit_card', 'coupon', 'bank_transfer', 'gift_card'] %}
 with orders as (
 
     select * from {{ ref('stg_orders') }}
@@ -16,10 +16,9 @@ order_payments as (
 
     select
         order_id,
-        sum(case when payment_method = 'credit_card' then amount else 0 end) as credit_card_amount,
-        sum(case when payment_method = 'coupon' then amount else 0 end) as coupon_amount,
-        sum(case when payment_method = 'bank_transfer' then amount else 0 end) as bank_transfer_amount,
-        sum(case when payment_method = 'gift_card' then amount else 0 end) as gift_card_amount,
+        {% for payment_method in payments_dict -%}
+            case when payment_method = '{{ payment_method }}' then amount else 0 end as {{ payments_dict[payment_method] }}_amount,
+        {% endfor %}
         sum(amount) as total_amount
 
     from payments
