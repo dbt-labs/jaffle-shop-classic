@@ -16,9 +16,9 @@ order_payments as (
 
     select
         order_id,
-        {% for payment_method in payments_dict -%}
-            case when payment_method = '{{ payment_method }}' then amount else 0 end as {{ payments_dict[payment_method] }}_amount,
-        {% endfor %}
+        {% for payment_method in payment_methods -%}
+        sum(case when payment_method = '{{ payment_method }}' then amount else 0 end) as {{ payment_method }}_amount,
+        {% endfor -%}
         sum(amount) as total_amount
 
     from payments
