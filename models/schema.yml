@@ -20,6 +20,19 @@ metrics:
       - field: is_completed
         operator: '='
         value: 'true'
+  - name: dbt_expression
+    label: dbt_expression
+    description: derived metric in v1.2 ( deprecated )
+    type: expression
+    sql: "{{metric('unique_customer_count')}} / {{metric('unique_customer_count')}}"
+    timestamp: created
+    time_grains: [ day, week, month, quarter, year ]
+  - name: dbt_derived
+    label: dbt_derived
+    calculation_method: derived
+    expression: "{{metric('unique_customer_count')}} / {{metric('unique_customer_count')}}"
+    timestamp: created
+    time_grains: [ day, week, month, quarter, year ]
 models:
   - name: customers
     description: >-
@@ -31,6 +44,11 @@ models:
         tests:
           - unique
           - not_null
+        meta:
+          metrics:
+            lightdash_derived:
+              type: number
+              sql: "${unique_customer_count} / ${unique_customer_count}"
       - name: first_name
         description: Customer's first name. PII.
         meta:
