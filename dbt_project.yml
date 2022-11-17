@@ -27,17 +27,21 @@ models:
       staging:
         + materialized: view
     example1:
-      +enabled: false
+      +enabled: true
       +materialized: incremental
     example2:
-      +enabled: false
+      +enabled: true
       materialized: view
     example3:
-      +enabled: false
+      +enabled: true
       ephemeral:
         +materialized: ephemeral
       incremental:
         +materialized: incremental
+      views:
+        +materialized: view
+      tables:
+        +materialized: table
 
 seeds:
   jaffle_shop:

@@ -1,0 +1,12 @@
+version: 2
+metrics:
+  - name: order_count
+    label: Order Count
+    model: ref('orders')
+    timestamp: order_date
+    time_grains: [day, week, month, quarter, year]
+    calculation_method: count_distinct
+    expression: order_id
+    dimensions:
+      - customer_id
+      - status

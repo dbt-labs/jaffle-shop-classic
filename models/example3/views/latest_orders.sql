@@ -1,1 +1,0 @@
-select * from {{ref('param_orders')}}

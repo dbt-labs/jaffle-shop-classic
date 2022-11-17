@@ -4,7 +4,7 @@
     period = "day",
     timestamp_field = "order_date",
     start_date = "2018-01-01",
-    stop_date = "2018-06-01")
+    stop_date = "2018-01-19")
 }}
 
 {% set payment_methods = ['credit_card', 'coupon', 'bank_transfer', 'gift_card'] %}
