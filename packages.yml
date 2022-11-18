@@ -1,0 +1,5 @@
+packages:
+  - git: https://github.com/dbt-labs/dbt-labs-experimental-features
+    subdirectory: insert_by_period
+  - package: dbt-labs/metrics
+    version: 1.3.1

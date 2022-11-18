@@ -21,6 +21,35 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 
 models:
   jaffle_shop:
-      materialized: table
+    original_code:
+      +enabled: true
+      +materialized: table
       staging:
-        materialized: view
+        + materialized: view
+    example1:
+      +enabled: true
+      +materialized: incremental
+    example2:
+      +enabled: true
+      materialized: view
+    example3:
+      +enabled: true
+      ephemeral:
+        +materialized: ephemeral
+      incremental:
+        +materialized: incremental
+      views:
+        +materialized: view
+      tables:
+        +materialized: table
+
+seeds:
+  jaffle_shop:
+    example:
+      +enabled: false
+
+
+vars:
+    dbt_metrics_calendar_model: metrics_calendar
+    'dbt_date:time_zone': 'America/Chicago'
+    load_date:
