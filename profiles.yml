@@ -1,0 +1,10 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: "lightdash-test-space-371012"
+      dataset: jaffle_shop
+      threads: 2
+      keyfile: dbt-service-account-bigquery.json

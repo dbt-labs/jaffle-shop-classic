@@ -3,3 +3,6 @@ target/
 dbt_modules/
 logs/
 **/.DS_Store
+
+profile.yml
+dbt-service-account-bigquery.json
