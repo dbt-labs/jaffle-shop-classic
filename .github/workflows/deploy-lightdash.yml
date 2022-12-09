@@ -1,0 +1,62 @@
+name: deploy-lightdash
+
+on:
+  push:
+    branches: [ "main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3.4.1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "3.7.x"
+
+      - name: Copy Google credentials file
+        env: 
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        if: "${{ env.GOOGLE_CREDENTIALS != '' }}"
+        id: create-json
+        uses: jsdaniell/create-json@1.1.2
+        with:
+          name: "googlecredentials.json"
+          json: ${{ env.GOOGLE_CREDENTIALS }}
+
+      - name: Move credentials to /tmp 
+        run: mv googlecredentials.json /tmp || true
+
+      - name: Locate dbt_project.yml
+        run: echo "PROJECT_DIR=$(find . -name "dbt_project.yml"  | sed  's/dbt_project.yml//g')" >> $GITHUB_ENV
+
+      - name: Get lightdash version 
+        uses: sergeysova/jq-action@v2
+        id: version 
+        env:
+          LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}   
+        with: 
+          cmd: curl -s "${LIGHTDASH_URL}/api/v1/health" | jq -r '.results.version'
+
+      - name: Copy profiles.yml
+        env:
+          config: ${{ secrets.DBT_PROFILES }}          
+        run: echo -e "$config" > profiles.yml      
+
+      - name: Install dbt
+        run: |
+          pip install dbt-core dbt-bigquery
+          dbt deps --project-dir "$PROJECT_DIR"
+
+      - name: Install lightdash CLI
+        run: npm install -g "@lightdash/cli@${{ steps.version.outputs.value }}" || npm install -g @lightdash/cli@latest
+
+      - name: Lightdash CLI deploy 
+        env:
+          LIGHTDASH_API_KEY: ${{ secrets.LIGHTDASH_API_KEY }}          
+          LIGHTDASH_PROJECT: ${{ secrets.LIGHTDASH_PROJECT }}          
+          LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}      
+          GOOGLE_APPLICATION_CREDENTIALS: '/tmp/googlecredentials.json'    
+
+        run: lightdash deploy --project-dir "$PROJECT_DIR" --profiles-dir . --profile prod || lightdash deploy --project-dir "$PROJECT_DIR" --profiles-dir .
