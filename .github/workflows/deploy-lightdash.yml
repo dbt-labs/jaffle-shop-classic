@@ -59,4 +59,4 @@ jobs:
           LIGHTDASH_URL: ${{ secrets.LIGHTDASH_URL }}      
           GOOGLE_APPLICATION_CREDENTIALS: '/tmp/googlecredentials.json'    
 
-        run: lightdash deploy --project-dir "$PROJECT_DIR" --profiles-dir . --profile prod || lightdash deploy --project-dir "$PROJECT_DIR" --profiles-dir .
+        run: lightdash deploy --project-dir "$PROJECT_DIR" --profiles-dir . --profile jaffle_shop --target prod || lightdash deploy --project-dir "$PROJECT_DIR" --profiles-dir .
