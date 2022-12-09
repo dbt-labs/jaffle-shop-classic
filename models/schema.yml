@@ -38,6 +38,10 @@ models:
           - unique
           - not_null
         description: This is a unique identifier for an order
+        meta:
+          metrics:
+            total_order_count:
+              type: count_distinct
 
       - name: customer_id
         description: Foreign key to the customers table
@@ -60,6 +64,14 @@ models:
         description: Total amount (AUD) of the order
         tests:
           - not_null
+
+        meta:
+          dimension:
+            format: 'usd'
+          metrics:
+            total_order_amount:
+              type: sum
+              format: 'usd'
 
       - name: credit_card_amount
         description: Amount of the order (AUD) paid for by credit card
