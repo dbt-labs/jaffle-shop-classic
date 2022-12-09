@@ -15,7 +15,7 @@ jaffle_shop:
       schema: "{{ env_var('SNOWFLAKE_SCHEMA') | as_text }}"
       threads: 4
     prod:
-      type: snowflak
+      type: snowflake
       account: "{{ env_var('SNOWFLAKE_ACCOUNT') | as_text }}"
 
       # User/password auth
