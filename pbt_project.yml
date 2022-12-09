@@ -1,0 +1,21 @@
+name: DBTJaffleShop
+description: ''
+version: 0.0.1-SNAPSHOT
+author: kishore@simpledatalabs.com
+language: sql
+buildSystem: sql
+pipelines: {}
+datasets: {}
+templates: {}
+jobs: {}
+libraries: []
+subgraphs: {}
+sqlModels: {}
+sqlPipeline:
+  name: sqlPipeline
+  description: kishore@simpledatalabs.com
+  author: kishore@simpledatalabs.com
+  createdAt: '2022-12-09 04:40:14'
+dependencies: '[]'
+projectDependencies: {}
+pipelineConfigurations: {}
