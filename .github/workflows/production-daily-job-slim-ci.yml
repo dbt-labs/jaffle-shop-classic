@@ -38,6 +38,7 @@ jobs:
 
     - name: Setup DBT + Piperider
       run: |
+        pip install dbt-cloud-cli
         pip install dbt-snowflake
         pip install piperider['snowflake']
 
@@ -54,7 +55,7 @@ jobs:
         mkdir -p state/prod
         dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path manifest.json -f state/prod/manifest.json
         dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path run_results.json -f state/prod/run_results.json
-        piperider run --datasource infusetude --dbt-state state/prod -o report/
+        piperider run --datasource jaffle_shop --dbt-state state/prod -o report/
         piperider cloud upload-report --run .piperider/outputs/latest/run.json
 
     - name: Create run artifact
