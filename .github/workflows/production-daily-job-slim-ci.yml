@@ -1,0 +1,67 @@
+name: Daily Production Transformation (Slim CI)
+on:
+  schedule:
+    - cron: '0 18 * * *' # run at 2 AM (UTC + 8) every day
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches: ['main']
+    paths:
+      - models/**
+      - seeds/**
+      - tests/**
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+  SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+  SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+  DBT_CLOUD_API_TOKEN: ${{ secrets.DBT_CLOUD_API_TOKEN }}
+  DBT_CLOUD_ACCOUNT_ID: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
+  DBT_CLOUD_JOB_ID: 173663
+  PIPERIDER_CLOUD_TOKEN_ID: ${{ secrets.PIPERIDER_CLOUD_TOKEN_ID }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Setup DBT + Piperider
+      run: |
+        pip install dbt-snowflake
+        pip install piperider['snowflake']
+
+    - name: Run DBT on PROD environment
+      run: |
+        dbt-cloud job run --wait --file response.json
+        echo "run_id=$(cat response.json | jq -r '.data.id')" >> $GITHUB_ENV
+
+    - name: Piperider Cloud Login
+      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID --disable-auto-upload
+
+    - name: Profile on PROD environment
+      run: |
+        mkdir -p state/prod
+        dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path manifest.json -f state/prod/manifest.json
+        dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path run_results.json -f state/prod/run_results.json
+        piperider run --datasource infusetude --dbt-state state/prod -o report/
+        piperider cloud upload-report --run .piperider/outputs/latest/run.json
+
+    - name: Create run artifact
+      run: zip -r run-report.zip report/
+
+    - name: Upload profiling result
+      uses: actions/upload-artifact@v3
+      with:
+        name: run-report-artifact
+        path: run-report.zip
