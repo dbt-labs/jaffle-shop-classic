@@ -58,3 +58,17 @@ jobs:
         name: comparison-report-artifact
         path: comparison-report.zip
 
+    - name: Prepare Comparison Summary
+      run: |
+        echo "# :bar_chart: Piperider Comparison Summary" > summary.md
+        cat comparison-report/summary.md >> summary.md
+        echo -e "\n" >> summary.md
+        echo "## :paperclip: Generated Comparison Report ZIP" >> summary.md
+        echo "Find it in the [Github Action Runs Page](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> summary.md
+
+    - name: Create PR Comment
+      uses: peter-evans/create-or-update-comment@v2.1.0
+      with:
+        issue-number: ${{ github.event.number }}
+        body-file: summary.md
+
