@@ -64,39 +64,13 @@ jobs:
         piperider run --datasource jaffle_shop_pr --dbt-state state/pr -o /tmp/pipe-target
         piperider cloud upload-report --run .piperider/outputs/latest/run.json
 
-    - name: Fetch Base Run
+    - name: Generate Comparison Summary
       run: |
-        curl -X GET \
-        -H "Authorization: Bearer $PIPERIDER_CLOUD_TOKEN_ID" \
-        "https://cloud.piperider.io/api/projects/$PIPERIDER_CLOUD_PROJECT_ID/reports?datasource=jaffle_shop" > response.json
-        base_report_id=$(cat response.json | jq -r '.[-1].id')
-        mkdir -p /tmp/pipe-base
-        curl -X GET \
-        -H "Authorization: Bearer $PIPERIDER_CLOUD_TOKEN_ID" \
-        "https://cloud.piperider.io/api/projects/$PIPERIDER_CLOUD_PROJECT_ID/reports/$base_report_id" | jq -r '.report_content' > /tmp/pipe-base/run.json
-
-    - name: Generate Comparison Artifact + Data Summary (local)
-      run: |
-        piperider compare-reports \
-          --debug \
-          --base /tmp/pipe-base/run.json \
-          --target /tmp/pipe-target/run.json \
-          --tables-from target-only \
-          -o comparison-report/
-        zip -r comparison-report.zip comparison-report/
-
-    - uses: actions/upload-artifact@v3
-      with:
-        name: comparison-report-artifact
-        path: comparison-report.zip
-
-    - name: Prepare Comparison Summary
-      run: |
-        echo "# :bar_chart: Piperider Comparison Summary" > summary.md
-        cat comparison-report/summary.md >> summary.md
-        echo -e "\n" >> summary.md
-        echo "## :paperclip: Generated Comparison Report ZIP" >> summary.md
-        echo "Find it in the [Github Action Runs Page](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> summary.md
+        piperider cloud compare-reports \
+          --base datasource:jaffle_shop \
+          --target datasource:jaffle_shop_pr \
+          --summary-file summary.md \
+          --tables-from target-only
 
     - name: Create PR Comment
       uses: peter-evans/create-or-update-comment@v2.1.0
