@@ -41,7 +41,7 @@ jobs:
       run: |
         pip install dbt-cloud-cli
         pip install dbt-snowflake
-        pip install piperider['snowflake']
+        pip install 'piperider-nightly[snowflake]'
 
     - name: Trigger DBT Cloud Job (PR Job)
       run: |
