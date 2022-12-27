@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_customers_pii
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: first_name:
+        meta:
+          sensitive: true
+      - name: last_name:
+        meta:
+          sensitive: true
