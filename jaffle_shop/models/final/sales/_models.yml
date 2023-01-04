@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fnl_sales_newcustomerhistory
+    description: > 
+      This table gives one row per truncated month with the count 
+      of customers that have created their first order within this month
+    columns:
+      - name: first_order_month
+        description: primary key
+        tests:
+          - unique
+          - not_null
