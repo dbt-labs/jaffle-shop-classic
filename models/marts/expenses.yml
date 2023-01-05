@@ -1,0 +1,21 @@
+version: 2
+
+metrics:
+  - name: expenses
+    label: Expenses
+    model: ref('orders')
+    description: "The total expenses of our jaffle business"
+
+    calculation_method: sum
+    expression: amount / 4
+
+    timestamp: order_date
+    time_grains: [day, week, month, year]
+
+    filters:
+      - field: status
+        operator: '='
+        value: "'completed'"
+
+    tags: ['piperider']
+
