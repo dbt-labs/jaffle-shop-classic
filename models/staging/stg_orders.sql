@@ -12,7 +12,7 @@ customer_address as (
     select
         id,
         address,
-    from  {{ ref('raw_customers') }
+    from  {{ ref('raw_customers') }}
 )
 
 renamed as (
