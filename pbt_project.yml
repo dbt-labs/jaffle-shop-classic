@@ -10,7 +10,62 @@ templates: {}
 jobs: {}
 libraries: []
 subgraphs: {}
-sqlModels: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
+    description: null
+    author: kishore@simpledatalabs.com
+    files:
+    - .prophecy/ide/models/stg_customers.json
+    - newProjJan27/models/staging/stg_customers.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-01-27 20:34:37'
+  .prophecy/metadata/sqlmodels/stg_orders:
+    name: stg_orders
+    description: null
+    author: kishore@simpledatalabs.com
+    files:
+    - .prophecy/ide/models/stg_orders.json
+    - newProjJan27/models/staging/stg_orders.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-01-27 20:34:38'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    description: null
+    author: kishore@simpledatalabs.com
+    files:
+    - .prophecy/ide/models/stg_payments.json
+    - newProjJan27/models/staging/stg_payments.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-01-27 20:34:38'
+  .prophecy/metadata/sqlmodels/orders:
+    name: orders
+    description: null
+    author: kishore@simpledatalabs.com
+    files:
+    - .prophecy/ide/models/orders.json
+    - newProjJan27/models/orders.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-01-27 20:34:38'
+  .prophecy/metadata/sqlmodels/customers:
+    name: customers
+    description: null
+    author: kishore@simpledatalabs.com
+    files:
+    - .prophecy/ide/models/customers.json
+    - newProjJan27/models/customers.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-01-27 20:34:38'
 sqlPipeline:
   name: sqlPipeline
   description: kishore@simpledatalabs.com
