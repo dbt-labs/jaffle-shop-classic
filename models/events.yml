@@ -106,3 +106,14 @@ models:
             in_trillions:
               type: sum
               compact: trillions
+            percentile_25:
+              type: percentile
+              percentile: 25
+            percentile_50:
+              type: percentile
+              percentile: 50
+            percentile_75:
+              type: percentile
+              percentile: 75
+            median: 
+              type: median
