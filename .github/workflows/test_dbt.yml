@@ -26,7 +26,14 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Setup DB
       run: |
-        docker-compose up
+        docker-compose up &
+
+    - name: Wait for setup to finish
+      run: |
+        until [ "`docker inspect -f {{.State.Running}} postgres`"=="true" ]; do
+            sleep 0.1;
+        done;
+
     - name: Run dbt
       run: |
         dbt debug
