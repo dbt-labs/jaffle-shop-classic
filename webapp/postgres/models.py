@@ -7,7 +7,7 @@ class MonthlyOrders(Base):
     __tablename__ = "monthly_orders"
     __table_args__ = {'schema': 'exercise'}
 
-    month = Column(Date, primary_key=True)
+    month = Column(Date, primary_key=True)  # sqlalchemy requires some column to be primary key, randomly chose this one
     amount = Column(Integer)
 
 
@@ -18,5 +18,5 @@ class CustomerMonthlyOrders(Base):
     customer_id = Column(Date)
     first_name = Column(String)
     last_name = Column(String)
-    month = Column(DateTime, primary_key=True)
+    month = Column(DateTime, primary_key=True)  # sqlalchemy requires some column to be primary key, randomly chose this one
     amount = Column(Integer)
