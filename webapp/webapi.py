@@ -5,7 +5,7 @@ import dateutil.parser
 import uvicorn
 from fastapi import FastAPI
 
-from crud import get_monthly_orders, filter_results_by_dates
+from crud import get_monthly_orders
 from postgres import models, schemas
 from postgres.database import engine, get_db
 

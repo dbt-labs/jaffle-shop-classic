@@ -8,6 +8,7 @@ from postgres.models import MonthlyOrders, CustomerMonthlyOrders
 
 def get_monthly_orders(db: Session, customer_id: Optional[int] = None, start_date: Optional[dt.datetime] = None,
                        end_date: Optional[dt.datetime] = None) -> Query:
+    """Return all monthly orders, filtered by the given parameters"""
     if customer_id:
         query = db.query(CustomerMonthlyOrders).filter(CustomerMonthlyOrders.customer_id == customer_id)
         return filter_results_by_dates(query, CustomerMonthlyOrders.month, start_date, end_date)
