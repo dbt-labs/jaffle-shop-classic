@@ -5,7 +5,7 @@ import dateutil.parser
 import uvicorn
 from fastapi import FastAPI
 
-from crud import get_monthly_orders
+from postgres.crud import get_monthly_orders
 from postgres import models, schemas
 from postgres.database import engine, get_db
 
@@ -23,6 +23,14 @@ def get_date_from_str(value: Optional[str]) -> Optional[dt.date]:
 
 @app.get("/monthly_orders", response_model=List[Union[schemas.CustomerMonthlyOrders, schemas.MonthlyOrders]])
 async def monthly_orders(start_date: Optional[str] = None, end_date: Optional[str] = None, customer_id: Optional[str] = None):
+    """
+    API to fetch all monthly orders.
+
+    :param start_date: If defined, only return order data after this date
+    :param end_date: If defined, only return order data before this date
+    :param customer_id: If defined, will filter the result on a specific customer ID
+    :return: A list of JSONs representing the filtered monthly orders
+    """
     start_date = get_date_from_str(start_date)
     end_date = get_date_from_str(end_date)
 
