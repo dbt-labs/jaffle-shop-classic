@@ -1,0 +1,13 @@
+# DATABASE CONNECTION INFORMATION
+# In this section, you can specify one or more databases that your runs (which are defined later in the file) can connect to.
+
+# Specify the database connection information
+[database.your_business_data] 
+# Note that this line *can* be the same as your actual database name, but doesn't 
+# have to be. It's a variable that stores information about a database connection 
+# (driver, database, user, and password).
+
+  driver = "postgresql"
+  database = "sungwonchung3/constraints" # Note that this line *is* where your actual database name must be used.
+  user = "dbt_sung"
+  password = ${DB_PASS} 

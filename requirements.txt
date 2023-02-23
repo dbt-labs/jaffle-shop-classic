@@ -1,3 +1,4 @@
-git+https://github.com/dbt-labs/dbt-core.git@dbt-constraints#egg=dbt-core&subdirectory=core
-git+https://github.com/dbt-labs/dbt-core.git@dbt-constraints#egg=dbt-tests-adapter&subdirectory=tests/adapter
-git+https://github.com/dbt-labs/dbt-core.git@dbt-constraints#egg=dbt-postgres&subdirectory=plugins/postgres
+git+https://github.com/dbt-labs/dbt-core.git@main#egg=dbt-core&subdirectory=core
+git+https://github.com/dbt-labs/dbt-core.git@main#egg=dbt-tests-adapter&subdirectory=tests/adapter
+git+https://github.com/dbt-labs/dbt-core.git@main#egg=dbt-postgres&subdirectory=plugins/postgres
+data-diff[postgresql]==0.4.1

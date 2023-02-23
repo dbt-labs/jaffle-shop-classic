@@ -9,7 +9,7 @@ models:
     columns:
       - name: customer_id
         description: This is a unique identifier for a customer
-        data_type: forced_error
+        data_type: integer
         constraints: ["not null", "primary key"]
         tests:
           - unique

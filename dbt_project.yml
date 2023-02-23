@@ -2,7 +2,6 @@ name: 'jaffle_shop'
 
 config-version: 2
 version: '0.1'
-
 profile: 'jaffle_shop'
 
 model-paths: ["models"]
@@ -19,8 +18,14 @@ clean-targets:
 
 require-dbt-version: [">=1.0.0", "<2.0.0"]
 
+vars:
+  data_diff:
+    prod_database: sungwonchung3/constraints
+    prod_schema: dbt_sung_prod # optional -- use if project deploys to a single schema
+
 models:
   jaffle_shop:
       materialized: table
       staging:
+        +contract: false
         materialized: view
