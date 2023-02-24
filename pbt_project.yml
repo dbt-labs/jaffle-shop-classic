@@ -13,7 +13,7 @@ subgraphs: {}
 sqlModels: {}
 sqlPipeline:
   name: sqlPipeline
-  description: kunalg@prophecy.io
+  description: kishore@simpledatalabs.com
   author: kishore@simpledatalabs.com
   createdAt: '2022-12-09 05:43:56'
 dependencies: '[]'
