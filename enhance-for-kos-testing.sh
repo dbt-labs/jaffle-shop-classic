@@ -29,7 +29,7 @@ version: 2
 sources:
   - name: jaffle_shop
     description: a demo source for jaffle shop
-    schema: dbt_jaffle
+    schema: KOS_DBT_TEST_MANUAL
     meta:
       favorite_color: red
     tables:
