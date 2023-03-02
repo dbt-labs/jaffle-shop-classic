@@ -37,11 +37,10 @@ sources:
         meta:
           is_source_table: true
         columns:
-          - name: id
+          - name: order_id
             tests:
               - unique
               - not_null
-          - name: order_id
             meta:
               column_note: "column meta test value"
 EOF
