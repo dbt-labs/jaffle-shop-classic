@@ -30,6 +30,9 @@ models:
         description: Total value (AUD) of a customer's orders
 
   - name: orders
+    config:
+      meta:
+        orders_meta: "model meta test for orders"
     description: This table has basic information about orders, as well as some derived facts based on payments
 
     columns:

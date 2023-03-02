@@ -1,3 +1,4 @@
+{{ config(meta = {'customers_sql': 'applies to one model in sql config'}) }}
 with customers as (
 
     select * from {{ ref('stg_customers') }}

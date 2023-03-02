@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: a demo source for jaffle shop
+    schema: dbt_jaffle
+    meta:
+      favorite_color: red
+    tables:
+      - name: stg_orders
+        meta:
+          is_source_table: true
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+          - name: order_id
+            meta:
+              column_note: "column meta test value"

@@ -2,7 +2,7 @@
 
 with orders as (
 
-    select * from {{ ref('stg_orders') }}
+    select * from {{ source('jaffle_shop', 'stg_orders') }}
 
 ),
 
@@ -43,7 +43,7 @@ final as (
 
         {% endfor -%}
 
-        order_payments.total_amount as amount
+        order_payments.total_amount as amount, current_timestamp as updated_at
 
     from orders
 

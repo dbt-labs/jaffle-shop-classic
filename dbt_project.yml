@@ -24,3 +24,13 @@ models:
       materialized: table
       staging:
         materialized: view
+  +meta:
+    all-models: "all models meta"
+
+seeds:
+  +meta:
+    all-seeds: "all seeds meta"
+
+tests:
+  +meta:
+    all-tests: "all tests meta"
