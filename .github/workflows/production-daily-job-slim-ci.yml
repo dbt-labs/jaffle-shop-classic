@@ -48,7 +48,7 @@ jobs:
         echo "run_id=$(cat response.json | jq -r '.data.id')" >> $GITHUB_ENV
 
     - name: Piperider Cloud Login
-      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID --disable-auto-upload
+      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID
 
     - name: Profile on PROD environment
       run: |
