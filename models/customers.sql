@@ -12,7 +12,7 @@ orders as (
 
 payments as (
 
-    select * from {{ ref('stg_payments') }}
+    select * from {{ ref('stg_payments') }} sample (500 rows)
 
 ),
 
