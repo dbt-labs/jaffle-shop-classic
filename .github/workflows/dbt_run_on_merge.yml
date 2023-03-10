@@ -1,0 +1,34 @@
+    
+name: run dbt Cloud job on push
+
+# This filter says only run this job when there is a push to the main branch
+# This works off the assumption that you've restrictred this branch to only all PRs to push to the deafult branch
+# Update the name to match the name of your default branch
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+
+  # the job calls the dbt Cloud API to run a job
+  run_dbt_cloud_job:
+    name: Run dbt Cloud Job
+    runs-on: ubuntu-latest
+
+  # Set the environment variables needed for the run
+    env:
+      DBT_ACCOUNT_ID: 1846 # enter your account id
+      DBT_PROJECT_ID: 80822 # enter your project id
+      DBT_PR_JOB_ID:  234717 # enter your job id
+      DBT_API_KEY: ${{ secrets.DBT_API_KEY }}
+      DBT_JOB_CAUSE: 'GitHub Pipeline CI Job' 
+      DBT_JOB_BRANCH: ${{ github.ref_name }}
+
+    steps:
+      - uses: "actions/checkout@v3"
+      - uses: "actions/setup-python@v2"
+        with:
+          python-version: "3.9"
+      - name: Run dbt Cloud job
+        run: "python python/run_and_monitor_dbt_job.py"
