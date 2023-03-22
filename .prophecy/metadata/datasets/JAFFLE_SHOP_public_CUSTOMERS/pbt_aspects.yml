@@ -1,0 +1,29 @@
+version: 1
+schema:
+  providerType: Snowflake
+  fields:
+  - name: CUSTOMER_ID
+    dataType:
+      type: Number
+  - name: FIRST_NAME
+    dataType:
+      type: String
+  - name: LAST_NAME
+    dataType:
+      type: String
+  - name: FIRST_ORDER
+    dataType:
+      type: Date
+  - name: MOST_RECENT_ORDER
+    dataType:
+      type: Date
+  - name: NUMBER_OF_ORDERS
+    dataType:
+      type: Number
+  - name: CUSTOMER_LIFETIME_VALUE
+    dataType:
+      type: Number
+sqlInfo:
+  databaseName: JAFFLE_SHOP
+  schemaName: public
+  tableName: CUSTOMERS

@@ -1,0 +1,35 @@
+version: 1
+schema:
+  providerType: Snowflake
+  fields:
+  - name: ORDER_ID
+    dataType:
+      type: Number
+  - name: CUSTOMER_ID
+    dataType:
+      type: Number
+  - name: ORDER_DATE
+    dataType:
+      type: Date
+  - name: STATUS
+    dataType:
+      type: String
+  - name: CREDIT_CARD_AMOUNT
+    dataType:
+      type: Number
+  - name: COUPON_AMOUNT
+    dataType:
+      type: Number
+  - name: BANK_TRANSFER_AMOUNT
+    dataType:
+      type: Number
+  - name: GIFT_CARD_AMOUNT
+    dataType:
+      type: Number
+  - name: AMOUNT
+    dataType:
+      type: Number
+sqlInfo:
+  databaseName: JAFFLE_SHOP
+  schemaName: public
+  tableName: ORDERS

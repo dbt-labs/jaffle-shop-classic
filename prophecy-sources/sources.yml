@@ -1,0 +1,61 @@
+---
+version: 2
+sources:
+- name: "JAFFLE_SHOP.public"
+  database: "JAFFLE_SHOP"
+  schema: "public"
+  config:
+    enabled: true
+  tables:
+  - name: "CUSTOMERS"
+    columns:
+    - name: "CUSTOMER_ID"
+      dataType:
+        type: "Number"
+    - name: "FIRST_NAME"
+      dataType:
+        type: "String"
+    - name: "LAST_NAME"
+      dataType:
+        type: "String"
+    - name: "FIRST_ORDER"
+      dataType:
+        type: "Date"
+    - name: "MOST_RECENT_ORDER"
+      dataType:
+        type: "Date"
+    - name: "NUMBER_OF_ORDERS"
+      dataType:
+        type: "Number"
+    - name: "CUSTOMER_LIFETIME_VALUE"
+      dataType:
+        type: "Number"
+  - name: "ORDERS"
+    columns:
+    - name: "ORDER_ID"
+      dataType:
+        type: "Number"
+    - name: "CUSTOMER_ID"
+      dataType:
+        type: "Number"
+    - name: "ORDER_DATE"
+      dataType:
+        type: "Date"
+    - name: "STATUS"
+      dataType:
+        type: "String"
+    - name: "CREDIT_CARD_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "COUPON_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "BANK_TRANSFER_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "GIFT_CARD_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "AMOUNT"
+      dataType:
+        type: "Number"

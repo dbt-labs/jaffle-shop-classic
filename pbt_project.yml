@@ -1,0 +1,126 @@
+name: jaffle_6
+description: ''
+version: 0.0.1
+author: ashish@prophecy.io
+language: sql
+buildSystem: ''
+buildSystemDetails:
+  artefactID: jaffle_6
+  parentArtefactID: ''
+  buildSystem: wheel
+  author: null
+  createdAt: '2023-03-22 11:16:52'
+  modifiedAt: '2023-03-22 11:16:52'
+pipelines: {}
+datasets:
+  .prophecy/metadata/datasets/JAFFLE_SHOP_public_CUSTOMERS:
+    name: JAFFLE_SHOP.public.CUSTOMERS
+    description: ''
+    author: ashish@prophecy.io
+    createdAt: '2023-03-22 11:17:54'
+    modifiedAt: '2023-03-22 11:17:54'
+    mode: ''
+    physicalDatasets: {}
+  .prophecy/metadata/datasets/JAFFLE_SHOP_public_ORDERS:
+    name: JAFFLE_SHOP.public.ORDERS
+    description: ''
+    author: ashish@prophecy.io
+    createdAt: '2023-03-22 11:18:06'
+    modifiedAt: '2023-03-22 11:18:06'
+    mode: ''
+    physicalDatasets: {}
+templates: {}
+jobs: {}
+functions:
+  author: null
+  createdAt: '2023-03-22 11:16:52'
+  modifiedAt: '2023-03-22 11:16:52'
+  gems: {}
+  udfs: {}
+  udafs: {}
+  expressions: {}
+subgraphs: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - .prophecy/ide/models/stg_customers.json
+    - jaffle_6HhFOu5CR/models/staging/stg_customers.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-03-22 11:16:58'
+    modifiedAt: '2023-03-22 11:16:58'
+  .prophecy/metadata/sqlmodels/stg_orders:
+    name: stg_orders
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - .prophecy/ide/models/stg_orders.json
+    - jaffle_6HhFOu5CR/models/staging/stg_orders.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-03-22 11:16:58'
+    modifiedAt: '2023-03-22 11:16:58'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - .prophecy/ide/models/stg_payments.json
+    - jaffle_6HhFOu5CR/models/staging/stg_payments.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-03-22 11:16:58'
+    modifiedAt: '2023-03-22 11:16:58'
+  .prophecy/metadata/sqlmodels/orders:
+    name: orders
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - .prophecy/ide/models/orders.json
+    - jaffle_6HhFOu5CR/models/orders.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-03-22 11:16:58'
+    modifiedAt: '2023-03-22 11:16:58'
+  .prophecy/metadata/sqlmodels/customers:
+    name: customers
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - .prophecy/ide/models/customers.json
+    - jaffle_6HhFOu5CR/models/customers.sql
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-03-22 11:16:58'
+    modifiedAt: '2023-03-22 11:16:58'
+  .prophecy/metadata/sqlmodels/customer_report:
+    name: customer_report
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - .prophecy/ide/models/customer_report.json
+    - jaffle_6HhFOu5CR/models/customer_report.sql
+    sqlDependencies:
+      models: []
+      datasets:
+      - 54/.prophecy/metadata/datasets/JAFFLE_SHOP_public_CUSTOMERS
+      - 54/.prophecy/metadata/datasets/JAFFLE_SHOP_public_ORDERS
+    createdAt: '2023-03-22 11:17:35'
+    modifiedAt: '2023-03-22 11:17:35'
+sqlPipeline:
+  name: sqlPipeline
+  description: null
+  author: ashish@prophecy.io
+  createdAt: '2023-03-22 11:16:52'
+  modifiedAt: '2023-03-22 11:16:52'
+dependencies: '[]'
+projectDependencies: {}
+pipelineConfigurations: {}
