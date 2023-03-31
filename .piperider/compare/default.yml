@@ -1,0 +1,16 @@
+base:
+  branch: main
+  dbt:
+    commands:
+    - dbt deps
+    - dbt build
+  piperider:
+    command: piperider run
+target:
+  branch: feature/add-metrics
+  dbt:
+    commands:
+    - dbt deps
+    - dbt build
+  piperider:
+    command: piperider run

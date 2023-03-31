@@ -2,4 +2,5 @@
 target/
 dbt_modules/
 logs/
+venv/
 **/.DS_Store

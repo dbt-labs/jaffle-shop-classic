@@ -1,35 +1,13 @@
-dataSources:
-- name: jaffle_shop_pr
-  type: snowflake
-  dbt:
-    profile: jaffle_shop
-    target: pr
-    projectDir: .
-- name: jaffle_shop
-  type: snowflake
-  dbt:
-    profile: jaffle_shop
-    target: prod
-    projectDir: .
+dataSources: []
+dbt:
+  projectDir: .
+  # tag: 'piperider'
 
 profiler:
 #   table:
 #     # the maximum row count to profile. (Default unlimited)
 #     limit: 1000000
 #     duplicateRows: false
-
-# The tables to include/exclude
-# includes: []
-# excludes: []
-
-# tables:
-#   my-table-name:
-#     # description of the table
-#     description: "this is a table description"
-#     columns:
-#       my-col-name:
-#         # description of the column
-#         description: "this is a column description"
 
 telemetry:
   id: 2e470b721f5a4114aa7cf9b73eca760d
