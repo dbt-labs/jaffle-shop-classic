@@ -1,0 +1,34 @@
+---
+version: 2
+sources:
+- name: "JAFFLE_SHOP.public"
+  database: "JAFFLE_SHOP"
+  schema: "public"
+  config:
+    enabled: true
+  tables:
+  - name: "RAW_CUSTOMERS"
+    columns:
+    - name: "ID"
+      dataType:
+        type: "Number"
+    - name: "FIRST_NAME"
+      dataType:
+        type: "String"
+    - name: "LAST_NAME"
+      dataType:
+        type: "String"
+  - name: "RAW_ORDERS"
+    columns:
+    - name: "ID"
+      dataType:
+        type: "Number"
+    - name: "USER_ID"
+      dataType:
+        type: "Number"
+    - name: "ORDER_DATE"
+      dataType:
+        type: "Date"
+    - name: "STATUS"
+      dataType:
+        type: "String"

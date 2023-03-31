@@ -1,0 +1,24 @@
+---
+version: 2
+macros:
+- name: "cents"
+  description: "This is cents macro"
+  arguments:
+  - name: "column_name"
+    type: "unknown"
+  - name: "decimal_places"
+    type: "int"
+    description: "Field with default value"
+  macroType: "expression"
+- name: "audit"
+  arguments:
+  - name: "table_name"
+    type: "unknown"
+    description: "Name of the table"
+  macroType: "query"
+- name: "nested"
+  description: "This is nested"
+  arguments:
+  - name: "column_name"
+    type: "unknown"
+  macroType: "expression"

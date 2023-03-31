@@ -60,6 +60,18 @@ sqlModels:
       datasets: []
     createdAt: '2023-03-31 19:50:01'
     modifiedAt: '2023-03-31 19:50:01'
+  .prophecy/metadata/sqlmodels/macro_model:
+    name: macro_model
+    description: null
+    author: kishore+1@simpledatalabs.com
+    files:
+    - models/macro_model.sql
+    - .prophecy/ide/models/macro_model.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-03-31 21:06:22'
+    modifiedAt: '2023-03-31 21:06:22'
   .prophecy/metadata/sqlmodels/stg_payments:
     name: stg_payments
     description: null
@@ -86,7 +98,34 @@ sqlModels:
       datasets: []
     createdAt: '2023-03-31 19:50:01'
     modifiedAt: '2023-03-31 19:50:01'
-sqlMacros: {}
+sqlMacros:
+  .prophecy/metadata/sqlmacros/audit:
+    name: audit
+    description: null
+    author: kishore+1@simpledatalabs.com
+    files:
+    - macros/audit.sql
+    - macros/macros.yml
+    createdAt: '2023-03-31 21:23:04'
+    modifiedAt: '2023-03-31 21:23:04'
+  .prophecy/metadata/sqlmacros/cents:
+    name: cents
+    description: This is cents macro
+    author: kishore+1@simpledatalabs.com
+    files:
+    - macros/cents.sql
+    - macros/macros.yml
+    createdAt: '2023-03-31 20:56:42'
+    modifiedAt: '2023-03-31 20:56:42'
+  .prophecy/metadata/sqlmacros/nested:
+    name: nested
+    description: This is nested
+    author: kishore+1@simpledatalabs.com
+    files:
+    - macros/nested.sql
+    - macros/macros.yml
+    createdAt: '2023-03-31 21:31:03'
+    modifiedAt: '2023-03-31 21:31:03'
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
     name: raw_customers
@@ -112,7 +151,26 @@ sqlSeeds:
     - seeds/raw_payments.csv
     createdAt: '2023-03-31 19:50:01'
     modifiedAt: '2023-03-31 19:50:01'
-sqlSources: {}
+sqlSources:
+  .prophecy/metadata/sqlsources/JAFFLE_SHOP_public:
+    name: JAFFLE_SHOP.public
+    description: null
+    author: kishore+1@simpledatalabs.com
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2023-03-31 20:12:16'
+    modifiedAt: '2023-03-31 20:12:16'
+    tables:
+    - name: RAW_CUSTOMERS
+      description: null
+      author: kishore+1@simpledatalabs.com
+      createdAt: '2023-03-31 20:12:16'
+      modifiedAt: '2023-03-31 20:12:16'
+    - name: RAW_ORDERS
+      description: null
+      author: kishore+1@simpledatalabs.com
+      createdAt: '2023-03-31 20:12:18'
+      modifiedAt: '2023-03-31 20:12:18'
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline
