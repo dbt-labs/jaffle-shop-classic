@@ -24,6 +24,7 @@ env:
   DBT_CLOUD_JOB_ID: 173664
   PIPERIDER_CLOUD_TOKEN_ID: ${{ secrets.PIPERIDER_CLOUD_TOKEN_ID }}
   PIPERIDER_CLOUD_PROJECT_ID: ${{ secrets.PIPERIDER_CLOUD_PROJECT_ID }}
+  PIPERIDER_API_PROJECT: ${{ secrets.PIPERIDER_API_PROJECT }}
 
 jobs:
   build:
@@ -54,14 +55,14 @@ jobs:
         echo "run_id=$(cat response.json | jq -r '.data.id')" >> $GITHUB_ENV
 
     - name: Piperider Cloud Login
-      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID
+      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID --no-interaction
 
     - name: Profile on PR environment
       run: |
         mkdir -p state/pr
         dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path manifest.json -f state/pr/manifest.json
         dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path run_results.json -f state/pr/run_results.json
-        piperider run --datasource jaffle_shop_pr --dbt-state state/pr -o /tmp/pipe-target
+        piperider run --datasource jaffle_shop_pr --dbt-state state/pr --dbt-run-results -o /tmp/pipe-target
         piperider cloud upload-report --run .piperider/outputs/latest/run.json
 
     - name: Generate Comparison Summary
