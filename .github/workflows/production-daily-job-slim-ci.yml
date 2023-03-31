@@ -23,6 +23,7 @@ env:
   DBT_CLOUD_ACCOUNT_ID: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
   DBT_CLOUD_JOB_ID: 173663
   PIPERIDER_CLOUD_TOKEN_ID: ${{ secrets.PIPERIDER_CLOUD_TOKEN_ID }}
+  PIPERIDER_API_PROJECT: ${{ secrets. PIPERIDER_API_PROJECT }}
 
 jobs:
   build:
@@ -48,7 +49,7 @@ jobs:
         echo "run_id=$(cat response.json | jq -r '.data.id')" >> $GITHUB_ENV
 
     - name: Piperider Cloud Login
-      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID
+      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID --no-interaction
 
     - name: Profile on PROD environment
       run: |
