@@ -1,0 +1,125 @@
+name: jaffle_shop
+description: ''
+version: 0.0.1
+author: null
+language: sql
+buildSystem: ''
+buildSystemDetails: null
+pipelines: {}
+datasets: {}
+templates: {}
+jobs: {}
+functions:
+  author: null
+  createdAt: '2023-04-05 07:56:18'
+  modifiedAt: '2023-04-05 07:56:18'
+  gems: {}
+  udfs: {}
+  udafs: {}
+  expressions: {}
+subgraphs: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/stg_orders:
+    name: stg_orders
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/staging/stg_orders.sql
+    - .prophecy/ide/models/stg_orders.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/orders:
+    name: orders
+    description: This table has basic information about orders, as well as some derived
+      facts based on payments
+    author: ashish@prophecy.io
+    files:
+    - models/orders.sql
+    - .prophecy/ide/models/orders.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/customers:
+    name: customers
+    description: This table has basic information about a customer, as well as some
+      derived facts based on a customer's orders
+    author: ashish@prophecy.io
+    files:
+    - models/customers.sql
+    - .prophecy/ide/models/customers.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/staging/stg_payments.sql
+    - .prophecy/ide/models/stg_payments.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+sqlMacros: {}
+sqlSeeds:
+  .prophecy/metadata/sqlseeds/raw_customers:
+    name: raw_customers
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - seeds/raw_customers.csv
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlseeds/raw_orders:
+    name: raw_orders
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - seeds/raw_orders.csv
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlseeds/raw_payments:
+    name: raw_payments
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - seeds/raw_payments.csv
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+sqlSources: {}
+sqlUnreferencedSources: {}
+sqlPipeline:
+  name: sqlPipeline
+  description: null
+  author: ashish@prophecy.io
+  createdAt: '2023-04-05 07:56:18'
+  modifiedAt: '2023-04-05 07:56:18'
+dependencies: '[]'
+projectDependencies: {}
+pipelineConfigurations: {}

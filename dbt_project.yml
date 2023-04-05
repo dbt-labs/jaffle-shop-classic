@@ -1,26 +1,39 @@
-name: 'jaffle_shop'
-
+# ==================
+# Project Details
+# ==================
+name: "jaffle_shop"
 config-version: 2
-version: '0.1'
+require-dbt-version:
+- ">=1.0.0"
+- "<2.0.0"
+version: "0.1"
+profile: "jaffle_shop"
 
-profile: 'jaffle_shop'
-
-model-paths: ["models"]
-seed-paths: ["seeds"]
-test-paths: ["tests"]
-analysis-paths: ["analysis"]
-macro-paths: ["macros"]
-
-target-path: "target"
+# ==================
+# File Path Configs
+# ==================
+test-paths:
+- "tests"
 clean-targets:
-    - "target"
-    - "dbt_modules"
-    - "logs"
+- "target"
+- "dbt_modules"
+- "logs"
+seed-paths:
+- "seeds"
+model-paths:
+- "models"
+- "prophecy-sources"
+analysis-paths:
+- "analysis"
+macro-paths:
+- "macros"
+target-path: "target"
 
-require-dbt-version: [">=1.0.0", "<2.0.0"]
-
+# ==================
+# Model Configs
+# ==================
 models:
   jaffle_shop:
-      materialized: table
-      staging:
-        materialized: view
+    materialized: "table"
+    staging:
+      materialized: "view"
