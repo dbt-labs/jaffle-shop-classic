@@ -35,7 +35,7 @@ jobs:
         pip install piperider['snowflake']
 
     - name: Run DBT on PR environment
-      run: dbt build --target pr
+      run: dbt build --target jaffle_shop_pr
 
     - name: Profile on PR environment
       run: piperider run --datasource jaffle_shop_pr --dbt-state target -o /tmp/pr-report/

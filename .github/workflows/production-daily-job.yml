@@ -38,7 +38,7 @@ jobs:
         pip install piperider['snowflake']
 
     - name: Run DBT on PROD environment
-      run: dbt build --target prod
+      run: dbt build --target jaffle_shop
 
     - name: Profile on PROD environment
       run: piperider run --datasource jaffle_shop --dbt-state target -o report/
