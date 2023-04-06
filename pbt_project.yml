@@ -84,19 +84,6 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
-  .prophecy/metadata/sqlmodels/stg_customers:
-    name: stg_customers
-    description: null
-    author: ashish@prophecy.io
-    files:
-    - models/staging/stg_customers.sql
-    - .prophecy/ide/models/stg_customers.json
-    - models/staging/schema.yml
-    sqlDependencies:
-      models: []
-      datasets: []
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
   .prophecy/metadata/sqlmodels/stg_payments:
     name: stg_payments
     description: null
@@ -110,25 +97,26 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
-  .prophecy/metadata/sqlmodels/test:
-    name: test
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
     description: null
     author: ashish@prophecy.io
     files:
-    - models/test.sql
-    - .prophecy/ide/models/test.json
+    - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
+    - models/staging/schema.yml
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-05 08:11:06'
-    modifiedAt: '2023-04-05 08:11:06'
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
 sqlMacros:
   .prophecy/metadata/sqlmacros/add_audit_cols:
     name: add_audit_cols
     description: null
     author: ashish@prophecy.io
     files:
-    - macros/add_audit_cols
+    - macros/add_audit_cols.sql
     - macros/macros_001.yml
     createdAt: '2023-04-06 14:00:57'
     modifiedAt: '2023-04-06 14:00:57'
@@ -137,7 +125,7 @@ sqlMacros:
     description: null
     author: ashish@prophecy.io
     files:
-    - macros/cents_to_dollars
+    - macros/cents_to_dollars.sql
     createdAt: '2023-04-06 14:09:30'
     modifiedAt: '2023-04-06 14:09:30'
   .prophecy/metadata/sqlmacros/dollars_to_cents:

@@ -59,7 +59,8 @@ AmountByCustomer AS (
     USER_ID AS USER_ID,
     sum(AMOUNT) AS AMOUNT,
     max(ORDER_DATE) AS ORDER_DATE,
-    ANY_VALUE(FULL_NAME) AS FULL_NAME
+    ANY_VALUE(FULL_NAME) AS FULL_NAME,
+    sum(AMOUNT_CENTS) AS AMOUNT_CENTS
   
   FROM byCustomer
   
@@ -67,12 +68,21 @@ AmountByCustomer AS (
 
 ),
 
-add_audit_cols_1 AS (
+HumanReadableAmount AS (
 
-  {{ jaffle_shop.add_audit_cols(table_name = 'AmountByCustomer', modified_by = 'ASHISH') }}
+  SELECT 
+    USER_ID AS USER_ID,
+    AMOUNT AS AMOUNT,
+    ORDER_DATE AS ORDER_DATE,
+    FULL_NAME AS FULL_NAME,
+    AMOUNT_CENTS AS AMOUNT_CENTS,
+    {{ human_readable_number('AMOUNT_CENTS') }} AS HUMAN_AMOUNT_CENTS,
+    {{ human_readable_number('AMOUNT') }} AS HUMAN_AMOUNT
+  
+  FROM AmountByCustomer
 
 )
 
 SELECT * 
 
-FROM add_audit_cols_1
+FROM HumanReadableAmount
