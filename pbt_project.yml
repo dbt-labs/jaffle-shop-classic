@@ -32,6 +32,18 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/customer_reports:
+    name: customer_reports
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/customer_reports.sql
+    - .prophecy/ide/models/customer_reports.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 08:00:06'
+    modifiedAt: '2023-04-05 08:00:06'
   .prophecy/metadata/sqlmodels/orders:
     name: orders
     description: This table has basic information about orders, as well as some derived
@@ -60,19 +72,6 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
-  .prophecy/metadata/sqlmodels/stg_payments:
-    name: stg_payments
-    description: null
-    author: ashish@prophecy.io
-    files:
-    - models/staging/stg_payments.sql
-    - .prophecy/ide/models/stg_payments.json
-    - models/staging/schema.yml
-    sqlDependencies:
-      models: []
-      datasets: []
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
   .prophecy/metadata/sqlmodels/stg_customers:
     name: stg_customers
     description: null
@@ -86,6 +85,31 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/staging/stg_payments.sql
+    - .prophecy/ide/models/stg_payments.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 07:56:18'
+    modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/test:
+    name: test
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/test.sql
+    - .prophecy/ide/models/test.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-05 08:11:06'
+    modifiedAt: '2023-04-05 08:11:06'
 sqlMacros: {}
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
@@ -112,7 +136,74 @@ sqlSeeds:
     - seeds/raw_payments.csv
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
-sqlSources: {}
+sqlSources:
+  .prophecy/metadata/sqlsources/ASHISH_PUBLIC:
+    name: ASHISH.PUBLIC
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2023-04-05 08:11:38'
+    modifiedAt: '2023-04-05 08:11:38'
+    tables:
+    - name: DEMONSTRATION4
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-05 08:11:38'
+      modifiedAt: '2023-04-05 08:11:38'
+    - name: T1
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-06 06:14:56'
+      modifiedAt: '2023-04-06 06:14:56'
+  .prophecy/metadata/sqlsources/JAFFLE_SHOP_PUBLIC:
+    name: JAFFLE_SHOP.PUBLIC
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2023-04-05 08:00:32'
+    modifiedAt: '2023-04-05 08:00:32'
+    tables:
+    - name: ORDERS
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-05 08:00:32'
+      modifiedAt: '2023-04-05 08:00:32'
+    - name: CUSTOMERS
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-05 08:00:38'
+      modifiedAt: '2023-04-05 08:00:38'
+    - name: T2
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-06 07:43:24'
+      modifiedAt: '2023-04-06 07:43:24'
+  .prophecy/metadata/sqlsources/TESTING_PUBLIC:
+    name: TESTING.PUBLIC
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2023-04-06 08:19:46'
+    modifiedAt: '2023-04-06 08:19:46'
+    tables:
+    - name: JSON_SONGS_DATA
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-06 08:19:46'
+      modifiedAt: '2023-04-06 08:19:46'
+    - name: COMPLEXTABLE1
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-06 08:24:57'
+      modifiedAt: '2023-04-06 08:24:57'
+    - name: COMPLEX_TABLE
+      description: null
+      author: ashish@prophecy.io
+      createdAt: '2023-04-06 09:03:44'
+      modifiedAt: '2023-04-06 09:03:44'
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline
