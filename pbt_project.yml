@@ -83,8 +83,8 @@ sqlModels:
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
+    createdAt: '2023-04-06 10:31:52'
+    modifiedAt: '2023-04-06 10:31:52'
   .prophecy/metadata/sqlmodels/stg_payments:
     name: stg_payments
     description: null
@@ -98,19 +98,18 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-06 10:31:52'
     modifiedAt: '2023-04-06 10:31:52'
-  .prophecy/metadata/sqlmodels/stg_customers:
-    name: stg_customers
+  .prophecy/metadata/sqlmodels/test:
+    name: test
     description: null
     author: ashish@prophecy.io
     files:
-    - models/staging/stg_customers.sql
-    - .prophecy/ide/models/stg_customers.json
-    - models/staging/schema.yml
+    - models/test.sql
+    - .prophecy/ide/models/test.json
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-06 10:31:52'
-    modifiedAt: '2023-04-06 10:31:52'
+    createdAt: '2023-04-06 10:50:53'
+    modifiedAt: '2023-04-06 10:50:53'
 sqlMacros: {}
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
