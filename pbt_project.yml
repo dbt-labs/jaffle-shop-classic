@@ -108,8 +108,8 @@ sqlModels:
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-06 10:50:53'
-    modifiedAt: '2023-04-06 10:50:53'
+    createdAt: '2023-04-06 18:50:55'
+    modifiedAt: '2023-04-06 18:50:55'
 sqlMacros: {}
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
