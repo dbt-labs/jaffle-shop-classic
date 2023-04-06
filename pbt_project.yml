@@ -1,4 +1,4 @@
-name: jaffle_shop
+name: prophecy_dbt_snowflake
 description: ''
 version: 0.0.1
 author: null
@@ -11,8 +11,8 @@ templates: {}
 jobs: {}
 functions:
   author: null
-  createdAt: '2023-04-05 07:56:18'
-  modifiedAt: '2023-04-05 07:56:18'
+  createdAt: '2023-04-06 10:31:52'
+  modifiedAt: '2023-04-06 10:31:52'
   gems: {}
   udfs: {}
   udafs: {}
@@ -56,8 +56,8 @@ sqlModels:
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
+    createdAt: '2023-04-06 10:31:52'
+    modifiedAt: '2023-04-06 10:31:52'
   .prophecy/metadata/sqlmodels/customers:
     name: customers
     description: This table has basic information about a customer, as well as some
@@ -96,20 +96,21 @@ sqlModels:
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
-  .prophecy/metadata/sqlmodels/test:
-    name: test
+    createdAt: '2023-04-06 10:31:52'
+    modifiedAt: '2023-04-06 10:31:52'
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
     description: null
     author: ashish@prophecy.io
     files:
-    - models/test.sql
-    - .prophecy/ide/models/test.json
+    - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
+    - models/staging/schema.yml
     sqlDependencies:
       models: []
       datasets: []
-    createdAt: '2023-04-05 08:11:06'
-    modifiedAt: '2023-04-05 08:11:06'
+    createdAt: '2023-04-06 10:31:52'
+    modifiedAt: '2023-04-06 10:31:52'
 sqlMacros: {}
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
@@ -118,16 +119,16 @@ sqlSeeds:
     author: ashish@prophecy.io
     files:
     - seeds/raw_customers.csv
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
+    createdAt: '2023-04-06 10:31:52'
+    modifiedAt: '2023-04-06 10:31:52'
   .prophecy/metadata/sqlseeds/raw_orders:
     name: raw_orders
     description: null
     author: ashish@prophecy.io
     files:
     - seeds/raw_orders.csv
-    createdAt: '2023-04-05 07:56:18'
-    modifiedAt: '2023-04-05 07:56:18'
+    createdAt: '2023-04-06 10:31:52'
+    modifiedAt: '2023-04-06 10:31:52'
   .prophecy/metadata/sqlseeds/raw_payments:
     name: raw_payments
     description: null
@@ -209,8 +210,8 @@ sqlPipeline:
   name: sqlPipeline
   description: null
   author: ashish@prophecy.io
-  createdAt: '2023-04-05 07:56:18'
-  modifiedAt: '2023-04-05 07:56:18'
+  createdAt: '2023-04-06 10:31:52'
+  modifiedAt: '2023-04-06 10:31:52'
 dependencies: '[]'
 projectDependencies: {}
 pipelineConfigurations: {}
