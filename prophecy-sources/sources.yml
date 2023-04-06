@@ -1,0 +1,148 @@
+---
+version: 2
+sources:
+- name: "ASHISH.PUBLIC"
+  database: "ASHISH"
+  schema: "PUBLIC"
+  config:
+    enabled: true
+  tables:
+  - name: "DEMONSTRATION4"
+    columns:
+    - name: "ID"
+      dataType:
+        type: "Number"
+    - name: "ARRAY1"
+      dataType:
+        type: "Array"
+    - name: "VARIANT1"
+      dataType:
+        type: "Variant"
+    - name: "OBJECT1"
+      dataType:
+        type: "Object"
+    - name: "NUM"
+      dataType:
+        type: "Number"
+    - name: "DEC"
+      dataType:
+        type: "Number"
+    - name: "G"
+      dataType:
+        type: "Geography"
+    - name: "TS"
+      dataType:
+        type: "Timestamp"
+  - name: "T1"
+    columns:
+    - name: "ID"
+      dataType:
+        type: "Number"
+    - name: "C1"
+      dataType:
+        type: "String"
+- name: "JAFFLE_SHOP.PUBLIC"
+  database: "JAFFLE_SHOP"
+  schema: "PUBLIC"
+  config:
+    enabled: true
+  tables:
+  - name: "ORDERS"
+    columns:
+    - name: "ORDER_ID"
+      dataType:
+        type: "Number"
+    - name: "CUSTOMER_ID"
+      dataType:
+        type: "Number"
+    - name: "ORDER_DATE"
+      dataType:
+        type: "Date"
+    - name: "STATUS"
+      dataType:
+        type: "String"
+    - name: "CREDIT_CARD_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "COUPON_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "BANK_TRANSFER_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "GIFT_CARD_AMOUNT"
+      dataType:
+        type: "Number"
+    - name: "AMOUNT"
+      dataType:
+        type: "Number"
+  - name: "CUSTOMERS"
+    columns:
+    - name: "CUSTOMER_ID"
+      dataType:
+        type: "Number"
+    - name: "FIRST_ORDER"
+      dataType:
+        type: "Date"
+    - name: "MOST_RECENT_ORDER"
+      dataType:
+        type: "Date"
+    - name: "NUMBER_OF_ORDERS"
+      dataType:
+        type: "Number"
+  - name: "T2"
+    columns:
+    - name: "DATA"
+      dataType:
+        type: "Variant"
+    - name: "KIND"
+      dataType:
+        type: "String"
+    - name: "ID"
+      dataType:
+        type: "Number"
+- name: "TESTING.PUBLIC"
+  database: "TESTING"
+  schema: "PUBLIC"
+  config:
+    enabled: true
+  tables:
+  - name: "JSON_SONGS_DATA"
+    columns:
+    - name: "SRC"
+      dataType:
+        type: "Variant"
+  - name: "COMPLEXTABLE1"
+    columns:
+    - name: "DATA"
+      dataType:
+        type: "Variant"
+    - name: "KIND"
+      dataType:
+        type: "String"
+    - name: "ID"
+      dataType:
+        type: "Number"
+  - name: "COMPLEX_TABLE"
+    columns:
+    - name: "ID"
+      dataType:
+        type: "Number"
+    - name: "DATA"
+      dataType:
+        type: "Variant"
+    - name: "KIND"
+      dataType:
+        type: "String"
+    - name: "BOOK_DATA"
+      dataType:
+        type: "Variant"
+    - name: "FOOD_MENU"
+      dataType:
+        type: "Variant"
+    - name: "SONGS_DATA"
+      dataType:
+        type: "Variant"
+    - name: "MAPS_DATA"
+      dataType:
+        type: "Variant"
