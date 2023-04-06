@@ -58,6 +58,18 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 07:56:18'
     modifiedAt: '2023-04-05 07:56:18'
+  .prophecy/metadata/sqlmodels/macro_tests:
+    name: macro_tests
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - models/macro_tests.sql
+    - .prophecy/ide/models/macro_tests.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-06 13:41:36'
+    modifiedAt: '2023-04-06 13:41:36'
   .prophecy/metadata/sqlmodels/customers:
     name: customers
     description: This table has basic information about a customer, as well as some
@@ -110,7 +122,42 @@ sqlModels:
       datasets: []
     createdAt: '2023-04-05 08:11:06'
     modifiedAt: '2023-04-05 08:11:06'
-sqlMacros: {}
+sqlMacros:
+  .prophecy/metadata/sqlmacros/add_audit_cols:
+    name: add_audit_cols
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - macros/add_audit_cols
+    - macros/macros_001.yml
+    createdAt: '2023-04-06 14:00:57'
+    modifiedAt: '2023-04-06 14:00:57'
+  .prophecy/metadata/sqlmacros/cents_to_dollars:
+    name: cents_to_dollars
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - macros/cents_to_dollars
+    createdAt: '2023-04-06 14:09:30'
+    modifiedAt: '2023-04-06 14:09:30'
+  .prophecy/metadata/sqlmacros/dollars_to_cents:
+    name: dollars_to_cents
+    description: null
+    author: ashish@prophecy.io
+    files:
+    - macros/dollars_to_cents.sql
+    createdAt: '2023-04-06 10:52:55'
+    modifiedAt: '2023-04-06 10:52:55'
+  .prophecy/metadata/sqlmacros/human_readable_number:
+    name: human_readable_number
+    description: this macro a number into human approximate readable number ex. 14,001
+      -> 14K, 1,034,430 -> 1M and so on
+    author: ashish@prophecy.io
+    files:
+    - macros/human_readable_number.sql
+    - macros/macros.yml
+    createdAt: '2023-04-06 10:56:03'
+    modifiedAt: '2023-04-06 10:56:03'
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
     name: raw_customers
