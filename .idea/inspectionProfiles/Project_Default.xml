@@ -1,0 +1,87 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="66">
+            <item index="0" class="java.lang.String" itemvalue="traitlets" />
+            <item index="1" class="java.lang.String" itemvalue="pickleshare" />
+            <item index="2" class="java.lang.String" itemvalue="python-dateutil" />
+            <item index="3" class="java.lang.String" itemvalue="python-dotenv" />
+            <item index="4" class="java.lang.String" itemvalue="h11" />
+            <item index="5" class="java.lang.String" itemvalue="executing" />
+            <item index="6" class="java.lang.String" itemvalue="trio" />
+            <item index="7" class="java.lang.String" itemvalue="Pygments" />
+            <item index="8" class="java.lang.String" itemvalue="pyzmq" />
+            <item index="9" class="java.lang.String" itemvalue="soupsieve" />
+            <item index="10" class="java.lang.String" itemvalue="entrypoints" />
+            <item index="11" class="java.lang.String" itemvalue="pyparsing" />
+            <item index="12" class="java.lang.String" itemvalue="beautifulsoup4" />
+            <item index="13" class="java.lang.String" itemvalue="jupyter_client" />
+            <item index="14" class="java.lang.String" itemvalue="pexpect" />
+            <item index="15" class="java.lang.String" itemvalue="click" />
+            <item index="16" class="java.lang.String" itemvalue="ipykernel" />
+            <item index="17" class="java.lang.String" itemvalue="appnope" />
+            <item index="18" class="java.lang.String" itemvalue="wsproto" />
+            <item index="19" class="java.lang.String" itemvalue="attrs" />
+            <item index="20" class="java.lang.String" itemvalue="psutil" />
+            <item index="21" class="java.lang.String" itemvalue="jedi" />
+            <item index="22" class="java.lang.String" itemvalue="pure-eval" />
+            <item index="23" class="java.lang.String" itemvalue="asttokens" />
+            <item index="24" class="java.lang.String" itemvalue="backcall" />
+            <item index="25" class="java.lang.String" itemvalue="platformdirs" />
+            <item index="26" class="java.lang.String" itemvalue="PySocks" />
+            <item index="27" class="java.lang.String" itemvalue="pykernel" />
+            <item index="28" class="java.lang.String" itemvalue="charset-normalizer" />
+            <item index="29" class="java.lang.String" itemvalue="async-generator" />
+            <item index="30" class="java.lang.String" itemvalue="idna" />
+            <item index="31" class="java.lang.String" itemvalue="pathspec" />
+            <item index="32" class="java.lang.String" itemvalue="decorator" />
+            <item index="33" class="java.lang.String" itemvalue="matplotlib-inline" />
+            <item index="34" class="java.lang.String" itemvalue="ptyprocess" />
+            <item index="35" class="java.lang.String" itemvalue="trio-websocket" />
+            <item index="36" class="java.lang.String" itemvalue="mypy-extensions" />
+            <item index="37" class="java.lang.String" itemvalue="wcwidth" />
+            <item index="38" class="java.lang.String" itemvalue="webdriver-manager" />
+            <item index="39" class="java.lang.String" itemvalue="pycodestyle" />
+            <item index="40" class="java.lang.String" itemvalue="numpy" />
+            <item index="41" class="java.lang.String" itemvalue="requests" />
+            <item index="42" class="java.lang.String" itemvalue="jupyter_core" />
+            <item index="43" class="java.lang.String" itemvalue="sniffio" />
+            <item index="44" class="java.lang.String" itemvalue="exceptiongroup" />
+            <item index="45" class="java.lang.String" itemvalue="selenium" />
+            <item index="46" class="java.lang.String" itemvalue="stack-data" />
+            <item index="47" class="java.lang.String" itemvalue="nest-asyncio" />
+            <item index="48" class="java.lang.String" itemvalue="prompt-toolkit" />
+            <item index="49" class="java.lang.String" itemvalue="tomli" />
+            <item index="50" class="java.lang.String" itemvalue="urllib3" />
+            <item index="51" class="java.lang.String" itemvalue="outcome" />
+            <item index="52" class="java.lang.String" itemvalue="autopep8" />
+            <item index="53" class="java.lang.String" itemvalue="six" />
+            <item index="54" class="java.lang.String" itemvalue="tornado" />
+            <item index="55" class="java.lang.String" itemvalue="parso" />
+            <item index="56" class="java.lang.String" itemvalue="black" />
+            <item index="57" class="java.lang.String" itemvalue="ipython" />
+            <item index="58" class="java.lang.String" itemvalue="packaging" />
+            <item index="59" class="java.lang.String" itemvalue="toml" />
+            <item index="60" class="java.lang.String" itemvalue="sortedcontainers" />
+            <item index="61" class="java.lang.String" itemvalue="pandas" />
+            <item index="62" class="java.lang.String" itemvalue="tqdm" />
+            <item index="63" class="java.lang.String" itemvalue="typing_extensions" />
+            <item index="64" class="java.lang.String" itemvalue="debugpy" />
+            <item index="65" class="java.lang.String" itemvalue="pytz" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N803" />
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
