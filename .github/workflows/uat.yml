@@ -37,6 +37,7 @@ jobs:
           user: ${{ secrets.SF_USER }}
           password: ${{ secrets.SF_PASS }}
           role: sysadmin
+          warehouse: wh_sfp
           database: mt_py
           schema: dev
           target: UAT
