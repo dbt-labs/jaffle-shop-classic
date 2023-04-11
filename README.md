@@ -1,4 +1,4 @@
 # Run dbt project on GitHub actions
-As alternative to `Deploy` functionality of DBT cloud, this repo can be forked and customized for your DBT project.
-
-It provides both CI/CD pipeline for testing the code and deploying to Snowflake, and also for scheduling DBT pipeline in production.
+As alternative to `Deploy` functionality of DBT cloud, this repo provides:
+1. CI/CD pipeline for building the code, testing it and deploying to Snowflake.
+2. Pipeline triggered on schedule, that executes DBT job in production.
