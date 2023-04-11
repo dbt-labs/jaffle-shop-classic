@@ -20,8 +20,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    defaults:
-      working-directory: dbt
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -30,6 +28,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run dbt
+        working-directory: dbt
         uses: molar-volume/dbt-snowflake@main
         with:
           command: dbt run
