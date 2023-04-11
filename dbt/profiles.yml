@@ -1,0 +1,27 @@
+jaffle_shop:
+  outputs:
+    PROD:
+      type: snowflake
+      account: "{{ env_var('account') }}"
+      user: "{{ env_var('user') }}"
+      password: "{{ env_var('password') }}"
+      role: "{{ env_var('role') }}"
+      database: "{{ env_var('database') }}"
+      warehouse: "{{ env_var('warehouse') }}"
+      schema: "{{ env_var('schema') }}"
+      threads: 32
+      client_session_keep_alive: False
+      send_anonymous_usage_stats: False
+    UAT:
+      type: snowflake
+      account: "{{ env_var('account') }}"
+      user: "{{ env_var('user') }}"
+      password: "{{ env_var('password') }}"
+      role: "{{ env_var('role') }}"
+      database: "{{ env_var('database') }}"
+      warehouse: "{{ env_var('warehouse') }}"
+      schema: "{{ env_var('schema') }}"
+      threads: 32
+      client_session_keep_alive: False
+      send_anonymous_usage_stats: False
+  target: "{{ env_var('target') }}"

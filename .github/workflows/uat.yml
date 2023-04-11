@@ -32,3 +32,11 @@ jobs:
         with:
           command: dbt run
           project_folder: dbt
+        env:
+          account: ${{ secrets.SF_ACCOUNT }}
+          user: ${{ secrets.SF_USER }}
+          password: ${{ secrets.SF_PASS }}
+          role: sysadmin
+          database: mt_py
+          schema: dev
+          target: UAT
