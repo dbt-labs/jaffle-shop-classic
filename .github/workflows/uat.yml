@@ -28,7 +28,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run dbt
-        working-directory: dbt
         uses: molar-volume/dbt-snowflake@main
         with:
           command: dbt run
+        working-directory: dbt
