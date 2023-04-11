@@ -31,7 +31,8 @@ jobs:
         uses: molar-volume/dbt-snowflake@main
         with:
           command: |
-            dbt build
+            dbt test
+            dbt run
           project_folder: dbt
         env:
           account: ${{ secrets.SF_ACCOUNT }}
