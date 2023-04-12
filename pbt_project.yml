@@ -3,19 +3,123 @@ description: ''
 version: 0.0.1-SNAPSHOT
 author: kishore@simpledatalabs.com
 language: sql
-buildSystem: sql
+buildSystem: ''
+buildSystemDetails: null
 pipelines: {}
 datasets: {}
 templates: {}
 jobs: {}
-libraries: []
+functions:
+  author: null
+  createdAt: '2023-04-12 15:34:56'
+  modifiedAt: '2023-04-12 15:34:56'
+  gems: {}
+  udfs: {}
+  udafs: {}
+  expressions: {}
 subgraphs: {}
-sqlModels: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/stg_orders:
+    name: stg_orders
+    description: null
+    author: maciej@prophecy.io
+    files:
+    - models/staging/stg_orders.sql
+    - .prophecy/ide/models/stg_orders.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlmodels/orders:
+    name: orders
+    description: This table has basic information about orders, as well as some derived
+      facts based on payments
+    author: maciej@prophecy.io
+    files:
+    - models/orders.sql
+    - .prophecy/ide/models/orders.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlmodels/customers:
+    name: customers
+    description: This table has basic information about a customer, as well as some
+      derived facts based on a customer's orders
+    author: maciej@prophecy.io
+    files:
+    - models/customers.sql
+    - .prophecy/ide/models/customers.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    description: null
+    author: maciej@prophecy.io
+    files:
+    - models/staging/stg_payments.sql
+    - .prophecy/ide/models/stg_payments.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
+    description: null
+    author: maciej@prophecy.io
+    files:
+    - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+sqlMacros: {}
+sqlSeeds:
+  .prophecy/metadata/sqlseeds/raw_customers:
+    name: raw_customers
+    description: null
+    author: maciej@prophecy.io
+    files:
+    - seeds/raw_customers.csv
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlseeds/raw_orders:
+    name: raw_orders
+    description: null
+    author: maciej@prophecy.io
+    files:
+    - seeds/raw_orders.csv
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlseeds/raw_payments:
+    name: raw_payments
+    description: null
+    author: maciej@prophecy.io
+    files:
+    - seeds/raw_payments.csv
+    createdAt: '2023-04-12 15:35:01'
+    modifiedAt: '2023-04-12 15:35:01'
+sqlSources: {}
+sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline
   description: kishore@simpledatalabs.com
   author: kishore@simpledatalabs.com
   createdAt: '2022-12-09 05:43:56'
+  modifiedAt: '2022-12-09 05:43:56'
 dependencies: '[]'
 projectDependencies: {}
 pipelineConfigurations: {}
