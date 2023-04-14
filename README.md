@@ -1,4 +1,9 @@
-# Execute DBT jobs on GitHub Actions
-As alternative to `Deploy` functionality of DBT cloud, this repo provides:
-1. CI/CD pipeline for building the code, testing it and deploying to Snowflake.
-2. Pipeline triggered on schedule, that executes DBT job in production.
+
+# Template for DBT test and production pipelines.
+Simple way to replace `Deploy` feature of DBT cloud. Fork and customize for your DBT project.
+
+## .github/workflows/prod.yml
+Pipeline for running DBT project on schedule and on merge to `main` branch. Uses GitHub action `molar-volume/dbt-snowflake`. 
+
+## .github/workflows/uat.yml
+Pipeline for running DBT project on PR opened. Uses GitHub action `molar-volume/dbt-snowflake`.
