@@ -32,6 +32,7 @@ jobs:
           command: |
             dbt deps
             dbt test
+            dbt seed
             dbt run
           project_folder: dbt
         env:
