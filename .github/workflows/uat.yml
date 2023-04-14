@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: DBT execution
-        uses: molar-volume/dbt-snowflake@main
+        uses: molar-volume/dbt@snowflake
         with:
           command: |
             dbt deps
