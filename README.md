@@ -1,3 +1,4 @@
+
 # Template for DBT test and production pipelines.
 Simple way to replace `Deploy` feature of DBT cloud. Fork and customize for your DBT project.
 
@@ -6,4 +7,3 @@ Pipeline for running DBT project on schedule and on merge to `main` branch. Uses
 
 ## .github/workflows/uat.yml
 Pipeline for running DBT project on PR opened. Uses GitHub action `molar-volume/dbt-snowflake`.
-
