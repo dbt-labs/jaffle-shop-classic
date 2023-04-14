@@ -17,6 +17,8 @@ jobs:
   DBT:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+      container:
+        image: dbt-snowflake
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -24,14 +26,13 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: DBT execution
-        uses: molar-volume/dbt@snowflake
-        with:
+        run:
           command: |
+            cd dbt
             dbt deps
             dbt test
             dbt seed
             dbt run
-          project_folder: dbt
         env:
           account: ${{ secrets.SF_ACCOUNT }}
           user: ${{ secrets.SF_USER }}
