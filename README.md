@@ -1,6 +1,6 @@
 
 # Template for DBT pipelines.
-A simple way to replace `Deploy` feature of DBT cloud. Fork and customize for your DBT project.
+A simple way to replace `Deploy` feature of DBT cloud. Fork or copy and customize for your DBT project.
 
 ## [prod.yml](.github/workflows/prod.yml)
 Pipeline for running DBT project on schedule and on the merge to `main` branch. 
