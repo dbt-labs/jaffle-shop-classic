@@ -1,0 +1,5 @@
+status,status_str
+returned,Order returned
+completed,Order completed
+shipped,Order shipped
+placed,Order placed
