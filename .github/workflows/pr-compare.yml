@@ -1,0 +1,21 @@
+name: PR Compare
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: ['main']
+    paths:
+      - models/**
+      - seeds/**
+      - tests/**
+
+jobs:
+  piperider-compare:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: PipeRider Compare
+      uses: InfuseAI/piperider-compare-action@v1
+
