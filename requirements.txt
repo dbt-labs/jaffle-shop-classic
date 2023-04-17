@@ -1,0 +1,2 @@
+dbt-duckdb
+piperider[duckdb]
