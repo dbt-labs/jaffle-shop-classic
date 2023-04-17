@@ -7,7 +7,6 @@ base:
   piperider:
     command: piperider run
 target:
-  branch: feature/add-metrics
   dbt:
     commands:
     - dbt deps

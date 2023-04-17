@@ -1,0 +1,43 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') | as_text }}"
+
+      # User/password auth
+      user: "{{ env_var('SNOWFLAKE_USER') | as_text }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') | as_text }}"
+
+      role: "{{ env_var('SNOWFLAKE_ROLE') | as_text }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') | as_text }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') | as_text }}"
+      schema: PUBLIC
+      threads: 4  
+    jaffle_shop_pr:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') | as_text }}"
+
+      # User/password auth
+      user: "{{ env_var('SNOWFLAKE_USER') | as_text }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') | as_text }}"
+
+      role: "{{ env_var('SNOWFLAKE_ROLE') | as_text }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') | as_text }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') | as_text }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA') | as_text }}"
+      threads: 4
+    jaffle_shop:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') | as_text }}"
+
+      # User/password auth
+      user: "{{ env_var('SNOWFLAKE_USER') | as_text }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') | as_text }}"
+
+      role: "{{ env_var('SNOWFLAKE_ROLE') | as_text }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE') | as_text }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') | as_text }}"
+      schema: PUBLIC
+      threads: 4
+
