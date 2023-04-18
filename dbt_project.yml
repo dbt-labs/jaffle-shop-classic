@@ -24,6 +24,5 @@ models:
       materialized: table
       staging:      
         materialized: view
-        +tags: piperider
       marts:
         +tags: piperider

@@ -3,7 +3,8 @@ version: 2
 models:
   - name: int_customer_order_history_joined
     description: This table has basic information about a customer, as well as some derived facts based on a customer's orders
-
+    config:
+      tags: [piperider]
     columns:
       - name: customer_id
         description: This is a unique identifier for a customer
@@ -31,7 +32,8 @@ models:
 
   - name: int_order_payments_pivoted
     description: This table has basic information about orders, as well as some derived facts based on payments
-
+    config:
+      tags: [piperider]
     columns:
       - name: order_id
         tests:
