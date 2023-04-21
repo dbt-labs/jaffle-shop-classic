@@ -14,8 +14,8 @@
     }
   },
   "processes" : {
-    "source##vxwZ6eSA" : {
-      "id" : "source##vxwZ6eSA",
+    "source##VxMIf8UY" : {
+      "id" : "source##VxMIf8UY",
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
@@ -31,7 +31,7 @@
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "low4TNbx",
+          "id" : "H3CHWbml",
           "schema" : {
             "providerType" : "Snowflake",
             "fields" : [ {
@@ -61,8 +61,8 @@
         "isCustomOutputSchema" : false
       }
     },
-    "renamed##cFru1xqG" : {
-      "id" : "renamed##cFru1xqG",
+    "renamed##j3c1ViVR" : {
+      "id" : "renamed##j3c1ViVR",
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
@@ -70,7 +70,7 @@
         "macroDependencies" : [ ]
       },
       "properties" : {
-        "columnsSelector" : [ "i9wL1tkz##id", "i9wL1tkz##order_id", "i9wL1tkz##payment_method" ],
+        "columnsSelector" : [ "KPqq9NOM##id", "KPqq9NOM##order_id", "KPqq9NOM##payment_method" ],
         "expressions" : [ {
           "expression" : {
             "expression" : "id"
@@ -93,7 +93,7 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "i9wL1tkz",
+          "id" : "KPqq9NOM",
           "schema" : {
             "providerType" : "Snowflake",
             "fields" : [ {
@@ -121,38 +121,14 @@
           "slug" : "source"
         } ],
         "outputs" : [ {
-          "id" : "jNBvmFeX",
-          "schema" : {
-            "providerType" : "Snowflake",
-            "fields" : [ {
-              "name" : "PAYMENT_ID",
-              "dataType" : {
-                "type" : "Number"
-              }
-            }, {
-              "name" : "ORDER_ID",
-              "dataType" : {
-                "type" : "Number"
-              }
-            }, {
-              "name" : "PAYMENT_METHOD",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "AMOUNT",
-              "dataType" : {
-                "type" : "Number"
-              }
-            } ]
-          },
+          "id" : "JJn4ajlb",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false
       }
     },
-    "stg_payments##pGxpGLPo" : {
-      "id" : "stg_payments##pGxpGLPo",
+    "stg_payments##PMerBwCO" : {
+      "id" : "stg_payments##PMerBwCO",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_payments",
@@ -171,59 +147,11 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "sowF4GAM",
-          "schema" : {
-            "providerType" : "Snowflake",
-            "fields" : [ {
-              "name" : "PAYMENT_ID",
-              "dataType" : {
-                "type" : "Number"
-              }
-            }, {
-              "name" : "ORDER_ID",
-              "dataType" : {
-                "type" : "Number"
-              }
-            }, {
-              "name" : "PAYMENT_METHOD",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "AMOUNT",
-              "dataType" : {
-                "type" : "Number"
-              }
-            } ]
-          },
+          "id" : "QFoHKIHO",
           "slug" : "renamed"
         } ],
         "outputs" : [ {
-          "id" : "MduNOTYq",
-          "schema" : {
-            "providerType" : "Snowflake",
-            "fields" : [ {
-              "name" : "PAYMENT_ID",
-              "dataType" : {
-                "type" : "Number"
-              }
-            }, {
-              "name" : "ORDER_ID",
-              "dataType" : {
-                "type" : "Number"
-              }
-            }, {
-              "name" : "PAYMENT_METHOD",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "AMOUNT",
-              "dataType" : {
-                "type" : "Number"
-              }
-            } ]
-          },
+          "id" : "chtHMDum",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false
@@ -231,17 +159,17 @@
     }
   },
   "connections" : [ {
-    "id" : "xS2doNa1",
-    "source" : "source##vxwZ6eSA",
-    "sourcePort" : "low4TNbx",
-    "target" : "renamed##cFru1xqG",
-    "targetPort" : "i9wL1tkz"
+    "id" : "pyg1teRL",
+    "source" : "source##VxMIf8UY",
+    "sourcePort" : "H3CHWbml",
+    "target" : "renamed##j3c1ViVR",
+    "targetPort" : "KPqq9NOM"
   }, {
-    "id" : "xIQyQg3u",
-    "source" : "renamed##cFru1xqG",
-    "sourcePort" : "jNBvmFeX",
-    "target" : "stg_payments##pGxpGLPo",
-    "targetPort" : "sowF4GAM"
+    "id" : "Wt6uHrWy",
+    "source" : "renamed##j3c1ViVR",
+    "sourcePort" : "JJn4ajlb",
+    "target" : "stg_payments##PMerBwCO",
+    "targetPort" : "QFoHKIHO"
   } ],
   "component" : "Model"
 }
