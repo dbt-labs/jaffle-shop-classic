@@ -1,0 +1,247 @@
+{
+  "id" : "stg_orders",
+  "metainfo" : {
+    "label" : "stg_orders",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    }
+  },
+  "processes" : {
+    "source##otWLfdM9" : {
+      "id" : "source##otWLfdM9",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "source",
+        "phase" : 0,
+        "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
+      },
+      "properties" : {
+        "table" : {
+          "name" : "raw_orders",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "WXBMwyQ1",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "user_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "status",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "renamed##Mv4KzJba" : {
+      "id" : "renamed##Mv4KzJba",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "renamed",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ "Mvdnupvs##id", "Mvdnupvs##user_id", "Mvdnupvs##order_date", "Mvdnupvs##status" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "id"
+          },
+          "alias" : "order_id"
+        }, {
+          "expression" : {
+            "expression" : "user_id"
+          },
+          "alias" : "customer_id"
+        }, {
+          "expression" : {
+            "expression" : "order_date"
+          }
+        }, {
+          "expression" : {
+            "expression" : "status"
+          }
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Mvdnupvs",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "user_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "status",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "source"
+        } ],
+        "outputs" : [ {
+          "id" : "VMgKghez",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "stg_orders##WBmEWMdE" : {
+      "id" : "stg_orders##WBmEWMdE",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "stg_orders",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM renamed\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "UP0mlLdS",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "renamed"
+        } ],
+        "outputs" : [ {
+          "id" : "Uy3yuLpz",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "S53E5YHr",
+    "source" : "source##otWLfdM9",
+    "sourcePort" : "WXBMwyQ1",
+    "target" : "renamed##Mv4KzJba",
+    "targetPort" : "Mvdnupvs"
+  }, {
+    "id" : "xiVLVopE",
+    "source" : "renamed##Mv4KzJba",
+    "sourcePort" : "VMgKghez",
+    "target" : "stg_orders##WBmEWMdE",
+    "targetPort" : "UP0mlLdS"
+  } ],
+  "component" : "Model"
+}

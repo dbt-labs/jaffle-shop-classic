@@ -1,0 +1,217 @@
+{
+  "id" : "stg_customers",
+  "metainfo" : {
+    "label" : "stg_customers",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    }
+  },
+  "processes" : {
+    "source##fOa6YAq6" : {
+      "id" : "source##fOa6YAq6",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "source",
+        "phase" : 0,
+        "comment" : "-\n  Normally we would select from the table here, but we are using seeds to load\n  our data in this project\n  "
+      },
+      "properties" : {
+        "table" : {
+          "name" : "raw_customers",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "OM1nQQun",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "first_name",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "last_name",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "renamed##D6cpB6ei" : {
+      "id" : "renamed##D6cpB6ei",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "renamed",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ "f9D3GUYy##id", "f9D3GUYy##first_name", "f9D3GUYy##last_name" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "id"
+          },
+          "alias" : "customer_id"
+        }, {
+          "expression" : {
+            "expression" : "first_name"
+          }
+        }, {
+          "expression" : {
+            "expression" : "last_name"
+          }
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "f9D3GUYy",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "first_name",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "last_name",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "source"
+        } ],
+        "outputs" : [ {
+          "id" : "Asigfh64",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "FIRST_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "LAST_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "stg_customers##htBkAwkM" : {
+      "id" : "stg_customers##htBkAwkM",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "stg_customers",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM renamed\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "gzCd4VxT",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "FIRST_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "LAST_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "renamed"
+        } ],
+        "outputs" : [ {
+          "id" : "MGhrS9iD",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "FIRST_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "LAST_NAME",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "eaDV1W3c",
+    "source" : "source##fOa6YAq6",
+    "sourcePort" : "OM1nQQun",
+    "target" : "renamed##D6cpB6ei",
+    "targetPort" : "f9D3GUYy"
+  }, {
+    "id" : "O69qrU49",
+    "source" : "renamed##D6cpB6ei",
+    "sourcePort" : "Asigfh64",
+    "target" : "stg_customers##htBkAwkM",
+    "targetPort" : "gzCd4VxT"
+  } ],
+  "component" : "Model"
+}

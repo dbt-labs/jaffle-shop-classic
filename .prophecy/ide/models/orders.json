@@ -1,0 +1,561 @@
+{
+  "id" : "orders",
+  "metainfo" : {
+    "label" : "orders",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : {
+          "payment_methods" : "['credit_card', 'coupon', 'bank_transfer', 'gift_card']"
+        }
+      }
+    }
+  },
+  "processes" : {
+    "payments##CT2pvjZ3" : {
+      "id" : "payments##CT2pvjZ3",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "payments",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "stg_payments",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "yRRvDc9S",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "PAYMENT_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "PAYMENT_METHOD",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "orders##vuSJB6mt" : {
+      "id" : "orders##vuSJB6mt",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "orders",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM final\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Oa93svkZ",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "CREDIT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "COUPON_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "BANK_TRANSFER_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "GIFT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "final"
+        } ],
+        "outputs" : [ {
+          "id" : "s7D9O9EN",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "CREDIT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "COUPON_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "BANK_TRANSFER_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "GIFT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "final##eDh2AKCi" : {
+      "id" : "final##eDh2AKCi",
+      "component" : "Join",
+      "metadata" : {
+        "label" : "final",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "conditions" : [ {
+          "alias" : "order_payments",
+          "expression" : {
+            "expression" : "orders.order_id = order_payments.order_id"
+          },
+          "joinType" : "LEFT"
+        } ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "orders.order_id"
+          }
+        }, {
+          "expression" : {
+            "expression" : "orders.customer_id"
+          }
+        }, {
+          "expression" : {
+            "expression" : "orders.order_date"
+          }
+        }, {
+          "expression" : {
+            "expression" : "orders.status"
+          }
+        }, {
+          "expression" : {
+            "expression" : "order_payments.credit_card_amount"
+          }
+        }, {
+          "expression" : {
+            "expression" : "order_payments.coupon_amount"
+          }
+        }, {
+          "expression" : {
+            "expression" : "order_payments.bank_transfer_amount"
+          }
+        }, {
+          "expression" : {
+            "expression" : "order_payments.gift_card_amount"
+          }
+        }, {
+          "expression" : {
+            "expression" : "order_payments.total_amount"
+          },
+          "alias" : "amount"
+        } ],
+        "activeTab" : "conditions",
+        "columnsSelector" : [ ],
+        "headAlias" : "orders"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "fJeySi7J",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "orders"
+        }, {
+          "id" : "b0qslwRv",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CREDIT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "COUPON_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "BANK_TRANSFER_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "GIFT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "TOTAL_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "order_payments"
+        } ],
+        "outputs" : [ {
+          "id" : "mdgd2OY1",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "CREDIT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "COUPON_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "BANK_TRANSFER_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "GIFT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "orders##IIArwIKb" : {
+      "id" : "orders##IIArwIKb",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "orders",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "stg_orders",
+          "sourceType" : "Model"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "kRlfyqRs",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "order_payments##egxdaFU4" : {
+      "id" : "order_payments##egxdaFU4",
+      "component" : "Aggregate",
+      "metadata" : {
+        "label" : "order_payments",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "aggregate" : [ {
+          "expression" : {
+            "expression" : "order_id"
+          }
+        }, {
+          "rowType" : "for",
+          "variable" : {
+            "expression" : "payment_method"
+          },
+          "iterable" : {
+            "expression" : "payment_methods"
+          },
+          "children" : [ {
+            "expression" : {
+              "expression" : "sum(CASE\n  WHEN payment_method = '{{ payment_method }}'\n    THEN amount\n  ELSE 0\nEND)"
+            },
+            "alias" : "{{payment_method}}_amount"
+          } ]
+        }, {
+          "expression" : {
+            "expression" : "sum(amount)"
+          },
+          "alias" : "total_amount"
+        } ],
+        "allowSelection" : true,
+        "condition" : {
+          "expression" : ""
+        },
+        "activeTab" : "aggregate",
+        "columnsSelector" : [ ],
+        "groupBy" : [ {
+          "expression" : {
+            "expression" : "order_id"
+          }
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "GHAKKvP4",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "PAYMENT_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "PAYMENT_METHOD",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "payments"
+        } ],
+        "outputs" : [ {
+          "id" : "ybL7j9wy",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CREDIT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "COUPON_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "BANK_TRANSFER_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "GIFT_CARD_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "TOTAL_AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "fbquV0Rz",
+    "source" : "payments##CT2pvjZ3",
+    "sourcePort" : "yRRvDc9S",
+    "target" : "order_payments##egxdaFU4",
+    "targetPort" : "GHAKKvP4"
+  }, {
+    "id" : "NE8IXLkV",
+    "source" : "orders##IIArwIKb",
+    "sourcePort" : "kRlfyqRs",
+    "target" : "final##eDh2AKCi",
+    "targetPort" : "fJeySi7J"
+  }, {
+    "id" : "mQ8au7ju",
+    "source" : "order_payments##egxdaFU4",
+    "sourcePort" : "ybL7j9wy",
+    "target" : "final##eDh2AKCi",
+    "targetPort" : "b0qslwRv"
+  }, {
+    "id" : "Qt5IYlo5",
+    "source" : "final##eDh2AKCi",
+    "sourcePort" : "mdgd2OY1",
+    "target" : "orders##vuSJB6mt",
+    "targetPort" : "Oa93svkZ"
+  } ],
+  "component" : "Model"
+}

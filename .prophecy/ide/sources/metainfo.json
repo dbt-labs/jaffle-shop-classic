@@ -1,0 +1,20 @@
+{
+  "name" : "jaffle_shop",
+  "fileSystem" : {
+    "type" : "Folder",
+    "name" : "",
+    "children" : { },
+    "path" : "",
+    "editable" : true
+  },
+  "providerType" : "snowflake",
+  "fabricId" : "5639",
+  "prophecyIDEFolder" : {
+    "name" : "",
+    "children" : { },
+    "path" : "",
+    "editable" : true
+  },
+  "dependenciesContainer" : { },
+  "frontEndLanguage" : "sql"
+}

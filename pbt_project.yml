@@ -25,6 +25,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/staging/stg_orders.sql
+    - .prophecy/ide/models/stg_orders.json
     - models/staging/schema.yml
     sqlDependencies:
       models: []
@@ -38,23 +39,13 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/orders.sql
+    - .prophecy/ide/models/orders.json
     - models/schema.yml
     sqlDependencies:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
     modifiedAt: '2023-04-12 15:35:01'
-  .prophecy/metadata/sqlmodels/customers_orders:
-    name: customers_orders
-    description: null
-    author: maciej@prophecy.io
-    files:
-    - models/customers_orders.sql
-    sqlDependencies:
-      models: []
-      datasets: []
-    createdAt: '2023-04-12 15:42:04'
-    modifiedAt: '2023-04-12 15:42:04'
   .prophecy/metadata/sqlmodels/customers:
     name: customers
     description: This table has basic information about a customer, as well as some
@@ -62,6 +53,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/customers.sql
+    - .prophecy/ide/models/customers.json
     - models/schema.yml
     sqlDependencies:
       models: []
@@ -74,6 +66,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/staging/stg_payments.sql
+    - .prophecy/ide/models/stg_payments.json
     - models/staging/schema.yml
     sqlDependencies:
       models: []
@@ -86,6 +79,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
     - models/staging/schema.yml
     sqlDependencies:
       models: []
