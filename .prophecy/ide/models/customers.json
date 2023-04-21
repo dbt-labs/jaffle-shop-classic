@@ -2,7 +2,7 @@
   "id" : "customers",
   "metainfo" : {
     "label" : "customers",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
@@ -19,6 +19,8 @@
       "component" : "Join",
       "metadata" : {
         "label" : "customer_report",
+        "x" : 760,
+        "y" : 320,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -190,6 +192,8 @@
       "component" : "Join",
       "metadata" : {
         "label" : "customer_payments",
+        "x" : 340,
+        "y" : 320,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -297,11 +301,13 @@
       "component" : "OrderBy",
       "metadata" : {
         "label" : "final_with_order",
+        "x" : 980,
+        "y" : 320,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "y90R6teU##total_orders" ],
         "orders" : [ {
           "expression" : {
             "expression" : "total_orders"
@@ -404,6 +410,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "payments",
+        "x" : 120,
+        "y" : 320,
         "phase" : 0
       },
       "properties" : {
@@ -450,6 +458,8 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "customers",
+        "x" : 1180,
+        "y" : 320,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -558,6 +568,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "customers",
+        "x" : 540,
+        "y" : 120,
         "phase" : 0
       },
       "properties" : {
@@ -599,6 +611,8 @@
       "component" : "Aggregate",
       "metadata" : {
         "label" : "amount_per_customer",
+        "x" : 540,
+        "y" : 320,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -670,6 +684,8 @@
       "component" : "Aggregate",
       "metadata" : {
         "label" : "customer_orders",
+        "x" : 540,
+        "y" : 540,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -771,6 +787,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "orders",
+        "x" : 120,
+        "y" : 520,
         "phase" : 0
       },
       "properties" : {
