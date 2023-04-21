@@ -25,6 +25,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/staging/stg_orders.sql
+    - .prophecy/ide/models/stg_orders.json
     - models/staging/schema.yml
     sqlDependencies:
       models: []
@@ -38,6 +39,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/orders.sql
+    - .prophecy/ide/models/orders.json
     - models/schema.yml
     sqlDependencies:
       models: []
@@ -50,6 +52,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/customers_orders.sql
+    - .prophecy/ide/models/customers_orders.json
     sqlDependencies:
       models: []
       datasets: []
@@ -62,6 +65,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/customers.sql
+    - .prophecy/ide/models/customers.json
     - models/schema.yml
     sqlDependencies:
       models: []
@@ -74,6 +78,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/staging/stg_payments.sql
+    - .prophecy/ide/models/stg_payments.json
     - models/staging/schema.yml
     sqlDependencies:
       models: []
@@ -86,6 +91,7 @@ sqlModels:
     author: maciej@prophecy.io
     files:
     - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
     - models/staging/schema.yml
     sqlDependencies:
       models: []
