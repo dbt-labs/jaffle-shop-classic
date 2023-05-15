@@ -53,7 +53,7 @@ final as (
         customers.last_name,
         customer_orders.first_order,
         customer_orders.most_recent_order,
-        customer_orders.number_of_orders as number_of_orders,
+        {# customer_orders.number_of_orders as number_of_orders, #}
         customer_payments.total_amount as customer_lifetime_value
 
     from customers

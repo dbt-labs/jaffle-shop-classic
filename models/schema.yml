@@ -11,11 +11,20 @@ groups:
 models:
   - name: customers
     description: This table has basic information about a customer, as well as some derived facts based on a customer's orders
-    access: private
+    access: public
     group: finance
     config:
       contract:
         enforced: true
+    latest_version: 2
+    versions:
+      - v: 2
+        columns:
+          - include: "*"
+            exclude:
+              - number_of_orders # this is the breaking change!
+      - v: 1
+        defined_in: customers
     columns:
       - name: customer_id
         description: This is a unique identifier for a customer

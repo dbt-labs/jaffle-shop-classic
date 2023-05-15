@@ -1,0 +1,1 @@
+select * from {{ ref('customers', v=2)}} limit 5
