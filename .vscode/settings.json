@@ -1,0 +1,70 @@
+{
+    // change this to your desired path!
+    "python.pythonPath": "./.dbtenv/Lib/python",
+
+
+    "files.associations": {
+        // the pattern on the left side can be whatever you want: e.g.
+        "**/jaffle_shop/**/*.sql": "jinja-sql", // just the .sqlfiles inside of jaffle_shop, or
+        "*.sql": "jinja-sql", // all .sql files
+
+        // optional: don't format models in `target/` dir
+        "**/target/**": "",
+        // I don't personally use these, but you can also have jinja work for `yaml` and `md` files
+        "**/<dbt-project-dir>/**/*.yaml": "jinja-yaml",
+        "**/<dbt-project-dir>/**/*.yml": "jinja-yaml",
+        "**/<dbt-project-dir>/**/docs/**/*.md": "jinja-md",
+
+        // the vscode-dbt docs say you may need this
+        "editor.quickSuggestions": {
+        "strings": true
+        }
+    },
+
+
+    // this is so you can easily jump to your compiled SQL files
+    "findrelated.workspaceRulesets": 
+        {
+            "name": "sql",
+            "rules": [
+                {
+                    "pattern": "^(.*/)?models/(.*/)?(.+\\.sql)$",
+                    "locators": [
+                        "**/compiled/**/$3"
+                    ]
+                },
+                {
+                    "pattern": "^(.*/)?compiled/(.*/)?(.+\\.sql)$",
+                    "locators": [
+                        "**/run/**/$3"
+                    ]
+                },
+                {
+                    "pattern": "^(.*/)?run/(.*/)?(.+\\.sql)$",
+                    "locators": [
+                        "**/models/**/$3"
+                    ]
+                }
+            ]
+        },
+    "findrelated.applyRulesets": [
+        "sql"
+    ],
+
+    // you get this by calling `where sqlfluff` after calling `pip install sqlfluff`
+    "sql.linter.executablePath": "<PATH_TO_YOUR_SQLFLUFF_FROM_WHICH_SQLFLUFF_COMMAND",
+    "sql.linter.run": "onType", // alternatively "onSave" if you'd like it less frequent
+
+    // easier to see if there are unsaved changed
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.labelFormat": "medium",
+    // make Command Prompt the default shell for Windows instead of Powershell
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\cmd.exe",
+    
+    // make a vertical line so I don't make lines too long
+    "editor.rulers": [80],
+    // show whitespace as dots
+    // (easier to count out indentation and spot trailing whitesapce)
+    "editor.renderWhitespace": "all",
+}
+

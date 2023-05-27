@@ -1,0 +1,2 @@
+[console_scripts]
+dbt = dbt.cli.main:cli

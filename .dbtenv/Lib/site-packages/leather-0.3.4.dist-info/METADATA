@@ -1,0 +1,65 @@
+Metadata-Version: 2.1
+Name: leather
+Version: 0.3.4
+Summary: Python charting for 80% of humans.
+Home-page: http://leather.readthedocs.io/
+Author: Christopher Groskopf
+Author-email: chrisgroskopf@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Framework :: IPython
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Multimedia :: Graphics
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+Requires-Dist: six (>=1.6.1)
+
+.. image:: https://travis-ci.org/wireservice/leather.png
+    :target: https://travis-ci.org/wireservice/leather
+    :alt: Build status
+
+.. image:: https://img.shields.io/pypi/dw/leather.svg
+    :target: https://pypi.python.org/pypi/leather
+    :alt: PyPI downloads
+
+.. image:: https://img.shields.io/pypi/v/leather.svg
+    :target: https://pypi.python.org/pypi/leather
+    :alt: Version
+
+.. image:: https://img.shields.io/pypi/l/leather.svg
+    :target: https://pypi.python.org/pypi/leather
+    :alt: License
+
+.. image:: https://img.shields.io/pypi/pyversions/leather.svg
+    :target: https://pypi.python.org/pypi/leather
+    :alt: Support Python versions
+
+Leather is the Python charting library for those who need charts *now* and don't care if they're perfect.
+
+Leather isn't picky. It's rough. It gets dirty. It looks sexy just hanging on the back of a chair. Leather doesn't need your accessories. Leather is how Snake Plissken would make charts.
+
+Get it?
+
+Important links:
+
+* Documentation:    http://leather.rtfd.io
+* Repository:       https://github.com/wireservice/leather
+* Issues:           https://github.com/wireservice/leather/issues
+
+

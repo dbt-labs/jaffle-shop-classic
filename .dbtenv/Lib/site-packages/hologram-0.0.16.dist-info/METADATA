@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: hologram
+Version: 0.0.16
+Summary: JSON schema generation from dataclasses
+Home-page: https://github.com/fishtown-analytics/hologram
+Author: Connor McArthur, Jacob Beck, Simon Knibbs
+Author-email: info@fishtowanalytics.com, simon.knibbs@gmail.com
+License: MIT
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Topic :: Software Development :: Libraries
+Description-Content-Type: text/markdown
+Requires-Dist: python-dateutil (<2.9,>=2.8)
+Requires-Dist: jsonschema (>=3.0)
+Requires-Dist: dataclasses (<0.9,>=0.6) ; python_version < "3.7"
+
+# Hologram
+
+Hologram is a lightweight library to generate Draft 7 compatible JSON Schemas from python 3.7 dataclasses. Python 3.6 is supported through the [dataclasses backport](https://github.com/ericvsmith/dataclasses). It is forked from [dataclasses-jsonschema](https://github.com/s-knibbs/dataclasses-jsonschema) created by [s-knibbs](https://github.com/s-knibbs).
+
+

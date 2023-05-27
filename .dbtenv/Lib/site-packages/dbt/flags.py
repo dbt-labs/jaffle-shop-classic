@@ -1,0 +1,104 @@
+# Do not import the os package because we expose this package in jinja
+from os import getenv as os_getenv
+from argparse import Namespace
+from multiprocessing import get_context
+from typing import Optional
+
+
+# for setting up logger for legacy logger
+def env_set_truthy(key: str) -> Optional[str]:
+    """Return the value if it was set to a "truthy" string value or None
+    otherwise.
+    """
+    value = os_getenv(key)
+    if not value or value.lower() in ("0", "false", "f"):
+        return None
+    return value
+
+
+# for setting up logger for legacy logger
+ENABLE_LEGACY_LOGGER = env_set_truthy("DBT_ENABLE_LEGACY_LOGGER")
+
+# This is not a flag, it's a place to store the lock
+MP_CONTEXT = get_context()
+
+
+# this roughly follows the patten of EVENT_MANAGER in dbt/events/functions.py
+# During de-globlization, we'll need to handle both similarly
+# Match USE_COLORS default with default in dbt.cli.params.use_colors for use in --version
+GLOBAL_FLAGS = Namespace(USE_COLORS=True)  # type: ignore
+
+
+def set_flags(flags):
+    global GLOBAL_FLAGS
+    GLOBAL_FLAGS = flags
+
+
+def get_flags():
+    return GLOBAL_FLAGS
+
+
+def set_from_args(args: Namespace, user_config):
+    global GLOBAL_FLAGS
+    from dbt.cli.main import cli
+    from dbt.cli.flags import Flags, convert_config
+
+    # we set attributes of args after initialize the flags, but user_config
+    # is being read in the Flags constructor, so we need to read it here and pass in
+    # to make sure we use the correct user_config
+    if (hasattr(args, "PROFILES_DIR") or hasattr(args, "profiles_dir")) and not user_config:
+        from dbt.config.profile import read_user_config
+
+        profiles_dir = getattr(args, "PROFILES_DIR", None) or getattr(args, "profiles_dir")
+        user_config = read_user_config(profiles_dir)
+
+    # make a dummy context to get the flags, totally arbitrary
+    ctx = cli.make_context("run", ["run"])
+    flags = Flags(ctx, user_config)
+    for arg_name, args_param_value in vars(args).items():
+        args_param_value = convert_config(arg_name, args_param_value)
+        object.__setattr__(flags, arg_name.upper(), args_param_value)
+        object.__setattr__(flags, arg_name.lower(), args_param_value)
+    GLOBAL_FLAGS = flags  # type: ignore
+
+
+def get_flag_dict():
+    flag_attr = {
+        "use_experimental_parser",
+        "static_parser",
+        "warn_error",
+        "warn_error_options",
+        "write_json",
+        "partial_parse",
+        "use_colors",
+        "profiles_dir",
+        "debug",
+        "log_format",
+        "version_check",
+        "fail_fast",
+        "send_anonymous_usage_stats",
+        "printer_width",
+        "indirect_selection",
+        "log_cache_events",
+        "quiet",
+        "no_print",
+        "cache_selected_only",
+        "introspect",
+        "target_path",
+        "log_path",
+    }
+    return {key: getattr(GLOBAL_FLAGS, key.upper(), None) for key in flag_attr}
+
+
+# This is used by core/dbt/context/base.py to return a flag object
+# in Jinja.
+def get_flag_obj():
+    new_flags = Namespace()
+    for key, val in get_flag_dict().items():
+        setattr(new_flags, key.upper(), val)
+    # The following 3 are CLI arguments only so they're not full-fledged flags,
+    # but we put in flags for users.
+    setattr(new_flags, "FULL_REFRESH", getattr(GLOBAL_FLAGS, "FULL_REFRESH", None))
+    setattr(new_flags, "STORE_FAILURES", getattr(GLOBAL_FLAGS, "STORE_FAILURES", None))
+    setattr(new_flags, "WHICH", getattr(GLOBAL_FLAGS, "WHICH", None))
+    return new_flags

@@ -1,0 +1,24 @@
+[sqlfluff]
+# Run `sqlfluff dialects` to get a list of all dialects
+dialect = tsql
+
+# Use the dbt templater
+# templater = dbt
+
+# Use jinja templater instead of dbt
+templater = jinja
+
+[sqlfluff:templater:jinja]
+# Make dbt default macros like available like `ref`
+apply_dbt_builtins = true
+
+# Load custom macros from the macro directory
+load_macros_from_path = ./macros/
+
+# Allow mocking dbt_utils and other packages through
+# python files placed in this dir
+library_path = ./sqlfluff_libs/
+
+# Mock variables that are used in dbt
+[sqlfluff:templater:jinja:context]
+target = prod
