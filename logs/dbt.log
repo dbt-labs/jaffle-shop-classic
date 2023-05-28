@@ -9603,3 +9603,633 @@ drop table if exists "sales"."public"."orders__dbt_backup" cascade
 [0m16:34:33  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
 [0m16:34:33  Command `dbt run` succeeded at 18:34:33.661978 after 1.84 seconds
 [0m16:34:33  Flushing usage events
+[0m16:40:40  Running with dbt=1.5.0
+[0m16:40:40  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\lfouc\\.dbt', 'version_check': 'True', 'debug': 'True', 'log_path': 'C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs', 'fail_fast': 'True', 'warn_error': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'log_format': 'text', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}
+[0m16:40:41  checksum: 4568eb639a77b8fcb3a1f4a07856f42b1ff63f1376652889143968e1dbdafbda, vars: {}, profile: , target: , version: 1.5.0
+[0m16:40:41  Partial parsing enabled: 0 files deleted, 0 files added, 1 files changed.
+[0m16:40:41  Partial parsing: updated file: jaffle_shop://macros\get_payment_method.sql
+[0m16:40:41  1603: static parser failed on orders.sql
+[0m16:40:41  1602: parser fallback to jinja rendering on orders.sql
+[0m16:40:41  Found 5 models, 20 tests, 0 snapshots, 0 analyses, 308 macros, 0 operations, 3 seed files, 0 sources, 0 exposures, 0 metrics, 0 groups
+[0m16:40:41  
+[0m16:40:41  Acquiring new postgres connection 'master'
+[0m16:40:41  Acquiring new postgres connection 'list_sales'
+[0m16:40:41  Using postgres connection "list_sales"
+[0m16:40:41  On list_sales: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "connection_name": "list_sales"} */
+
+    select distinct nspname from pg_namespace
+  
+[0m16:40:41  Opening a new connection, currently in state init
+[0m16:40:41  SQL status: SELECT 4 in 0.0 seconds
+[0m16:40:41  On list_sales: Close
+[0m16:40:41  Acquiring new postgres connection 'list_sales_public'
+[0m16:40:41  Using postgres connection "list_sales_public"
+[0m16:40:41  On list_sales_public: BEGIN
+[0m16:40:41  Opening a new connection, currently in state init
+[0m16:40:41  SQL status: BEGIN in 0.0 seconds
+[0m16:40:41  Using postgres connection "list_sales_public"
+[0m16:40:41  On list_sales_public: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "connection_name": "list_sales_public"} */
+select
+      'sales' as database,
+      tablename as name,
+      schemaname as schema,
+      'table' as type
+    from pg_tables
+    where schemaname ilike 'public'
+    union all
+    select
+      'sales' as database,
+      viewname as name,
+      schemaname as schema,
+      'view' as type
+    from pg_views
+    where schemaname ilike 'public'
+  
+[0m16:40:41  SQL status: SELECT 8 in 0.0 seconds
+[0m16:40:41  On list_sales_public: ROLLBACK
+[0m16:40:41  On list_sales_public: Close
+[0m16:40:41  Using postgres connection "master"
+[0m16:40:41  On master: BEGIN
+[0m16:40:41  Opening a new connection, currently in state init
+[0m16:40:41  SQL status: BEGIN in 0.0 seconds
+[0m16:40:41  Using postgres connection "master"
+[0m16:40:41  On master: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "connection_name": "master"} */
+with relation as (
+        select
+            pg_rewrite.ev_class as class,
+            pg_rewrite.oid as id
+        from pg_rewrite
+    ),
+    class as (
+        select
+            oid as id,
+            relname as name,
+            relnamespace as schema,
+            relkind as kind
+        from pg_class
+    ),
+    dependency as (
+        select distinct
+            pg_depend.objid as id,
+            pg_depend.refobjid as ref
+        from pg_depend
+    ),
+    schema as (
+        select
+            pg_namespace.oid as id,
+            pg_namespace.nspname as name
+        from pg_namespace
+        where nspname != 'information_schema' and nspname not like 'pg\_%'
+    ),
+    referenced as (
+        select
+            relation.id AS id,
+            referenced_class.name ,
+            referenced_class.schema ,
+            referenced_class.kind
+        from relation
+        join class as referenced_class on relation.class=referenced_class.id
+        where referenced_class.kind in ('r', 'v')
+    ),
+    relationships as (
+        select
+            referenced.name as referenced_name,
+            referenced.schema as referenced_schema_id,
+            dependent_class.name as dependent_name,
+            dependent_class.schema as dependent_schema_id,
+            referenced.kind as kind
+        from referenced
+        join dependency on referenced.id=dependency.id
+        join class as dependent_class on dependency.ref=dependent_class.id
+        where
+            (referenced.name != dependent_class.name or
+             referenced.schema != dependent_class.schema)
+    )
+
+    select
+        referenced_schema.name as referenced_schema,
+        relationships.referenced_name as referenced_name,
+        dependent_schema.name as dependent_schema,
+        relationships.dependent_name as dependent_name
+    from relationships
+    join schema as dependent_schema on relationships.dependent_schema_id=dependent_schema.id
+    join schema as referenced_schema on relationships.referenced_schema_id=referenced_schema.id
+    group by referenced_schema, referenced_name, dependent_schema, dependent_name
+    order by referenced_schema, referenced_name, dependent_schema, dependent_name;
+[0m16:40:41  SQL status: SELECT 3 in 0.0 seconds
+[0m16:40:41  On master: ROLLBACK
+[0m16:40:41  Using postgres connection "master"
+[0m16:40:41  On master: BEGIN
+[0m16:40:41  SQL status: BEGIN in 0.0 seconds
+[0m16:40:41  On master: COMMIT
+[0m16:40:41  Using postgres connection "master"
+[0m16:40:41  On master: COMMIT
+[0m16:40:41  SQL status: COMMIT in 0.0 seconds
+[0m16:40:41  On master: Close
+[0m16:40:41  Concurrency: 1 threads (target='dev')
+[0m16:40:41  
+[0m16:40:41  Began running node model.jaffle_shop.stg_customers
+[0m16:40:41  1 of 5 START sql view model public.stg_customers ............................... [RUN]
+[0m16:40:41  Acquiring new postgres connection 'model.jaffle_shop.stg_customers'
+[0m16:40:41  Began compiling node model.jaffle_shop.stg_customers
+[0m16:40:41  Writing injected SQL for node "model.jaffle_shop.stg_customers"
+[0m16:40:41  Timing info for model.jaffle_shop.stg_customers (compile): 18:40:41.763642 => 18:40:41.763642
+[0m16:40:41  Began executing node model.jaffle_shop.stg_customers
+[0m16:40:41  Writing runtime sql for node "model.jaffle_shop.stg_customers"
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_customers"
+[0m16:40:41  On model.jaffle_shop.stg_customers: BEGIN
+[0m16:40:41  Opening a new connection, currently in state init
+[0m16:40:41  SQL status: BEGIN in 0.0 seconds
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_customers"
+[0m16:40:41  On model.jaffle_shop.stg_customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_customers"} */
+
+  create view "sales"."public"."stg_customers__dbt_tmp"
+    
+    
+  as (
+    with source as (
+    select * from "sales"."public"."raw_customers"
+
+),
+
+renamed as (
+
+    select
+        id as customer_id,
+        first_name,
+        last_name
+
+    from source
+
+)
+
+select * from renamed
+  );
+[0m16:40:41  SQL status: CREATE VIEW in 0.0 seconds
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_customers"
+[0m16:40:41  On model.jaffle_shop.stg_customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_customers"} */
+alter table "sales"."public"."stg_customers" rename to "stg_customers__dbt_backup"
+[0m16:40:41  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_customers"
+[0m16:40:41  On model.jaffle_shop.stg_customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_customers"} */
+alter table "sales"."public"."stg_customers__dbt_tmp" rename to "stg_customers"
+[0m16:40:41  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:41  On model.jaffle_shop.stg_customers: COMMIT
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_customers"
+[0m16:40:41  On model.jaffle_shop.stg_customers: COMMIT
+[0m16:40:41  SQL status: COMMIT in 0.0 seconds
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_customers"
+[0m16:40:41  On model.jaffle_shop.stg_customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_customers"} */
+drop view if exists "sales"."public"."stg_customers__dbt_backup" cascade
+[0m16:40:41  SQL status: DROP VIEW in 0.0 seconds
+[0m16:40:41  Timing info for model.jaffle_shop.stg_customers (execute): 18:40:41.772028 => 18:40:41.965537
+[0m16:40:41  On model.jaffle_shop.stg_customers: Close
+[0m16:40:41  1 of 5 OK created sql view model public.stg_customers .......................... [[32mCREATE VIEW[0m in 0.21s]
+[0m16:40:41  Finished running node model.jaffle_shop.stg_customers
+[0m16:40:41  Began running node model.jaffle_shop.stg_orders
+[0m16:40:41  2 of 5 START sql view model public.stg_orders .................................. [RUN]
+[0m16:40:41  Re-using an available connection from the pool (formerly model.jaffle_shop.stg_customers, now model.jaffle_shop.stg_orders)
+[0m16:40:41  Began compiling node model.jaffle_shop.stg_orders
+[0m16:40:41  Writing injected SQL for node "model.jaffle_shop.stg_orders"
+[0m16:40:41  Timing info for model.jaffle_shop.stg_orders (compile): 18:40:41.981792 => 18:40:41.989804
+[0m16:40:41  Began executing node model.jaffle_shop.stg_orders
+[0m16:40:41  Writing runtime sql for node "model.jaffle_shop.stg_orders"
+[0m16:40:41  Using postgres connection "model.jaffle_shop.stg_orders"
+[0m16:40:41  On model.jaffle_shop.stg_orders: BEGIN
+[0m16:40:42  Opening a new connection, currently in state closed
+[0m16:40:42  SQL status: BEGIN in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_orders"
+[0m16:40:42  On model.jaffle_shop.stg_orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_orders"} */
+
+  create view "sales"."public"."stg_orders__dbt_tmp"
+    
+    
+  as (
+    with source as (
+    select * from "sales"."public"."raw_orders"
+
+),
+
+renamed as (
+
+    select
+        id as order_id,
+        user_id as customer_id,
+        order_date,
+        status
+
+    from source
+
+)
+
+select * from renamed
+  );
+[0m16:40:42  SQL status: CREATE VIEW in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_orders"
+[0m16:40:42  On model.jaffle_shop.stg_orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_orders"} */
+alter table "sales"."public"."stg_orders" rename to "stg_orders__dbt_backup"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_orders"
+[0m16:40:42  On model.jaffle_shop.stg_orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_orders"} */
+alter table "sales"."public"."stg_orders__dbt_tmp" rename to "stg_orders"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  On model.jaffle_shop.stg_orders: COMMIT
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_orders"
+[0m16:40:42  On model.jaffle_shop.stg_orders: COMMIT
+[0m16:40:42  SQL status: COMMIT in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_orders"
+[0m16:40:42  On model.jaffle_shop.stg_orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_orders"} */
+drop view if exists "sales"."public"."stg_orders__dbt_backup" cascade
+[0m16:40:42  SQL status: DROP VIEW in 0.0 seconds
+[0m16:40:42  Timing info for model.jaffle_shop.stg_orders (execute): 18:40:41.989804 => 18:40:42.118343
+[0m16:40:42  On model.jaffle_shop.stg_orders: Close
+[0m16:40:42  2 of 5 OK created sql view model public.stg_orders ............................. [[32mCREATE VIEW[0m in 0.14s]
+[0m16:40:42  Finished running node model.jaffle_shop.stg_orders
+[0m16:40:42  Began running node model.jaffle_shop.stg_payments
+[0m16:40:42  3 of 5 START sql view model public.stg_payments ................................ [RUN]
+[0m16:40:42  Re-using an available connection from the pool (formerly model.jaffle_shop.stg_orders, now model.jaffle_shop.stg_payments)
+[0m16:40:42  Began compiling node model.jaffle_shop.stg_payments
+[0m16:40:42  Writing injected SQL for node "model.jaffle_shop.stg_payments"
+[0m16:40:42  Timing info for model.jaffle_shop.stg_payments (compile): 18:40:42.134580 => 18:40:42.142542
+[0m16:40:42  Began executing node model.jaffle_shop.stg_payments
+[0m16:40:42  Writing runtime sql for node "model.jaffle_shop.stg_payments"
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_payments"
+[0m16:40:42  On model.jaffle_shop.stg_payments: BEGIN
+[0m16:40:42  Opening a new connection, currently in state closed
+[0m16:40:42  SQL status: BEGIN in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_payments"
+[0m16:40:42  On model.jaffle_shop.stg_payments: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_payments"} */
+
+  create view "sales"."public"."stg_payments__dbt_tmp"
+    
+    
+  as (
+    with source as (
+    select * from "sales"."public"."raw_payments"
+
+),
+
+renamed as (
+
+    select
+        id as payment_id,
+        order_id,
+        payment_method,
+
+        -- `amount` is currently stored in cents, so we convert it to dollars
+        amount / 100 as amount
+
+    from source
+
+)
+
+select * from renamed
+  );
+[0m16:40:42  SQL status: CREATE VIEW in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_payments"
+[0m16:40:42  On model.jaffle_shop.stg_payments: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_payments"} */
+alter table "sales"."public"."stg_payments" rename to "stg_payments__dbt_backup"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_payments"
+[0m16:40:42  On model.jaffle_shop.stg_payments: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_payments"} */
+alter table "sales"."public"."stg_payments__dbt_tmp" rename to "stg_payments"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  On model.jaffle_shop.stg_payments: COMMIT
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_payments"
+[0m16:40:42  On model.jaffle_shop.stg_payments: COMMIT
+[0m16:40:42  SQL status: COMMIT in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.stg_payments"
+[0m16:40:42  On model.jaffle_shop.stg_payments: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.stg_payments"} */
+drop view if exists "sales"."public"."stg_payments__dbt_backup" cascade
+[0m16:40:42  SQL status: DROP VIEW in 0.0 seconds
+[0m16:40:42  Timing info for model.jaffle_shop.stg_payments (execute): 18:40:42.142542 => 18:40:42.263014
+[0m16:40:42  On model.jaffle_shop.stg_payments: Close
+[0m16:40:42  3 of 5 OK created sql view model public.stg_payments ........................... [[32mCREATE VIEW[0m in 0.14s]
+[0m16:40:42  Finished running node model.jaffle_shop.stg_payments
+[0m16:40:42  Began running node model.jaffle_shop.customers
+[0m16:40:42  4 of 5 START sql table model public.customers .................................. [RUN]
+[0m16:40:42  Re-using an available connection from the pool (formerly model.jaffle_shop.stg_payments, now model.jaffle_shop.customers)
+[0m16:40:42  Began compiling node model.jaffle_shop.customers
+[0m16:40:42  Writing injected SQL for node "model.jaffle_shop.customers"
+[0m16:40:42  Timing info for model.jaffle_shop.customers (compile): 18:40:42.279086 => 18:40:42.287274
+[0m16:40:42  Began executing node model.jaffle_shop.customers
+[0m16:40:42  Writing runtime sql for node "model.jaffle_shop.customers"
+[0m16:40:42  Using postgres connection "model.jaffle_shop.customers"
+[0m16:40:42  On model.jaffle_shop.customers: BEGIN
+[0m16:40:42  Opening a new connection, currently in state closed
+[0m16:40:42  SQL status: BEGIN in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.customers"
+[0m16:40:42  On model.jaffle_shop.customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.customers"} */
+
+  
+    
+
+  create  table "sales"."public"."customers__dbt_tmp"
+  
+  
+    as
+  
+  (
+    with customers as (
+
+    select * from "sales"."public"."stg_customers"
+
+),
+
+orders as (
+
+    select * from "sales"."public"."stg_orders"
+
+),
+
+payments as (
+
+    select * from "sales"."public"."stg_payments"
+
+),
+
+
+
+customer_orders as (
+
+        select
+        customer_id,
+
+        min(order_date) as first_order,
+        max(order_date) as most_recent_order,
+        count(order_id) as number_of_orders
+    from orders
+
+    group by customer_id
+
+),
+
+customer_payments as (
+
+    select
+        orders.customer_id,
+        sum(amount) as total_amount
+
+    from payments
+
+    left join orders on
+         payments.order_id = orders.order_id
+
+    group by orders.customer_id
+
+),
+
+final as (
+
+    select
+        customers.customer_id,
+        customers.first_name,
+        customers.last_name,
+        customer_orders.first_order,
+        customer_orders.most_recent_order,
+        customer_orders.number_of_orders,
+        customer_payments.total_amount as customer_lifetime_value
+
+    from customers
+
+    left join customer_orders
+        on customers.customer_id = customer_orders.customer_id
+
+    left join customer_payments
+        on  customers.customer_id = customer_payments.customer_id
+
+)
+
+select * from final
+  );
+  
+[0m16:40:42  SQL status: SELECT 100 in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.customers"
+[0m16:40:42  On model.jaffle_shop.customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.customers"} */
+alter table "sales"."public"."customers" rename to "customers__dbt_backup"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.customers"
+[0m16:40:42  On model.jaffle_shop.customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.customers"} */
+alter table "sales"."public"."customers__dbt_tmp" rename to "customers"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  On model.jaffle_shop.customers: COMMIT
+[0m16:40:42  Using postgres connection "model.jaffle_shop.customers"
+[0m16:40:42  On model.jaffle_shop.customers: COMMIT
+[0m16:40:42  SQL status: COMMIT in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.customers"
+[0m16:40:42  On model.jaffle_shop.customers: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.customers"} */
+drop table if exists "sales"."public"."customers__dbt_backup" cascade
+[0m16:40:42  SQL status: DROP TABLE in 0.0 seconds
+[0m16:40:42  Timing info for model.jaffle_shop.customers (execute): 18:40:42.295292 => 18:40:42.544775
+[0m16:40:42  On model.jaffle_shop.customers: Close
+[0m16:40:42  4 of 5 OK created sql table model public.customers ............................. [[32mSELECT 100[0m in 0.27s]
+[0m16:40:42  Finished running node model.jaffle_shop.customers
+[0m16:40:42  Began running node model.jaffle_shop.orders
+[0m16:40:42  5 of 5 START sql table model public.orders ..................................... [RUN]
+[0m16:40:42  Re-using an available connection from the pool (formerly model.jaffle_shop.customers, now model.jaffle_shop.orders)
+[0m16:40:42  Began compiling node model.jaffle_shop.orders
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.orders"} */
+
+    
+    select distinct
+    payment_method
+    from "sales"."public"."raw_payments"
+    order by 1
+
+  
+[0m16:40:42  Opening a new connection, currently in state closed
+[0m16:40:42  SQL status: SELECT 4 in 0.0 seconds
+[0m16:40:42  Writing injected SQL for node "model.jaffle_shop.orders"
+[0m16:40:42  Timing info for model.jaffle_shop.orders (compile): 18:40:42.562136 => 18:40:42.662128
+[0m16:40:42  Began executing node model.jaffle_shop.orders
+[0m16:40:42  Writing runtime sql for node "model.jaffle_shop.orders"
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: BEGIN
+[0m16:40:42  SQL status: BEGIN in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.orders"} */
+
+  
+    
+
+  create  table "sales"."public"."orders__dbt_tmp"
+  
+  
+    as
+  
+  (
+    --Set the payment methods in a variable to use later in a for loop
+
+
+with orders as (
+
+    select * from "sales"."public"."stg_orders"
+
+),
+
+payments as (
+
+    select * from "sales"."public"."stg_payments"
+
+),
+
+order_payments as (
+
+    select
+        order_id,
+
+        --use the variable specified at the top of this model
+        sum(case when payment_method = 'bank_transfer' then amount else 0 end) as bank_transfer_amount,
+        
+        --remove trailling , that may cause double comma errors,--end for loop
+        sum(case when payment_method = 'coupon' then amount else 0 end) as coupon_amount,
+        
+        --remove trailling , that may cause double comma errors,--end for loop
+        sum(case when payment_method = 'credit_card' then amount else 0 end) as credit_card_amount,
+        
+        --remove trailling , that may cause double comma errors,--end for loop
+        sum(case when payment_method = 'gift_card' then amount else 0 end) as gift_card_amount,
+        
+        --remove trailling , that may cause double comma errors--end for loop
+        sum(amount) as total_amount
+
+    from payments
+
+    group by order_id
+
+),
+
+final as (
+
+    select
+        orders.order_id,
+        orders.customer_id,
+        orders.order_date,
+        orders.status,
+
+        order_payments.bank_transfer_amount,
+
+        order_payments.coupon_amount,
+
+        order_payments.credit_card_amount,
+
+        order_payments.gift_card_amount,
+
+        order_payments.total_amount as amount
+
+    from orders
+
+
+    left join order_payments
+        on orders.order_id = order_payments.order_id
+
+)
+
+select * from final
+  );
+  
+[0m16:40:42  SQL status: SELECT 99 in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.orders"} */
+alter table "sales"."public"."orders" rename to "orders__dbt_backup"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.orders"} */
+alter table "sales"."public"."orders__dbt_tmp" rename to "orders"
+[0m16:40:42  SQL status: ALTER TABLE in 0.0 seconds
+[0m16:40:42  On model.jaffle_shop.orders: COMMIT
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: COMMIT
+[0m16:40:42  SQL status: COMMIT in 0.0 seconds
+[0m16:40:42  Using postgres connection "model.jaffle_shop.orders"
+[0m16:40:42  On model.jaffle_shop.orders: /* {"app": "dbt", "dbt_version": "1.5.0", "profile_name": "jaffle_shop", "target_name": "dev", "node_id": "model.jaffle_shop.orders"} */
+drop table if exists "sales"."public"."orders__dbt_backup" cascade
+[0m16:40:42  SQL status: DROP TABLE in 0.0 seconds
+[0m16:40:42  Timing info for model.jaffle_shop.orders (execute): 18:40:42.665729 => 18:40:42.810382
+[0m16:40:42  On model.jaffle_shop.orders: Close
+[0m16:40:42  5 of 5 OK created sql table model public.orders ................................ [[32mSELECT 99[0m in 0.26s]
+[0m16:40:42  Finished running node model.jaffle_shop.orders
+[0m16:40:42  Using postgres connection "master"
+[0m16:40:42  On master: BEGIN
+[0m16:40:42  Opening a new connection, currently in state closed
+[0m16:40:42  SQL status: BEGIN in 0.0 seconds
+[0m16:40:42  On master: COMMIT
+[0m16:40:42  Using postgres connection "master"
+[0m16:40:42  On master: COMMIT
+[0m16:40:42  SQL status: COMMIT in 0.0 seconds
+[0m16:40:42  On master: Close
+[0m16:40:42  Connection 'master' was properly closed.
+[0m16:40:42  Connection 'list_sales' was properly closed.
+[0m16:40:42  Connection 'list_sales_public' was properly closed.
+[0m16:40:42  Connection 'model.jaffle_shop.orders' was properly closed.
+[0m16:40:42  
+[0m16:40:42  Finished running 3 view models, 2 table models in 0 hours 0 minutes and 1.56 seconds (1.56s).
+[0m16:40:42  Command end result
+[0m16:40:42  
+[0m16:40:42  [32mCompleted successfully[0m
+[0m16:40:42  
+[0m16:40:42  Done. PASS=5 WARN=0 ERROR=0 SKIP=0 TOTAL=5
+[0m16:40:42  Command `dbt run` succeeded at 18:40:42.972349 after 2.08 seconds
+[0m16:40:42  Flushing usage events
+[0m16:50:52  Running with dbt=1.5.0
+[0m16:50:52  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'True', 'version_check': 'True', 'debug': 'True', 'log_path': 'C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs', 'profiles_dir': 'C:\\Users\\lfouc\\.dbt', 'fail_fast': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'log_format': 'text', 'introspect': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}
+[0m16:50:52  Set downloads directory='C:\Users\lfouc\AppData\Local\Temp\dbt-downloads-u0kkpslj'
+[0m16:50:52  Making package index registry request: GET https://hub.getdbt.com/api/v1/index.json
+[0m16:50:53  Response from registry index: GET https://hub.getdbt.com/api/v1/index.json 200
+[0m16:50:53  Making package registry request: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json
+[0m16:50:53  Response from registry: GET https://hub.getdbt.com/api/v1/dbt-labs/dbt_utils.json 200
+[0m16:50:53  Installing dbt-labs/dbt_utils
+[0m16:50:54  Installed from version 1.1.0
+[0m16:50:54  Up to date!
+[0m16:50:54  Command `dbt deps` succeeded at 18:50:54.666030 after 1.95 seconds
+[0m16:50:54  Flushing usage events
+[0m16:54:43  Running with dbt=1.5.0
+[0m16:54:43  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'True', 'version_check': 'True', 'fail_fast': 'True', 'log_path': 'C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs', 'debug': 'True', 'profiles_dir': 'C:\\Users\\lfouc\\.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'text', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}
+[0m16:54:43  Encountered an error:
+Runtime Error
+  The packages.yml file in this project is malformed. Please double check
+  the contents of this file and fix any errors before retrying.
+  
+  You can find more information on the syntax for this file here:
+  https://docs.getdbt.com/docs/package-management
+  
+  Validator Error:
+  {'git': 'https://github.com/dbt-labs/dbt-utils.git', 'version': 'master'} is not valid under any of the given schemas
+  
+
+Error encountered in C:\Louw\GitHub\dbt\jaffle_shop\dbt_project.yml
+[0m16:54:43  Command `dbt deps` failed at 18:54:43.838810 after 0.07 seconds
+[0m16:54:43  Flushing usage events
+[0m16:56:01  Running with dbt=1.5.0
+[0m16:56:01  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'True', 'fail_fast': 'True', 'profiles_dir': 'C:\\Users\\lfouc\\.dbt', 'log_path': 'C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs', 'debug': 'True', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'text', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}
+[0m16:56:01  Encountered an error:
+Runtime Error
+  The packages.yml file in this project is malformed. Please double check
+  the contents of this file and fix any errors before retrying.
+  
+  You can find more information on the syntax for this file here:
+  https://docs.getdbt.com/docs/package-management
+  
+  Validator Error:
+  {'git': 'https://github.com/dbt-labs/dbt-utils.git', 'version': 'main'} is not valid under any of the given schemas
+  
+
+Error encountered in C:\Louw\GitHub\dbt\jaffle_shop\dbt_project.yml
+[0m16:56:01  Command `dbt deps` failed at 18:56:01.435037 after 0.09 seconds
+[0m16:56:01  Flushing usage events
+{"data": {"log_version": 3, "version": "=1.5.0"}, "info": {"category": "", "code": "A001", "extra": {}, "invocation_id": "3f0614b6-ec88-41dd-9a36-c9ef119f16af", "level": "info", "msg": "Running with dbt=1.5.0", "name": "MainReportVersion", "pid": 16372, "thread": "MainThread", "ts": "2023-05-28T07:14:32.109129Z"}}
+{"data": {"args": {"cache_selected_only": "False", "debug": "True", "fail_fast": "True", "indirect_selection": "eager", "introspect": "True", "log_cache_events": "False", "log_format": "json", "log_path": "C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs", "no_print": "None", "partial_parse": "True", "printer_width": "80", "profiles_dir": "C:\\Louw\\GitHub\\dbt", "quiet": "False", "send_anonymous_usage_stats": "False", "static_parser": "True", "target_path": "None", "use_colors": "True", "use_experimental_parser": "False", "version_check": "True", "warn_error": "True", "warn_error_options": "WarnErrorOptions(include=[], exclude=[])", "write_json": "True"}}, "info": {"category": "", "code": "A002", "extra": {}, "invocation_id": "3f0614b6-ec88-41dd-9a36-c9ef119f16af", "level": "debug", "msg": "running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'True', 'version_check': 'True', 'fail_fast': 'True', 'log_path': 'C:\\\\Louw\\\\GitHub\\\\dbt\\\\jaffle_shop\\\\logs', 'profiles_dir': 'C:\\\\Louw\\\\GitHub\\\\dbt', 'debug': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'log_format': 'json', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}", "name": "MainReportArgs", "pid": 16372, "thread": "MainThread", "ts": "2023-05-28T07:14:32.124752Z"}}
+{"data": {"exc": "Runtime Error\n  at path ['threads']: ['optional', '1 or more'] is not of type 'integer'"}, "info": {"category": "", "code": "Z002", "extra": {}, "invocation_id": "3f0614b6-ec88-41dd-9a36-c9ef119f16af", "level": "error", "msg": "Encountered an error:\nRuntime Error\n  at path ['threads']: ['optional', '1 or more'] is not of type 'integer'", "name": "MainEncounteredError", "pid": 16372, "thread": "MainThread", "ts": "2023-05-28T07:14:32.269098Z"}}
+{"data": {"command": "dbt run", "completed_at": "2023-05-28T07:14:32.271565Z", "elapsed": 0.26229, "success": false}, "info": {"category": "", "code": "Q039", "extra": {}, "invocation_id": "3f0614b6-ec88-41dd-9a36-c9ef119f16af", "level": "debug", "msg": "Command `dbt run` failed at 09:14:32.271565 after 0.26 seconds", "name": "CommandCompleted", "pid": 16372, "thread": "MainThread", "ts": "2023-05-28T07:14:32.272191Z"}}
+{"data": {}, "info": {"category": "", "code": "Z042", "extra": {}, "invocation_id": "3f0614b6-ec88-41dd-9a36-c9ef119f16af", "level": "debug", "msg": "Flushing usage events", "name": "FlushEvents", "pid": 16372, "thread": "MainThread", "ts": "2023-05-28T07:14:32.273850Z"}}
+{"data": {"log_version": 3, "version": "=1.5.0"}, "info": {"category": "", "code": "A001", "extra": {}, "invocation_id": "c628e6e5-813e-4e18-8b3e-5c6dde7dd352", "level": "info", "msg": "Running with dbt=1.5.0", "name": "MainReportVersion", "pid": 20072, "thread": "MainThread", "ts": "2023-05-28T07:16:08.692108Z"}}
+{"data": {"args": {"cache_selected_only": "False", "debug": "True", "fail_fast": "True", "indirect_selection": "eager", "introspect": "True", "log_cache_events": "False", "log_format": "json", "log_path": "C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs", "no_print": "None", "partial_parse": "True", "printer_width": "80", "profiles_dir": "C:\\Louw\\GitHub\\dbt", "quiet": "False", "send_anonymous_usage_stats": "False", "static_parser": "True", "target_path": "None", "use_colors": "True", "use_experimental_parser": "False", "version_check": "True", "warn_error": "True", "warn_error_options": "WarnErrorOptions(include=[], exclude=[])", "write_json": "True"}}, "info": {"category": "", "code": "A002", "extra": {}, "invocation_id": "c628e6e5-813e-4e18-8b3e-5c6dde7dd352", "level": "debug", "msg": "running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'True', 'fail_fast': 'True', 'profiles_dir': 'C:\\\\Louw\\\\GitHub\\\\dbt', 'log_path': 'C:\\\\Louw\\\\GitHub\\\\dbt\\\\jaffle_shop\\\\logs', 'debug': 'True', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'static_parser': 'True', 'introspect': 'True', 'log_format': 'json', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}", "name": "MainReportArgs", "pid": 20072, "thread": "MainThread", "ts": "2023-05-28T07:16:08.692108Z"}}
+{"data": {"exc": "Runtime Error\n  The packages.yml file in this project is malformed. Please double check\n  the contents of this file and fix any errors before retrying.\n  \n  You can find more information on the syntax for this file here:\n  https://docs.getdbt.com/docs/package-management\n  \n  Validator Error:\n  {'git': 'dbt-labs/dbt_utils', 'version': '1.1.0'} is not valid under any of the given schemas\n  \n\nError encountered in C:\\Louw\\GitHub\\dbt\\jaffle_shop\\dbt_project.yml"}, "info": {"category": "", "code": "Z002", "extra": {}, "invocation_id": "c628e6e5-813e-4e18-8b3e-5c6dde7dd352", "level": "error", "msg": "Encountered an error:\nRuntime Error\n  The packages.yml file in this project is malformed. Please double check\n  the contents of this file and fix any errors before retrying.\n  \n  You can find more information on the syntax for this file here:\n  https://docs.getdbt.com/docs/package-management\n  \n  Validator Error:\n  {'git': 'dbt-labs/dbt_utils', 'version': '1.1.0'} is not valid under any of the given schemas\n  \n\nError encountered in C:\\Louw\\GitHub\\dbt\\jaffle_shop\\dbt_project.yml", "name": "MainEncounteredError", "pid": 20072, "thread": "MainThread", "ts": "2023-05-28T07:16:08.718452Z"}}
+{"data": {"command": "dbt deps", "completed_at": "2023-05-28T07:16:08.718452Z", "elapsed": 0.0533978, "success": false}, "info": {"category": "", "code": "Q039", "extra": {}, "invocation_id": "c628e6e5-813e-4e18-8b3e-5c6dde7dd352", "level": "debug", "msg": "Command `dbt deps` failed at 09:16:08.718452 after 0.05 seconds", "name": "CommandCompleted", "pid": 20072, "thread": "MainThread", "ts": "2023-05-28T07:16:08.718452Z"}}
+{"data": {}, "info": {"category": "", "code": "Z042", "extra": {}, "invocation_id": "c628e6e5-813e-4e18-8b3e-5c6dde7dd352", "level": "debug", "msg": "Flushing usage events", "name": "FlushEvents", "pid": 20072, "thread": "MainThread", "ts": "2023-05-28T07:16:08.718452Z"}}
+{"data": {"log_version": 3, "version": "=1.5.0"}, "info": {"category": "", "code": "A001", "extra": {}, "invocation_id": "cf430e75-1a61-4e2a-9d2a-abd56128f1e8", "level": "info", "msg": "Running with dbt=1.5.0", "name": "MainReportVersion", "pid": 9576, "thread": "MainThread", "ts": "2023-05-28T07:16:23.991401Z"}}
+{"data": {"args": {"cache_selected_only": "False", "debug": "True", "fail_fast": "True", "indirect_selection": "eager", "introspect": "True", "log_cache_events": "False", "log_format": "json", "log_path": "C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs", "no_print": "None", "partial_parse": "True", "printer_width": "80", "profiles_dir": "C:\\Louw\\GitHub\\dbt", "quiet": "False", "send_anonymous_usage_stats": "False", "static_parser": "True", "target_path": "None", "use_colors": "True", "use_experimental_parser": "False", "version_check": "True", "warn_error": "True", "warn_error_options": "WarnErrorOptions(include=[], exclude=[])", "write_json": "True"}}, "info": {"category": "", "code": "A002", "extra": {}, "invocation_id": "cf430e75-1a61-4e2a-9d2a-abd56128f1e8", "level": "debug", "msg": "running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\\\Louw\\\\GitHub\\\\dbt', 'version_check': 'True', 'warn_error': 'True', 'log_path': 'C:\\\\Louw\\\\GitHub\\\\dbt\\\\jaffle_shop\\\\logs', 'fail_fast': 'True', 'debug': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'log_format': 'json', 'static_parser': 'True', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}", "name": "MainReportArgs", "pid": 9576, "thread": "MainThread", "ts": "2023-05-28T07:16:23.991401Z"}}
+{"data": {"exc": "Runtime Error\n  at path ['threads']: ['optional', '1 or more'] is not of type 'integer'"}, "info": {"category": "", "code": "Z002", "extra": {}, "invocation_id": "cf430e75-1a61-4e2a-9d2a-abd56128f1e8", "level": "error", "msg": "Encountered an error:\nRuntime Error\n  at path ['threads']: ['optional', '1 or more'] is not of type 'integer'", "name": "MainEncounteredError", "pid": 9576, "thread": "MainThread", "ts": "2023-05-28T07:16:24.047415Z"}}
+{"data": {"command": "dbt test", "completed_at": "2023-05-28T07:16:24.049418Z", "elapsed": 0.0715129, "success": false}, "info": {"category": "", "code": "Q039", "extra": {}, "invocation_id": "cf430e75-1a61-4e2a-9d2a-abd56128f1e8", "level": "debug", "msg": "Command `dbt test` failed at 09:16:24.049418 after 0.07 seconds", "name": "CommandCompleted", "pid": 9576, "thread": "MainThread", "ts": "2023-05-28T07:16:24.050417Z"}}
+{"data": {}, "info": {"category": "", "code": "Z042", "extra": {}, "invocation_id": "cf430e75-1a61-4e2a-9d2a-abd56128f1e8", "level": "debug", "msg": "Flushing usage events", "name": "FlushEvents", "pid": 9576, "thread": "MainThread", "ts": "2023-05-28T07:16:24.053418Z"}}
