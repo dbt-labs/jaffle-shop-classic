@@ -23,4 +23,32 @@ models:
   jaffle_shop:
       materialized: table
       staging:
+        tags:
+        - 'stage'
+        enabled: true
         materialized: view
+      # raw_stage:
+      #   tags:
+      #     - 'raw'
+      #   materialized: view
+      # raw_vault:
+      #   tags:
+      #     - 'raw_vault'
+      #   materialized: incremental
+      # hubs:
+      #   tags:
+      #     - 'hub'
+      # links:
+      #   tags:
+      #     - 'link'
+      # sats:
+      #   tags:
+      #     - 'satellite'
+      # t_links:
+      #   tags:
+      #     - 't_link'
+
+vars:
+  hash: MD5
+  concat_string: '||'
+  null_placeholder_string: '##'

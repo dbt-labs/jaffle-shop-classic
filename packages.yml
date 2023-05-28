@@ -1,3 +1,6 @@
 packages:
-  - git: dbt-labs/dbt_utils
+  - package: dbt-labs/dbt_utils
     version: 1.1.0
+
+  - package: Datavault-UK/automate_dv
+    version: 0.9.6
