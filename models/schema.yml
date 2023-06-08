@@ -80,3 +80,82 @@ models:
         description: Amount of the order (AUD) paid for by gift card
         tests:
           - not_null
+
+semantic_models:
+  - name: semantic_customers
+    description: The semantic representation of the `customers` model
+    model: ref('customers')
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: first_order
+        type: time
+      - name: most_recent_order
+        type: time
+    measures:
+      - name: number_of_orders
+        agg: sum
+      - name: total_order_amount
+        agg: sum
+  - name: semantic_orders
+    description: The semantic representation of the `orders` model
+    model: ref('orders')
+    entities:
+      - name: order
+        type: primary
+        expr: order_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: order_date
+        type: time
+      - name: status
+        type: categorical
+    measures:
+      - name: amount
+        agg: sum
+      - name: credit_card_amount
+        agg: sum
+      - name: coupon_amount
+        agg: sum
+      - name: bank_transfer_amount
+        agg: sum
+      - name: gift_card_amount
+        agg: sum
+metrics:
+  - name: returned_amount
+    label: Returned Amount
+    type: simple
+    type_params:
+      measure:
+        name: amount
+        filter: status = 'return_pending'
+  - name: returned_percent
+    label: Returned Percent
+    type: ratio
+    type_params:
+      numerator:
+        name: amount
+        filter: status = 'return_pending'
+      denominator: amount
+  - name: gift_card_amount
+    label: Gift Card Amount
+    type: simple
+    type_params:
+      measure: gift_card_amount
+  - name: amount
+    label: Amount
+    type: simple
+    type_params:
+      measure: amount
+  - name: non_gift_card_amount
+    label: Non Gift Card Amount
+    type: derived
+    type_params:
+      expr: amount - gift_card_amount
+      metrics:
+        - amount
+        - gift_card_amount
