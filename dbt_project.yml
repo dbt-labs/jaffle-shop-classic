@@ -1,26 +1,26 @@
-name: 'jaffle_shop'
+---
+name: jaffle_shop
 
 config-version: 2
-version: '0.1'
+version: 0.0.0
+require-dbt-version: [">=1.4.0", "<1.5.0"]
 
-profile: 'jaffle_shop'
+profile: default
 
-model-paths: ["models"]
-seed-paths: ["seeds"]
-test-paths: ["tests"]
-analysis-paths: ["analysis"]
-macro-paths: ["macros"]
+model-paths: ["jaffle_shop/models"]
+seed-paths: ["jaffle_shop/seeds"]
+test-paths: ["jaffle_shop/tests"]
+macro-paths: ["jaffle_shop/macros"]
 
-target-path: "target"
-clean-targets:
-    - "target"
-    - "dbt_modules"
-    - "logs"
-
-require-dbt-version: [">=1.0.0", "<2.0.0"]
+target-path: target
+packages-install-path: packages
+clean-targets: [target, packages, logs]
 
 models:
   jaffle_shop:
-      materialized: table
-      staging:
-        materialized: view
+    +materialized: table
+    +schema: main
+
+tests:
+  +docs:
+    node_color: Indigo

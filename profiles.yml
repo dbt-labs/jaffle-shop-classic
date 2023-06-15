@@ -1,0 +1,27 @@
+---
+config:
+  send_anonymous_usage_stats: true
+  use_colors: true
+  partial_parse: true
+  printer_width: 80
+  write_json: true
+  warn_error: false
+  log_format: default
+  debug: false
+  version_check: true
+  fail_fast: false
+  use_experimental_parser: true
+
+# You won't need to create the SQLite database -- it'll be created automatically
+default:
+  outputs:
+    dev:
+      type: sqlite
+      threads: 1
+      database: jaffle-shop
+      schema: main
+      schemas_and_paths:
+        main: "jaffle_shop/jaffle-shop.db"
+      schema_directory: jaffle_shop
+
+  target: dev
