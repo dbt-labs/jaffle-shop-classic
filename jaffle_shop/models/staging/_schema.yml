@@ -1,14 +1,14 @@
 version: 2
 
 models:
-  - name: stg_customers
+  - name: stg__customers
     columns:
       - name: customer_id
         tests:
           - unique
           - not_null
 
-  - name: stg_orders
+  - name: stg__orders
     columns:
       - name: order_id
         tests:
@@ -17,9 +17,14 @@ models:
       - name: status
         tests:
           - accepted_values:
-              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+              values:
+                - placed
+                - shipped
+                - completed
+                - return_pending
+                - returned
 
-  - name: stg_payments
+  - name: stg__payments
     columns:
       - name: payment_id
         tests:
@@ -28,4 +33,8 @@ models:
       - name: payment_method
         tests:
           - accepted_values:
-              values: ['credit_card', 'coupon', 'bank_transfer', 'gift_card']
+              values:
+                - credit_card
+                - coupon
+                - bank_transfer
+                - gift_card

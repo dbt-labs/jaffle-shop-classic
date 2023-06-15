@@ -1,0 +1,2 @@
+dbt-core==1.4.6  # Pinned for the SQLite adapter
+dbt-sqlite==1.4.0

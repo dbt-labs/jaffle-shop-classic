@@ -1,5 +1,12 @@
+# IDE configs
+.idea/
+.vscode/
 
+# dbt artifacts
 target/
-dbt_modules/
+packages/
 logs/
-**/.DS_Store
+.user.yml
+
+# Files
+*.db
