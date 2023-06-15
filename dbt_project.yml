@@ -16,10 +16,19 @@ target-path: target
 packages-install-path: packages
 clean-targets: [target, packages, logs]
 
+quoting:
+  database: false
+  schema: false
+  identifier: false
+
 models:
   jaffle_shop:
     +materialized: table
     +schema: main
+
+seeds:
+  +docs:
+    node_color: Gray
 
 tests:
   +docs:
