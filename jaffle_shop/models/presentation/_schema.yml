@@ -44,7 +44,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('customers')
+              to: ref("pl__customers")
               field: customer_id
 
       - name: order_date

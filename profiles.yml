@@ -5,7 +5,7 @@ config:
   partial_parse: true
   printer_width: 80
   write_json: true
-  warn_error: false
+  warn_error: true
   log_format: default
   debug: false
   version_check: true
