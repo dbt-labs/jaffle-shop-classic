@@ -37,6 +37,27 @@ class TestCase:
     cte_name: str = None
 
 
+def has_unit_test_tag(kwargs: t.Iterable[nodes.Keyword]) -> bool:
+    for arg in kwargs:
+        if arg.key == "tags":
+            for item in arg.value.items:
+                if item.value == "unit-test":
+                    return True
+
+    return False
+
+
+def is_test_file(ast: nodes.Template) -> bool:
+    for node in ast.body[0].nodes:
+        if (
+            isinstance(node, nodes.Call) and
+            node.node.name == "config" and
+            has_unit_test_tag(node.kwargs)
+        ):
+            return True
+
+    return False
+
 def get_cte_name(args: t.Iterable[nodes.Const]) -> t.Optional[str]:
     if len(args) < 3:
         return None
@@ -73,6 +94,9 @@ def main():
         )
         for call in calls
     ]
+
+    print("Is test file?", is_test_file(ast))
+
     pass
 
 
