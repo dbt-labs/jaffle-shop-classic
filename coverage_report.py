@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+from pathlib import Path
 
 import typing as t
 
+import jinja2
 from jinja2 import Environment, nodes
 
 TEST_STRING = """
@@ -48,6 +50,12 @@ def has_unit_test_tag(kwargs: t.Iterable[nodes.Keyword]) -> bool:
 
 
 def is_test_file(ast: nodes.Template) -> bool:
+    if not ast.body:
+        return False
+
+    if not hasattr(ast.body[0], "nodes"):
+        return False
+
     for node in ast.body[0].nodes:
         if (
             isinstance(node, nodes.Call) and
@@ -57,6 +65,7 @@ def is_test_file(ast: nodes.Template) -> bool:
             return True
 
     return False
+
 
 def get_cte_name(args: t.Iterable[nodes.Const]) -> t.Optional[str]:
     if len(args) < 3:
@@ -70,6 +79,20 @@ def get_cte_name(args: t.Iterable[nodes.Const]) -> t.Optional[str]:
             return dict_item.value.value
 
     return None
+
+
+def get_test_files(env: jinja2.Environment, src: Path) -> t.List[Path]:
+    files = []
+    for sql in src.glob("**/*.sql"):
+        with sql.open() as f:
+            try:
+                ast = env.parse(f.read())
+            except:
+                continue
+            if is_test_file(ast):
+                files.append(sql)
+
+    return files
 
 
 def main():
@@ -95,7 +118,9 @@ def main():
         for call in calls
     ]
 
-    print("Is test file?", is_test_file(ast))
+    files = get_test_files(env, Path.cwd())
+
+    print("Test files:", files)
 
     pass
 
