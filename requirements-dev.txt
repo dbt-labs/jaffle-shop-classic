@@ -1,1 +1,2 @@
 pre-commit==3.3.3
+Jinja2>=3.*
