@@ -1,4 +1,5 @@
 pre-commit==3.3.3
+sqlglot==16.3.1
 Jinja2>=3.*
 typer
 pybadges
