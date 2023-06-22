@@ -3,8 +3,9 @@ from pathlib import Path
 
 import typing as t
 
-import jinja2
 from jinja2 import Environment, nodes
+from jinja2.exceptions import TemplateSyntaxError
+import typer
 
 TEST_STRING = """
 {{ config(tags=["unit-test"]) }}
@@ -59,6 +60,8 @@ def is_test_file(ast: nodes.Template) -> bool:
     for node in ast.body[0].nodes:
         if (
             isinstance(node, nodes.Call) and
+            hasattr(node, "node") and
+            hasattr(node.node, "name") and
             node.node.name == "config" and
             has_unit_test_tag(node.kwargs)
         ):
@@ -67,7 +70,7 @@ def is_test_file(ast: nodes.Template) -> bool:
     return False
 
 
-def get_cte_name(args: t.Iterable[nodes.Const]) -> t.Optional[str]:
+def get_cte_name(args: t.List[nodes.Const]) -> t.Optional[str]:
     if len(args) < 3:
         return None
 
@@ -81,13 +84,13 @@ def get_cte_name(args: t.Iterable[nodes.Const]) -> t.Optional[str]:
     return None
 
 
-def get_test_files(env: jinja2.Environment, src: Path) -> t.List[Path]:
+def get_test_files(env: Environment, src: Path) -> t.List[Path]:
     files = []
     for sql in src.glob("**/*.sql"):
         with sql.open() as f:
             try:
                 ast = env.parse(f.read())
-            except:
+            except TemplateSyntaxError:
                 continue
             if is_test_file(ast):
                 files.append(sql)
@@ -95,22 +98,23 @@ def get_test_files(env: jinja2.Environment, src: Path) -> t.List[Path]:
     return files
 
 
-def main():
-    env = Environment()
-    ast = env.parse(TEST_STRING)
+def get_test_cases(env: Environment, file: Path) -> t.List[TestCase]:
+    with file.open() as f:
+        ast = env.parse(f.read())
 
     calls = [
         callblock.call for callblock in ast.body
         if (
-            isinstance(callblock, nodes.CallBlock) and
-            callblock.call.node.node.name == "dbt_unit_testing" and
-            callblock.call.node.attr == "test"
+                isinstance(callblock, nodes.CallBlock) and
+                hasattr(callblock.call.node, "node") and
+                callblock.call.node.node.name == "dbt_unit_testing" and
+                callblock.call.node.attr == "test"
         )
     ]
 
-    cases = [
+    return [
         TestCase(
-            filename="somefile",
+            filename=str(file),
             lineno=call.lineno,
             dbt_model=call.args[0].value,
             cte_name=get_cte_name(call.args)
@@ -118,13 +122,23 @@ def main():
         for call in calls
     ]
 
-    files = get_test_files(env, Path.cwd())
 
-    print("Test files:", files)
+def get_all_test_cases(env: Environment, files: t.List[Path]) -> t.List[TestCase]:
+    return [
+        case
+        for file in files
+        for case in get_test_cases(env, file)
+    ]
 
-    pass
 
+def main(directory: t.Optional[Path] = "."):
+    env = Environment()
+    files = get_test_files(env, directory)
+    cases = get_all_test_cases(env, files)
+
+    from pprint import pprint
+    pprint(cases)
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(main)
