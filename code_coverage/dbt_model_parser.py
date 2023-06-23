@@ -103,9 +103,9 @@ def walk_the_models(model_directory: Path) -> None:
     assert model_directory.is_dir()
     assert model_directory.name == "models"  # Required by dbt
 
-    compiled = Path("../target/compiled/jaffle_shop/jaffle_shop/models/")
+    compiled = Path("target/compiled/jaffle_shop/jaffle_shop/models/")
     for path in model_directory.glob("**/*.sql"):
-        compiled_path = compiled / path.relative_to("../jaffle_shop/models")
+        compiled_path = compiled / path.relative_to("jaffle_shop/models")
         with open(compiled_path, "r") as f:
             sql = f.read()
 

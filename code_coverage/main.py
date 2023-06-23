@@ -49,7 +49,7 @@ def get_dbt_config(dbt_project_root: Path) -> DbtConfig:
     )
 
 
-def main(dbt_project_root: t.Optional[Path] = "../", badge: t.Optional[Path] = None):
+def main(dbt_project_root: t.Optional[Path] = ".", badge: t.Optional[Path] = None):
     dbt_config = get_dbt_config(dbt_project_root)
 
     env = Environment()
