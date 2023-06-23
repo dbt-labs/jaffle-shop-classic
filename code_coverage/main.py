@@ -1,127 +1,73 @@
-"""
-https://jinja.palletsprojects.com/en/3.1.x/extensions/#ast
-https://github.com/tobymao/sqlglot
-"""
-import dataclasses
+from bisect import bisect
+from dataclasses import dataclass
+from math import floor
 from pathlib import Path
-from typing import Literal
+import typing as t
+import yaml
 
-import sqlglot
-from sqlglot import Expression
+from jinja2 import Environment
+import pybadges
+import typer
 
+from dbt_model_parser import walk_the_models
+from unit_test_parser import get_test_files, get_all_test_cases
 
-# Clauses which indicate that a CTE is a "logical" CTE, not an "import" CTE
-LOGICAL_CTE_ARGS = [
-    "with",
-    "distinct",
-    "limit",
-    "joins",
-    "laterals",
-    "where",
-    "pivots",
-    "group",
-    "qualify",
-    "windows",
-    "order",
-]
-
-
-@dataclasses.dataclass
-class CTE:
-    name: str
-    expression: Expression
-
-    @property
-    def cte_type(self) -> Literal["import", "logical", "final"]:
-        """
-        The type of CTE this is.
-
-        Can be "import", "logical", or "final".
-        """
-        if self.name.lower() == "final":
-            return "final"
-        elif is_import_cte(self.expression):
-            return "import"
-        else:
-            return "logical"
-
-    def __str__(self) -> str:
-        return f"{self.name} ({self.cte_type})"
+# Borrowed from https://docs.gitlab.com/ee/user/project/badges.html
+badge_colors = {
+    0: "#9f9f9f",
+    75: "#e05d44",
+    90: "#dfb317",
+    95: "#a3c51c",
+    100: "#4c1",
+    1000: "#4c1"
+}
 
 
-def get_common_table_expressions(sql: str) -> dict[str, Expression]:
-    """
-    Get CTEs from a single SQL statement.
-    """
-    parsed = sqlglot.parse(sql)
-    if len(parsed) != 1:
-        raise ValueError(f"The SQL text should have a single statement, found {len(parsed)}.")
+def generate_badge(badge_path: Path, coverage: float) -> None:
+    bounds = list(badge_colors.keys())
+    key = bounds[bisect(bounds, floor(coverage)) - 1]
+    color = badge_colors[key]
+    svg = pybadges.badge(left_text="coverage", right_text=f"{round(coverage, 2)}%", right_color=color)
 
-    common_table_expressions: Expression = parsed[0].args.get("with", None)
-
-    if common_table_expressions is None:
-        return {}
-    return {
-        expression.alias: expression.this
-        for _, expression in common_table_expressions.iter_expressions()
-        if expression.key == "cte"
-    }
+    with badge_path.open("w") as f:
+        f.write(svg)
 
 
-def is_import_cte(common_table_expression: Expression) -> bool:
-    """
-    Determine if a CTE is an "import" CTE.
-    """
-    return (
-        # The `FROM` isn't a subquery
-        getattr(common_table_expression.args["from"], "alias_or_name", "") != ""
-        # The column list is a star, or doesn't have any calculations
-        and (common_table_expression.is_star or all(
-            col.key == "column"
-            for col in common_table_expression.args["expressions"]
-        ))
-        # It doesn't have any logical CTE clauses
-        and all(
-            common_table_expression.args.get(arg, None) is None
-            for arg in LOGICAL_CTE_ARGS
-        )
+@dataclass
+class DbtConfig:
+    model_paths: t.List[Path]
+    test_paths: t.List[Path]
+
+
+def get_dbt_config(dbt_project_root: Path) -> DbtConfig:
+    with (dbt_project_root / "dbt_project.yml").open() as config_yml:
+        config = yaml.safe_load(config_yml)
+
+    return DbtConfig(
+        model_paths=[Path(p) for p in config['model-paths']],
+        test_paths=[Path(p) for p in config['test-paths']]
     )
 
 
-def get_model_common_table_expressions(sql: str) -> list[CTE]:
-    """
-    Get CTEs from a single SQL statement.
-    """
-    return [
-        CTE(name=cte_name, expression=cte_expr)
-        for cte_name, cte_expr in get_common_table_expressions(sql).items()
+def main(dbt_project_root: t.Optional[Path] = "../", badge: t.Optional[Path] = None):
+    dbt_config = get_dbt_config(dbt_project_root)
+
+    env = Environment()
+    files = [
+        file
+        for dir in dbt_config.test_paths
+        for file in get_test_files(env, dir)
     ]
+    cases = get_all_test_cases(env, files)
 
+    from pprint import pprint
+    pprint(cases)
 
-def walk_the_models(model_directory: Path) -> None:
-    """
-    Walk the models directory and print out the CTEs in each model.
+    walk_the_models(dbt_config.model_paths[0])
 
-    :param model_directory: The directory containing the models.
-    """
-    assert model_directory.is_dir()
-    assert model_directory.name == "models"  # Required by dbt
-
-    compiled = Path("../target/compiled/jaffle_shop/jaffle_shop/models/")
-    for path in model_directory.glob("**/*.sql"):
-        compiled_path = compiled / path.relative_to("../jaffle_shop/models")
-        with open(compiled_path, "r") as f:
-            sql = f.read()
-
-        print(path.stem)
-        for cte in get_model_common_table_expressions(sql):
-            print(f"\t{cte}")
-
-
-def main() -> None:
-    """Parse some SQL."""
-    walk_the_models(Path("../jaffle_shop/models"))
+    if badge:
+        generate_badge(badge, 75.12)
 
 
 if __name__ == "__main__":
-    main()
+    typer.run(main)

@@ -1,14 +1,11 @@
-from bisect import bisect
 from dataclasses import dataclass
-from math import floor
 from pathlib import Path
 
 import typing as t
 
 from jinja2 import Environment, nodes
 from jinja2.exceptions import TemplateSyntaxError
-import pybadges
-import typer
+
 
 TEST_STRING = """
 {{ config(tags=["unit-test"]) }}
@@ -132,41 +129,3 @@ def get_all_test_cases(env: Environment, files: t.List[Path]) -> t.List[TestCase
         for file in files
         for case in get_test_cases(env, file)
     ]
-
-
-# Borrowed from https://docs.gitlab.com/ee/user/project/badges.html
-badge_colors = {
-    0: "#9f9f9f",
-    75: "#e05d44",
-    90: "#dfb317",
-    95: "#a3c51c",
-    100: "#4c1",
-    1000: "#4c1"
-}
-
-
-def generate_badge(badge_path: Path, coverage: float) -> None:
-    bounds = list(badge_colors.keys())
-    key = bounds[bisect(bounds, floor(coverage)) - 1]
-    color = badge_colors[key]
-    svg = pybadges.badge(left_text="coverage", right_text=f"{round(coverage, 2)}%", right_color=color)
-
-    with badge_path.open("w") as f:
-        f.write(svg)
-
-
-def main(directory: t.Optional[Path] = ".", badge: t.Optional[Path] = None):
-    env = Environment()
-    files = get_test_files(env, directory)
-    cases = get_all_test_cases(env, files)
-
-    from pprint import pprint
-    pprint(cases)
-
-    if badge:
-        generate_badge(badge, 75.12)
-
-
-
-if __name__ == "__main__":
-    typer.run(main)
