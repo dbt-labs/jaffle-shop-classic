@@ -106,7 +106,7 @@ def walk_the_models(model_directory: Path) -> None:
     compiled = Path("target/compiled/jaffle_shop/jaffle_shop/models/")
     for path in model_directory.glob("**/*.sql"):
         compiled_path = compiled / path.relative_to("jaffle_shop/models")
-        with open(compiled_path, "r") as f:
+        with compiled_path.open() as f:
             sql = f.read()
 
         print(path.stem)

@@ -9,8 +9,8 @@ from jinja2 import Environment
 import pybadges
 import typer
 
-from dbt_model_parser import walk_the_models
-from unit_test_parser import get_test_files, get_all_test_cases
+from .dbt_model_parser import walk_the_models
+from .unit_test_parser import get_test_files, get_all_test_cases
 
 # Borrowed from https://docs.gitlab.com/ee/user/project/badges.html
 badge_colors = {
@@ -35,6 +35,7 @@ def generate_badge(badge_path: Path, coverage: float) -> None:
 
 @dataclass
 class DbtConfig:
+    name: str
     model_paths: t.List[Path]
     test_paths: t.List[Path]
 
@@ -44,12 +45,13 @@ def get_dbt_config(dbt_project_root: Path) -> DbtConfig:
         config = yaml.safe_load(config_yml)
 
     return DbtConfig(
+        name=config['name'],
         model_paths=[Path(p) for p in config['model-paths']],
-        test_paths=[Path(p) for p in config['test-paths']]
+        test_paths=[Path(p) for p in config['test-paths']],
     )
 
 
-def main(dbt_project_root: t.Optional[Path] = ".", badge: t.Optional[Path] = None):
+def main(dbt_project_root: t.Optional[Path] = Path("."), badge: t.Optional[Path] = None):
     dbt_config = get_dbt_config(dbt_project_root)
 
     env = Environment()
