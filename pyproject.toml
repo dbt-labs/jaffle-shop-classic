@@ -11,3 +11,14 @@ repository = "https://github.com/Bilbottom/jaffle-shop"
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 optional-dependencies = {file = ["requirements-dev.txt"]}
+
+
+[tool.pytest.ini_options]
+addopts = "--cov=code_coverage"
+testpaths = [
+    "tests",
+]
+
+
+[tool.isort]
+profile = "black"
