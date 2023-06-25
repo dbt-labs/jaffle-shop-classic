@@ -10,3 +10,7 @@ logs/
 
 # Files
 *.db
+
+# Test artifacts
+.pytest_cache/
+.coverage

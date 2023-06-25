@@ -14,10 +14,9 @@ optional-dependencies = {file = ["requirements-dev.txt"]}
 
 
 [tool.pytest.ini_options]
-addopts = "--cov=code_coverage"
-testpaths = [
-    "tests",
-]
+addopts = "--cov=code_coverage --disable-warnings"
+pythonpath = "."
+testpaths = ["tests"]
 
 
 [tool.isort]
