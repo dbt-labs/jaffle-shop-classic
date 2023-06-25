@@ -29,6 +29,9 @@ def generate_badge(badge_path: pathlib.Path, coverage: float) -> None:
     :param badge_path: The path to the badge.
     :param coverage: The code coverage percentage.
     """
+    if not badge_path.suffix:  # `badge_path.is_file()` only works if the file exists
+        raise TypeError(f"'{badge_path}' is not a file.")
+
     bounds = list(BADGE_COLOURS.keys())
     key = bounds[-1 + bisect.bisect(bounds, math.floor(coverage))]
     svg = pybadges.badge(

@@ -3,11 +3,15 @@ Parse the compiled model SQL files to find the CTEs.
 """
 import dataclasses
 import pathlib
-from typing import Literal
+from typing import Literal, Self
 
 import sqlglot
 from sqlglot import Expression
 
+from code_coverage.dbt.config import DbtConfig
+
+
+CteType = Literal["import", "logical", "final"]
 
 # Clauses which indicate that a CTE is a "logical" CTE, not an "import" CTE
 LOGICAL_CTE_ARGS = [
@@ -29,12 +33,12 @@ LOGICAL_CTE_ARGS = [
 class CTE:
     name: str
     expression: Expression
-    cte_name: Literal["import", "logical", "final"] = dataclasses.field(init=False)
+    cte_type: CteType = dataclasses.field(init=False)
 
     def __post_init__(self):
         self.cte_type = self._determine_cte_type()
 
-    def _determine_cte_type(self) -> Literal["import", "logical", "final"]:
+    def _determine_cte_type(self) -> CteType:
         """
         The type of CTE this is.
 
@@ -42,7 +46,7 @@ class CTE:
         """
         if self.name.lower() == "final":
             return "final"
-        elif is_import_cte(self.expression):
+        elif _is_import_cte(self.expression):
             return "import"
         else:
             return "logical"
@@ -51,7 +55,35 @@ class CTE:
         return f"{self.name} ({self.cte_type})"
 
 
-def is_import_cte(common_table_expression: Expression) -> bool:
+@dataclasses.dataclass
+class Model:
+    path: pathlib.Path
+    name: str = dataclasses.field(init=False)
+    ctes: list[CTE] = dataclasses.field(init=False)
+
+    def __post_init__(self):
+        if not self.path.is_file():
+            raise TypeError(f"'{self.path}' is not a file.")
+
+        self.name = self.path.stem
+
+    def parse_ctes(self, model_root: pathlib.Path, compiled_root: pathlib.Path) -> Self:
+        """
+        Parse the CTEs out of the model.
+
+        :param model_root: The root directory for the compiled dbt models.
+        :param compiled_root: The root directory for the raw dbt models.
+
+        :return: Self, for chaining.
+        """
+        compiled_path = compiled_root / self.path.relative_to(model_root)
+        with compiled_path.open() as f:
+            self.ctes = _get_model_common_table_expressions(f.read())
+
+        return self
+
+
+def _is_import_cte(common_table_expression: Expression) -> bool:
     """
     Determine if a CTE is an "import" CTE.
 
@@ -93,7 +125,7 @@ def _get_common_table_expressions(sql: str) -> dict[str, Expression]:
     parsed = sqlglot.parse(sql)
     if len(parsed) != 1:
         raise ValueError(
-            f"The SQL text should have a single statement, found {len(parsed)}."
+            f"The SQL text should have a single statement, found {len(parsed)} statements."
         )
 
     common_table_expressions: Expression = parsed[0].args.get("with", None)
@@ -121,33 +153,20 @@ def _get_model_common_table_expressions(sql: str) -> list[CTE]:
     ]
 
 
-def walk_the_models(model_directory: pathlib.Path) -> None:
+def parse_models_and_ctes(config: DbtConfig) -> list[Model]:
     """
     Walk the models directory and print out the CTEs in each model.
 
-    :param model_directory: The directory containing the models.
+    :param config: The dbt project configuration.
     """
-    compiled = pathlib.Path("target/compiled/jaffle_shop/jaffle_shop/models/")
-    if not compiled.exists():
+    if not (compiled := config.compiled_paths[0]).exists():
         raise FileNotFoundError(
             f"The compiled directory '{compiled}' does not exist."
             f" Try running `dbt compile`."
         )
 
-    for path in model_directory.glob("**/*.sql"):
-        compiled_path = compiled / path.relative_to("jaffle_shop/models")
-        with compiled_path.open() as f:
-            sql = f.read()
-
-        print(path.stem)
-        for cte in _get_model_common_table_expressions(sql):
-            print(f"\t{cte}")
-
-
-def main() -> None:
-    """Parse some SQL."""
-    walk_the_models(pathlib.Path("../jaffle_shop/models"))
-
-
-if __name__ == "__main__":
-    main()
+    models = config.model_paths[0]
+    return [
+        Model(path=path).parse_ctes(model_root=models, compiled_root=compiled)
+        for path in models.glob("**/*.sql")
+    ]
