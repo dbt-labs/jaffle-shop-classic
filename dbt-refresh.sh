@@ -1,5 +1,7 @@
 dbt clean
 dbt deps
+dbt compile
+
 dbt source freshness
 dbt seed
 dbt run --full-refresh

@@ -13,7 +13,7 @@ test-paths: ["jaffle_shop/tests"]
 macro-paths: ["jaffle_shop/macros"]
 
 target-path: target
-packages-install-path: packages
+packages-install-path: "jaffle_shop/packages"
 clean-targets: [target, packages, logs]
 
 quoting:
