@@ -8,7 +8,7 @@ This project has only been tested using Python 3.11 with the dependencies listed
 
 ## Getting started
 
-Install Python 3.11 and the dependencies listed in the requirements files.
+Install Python 3.9 and the dependencies listed in the requirements files.
 
 The `jaffle_shop` directory has the usual dbt objects and can be run in the usual way. The unit tests for the dbt models are in the `tests` subdirectory.
 

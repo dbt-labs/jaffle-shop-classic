@@ -2,9 +2,7 @@
 Test the ``code_coverage/dbt/models.py`` module.
 """
 import pytest
-
-import sqlglot  # parse_one
-from sqlglot import Expression
+import sqlglot
 
 import code_coverage.dbt.models as models
 

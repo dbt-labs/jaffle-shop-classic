@@ -11,7 +11,6 @@ import pathlib
 
 import pybadges
 
-
 BADGE_COLOURS: dict[int, str] = {
     0: "#9f9f9f",
     75: "#e05d44",

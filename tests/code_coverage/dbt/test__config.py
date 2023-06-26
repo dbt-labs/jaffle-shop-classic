@@ -15,14 +15,16 @@ def dbt_config_root(tmp_path) -> pathlib.Path:
     Create a mock ``dbt_project.yml`` file in a temp directory.
     """
     dbt_project = tmp_path / "dbt_project.yml"
-    dbt_project.write_text(textwrap.dedent(
-        """
-        name: project_name
-        model-paths: ["models"]
-        test-paths: ["tests"]
-        target-path: "target"
-        """
-    ))
+    dbt_project.write_text(
+        textwrap.dedent(
+            """
+            name: project_name
+            model-paths: ["models"]
+            test-paths: ["tests"]
+            target-path: "target"
+            """
+        )
+    )
     return tmp_path
 
 

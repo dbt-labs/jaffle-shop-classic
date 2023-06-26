@@ -23,6 +23,7 @@ def test__generate_badge(tmp_path: pathlib.Path) -> None:
 
     assert badge_path.exists()
 
+
 def test__generate_badge__not_a_file() -> None:
     """
     Test that ``TypeError`` is raised if the badge path is not a file.

@@ -3,13 +3,13 @@ Parse the compiled model SQL files to find the CTEs.
 """
 import dataclasses
 import pathlib
-from typing import Literal, Self
+from typing import Literal
 
 import sqlglot
 from sqlglot import Expression
+from typing_extensions import Self
 
 from code_coverage.dbt.config import DbtConfig
-
 
 CteType = Literal["import", "logical", "final"]
 
