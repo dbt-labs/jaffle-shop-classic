@@ -10,9 +10,9 @@ This project has only been tested using Python 3.11 with the dependencies listed
 
 Install Python 3.11 and the dependencies listed in the requirements files.
 
-The `jaffle_shop` directory has the usual dbt objects and can be run in the usual way. In the `tests` subdirectory are the unit tests for the dbt models.
+The `jaffle_shop` directory has the usual dbt objects and can be run in the usual way. The unit tests for the dbt models are in the `tests` subdirectory.
 
-The `code_coverage` directory is the package that will generate a coverage metric for the dbt models' unit tests. We can't measure line hits like we can with Python code, but we can measure the number of models that have unit tests and the number of models that have unit tests and _which of their CTEs_ have unit tests.
+The `code_coverage` directory is the package that will generate a coverage metric for the dbt models' unit tests. We can't measure line hits like we can with Python code, but we can measure the number of models that have unit tests and _which of their CTEs_ have unit tests.
 
 To run the code coverage report, compile the project and run the code coverage package:
 
