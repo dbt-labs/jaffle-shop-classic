@@ -2,7 +2,7 @@
 name = "jaffle-shop"
 version = "0.0.0"
 description = "A self-contained dbt project for testing purposes (fork of the `dbt-labs/jaffle_shop` repo)."
-requires-python = ">=3.9"
+requires-python = ">=3.11"
 dynamic = ["dependencies", "optional-dependencies"]
 
 [project.urls]
