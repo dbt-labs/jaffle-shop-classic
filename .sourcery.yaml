@@ -1,0 +1,6 @@
+ignore:
+  - tests/**/*
+
+rule_settings:
+  enable: [default]
+  python_version: "3.9"
