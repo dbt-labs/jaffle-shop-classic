@@ -1,11 +1,9 @@
+import typing as t
 from dataclasses import dataclass
 from pathlib import Path
 
-import typing as t
-
 from jinja2 import Environment, nodes
 from jinja2.exceptions import TemplateSyntaxError
-
 
 TEST_STRING = """
 {{ config(tags=["unit-test"]) }}
@@ -59,11 +57,11 @@ def is_test_file(ast: nodes.Template) -> bool:
 
     for node in ast.body[0].nodes:
         if (
-            isinstance(node, nodes.Call) and
-            hasattr(node, "node") and
-            hasattr(node.node, "name") and
-            node.node.name == "config" and
-            has_unit_test_tag(node.kwargs)
+            isinstance(node, nodes.Call)
+            and hasattr(node, "node")
+            and hasattr(node.node, "name")
+            and node.node.name == "config"
+            and has_unit_test_tag(node.kwargs)
         ):
             return True
 
@@ -103,12 +101,13 @@ def get_test_cases(env: Environment, file: Path) -> t.List[TestCase]:
         ast = env.parse(f.read())
 
     calls = [
-        callblock.call for callblock in ast.body
+        callblock.call
+        for callblock in ast.body
         if (
-                isinstance(callblock, nodes.CallBlock) and
-                hasattr(callblock.call.node, "node") and
-                callblock.call.node.node.name == "dbt_unit_testing" and
-                callblock.call.node.attr == "test"
+            isinstance(callblock, nodes.CallBlock)
+            and hasattr(callblock.call.node, "node")
+            and callblock.call.node.node.name == "dbt_unit_testing"
+            and callblock.call.node.attr == "test"
         )
     ]
 
@@ -117,15 +116,23 @@ def get_test_cases(env: Environment, file: Path) -> t.List[TestCase]:
             filename=str(file),
             lineno=call.lineno,
             dbt_model=call.args[0].value,
-            cte_name=get_cte_name(call.args)
+            cte_name=get_cte_name(call.args),
         )
         for call in calls
     ]
 
 
 def get_all_test_cases(env: Environment, files: t.List[Path]) -> t.List[TestCase]:
-    return [
-        case
-        for file in files
-        for case in get_test_cases(env, file)
-    ]
+    return [case for file in files for case in get_test_cases(env, file)]
+
+
+def parse_dbt_unit_tests(test_paths: list[Path]) -> list[TestCase]:
+    """
+    Return all the dbt unit tests parsed for key information.
+
+    :return: The list of parsed dbt unit tests.
+    """
+    env = Environment()
+    files = [file for dir_ in test_paths for file in get_test_files(env, dir_)]
+
+    return get_all_test_cases(env, files)
