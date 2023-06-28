@@ -1,4 +1,6 @@
+black==23.3.0
+isort==5.12.0
 pre-commit==3.3.3
-Jinja2>=3.*
-typer
-pybadges
+pycln==2.1.5
+pytest==7.4.0
+pytest-cov==4.1.0
