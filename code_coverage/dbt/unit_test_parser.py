@@ -34,7 +34,7 @@ TEST_STRING = """
 class TestCase:
     filename: str
     lineno: int
-    dbt_model: str
+    model_name: str
     cte_name: str = None
 
 
@@ -115,7 +115,7 @@ def get_test_cases(env: Environment, file: Path) -> t.List[TestCase]:
         TestCase(
             filename=str(file),
             lineno=call.lineno,
-            dbt_model=call.args[0].value,
+            model_name=call.args[0].value,
             cte_name=get_cte_name(call.args),
         )
         for call in calls

@@ -2,10 +2,11 @@
 
 {% set payment_methods = ["credit_card", "coupon", "bank_transfer", "gift_card"] %}
 
-
+{# Using the `final` CTE here to prove that it's the same as no `cte_name` usage #}
 {% call dbt_unit_testing.test(
     "pl__orders",
-    "Order metrics are aggregated correctly"
+    "Order metrics are aggregated correctly",
+    {"cte_name": "final"}
 ) %}
   {% call dbt_unit_testing.mock_ref("stg__orders", {"input_format": "csv"}) %}
     order_id,customer_id,order_date,status

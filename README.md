@@ -2,6 +2,8 @@
 
 [![Python 3.9](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Bilbottom/db-query-profiler)
+[![python-coverage](coverage-python.svg)](https://github.com/dbrgn/coverage-badge)
+[![dbt-coverage](coverage-dbt.svg)](https://github.com/google/pybadges)
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
