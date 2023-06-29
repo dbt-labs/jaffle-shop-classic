@@ -10,7 +10,11 @@ from code_coverage.dbt import DbtConfig, parse_dbt_unit_tests, parse_models_and_
 def compute_test_coverage(project_dir: pathlib.Path) -> float:
     """
     Compute the code coverage for the dbt unit tests.
-    :return:
+
+    This returns the metric as a percentage: that is, the percentage 10%
+    would be returned as ``10.0`` rather than ``0.1``.
+
+    :return: The code coverage for the dbt unit tests as a percentage.
     """
     dbt_config = DbtConfig.from_root(project_dir)
     print(dbt_config)
@@ -24,3 +28,4 @@ def compute_test_coverage(project_dir: pathlib.Path) -> float:
     pprint.pprint(cases)
 
     # Now join them!
+    return 0.0

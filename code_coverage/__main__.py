@@ -30,9 +30,7 @@ def main(
     if compile_dbt:
         subprocess.run(["dbt", "compile", f"--project-dir={project_dir}"])
 
-    coverage_metric = (
-        compute_test_coverage(project_dir=pathlib.Path(project_dir)) or 75.12
-    )
+    coverage_metric = compute_test_coverage(project_dir=pathlib.Path(project_dir))
     generate_badge(
         badge_path=pathlib.Path(badge_path).resolve(),
         coverage=coverage_metric,
