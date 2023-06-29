@@ -14,7 +14,7 @@ from code_coverage.coverage import compute_test_coverage
 
 def main(
     project_dir: str = ".",
-    badge_path: str = "dbt-coverage.svg",
+    badge_path: str = "coverage-dbt.svg",
     compile_dbt: bool = False,
 ) -> None:
     """
