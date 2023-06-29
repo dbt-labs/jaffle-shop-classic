@@ -33,10 +33,10 @@ LOGICAL_CTE_ARGS = [
 class CTE:
     name: str
     expression: Expression
-    cte_type: CteType = dataclasses.field(init=False)
+    type: CteType = dataclasses.field(init=False)
 
     def __post_init__(self):
-        self.cte_type = self._determine_cte_type()
+        self.type = self._determine_cte_type()
 
     def _determine_cte_type(self) -> CteType:
         """
@@ -52,7 +52,7 @@ class CTE:
             return "logical"
 
     def __str__(self) -> str:
-        return f"{self.name} ({self.cte_type})"
+        return f"{self.name} ({self.type})"
 
 
 @dataclasses.dataclass
@@ -101,16 +101,10 @@ def _is_import_cte(common_table_expression: Expression) -> bool:
         # The column list is a star, or doesn't have any calculations
         and (
             common_table_expression.is_star
-            or all(
-                col.key == "column"
-                for col in common_table_expression.args["expressions"]
-            )
+            or all(col.key == "column" for col in common_table_expression.args["expressions"])
         )
         # It doesn't have any logical CTE clauses
-        and all(
-            common_table_expression.args.get(arg, None) is None
-            for arg in LOGICAL_CTE_ARGS
-        )
+        and all(common_table_expression.args.get(arg, None) is None for arg in LOGICAL_CTE_ARGS)
     )
 
 
@@ -124,9 +118,7 @@ def _get_common_table_expressions(sql: str) -> dict[str, Expression]:
     """
     parsed = sqlglot.parse(sql)
     if len(parsed) != 1:
-        raise ValueError(
-            f"The SQL text should have a single statement, found {len(parsed)} statements."
-        )
+        raise ValueError(f"The SQL text should have a single statement, found {len(parsed)} statements.")
 
     common_table_expressions: Expression = parsed[0].args.get("with", None)
 
@@ -148,8 +140,7 @@ def _get_model_common_table_expressions(sql: str) -> list[CTE]:
     :return: A list of CTEs.
     """
     return [
-        CTE(name=cte_name, expression=cte_expr)
-        for cte_name, cte_expr in _get_common_table_expressions(sql).items()
+        CTE(name=cte_name, expression=cte_expr) for cte_name, cte_expr in _get_common_table_expressions(sql).items()
     ]
 
 
@@ -160,13 +151,7 @@ def parse_models_and_ctes(config: DbtConfig) -> list[Model]:
     :param config: The dbt project configuration.
     """
     if not (compiled := config.compiled_paths[0]).exists():
-        raise FileNotFoundError(
-            f"The compiled directory '{compiled}' does not exist."
-            f" Try running `dbt compile`."
-        )
+        raise FileNotFoundError(f"The compiled directory '{compiled}' does not exist." f" Try running `dbt compile`.")
 
     models = config.model_paths[0]
-    return [
-        Model(path=path).parse_ctes(model_root=models, compiled_root=compiled)
-        for path in models.glob("**/*.sql")
-    ]
+    return [Model(path=path).parse_ctes(model_root=models, compiled_root=compiled) for path in models.glob("**/*.sql")]

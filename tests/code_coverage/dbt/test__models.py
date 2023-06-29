@@ -26,4 +26,4 @@ def test__cte(name: str, sql: str, cte_type: models.CteType):
 
     assert cte.name == name
     assert cte.expression == expression
-    assert cte.cte_type == cte_type
+    assert cte.type == cte_type
