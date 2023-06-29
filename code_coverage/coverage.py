@@ -21,6 +21,9 @@ def compute_test_coverage(project_dir: pathlib.Path) -> float:
     models = parse_models_and_ctes(dbt_config)
     tests = parse_dbt_unit_tests(dbt_config.test_paths)
 
+    if not models or not tests:
+        return 0.0
+
     model_rows = [(model.name, cte.name, cte.type) for model in models for cte in model.ctes]
     test_rows = [(test.model_name, test.cte_name) for test in tests]
 
