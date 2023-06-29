@@ -23,6 +23,13 @@ repos:
       - id: prettier
         name: Make code pretty
 
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.7.0
+    hooks:
+      - id: pyupgrade
+        args: [--py39-plus]
+        name: Align Python code to latest syntax
+
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:

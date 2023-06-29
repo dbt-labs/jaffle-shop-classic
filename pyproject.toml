@@ -7,6 +7,7 @@ dynamic = ["dependencies", "optional-dependencies"]
 
 [project.urls]
 repository = "https://github.com/Bilbottom/jaffle-shop"
+origin = "https://github.com/dbt-labs/jaffle_shop"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
@@ -14,7 +15,7 @@ optional-dependencies = {file = ["requirements-dev.txt"]}
 
 
 [tool.pytest.ini_options]
-addopts = "--cov=code_coverage --disable-warnings"
+addopts = "--cov=code_coverage --cov-report term-missing --disable-warnings"
 pythonpath = "."
 testpaths = ["tests"]
 
