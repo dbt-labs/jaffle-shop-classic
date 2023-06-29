@@ -60,3 +60,11 @@ This fork adds the ability to unit test particular CTEs in a model, provided you
 ### Code coverage
 
 With the CTE unit tests, we can then measure the number of (logical) CTEs that don't have tests which forms the coverage metric.
+
+## Future plans
+
+The v1.5 release of [dbt-core](https://github.com/dbt-labs/dbt-core) introduced programmatic invocations:
+
+- https://docs.getdbt.com/reference/programmatic-invocations
+
+This would allow us to piggyback off of the dbt functionality even more, rather than hacking together our own solutions.
