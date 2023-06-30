@@ -3,11 +3,15 @@ Generate the coverage metric for the dbt unit tests.
 """
 import pathlib
 import sqlite3
+from typing import Optional
 
 from code_coverage.dbt import DbtConfig, parse_dbt_unit_tests, parse_models_and_ctes
 
 
-def compute_test_coverage(project_dir: pathlib.Path) -> float:
+def compute_test_coverage(
+    project_dir: pathlib.Path,
+    dbt_config: Optional[DbtConfig] = None,
+) -> float:
     """
     Compute the code coverage for the dbt unit tests.
 
@@ -16,7 +20,7 @@ def compute_test_coverage(project_dir: pathlib.Path) -> float:
 
     :return: The code coverage for the dbt unit tests as a percentage.
     """
-    dbt_config = DbtConfig.from_root(project_dir)
+    dbt_config = dbt_config or DbtConfig.from_root(project_dir)
 
     models = parse_models_and_ctes(dbt_config)
     tests = parse_dbt_unit_tests(dbt_config.test_paths)
