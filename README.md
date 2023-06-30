@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Python 3.9](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
-![GitHub last commit](https://img.shields.io/github/last-commit/Bilbottom/db-query-profiler)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Bilbottom/jaffle-shop)](https://github.com/Bilbottom/jaffle-shop/commits/main)
 [![python-coverage](coverage-python.svg)](https://github.com/dbrgn/coverage-badge)
 [![dbt-coverage](coverage-dbt.svg)](https://github.com/google/pybadges)
 
