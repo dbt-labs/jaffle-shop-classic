@@ -1,16 +1,83 @@
 """
 Generate the coverage metric for the dbt unit tests.
 """
+from __future__ import annotations
+
+import dataclasses
 import pathlib
 import sqlite3
-from typing import Optional
 
 from code_coverage.dbt import DbtConfig, parse_dbt_unit_tests, parse_models_and_ctes
 
 
+@dataclasses.dataclass
+class CoverageRow:
+    """
+    Quick and dirty dataclass to facilitate printing the coverage report.
+    """
+
+    model_name: str
+    ctes: int
+    miss: int
+    cover: float
+    missing: str
+
+    @classmethod
+    def from_tuple(cls, row: tuple[str, int, int, float, str]) -> CoverageRow:
+        """
+        Create a ``CoverageRow`` from a tuple.
+        """
+        return cls(*row)
+
+    def __str__(self) -> str:
+        """
+        Return a string representation of the coverage row.
+        """
+        return f"{self.model_name:<25} {self.ctes:>6} {self.miss:>6} {self.cover:>8.1f}%   {self.missing or ''}"
+
+
+def _print_coverage_report(coverage_rows: list[CoverageRow]) -> None:
+    """
+    Print the coverage report.
+
+    This is quick and dirty as it's just MVP.
+    """
+    print("Model Name                  CTEs   Miss     Cover   Missing")
+    print("-----------------------------------------------------------")
+    for row in coverage_rows[:-1]:
+        print(row)
+    print("-----------------------------------------------------------")
+    print(coverage_rows[-1])
+
+
+def _compute(
+    model_rows: list[tuple[str, str, str]],
+    test_rows: list[tuple[str, str]],
+    cov_report: bool,
+) -> float:
+    """
+    Compute the code coverage for the dbt unit tests.
+    """
+    with sqlite3.connect(":memory:") as conn:
+        conn.executescript(pathlib.Path("code_coverage/coverage.sql").read_text())
+
+        conn.executemany("""INSERT INTO models VALUES (?, ?, ?)""", model_rows)
+        conn.executemany("""INSERT INTO tests VALUES (?, ?)""", test_rows)
+
+        coverage_result = conn.execute("""SELECT 100.0 * SUM(coverage_flag) / COUNT(*) FROM coverage_flags""")
+        coverage = coverage_result.fetchone()[0]
+
+        if cov_report:
+            coverage_report = conn.execute("""SELECT model_name, ctes, miss, cover, missing FROM coverage_report""")
+            _print_coverage_report([CoverageRow.from_tuple(row) for row in coverage_report.fetchall()])
+
+    return coverage
+
+
 def compute_test_coverage(
     project_dir: pathlib.Path,
-    dbt_config: Optional[DbtConfig] = None,
+    cov_report: bool,
+    dbt_config: DbtConfig | None = None,
 ) -> float:
     """
     Compute the code coverage for the dbt unit tests.
@@ -31,12 +98,8 @@ def compute_test_coverage(
     model_rows = [(model.name, cte.name, cte.type) for model in models for cte in model.ctes]
     test_rows = [(test.model_name, test.cte_name) for test in tests]
 
-    with sqlite3.connect(":memory:") as conn:
-        conn.executescript(pathlib.Path("code_coverage/coverage.sql").read_text())
-
-        conn.executemany("""INSERT INTO models VALUES (?, ?, ?)""", model_rows)
-        conn.executemany("""INSERT INTO tests VALUES (?, ?)""", test_rows)
-
-        coverage = conn.execute("""SELECT 100.0 * SUM(coverage_flag) / COUNT(*) FROM coverage_flags""")
-
-    return coverage.fetchone()[0]
+    return _compute(
+        model_rows=model_rows,
+        test_rows=test_rows,
+        cov_report=cov_report,
+    )
