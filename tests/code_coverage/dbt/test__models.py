@@ -28,16 +28,6 @@ def compiled_sql() -> str:
     )
 
 
-@pytest.fixture
-def dbt_config(tmp_path: pathlib.Path) -> DbtConfig:
-    return DbtConfig(
-        name="test",
-        model_paths=[tmp_path / "models"],
-        test_paths=[tmp_path / "tests"],
-        target_path=tmp_path / "target",
-    )
-
-
 @pytest.mark.parametrize(
     "name, sql, cte_type",
     [
