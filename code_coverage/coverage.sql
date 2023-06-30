@@ -25,6 +25,29 @@ CREATE VIEW coverage_flags AS
     WHERE models.cte_type != 'import'
 ;
 
+
+CREATE VIEW coverage_report AS
+        SELECT
+            model_name,
+            COUNT(*) AS ctes,
+            SUM(1 - coverage_flag) AS miss,
+            100.0 * SUM(coverage_flag) / COUNT(*) AS cover,
+            GROUP_CONCAT(cte_name, ', ') FILTER(WHERE coverage_flag = 0) AS missing
+        FROM coverage_flags
+        GROUP BY model_name
+    UNION
+        SELECT
+            'TOTAL' AS model_name,
+            COUNT(*) AS ctes,
+            SUM(1 - coverage_flag) AS miss,
+            100.0 * SUM(coverage_flag) / COUNT(*) AS cover,
+            NULL AS missing
+        FROM coverage_flags
+
+    ORDER BY model_name
+;
+
+
 /* Model coverage */
 -- SELECT
 --     model_name,

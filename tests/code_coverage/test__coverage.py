@@ -18,6 +18,7 @@ def test__compute_test_coverage__no_models(tmp_path: pathlib.Path, dbt_config: D
     coverage_metric = coverage.compute_test_coverage(
         project_dir=tmp_path,
         dbt_config=dbt_config,
+        cov_report=False,
     )
 
     assert coverage_metric == 0.0
