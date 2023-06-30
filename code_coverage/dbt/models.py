@@ -71,8 +71,8 @@ class Model:
         """
         Parse the CTEs out of the model.
 
-        :param model_root: The root directory for the compiled dbt models.
-        :param compiled_root: The root directory for the raw dbt models.
+        :param model_root: The root directory for the raw dbt models.
+        :param compiled_root: The root directory for the compiled dbt models.
 
         :return: Self, for chaining.
         """
