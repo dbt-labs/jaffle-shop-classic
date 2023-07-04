@@ -32,7 +32,7 @@ def generate_badge(badge_path: pathlib.Path, coverage: float) -> None:
         raise TypeError(f"'{badge_path}' is not a file.")
 
     bounds = list(BADGE_COLOURS.keys())
-    key = bounds[-1 + bisect.bisect(bounds, math.floor(coverage))]
+    key = bounds[bisect.bisect(bounds, math.floor(coverage))]
     svg = pybadges.badge(
         left_text="dbt-coverage",
         right_text=f"{round(coverage, 2)}%",
