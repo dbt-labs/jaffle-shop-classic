@@ -1,36 +1,17 @@
-import typing as t
-from dataclasses import dataclass
-from pathlib import Path
+"""
+Parse the dbt unit tests to find the CTEs that are tested.
+"""
+from __future__ import annotations
+
+import dataclasses
+import pathlib
+from collections.abc import Iterable
 
 from jinja2 import Environment, nodes
 from jinja2.exceptions import TemplateSyntaxError
 
-TEST_STRING = """
-{{ config(tags=["unit-test"]) }}
 
-
-{% call dbt_unit_testing.test(
-    "pl__customers",
-    "Customer orders are aggregated correctly",
-    {"cte_name": "customer_orders"}
-) %}
-  {% call dbt_unit_testing.mock_ref("stg__orders", {"input_format": "csv"}) %}
-    order_id,customer_id,order_date,status
-    1,1,'2020-01-01',null
-    2,1,'2020-01-02',null
-    3,2,'2020-01-03',null
-  {% endcall %}
-
-  {% call dbt_unit_testing.expect({"input_format": "csv"}) %}
-    customer_id,first_order,most_recent_order,number_of_orders
-    1,'2020-01-01','2020-01-02',2
-    2,'2020-01-03','2020-01-03',1
-  {% endcall %}
-{% endcall %}
-"""
-
-
-@dataclass
+@dataclasses.dataclass
 class TestCase:
     filename: str
     lineno: int
@@ -38,7 +19,7 @@ class TestCase:
     cte_name: str = None
 
 
-def has_unit_test_tag(kwargs: t.Iterable[nodes.Keyword]) -> bool:
+def has_unit_test_tag(kwargs: Iterable[nodes.Keyword]) -> bool:
     for arg in kwargs:
         if arg.key == "tags":
             for item in arg.value.items:
@@ -68,7 +49,7 @@ def is_test_file(ast: nodes.Template) -> bool:
     return False
 
 
-def get_cte_name(args: t.List[nodes.Const]) -> t.Optional[str]:
+def get_cte_name(args: list[nodes.Const]) -> str | None:
     if len(args) < 3:
         return None
 
@@ -82,7 +63,7 @@ def get_cte_name(args: t.List[nodes.Const]) -> t.Optional[str]:
     return None
 
 
-def get_test_files(env: Environment, src: Path) -> t.List[Path]:
+def get_test_files(env: Environment, src: pathlib.Path) -> list[pathlib.Path]:
     files = []
     for sql in src.glob("**/*.sql"):
         with sql.open() as f:
@@ -96,7 +77,7 @@ def get_test_files(env: Environment, src: Path) -> t.List[Path]:
     return files
 
 
-def get_test_cases(env: Environment, file: Path) -> t.List[TestCase]:
+def get_test_cases(env: Environment, file: pathlib.Path) -> list[TestCase]:
     with file.open() as f:
         ast = env.parse(f.read())
 
@@ -122,11 +103,11 @@ def get_test_cases(env: Environment, file: Path) -> t.List[TestCase]:
     ]
 
 
-def get_all_test_cases(env: Environment, files: t.List[Path]) -> t.List[TestCase]:
+def get_all_test_cases(env: Environment, files: list[pathlib.Path]) -> list[TestCase]:
     return [case for file in files for case in get_test_cases(env, file)]
 
 
-def parse_dbt_unit_tests(test_paths: list[Path]) -> list[TestCase]:
+def parse_dbt_unit_tests(test_paths: list[pathlib.Path]) -> list[TestCase]:
     """
     Return all the dbt unit tests parsed for key information.
 
