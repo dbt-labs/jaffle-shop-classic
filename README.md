@@ -68,3 +68,8 @@ The v1.5 release of [dbt-core](https://github.com/dbt-labs/dbt-core) introduced 
 - https://docs.getdbt.com/reference/programmatic-invocations
 
 This would allow us to piggyback off of the dbt functionality even more, rather than hacking together our own solutions.
+
+Additionally, the coverage metric is easy to manipulate in your favour, so we intend to improve the metric by:
+
+- Validating the columns in the tests to make sure that each of the columns in the CTE are tested
+- Penalising CTEs that are overcomplicated and should be split into multiple CTEs (e.g. a CTE that has large sub-queries)
