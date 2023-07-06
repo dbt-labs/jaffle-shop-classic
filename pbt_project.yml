@@ -12,7 +12,6 @@ jobs: {}
 functions:
   author: null
   createdAt: '2023-04-12 15:34:56'
-  modifiedAt: '2023-04-12 15:34:56'
   gems: {}
   udfs: {}
   udafs: {}
@@ -21,6 +20,21 @@ subgraphs: {}
 sqlModels:
   .prophecy/metadata/sqlmodels/stg_orders:
     name: stg_orders
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: ORDER_DATE
+        dataType:
+          type: Date
+      - name: STATUS
+        dataType:
+          type: String
     description: null
     author: maciej@prophecy.io
     files:
@@ -31,9 +45,38 @@ sqlModels:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
   .prophecy/metadata/sqlmodels/orders:
     name: orders
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: ORDER_DATE
+        dataType:
+          type: Date
+      - name: STATUS
+        dataType:
+          type: String
+      - name: CREDIT_CARD_AMOUNT
+        dataType:
+          type: Number
+      - name: COUPON_AMOUNT
+        dataType:
+          type: Number
+      - name: BANK_TRANSFER_AMOUNT
+        dataType:
+          type: Number
+      - name: GIFT_CARD_AMOUNT
+        dataType:
+          type: Number
+      - name: AMOUNT
+        dataType:
+          type: Number
     description: This table has basic information about orders, as well as some derived
       facts based on payments
     author: maciej@prophecy.io
@@ -45,9 +88,32 @@ sqlModels:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
   .prophecy/metadata/sqlmodels/customers:
     name: customers
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: FIRST_NAME
+        dataType:
+          type: String
+      - name: LAST_NAME
+        dataType:
+          type: String
+      - name: FIRST_ORDER
+        dataType:
+          type: Date
+      - name: MOST_RECENT_ORDER
+        dataType:
+          type: Date
+      - name: TOTAL_ORDERS
+        dataType:
+          type: Number
+      - name: CUSTOMER_LIFETIME_VALUE
+        dataType:
+          type: Number
     description: This table has basic information about a customer, as well as some
       derived facts based on a customer's orders
     author: maciej@prophecy.io
@@ -59,9 +125,23 @@ sqlModels:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
   .prophecy/metadata/sqlmodels/stg_payments:
     name: stg_payments
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: PAYMENT_ID
+        dataType:
+          type: Number
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: PAYMENT_METHOD
+        dataType:
+          type: String
+      - name: AMOUNT
+        dataType:
+          type: Number
     description: null
     author: maciej@prophecy.io
     files:
@@ -72,9 +152,20 @@ sqlModels:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
   .prophecy/metadata/sqlmodels/stg_customers:
     name: stg_customers
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: FIRST_NAME
+        dataType:
+          type: String
+      - name: LAST_NAME
+        dataType:
+          type: String
     description: null
     author: maciej@prophecy.io
     files:
@@ -85,33 +176,71 @@ sqlModels:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
 sqlMacros: {}
 sqlSeeds:
   .prophecy/metadata/sqlseeds/raw_customers:
     name: raw_customers
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: id
+        dataType:
+          type: Number
+      - name: first_name
+        dataType:
+          type: String
+      - name: last_name
+        dataType:
+          type: String
     description: null
     author: maciej@prophecy.io
     files:
     - seeds/raw_customers.csv
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
   .prophecy/metadata/sqlseeds/raw_orders:
     name: raw_orders
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: id
+        dataType:
+          type: Number
+      - name: user_id
+        dataType:
+          type: Number
+      - name: order_date
+        dataType:
+          type: Date
+      - name: status
+        dataType:
+          type: String
     description: null
     author: maciej@prophecy.io
     files:
     - seeds/raw_orders.csv
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
   .prophecy/metadata/sqlseeds/raw_payments:
     name: raw_payments
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: id
+        dataType:
+          type: Number
+      - name: order_id
+        dataType:
+          type: Number
+      - name: payment_method
+        dataType:
+          type: String
+      - name: amount
+        dataType:
+          type: Number
     description: null
     author: maciej@prophecy.io
     files:
     - seeds/raw_payments.csv
     createdAt: '2023-04-12 15:35:01'
-    modifiedAt: '2023-04-12 15:35:01'
 sqlSources:
   .prophecy/metadata/sqlsources/main_default:
     name: main.default
@@ -120,25 +249,27 @@ sqlSources:
     files:
     - prophecy-sources/sources.yml
     createdAt: '2023-04-12 15:42:11'
-    modifiedAt: '2023-04-12 15:42:11'
     tables:
     - name: raw_customers
+      schema:
+        providerType: snowflake
+        fields: []
       description: null
       author: maciej@prophecy.io
       createdAt: '2023-04-12 15:42:11'
-      modifiedAt: '2023-04-12 15:42:11'
     - name: raw_orders
+      schema:
+        providerType: snowflake
+        fields: []
       description: null
       author: maciej@prophecy.io
       createdAt: '2023-04-12 15:42:16'
-      modifiedAt: '2023-04-12 15:42:16'
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline
   description: kishore@simpledatalabs.com
   author: kishore@simpledatalabs.com
   createdAt: '2022-12-09 05:43:56'
-  modifiedAt: '2022-12-09 05:43:56'
 dependencies: '[]'
 projectDependencies: {}
 pipelineConfigurations: {}
