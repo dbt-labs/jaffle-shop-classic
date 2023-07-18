@@ -57,7 +57,15 @@
     }, {
       "type" : "Catalog",
       "name" : "ntong",
-      "children" : [ ]
+      "children" : [ {
+        "type" : "Schema",
+        "name" : "default",
+        "children" : [ ]
+      }, {
+        "type" : "Schema",
+        "name" : "information_schema",
+        "children" : [ ]
+      } ]
     }, {
       "type" : "Catalog",
       "name" : "ntong2",
