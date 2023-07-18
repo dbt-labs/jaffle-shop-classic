@@ -2,7 +2,7 @@
   "id" : "orders",
   "metainfo" : {
     "label" : "orders",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
@@ -21,6 +21,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "payments",
+        "x" : 120,
+        "y" : 320,
         "phase" : 0
       },
       "properties" : {
@@ -34,26 +36,26 @@
         "outputs" : [ {
           "id" : "zMwnKYds",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "PAYMENT_ID",
+              "name" : "payment_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "PAYMENT_METHOD",
+              "name" : "payment_method",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -67,6 +69,8 @@
       "component" : "Aggregate",
       "metadata" : {
         "label" : "order_payments",
+        "x" : 320,
+        "y" : 320,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -111,26 +115,26 @@
         "inputs" : [ {
           "id" : "yQhFYyqi",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "PAYMENT_ID",
+              "name" : "payment_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "PAYMENT_METHOD",
+              "name" : "payment_method",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -139,36 +143,36 @@
         "outputs" : [ {
           "id" : "u8Bor8wu",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CREDIT_CARD_AMOUNT",
+              "name" : "credit_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "COUPON_AMOUNT",
+              "name" : "coupon_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "BANK_TRANSFER_AMOUNT",
+              "name" : "bank_transfer_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "GIFT_CARD_AMOUNT",
+              "name" : "gift_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "TOTAL_AMOUNT",
+              "name" : "total_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -182,6 +186,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "orders",
+        "x" : 320,
+        "y" : 120,
         "phase" : 0
       },
       "properties" : {
@@ -195,24 +201,24 @@
         "outputs" : [ {
           "id" : "CCxuaRZR",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
@@ -228,6 +234,8 @@
       "component" : "Join",
       "metadata" : {
         "label" : "final",
+        "x" : 520,
+        "y" : 220,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -285,24 +293,24 @@
         "inputs" : [ {
           "id" : "XdesD70c",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
@@ -312,36 +320,36 @@
         }, {
           "id" : "X4fSE3ze",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CREDIT_CARD_AMOUNT",
+              "name" : "credit_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "COUPON_AMOUNT",
+              "name" : "coupon_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "BANK_TRANSFER_AMOUNT",
+              "name" : "bank_transfer_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "GIFT_CARD_AMOUNT",
+              "name" : "gift_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "TOTAL_AMOUNT",
+              "name" : "total_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -350,51 +358,51 @@
         "outputs" : [ {
           "id" : "eYlflJ5k",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "CREDIT_CARD_AMOUNT",
+              "name" : "credit_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "COUPON_AMOUNT",
+              "name" : "coupon_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "BANK_TRANSFER_AMOUNT",
+              "name" : "bank_transfer_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "GIFT_CARD_AMOUNT",
+              "name" : "gift_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -408,6 +416,8 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "orders",
+        "x" : 720,
+        "y" : 220,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -425,51 +435,51 @@
         "inputs" : [ {
           "id" : "DwiHZdIR",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "CREDIT_CARD_AMOUNT",
+              "name" : "credit_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "COUPON_AMOUNT",
+              "name" : "coupon_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "BANK_TRANSFER_AMOUNT",
+              "name" : "bank_transfer_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "GIFT_CARD_AMOUNT",
+              "name" : "gift_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -478,51 +488,51 @@
         "outputs" : [ {
           "id" : "qK8xaSfN",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "CREDIT_CARD_AMOUNT",
+              "name" : "credit_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "COUPON_AMOUNT",
+              "name" : "coupon_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "BANK_TRANSFER_AMOUNT",
+              "name" : "bank_transfer_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "GIFT_CARD_AMOUNT",
+              "name" : "gift_card_amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },

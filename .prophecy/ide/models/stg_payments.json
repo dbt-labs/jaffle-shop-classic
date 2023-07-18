@@ -33,16 +33,16 @@
         "outputs" : [ {
           "id" : "H3CHWbml",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "payment_method",
@@ -52,7 +52,7 @@
             }, {
               "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             } ]
           },
@@ -95,16 +95,16 @@
         "inputs" : [ {
           "id" : "KPqq9NOM",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "payment_method",
@@ -114,7 +114,7 @@
             }, {
               "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             } ]
           },
@@ -123,26 +123,26 @@
         "outputs" : [ {
           "id" : "JJn4ajlb",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "PAYMENT_ID",
+              "name" : "payment_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "PAYMENT_METHOD",
+              "name" : "payment_method",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -173,26 +173,26 @@
         "inputs" : [ {
           "id" : "QFoHKIHO",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "PAYMENT_ID",
+              "name" : "payment_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "PAYMENT_METHOD",
+              "name" : "payment_method",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },
@@ -201,26 +201,26 @@
         "outputs" : [ {
           "id" : "chtHMDum",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "PAYMENT_ID",
+              "name" : "payment_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "PAYMENT_METHOD",
+              "name" : "payment_method",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "AMOUNT",
+              "name" : "amount",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Double"
               }
             } ]
           },

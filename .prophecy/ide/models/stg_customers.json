@@ -2,7 +2,7 @@
   "id" : "stg_customers",
   "metainfo" : {
     "label" : "stg_customers",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
@@ -19,6 +19,8 @@
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
+        "x" : 120,
+        "y" : 120,
         "phase" : 0,
         "comment" : "-\n  Normally we would select from the table here, but we are using seeds to load\n  our data in this project\n  "
       },
@@ -33,11 +35,11 @@
         "outputs" : [ {
           "id" : "zQ7m5ylK",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "first_name",
@@ -61,6 +63,8 @@
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
+        "x" : 320,
+        "y" : 120,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -85,11 +89,11 @@
         "inputs" : [ {
           "id" : "SVCfYggl",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "first_name",
@@ -108,19 +112,19 @@
         "outputs" : [ {
           "id" : "xtGCeWY6",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "FIRST_NAME",
+              "name" : "first_name",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "LAST_NAME",
+              "name" : "last_name",
               "dataType" : {
                 "type" : "String"
               }
@@ -136,6 +140,8 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_customers",
+        "x" : 520,
+        "y" : 120,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -153,19 +159,19 @@
         "inputs" : [ {
           "id" : "VOYRbv7e",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "FIRST_NAME",
+              "name" : "first_name",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "LAST_NAME",
+              "name" : "last_name",
               "dataType" : {
                 "type" : "String"
               }
@@ -176,19 +182,19 @@
         "outputs" : [ {
           "id" : "x1S5ZTan",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "FIRST_NAME",
+              "name" : "first_name",
               "dataType" : {
                 "type" : "String"
               }
             }, {
-              "name" : "LAST_NAME",
+              "name" : "last_name",
               "dataType" : {
                 "type" : "String"
               }

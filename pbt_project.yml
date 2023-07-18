@@ -21,18 +21,18 @@ sqlModels:
   .prophecy/metadata/sqlmodels/stg_orders:
     name: stg_orders
     schema:
-      providerType: Snowflake
+      providerType: Databricks
       fields:
-      - name: ORDER_ID
+      - name: order_id
         dataType:
-          type: Number
-      - name: CUSTOMER_ID
+          type: Integer
+      - name: customer_id
         dataType:
-          type: Number
-      - name: ORDER_DATE
+          type: Integer
+      - name: order_date
         dataType:
           type: Date
-      - name: STATUS
+      - name: status
         dataType:
           type: String
     description: null
@@ -48,35 +48,35 @@ sqlModels:
   .prophecy/metadata/sqlmodels/orders:
     name: orders
     schema:
-      providerType: Snowflake
+      providerType: Databricks
       fields:
-      - name: ORDER_ID
+      - name: order_id
         dataType:
-          type: Number
-      - name: CUSTOMER_ID
+          type: Integer
+      - name: customer_id
         dataType:
-          type: Number
-      - name: ORDER_DATE
+          type: Integer
+      - name: order_date
         dataType:
           type: Date
-      - name: STATUS
+      - name: status
         dataType:
           type: String
-      - name: CREDIT_CARD_AMOUNT
+      - name: credit_card_amount
         dataType:
-          type: Number
-      - name: COUPON_AMOUNT
+          type: Double
+      - name: coupon_amount
         dataType:
-          type: Number
-      - name: BANK_TRANSFER_AMOUNT
+          type: Double
+      - name: bank_transfer_amount
         dataType:
-          type: Number
-      - name: GIFT_CARD_AMOUNT
+          type: Double
+      - name: gift_card_amount
         dataType:
-          type: Number
-      - name: AMOUNT
+          type: Double
+      - name: amount
         dataType:
-          type: Number
+          type: Double
     description: This table has basic information about orders, as well as some derived
       facts based on payments
     author: maciej@prophecy.io
@@ -91,29 +91,29 @@ sqlModels:
   .prophecy/metadata/sqlmodels/customers:
     name: customers
     schema:
-      providerType: Snowflake
+      providerType: Databricks
       fields:
-      - name: CUSTOMER_ID
+      - name: customer_id
         dataType:
-          type: Number
-      - name: FIRST_NAME
-        dataType:
-          type: String
-      - name: LAST_NAME
+          type: Integer
+      - name: first_name
         dataType:
           type: String
-      - name: FIRST_ORDER
+      - name: last_name
+        dataType:
+          type: String
+      - name: first_order
         dataType:
           type: Date
-      - name: MOST_RECENT_ORDER
+      - name: most_recent_order
         dataType:
           type: Date
-      - name: TOTAL_ORDERS
+      - name: total_orders
         dataType:
-          type: Number
-      - name: CUSTOMER_LIFETIME_VALUE
+          type: Bigint
+      - name: customer_lifetime_value
         dataType:
-          type: Number
+          type: Double
     description: This table has basic information about a customer, as well as some
       derived facts based on a customer's orders
     author: maciej@prophecy.io
@@ -128,20 +128,20 @@ sqlModels:
   .prophecy/metadata/sqlmodels/stg_payments:
     name: stg_payments
     schema:
-      providerType: Snowflake
+      providerType: Databricks
       fields:
-      - name: PAYMENT_ID
+      - name: payment_id
         dataType:
-          type: Number
-      - name: ORDER_ID
+          type: Integer
+      - name: order_id
         dataType:
-          type: Number
-      - name: PAYMENT_METHOD
+          type: Integer
+      - name: payment_method
         dataType:
           type: String
-      - name: AMOUNT
+      - name: amount
         dataType:
-          type: Number
+          type: Double
     description: null
     author: maciej@prophecy.io
     files:
@@ -155,15 +155,15 @@ sqlModels:
   .prophecy/metadata/sqlmodels/stg_customers:
     name: stg_customers
     schema:
-      providerType: Snowflake
+      providerType: Databricks
       fields:
-      - name: CUSTOMER_ID
+      - name: customer_id
         dataType:
-          type: Number
-      - name: FIRST_NAME
+          type: Integer
+      - name: first_name
         dataType:
           type: String
-      - name: LAST_NAME
+      - name: last_name
         dataType:
           type: String
     description: null
@@ -241,29 +241,7 @@ sqlSeeds:
     files:
     - seeds/raw_payments.csv
     createdAt: '2023-04-12 15:35:01'
-sqlSources:
-  .prophecy/metadata/sqlsources/main_default:
-    name: main.default
-    description: null
-    author: maciej@prophecy.io
-    files:
-    - prophecy-sources/sources.yml
-    createdAt: '2023-04-12 15:42:11'
-    tables:
-    - name: raw_customers
-      schema:
-        providerType: databricks
-        fields: []
-      description: null
-      author: maciej@prophecy.io
-      createdAt: '2023-04-12 15:42:11'
-    - name: raw_orders
-      schema:
-        providerType: databricks
-        fields: []
-      description: null
-      author: maciej@prophecy.io
-      createdAt: '2023-04-12 15:42:16'
+sqlSources: {}
 sqlUnreferencedSources: {}
 sqlPipeline:
   name: sqlPipeline

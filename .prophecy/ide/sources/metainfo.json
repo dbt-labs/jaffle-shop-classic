@@ -7,14 +7,86 @@
     "path" : "",
     "editable" : true
   },
-  "providerType" : "snowflake",
-  "fabricId" : "5639",
+  "providerType" : "databricks",
+  "fabricId" : "2623",
   "prophecyIDEFolder" : {
     "name" : "",
     "children" : { },
     "path" : "",
     "editable" : true
   },
-  "dependenciesContainer" : { },
+  "externalSources" : {
+    "type" : "Project",
+    "name" : "",
+    "children" : [ {
+      "type" : "Catalog",
+      "name" : "apollo11",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "dais2023",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "dais_gen_ai",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "data_engg",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "fsidemos",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "gen_ai",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "hive_metastore",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "lineage_data",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "main",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "ntong",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "ntong2",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "ntong_dais",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "prophecy_data",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "rj",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "samples",
+      "children" : [ ]
+    }, {
+      "type" : "Catalog",
+      "name" : "system",
+      "children" : [ ]
+    } ]
+  },
+  "dependenciesContainer" : {
+    "dependencies" : { },
+    "prophecyProjectDependencies" : { }
+  },
   "frontEndLanguage" : "sql"
 }

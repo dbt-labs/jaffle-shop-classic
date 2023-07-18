@@ -33,16 +33,16 @@
         "outputs" : [ {
           "id" : "Abj9b1Az",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "user_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "order_date",
@@ -95,16 +95,16 @@
         "inputs" : [ {
           "id" : "XCch4FYH",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "user_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
               "name" : "order_date",
@@ -123,24 +123,24 @@
         "outputs" : [ {
           "id" : "J3jLWm3v",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
@@ -173,24 +173,24 @@
         "inputs" : [ {
           "id" : "XRJg3GT5",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
@@ -201,24 +201,24 @@
         "outputs" : [ {
           "id" : "We3TTUev",
           "schema" : {
-            "providerType" : "Snowflake",
+            "providerType" : "Databricks",
             "fields" : [ {
-              "name" : "ORDER_ID",
+              "name" : "order_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "CUSTOMER_ID",
+              "name" : "customer_id",
               "dataType" : {
-                "type" : "Number"
+                "type" : "Integer"
               }
             }, {
-              "name" : "ORDER_DATE",
+              "name" : "order_date",
               "dataType" : {
                 "type" : "Date"
               }
             }, {
-              "name" : "STATUS",
+              "name" : "status",
               "dataType" : {
                 "type" : "String"
               }
