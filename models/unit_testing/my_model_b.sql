@@ -1,0 +1,1 @@
+SELECT 2 as b, 1 as id, 2 as c, 'b' as string_b

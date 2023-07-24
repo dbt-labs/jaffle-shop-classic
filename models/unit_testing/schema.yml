@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: my_model_a
+    columns: 
+      - name: id
+      - name: a
+      - name: not_testing
+  - name: my_model_b
+  - name: my_model
+
+# dbt run --select my_model_a my_model_b
+# dbt unit-test --threads 5 --select my_model
+
+unit:
+  - model: my_model
+    tests:
+      - name: test_my_model
+        given:
+          - input: ref('my_model_a')
+            rows:
+              - {id: 1, a: 1}
+          - input: ref('my_model_b')
+            rows:
+              - {id: 1, b: 2}
+              - {id: 2, b: 2}
+        expect:
+          - {c: 3}
+      - name: test_my_model_empty
+        given:
+          - input: ref('my_model_a')
+            rows: []
+          - input: ref('my_model_b')
+            rows:
+              - {id: 1, b: 2}
+              - {id: 2, b: 2}
+        expect: []
+      - name: test_my_model_overrides
+        given:
+          - input: ref('my_model_a')
+            rows:
+              - {id: 1, a: 1}
+          - input: ref('my_model_b')
+            rows:
+              - {id: 1, b: 2}
+              - {id: 2, b: 2}
+        overrides: 
+          macros: 
+            type_numeric: override
+            invocation_id: 123
+          vars: 
+            test: var_override
+          env_vars:
+            TEST: env_var_override
+        expect:
+          - {macro_call: override, var_call: var_override, env_var_call: env_var_override, invocation_id: 123}
+      - name: test_my_model_string_concat
+        given:
+          - input: ref('my_model_a')
+            rows: 
+              - {id: 1, string_a: a}
+          - input: ref('my_model_b')
+            rows:
+              - {id: 1, string_b: b}
+        expect:
+          - {string_c: ab}
+      - name: test_my_model_datetime
+        given:
+          - input: ref('my_model_a')
+            rows: 
+              - {id: 1, date_a: "2020-01-01"}
+          - input: ref('my_model_b')
+            rows:
+              - {id: 1}
+        expect:
+          - {date_a: "2020-01-01"}
