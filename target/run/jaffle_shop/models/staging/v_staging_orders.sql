@@ -1,5 +1,5 @@
 
-  create view "sales"."public"."v_staging_orders__dbt_tmp"
+  create view "dbtsales"."public_stg"."v_staging_orders__dbt_tmp"
     
     
   as (
@@ -20,7 +20,7 @@ WITH source_data AS (
     order_date,
     status
 
-    FROM "sales"."public"."stg_orders"
+    FROM "dbtsales"."public"."stg_orders"
 ),
 
 derived_columns AS (

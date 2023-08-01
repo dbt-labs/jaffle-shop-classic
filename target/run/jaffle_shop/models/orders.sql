@@ -2,7 +2,7 @@
   
     
 
-  create  table "sales"."public"."orders__dbt_tmp"
+  create  table "dbtsales"."public"."orders__dbt_tmp"
   
   
     as
@@ -13,13 +13,13 @@
 
 with orders as (
 
-    select * from "sales"."public"."stg_orders"
+    select * from "dbtsales"."public"."stg_orders"
 
 ),
 
 payments as (
 
-    select * from "sales"."public"."stg_payments"
+    select * from "dbtsales"."public_stg"."stg_payments"
 
 ),
 

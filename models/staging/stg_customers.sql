@@ -1,22 +1,36 @@
 with source as (
 
-    {#-
-    Normally we would select from the table here, but we are using seeds to load
-    our data in this project
-    #}
-    select * from {{ ref('raw_customers') }}
+    select distinct
+        customername,
+        contactfirstname,
+        contactlastname,
+        dtloaded
+    from {{ ref('raw_sales') }}
 
 ),
 
 renamed as (
 
-    select
-        id as customer_id,
-        first_name,
-        last_name
-
+    select 
+        {{ dbt_utils.generate_surrogate_key(['customername'])}} as customer_id,
+        customername as customer_name,
+        contactfirstname as contact_firstname,
+        contactlastname as contact_lastname,
+        dtloaded
     from source
 
 )
 
-select * from renamed
+select  customer_id,
+        customer_name,
+        contact_firstname,
+        contact_lastname,
+        dtloaded
+from renamed
+UNION
+select  'a',
+        'b',
+        NULL,
+        NULL,
+        now()
+from renamed

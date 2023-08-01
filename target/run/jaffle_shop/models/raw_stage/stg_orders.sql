@@ -2,14 +2,14 @@
   
     
 
-  create  table "sales"."public"."stg_orders__dbt_tmp"
+  create  table "dbtsales"."public"."stg_orders__dbt_tmp"
   
   
     as
   
   (
     with source as (
-    select * from "sales"."public"."raw_orders"
+    select * from "dbtsales"."public"."raw_orders"
 
 ),
 

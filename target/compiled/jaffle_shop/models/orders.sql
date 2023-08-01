@@ -3,13 +3,13 @@
 
 with orders as (
 
-    select * from "sales"."public"."stg_orders"
+    select * from "dbtsales"."public"."stg_orders"
 
 ),
 
 payments as (
 
-    select * from "sales"."public"."stg_payments"
+    select * from "dbtsales"."public_stg"."stg_payments"
 
 ),
 

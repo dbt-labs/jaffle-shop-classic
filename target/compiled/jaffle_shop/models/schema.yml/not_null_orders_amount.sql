@@ -5,7 +5,7 @@
 
 
 select amount
-from "sales"."public"."orders"
+from "dbtsales"."public"."orders"
 where amount is null
 
 

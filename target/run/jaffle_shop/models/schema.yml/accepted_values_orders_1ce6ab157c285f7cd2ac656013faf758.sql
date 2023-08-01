@@ -13,7 +13,7 @@ with all_values as (
         status as value_field,
         count(*) as n_records
 
-    from "sales"."public"."orders"
+    from "dbtsales"."public"."orders"
     group by status
 
 )

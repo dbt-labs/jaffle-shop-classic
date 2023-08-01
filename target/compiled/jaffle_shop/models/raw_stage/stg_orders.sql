@@ -1,5 +1,5 @@
 with source as (
-    select * from "sales"."public"."raw_orders"
+    select * from "dbtsales"."public"."raw_orders"
 
 ),
 

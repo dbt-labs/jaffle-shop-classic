@@ -10,7 +10,7 @@ select
 
 
 select credit_card_amount
-from "sales"."public"."orders"
+from "dbtsales"."public"."orders"
 where credit_card_amount is null
 
 

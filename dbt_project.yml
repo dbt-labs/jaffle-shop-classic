@@ -27,6 +27,7 @@ models:
         - 'stage'
         enabled: true
         materialized: view
+        +schema: stg
       # raw_stage:
       #   tags:
       #     - 'raw'

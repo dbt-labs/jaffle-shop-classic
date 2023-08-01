@@ -1,23 +1,42 @@
 
-  create view "sales"."public"."stg_customers__dbt_tmp"
+  create view "dbtsales"."public_stg"."stg_customers__dbt_tmp"
     
     
   as (
     with source as (
-    select * from "sales"."public"."raw_customers"
+
+    select distinct
+        customername,
+        contactfirstname,
+        contactlastname,
+        dtloaded
+    from "dbtsales"."public"."raw_sales"
 
 ),
 
 renamed as (
 
-    select
-        id as customer_id,
-        first_name,
-        last_name
-
+    select 
+        md5(cast(coalesce(cast(customername as TEXT), '_dbt_utils_surrogate_key_null_') as TEXT)) as customer_id,
+        customername as customer_name,
+        contactfirstname as contact_firstname,
+        contactlastname as contact_lastname,
+        dtloaded
     from source
 
 )
 
-select * from renamed
+select  customer_id,
+        customer_name,
+        contact_firstname,
+        contact_lastname,
+        dtloaded
+from renamed
+UNION
+select  'a',
+        'b',
+        NULL,
+        NULL,
+        now()
+from renamed
   );

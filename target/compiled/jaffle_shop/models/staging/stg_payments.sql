@@ -1,5 +1,5 @@
-with source as (
-    select * from "sales"."public"."raw_payments"
+clearwith source as (
+    select * from "dbtsales"."public"."raw_payments"
 
 ),
 

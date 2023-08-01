@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: public
+    database: dbtsales  
+    schema: public  
+    tables:
+      - name: stgsales
+      # columns:
+      #   - name: CustomerID
+      #   - name: CUSTOMERNAME 
+    
+
+  # - name: stripe
+  #   tables:
+  #     - name: payments

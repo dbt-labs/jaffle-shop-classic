@@ -1,10 +1,10 @@
 
-  create view "sales"."public"."stg_payments__dbt_tmp"
+  create view "dbtsales"."public_stg"."stg_payments__dbt_tmp"
     
     
   as (
-    with source as (
-    select * from "sales"."public"."raw_payments"
+    clearwith source as (
+    select * from "dbtsales"."public"."raw_payments"
 
 ),
 

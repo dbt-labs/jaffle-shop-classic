@@ -1,3 +1,5 @@
+import threading
+
 from dbt.contracts.graph.unparsed import FreshnessThreshold
 from dbt.contracts.graph.nodes import SourceDefinition, ResultNode
 from dbt.contracts.util import (
@@ -21,13 +23,14 @@ import agate
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import (
-    Union,
+    Any,
+    Callable,
     Dict,
     List,
-    Optional,
-    Any,
     NamedTuple,
+    Optional,
     Sequence,
+    Union,
 )
 
 from dbt.clients.system import write_json
@@ -56,15 +59,16 @@ class TimingInfo(dbtClassMixin):
 
 # This is a context manager
 class collect_timing_info:
-    def __init__(self, name: str):
+    def __init__(self, name: str, callback: Callable[[TimingInfo], None]):
         self.timing_info = TimingInfo(name=name)
+        self.callback = callback
 
     def __enter__(self):
         self.timing_info.begin()
-        return self.timing_info
 
     def __exit__(self, exc_type, exc_value, traceback):
         self.timing_info.end()
+        self.callback(self.timing_info)
         # Note: when legacy logger is removed, we can remove the following line
         with TimingProcessor(self.timing_info):
             fire_event(
@@ -159,6 +163,20 @@ class RunResult(NodeResult):
     def skipped(self):
         return self.status == RunStatus.Skipped
 
+    @classmethod
+    def from_node(cls, node: ResultNode, status: RunStatus, message: Optional[str]):
+        thread_id = threading.current_thread().name
+        return RunResult(
+            status=status,
+            thread_id=thread_id,
+            execution_time=0,
+            timing=[],
+            message=message,
+            node=node,
+            adapter_response={},
+            failures=None,
+        )
+
 
 @dataclass
 class ExecutionResult(dbtClassMixin):
@@ -243,40 +261,6 @@ class RunResultsArtifact(ExecutionResult, ArtifactMixin):
 
     def write(self, path: str):
         write_json(path, self.to_dict(omit_none=False))
-
-
-@dataclass
-class RunOperationResult(ExecutionResult):
-    success: bool
-
-
-@dataclass
-class RunOperationResultMetadata(BaseArtifactMetadata):
-    dbt_schema_version: str = field(
-        default_factory=lambda: str(RunOperationResultsArtifact.dbt_schema_version)
-    )
-
-
-@dataclass
-@schema_version("run-operation-result", 1)
-class RunOperationResultsArtifact(RunOperationResult, ArtifactMixin):
-    @classmethod
-    def from_success(
-        cls,
-        success: bool,
-        elapsed_time: float,
-        generated_at: datetime,
-    ):
-        meta = RunOperationResultMetadata(
-            dbt_schema_version=str(cls.dbt_schema_version),
-            generated_at=generated_at,
-        )
-        return cls(
-            metadata=meta,
-            results=[],
-            elapsed_time=elapsed_time,
-            success=success,
-        )
 
 
 # due to issues with typing.Union collapsing subclasses, this can't subclass
@@ -390,6 +374,9 @@ class FreshnessResult(ExecutionResult):
     ):
         meta = FreshnessMetadata(generated_at=generated_at)
         return cls(metadata=meta, results=results, elapsed_time=elapsed_time)
+
+    def write(self, path):
+        FreshnessExecutionResultArtifact.from_result(self).write(path)
 
 
 @dataclass

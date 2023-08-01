@@ -5,7 +5,7 @@
 
 
 select customer_id
-from "sales"."public"."orders"
+from "dbtsales"."public"."orders"
 where customer_id is null
 
 

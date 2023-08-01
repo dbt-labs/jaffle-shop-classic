@@ -5,7 +5,7 @@
 
 
 select gift_card_amount
-from "sales"."public"."orders"
+from "dbtsales"."public"."orders"
 where gift_card_amount is null
 
 
