@@ -2310,3 +2310,58 @@ drop view if exists "sales"."public"."v_staging_orders__dbt_backup" cascade
 [0m11:16:30  Done. PASS=1 WARN=0 ERROR=0 SKIP=0 TOTAL=1
 [0m11:16:30  Command `dbt run` succeeded at 13:16:30.335815 after 1.23 seconds
 [0m11:16:30  Flushing usage events
+[0m10:44:57  Running with dbt=1.5.0
+[0m10:44:57  running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Louw\\GitHub\\dbt', 'fail_fast': 'True', 'version_check': 'True', 'log_path': 'C:\\Louw\\GitHub\\dbt\\jaffle_shop\\logs', 'warn_error': 'True', 'debug': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'introspect': 'True', 'static_parser': 'True', 'log_format': 'text', 'target_path': 'None', 'send_anonymous_usage_stats': 'False'}
+[0m10:44:57  dbt version: 1.5.0
+[0m10:44:57  python version: 3.10.11
+[0m10:44:57  python path: C:\Louw\GitHub\dbt\jaffle_shop\.dbtenv\Scripts\python.exe
+[0m10:44:57  os info: Windows-10-10.0.22621-SP0
+[0m10:44:57  Using profiles.yml file at C:\Louw\GitHub\dbt\profiles.yml
+[0m10:44:57  Using dbt_project.yml file at C:\Louw\GitHub\dbt\jaffle_shop\dbt_project.yml
+[0m10:44:57  Configuration:
+[0m10:44:57    profiles.yml file [[32mOK found and valid[0m]
+[0m10:44:57    dbt_project.yml file [[32mOK found and valid[0m]
+[0m10:44:57  Required dependencies:
+[0m10:44:57  Executing "git --help"
+[0m10:44:57  STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--super-prefix=<path>] [--config-env=<name>=<envvar>]\n           <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m10:44:57  STDERR: "b''"
+[0m10:44:57   - git [[32mOK found[0m]
+
+[0m10:44:57  Connection:
+[0m10:44:57    host: localhost
+[0m10:44:57    port: 5432
+[0m10:44:57    user: postgres
+[0m10:44:57    database: sales
+[0m10:44:57    schema: public
+[0m10:44:57    search_path: None
+[0m10:44:57    keepalives_idle: 0
+[0m10:44:57    sslmode: None
+[0m10:44:57  Acquiring new postgres connection 'debug'
+[0m10:44:57  Using postgres connection "debug"
+[0m10:44:57  On debug: select 1 as id
+[0m10:44:57  Opening a new connection, currently in state init
+[0m10:44:57  Postgres adapter: Got a retryable error when attempting to open a postgres connection.
+1 attempts remaining. Retrying in 0 seconds.
+Error:
+connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sales" does not exist
+
+[0m10:44:57  Postgres adapter: Error running SQL: select 1 as id
+[0m10:44:57  Postgres adapter: Rolling back transaction.
+[0m10:44:57  On debug: No close available on handle
+[0m10:44:57    Connection test: [[31mERROR[0m]
+
+[0m10:44:57  [31m1 check failed:[0m
+[0m10:44:57  dbt was unable to connect to the specified database.
+The database returned the following error:
+
+  >Database Error
+  connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "sales" does not exist
+  
+
+Check your database credentials and try again. For more information, visit:
+https://docs.getdbt.com/docs/configure-your-profile
+
+
+[0m10:44:57  Command `dbt debug` failed at 12:44:57.498664 after 0.42 seconds
+[0m10:44:57  Connection 'debug' was properly closed.
+[0m10:44:57  Flushing usage events
