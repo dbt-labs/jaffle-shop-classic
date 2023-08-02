@@ -35,7 +35,7 @@
         "outputs" : [ {
           "id" : "zQ7m5ylK",
           "schema" : {
-            "providerType" : "Databricks",
+            "providerType" : "Trino",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
@@ -89,7 +89,7 @@
         "inputs" : [ {
           "id" : "SVCfYggl",
           "schema" : {
-            "providerType" : "Databricks",
+            "providerType" : "Trino",
             "fields" : [ {
               "name" : "id",
               "dataType" : {
@@ -111,25 +111,6 @@
         } ],
         "outputs" : [ {
           "id" : "xtGCeWY6",
-          "schema" : {
-            "providerType" : "Databricks",
-            "fields" : [ {
-              "name" : "customer_id",
-              "dataType" : {
-                "type" : "Integer"
-              }
-            }, {
-              "name" : "first_name",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "last_name",
-              "dataType" : {
-                "type" : "String"
-              }
-            } ]
-          },
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false
@@ -158,48 +139,10 @@
       "ports" : {
         "inputs" : [ {
           "id" : "VOYRbv7e",
-          "schema" : {
-            "providerType" : "Databricks",
-            "fields" : [ {
-              "name" : "customer_id",
-              "dataType" : {
-                "type" : "Integer"
-              }
-            }, {
-              "name" : "first_name",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "last_name",
-              "dataType" : {
-                "type" : "String"
-              }
-            } ]
-          },
           "slug" : "renamed"
         } ],
         "outputs" : [ {
           "id" : "x1S5ZTan",
-          "schema" : {
-            "providerType" : "Databricks",
-            "fields" : [ {
-              "name" : "customer_id",
-              "dataType" : {
-                "type" : "Integer"
-              }
-            }, {
-              "name" : "first_name",
-              "dataType" : {
-                "type" : "String"
-              }
-            }, {
-              "name" : "last_name",
-              "dataType" : {
-                "type" : "String"
-              }
-            } ]
-          },
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false
