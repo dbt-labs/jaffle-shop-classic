@@ -68,6 +68,32 @@ sqlModels:
       models: []
       datasets: []
     createdAt: '2023-04-12 15:35:01'
+  .prophecy/metadata/sqlmodels/CustomerOrders:
+    name: CustomerOrders
+    schema:
+      providerType: Databricks
+      fields:
+      - name: customer_id
+        dataType:
+          type: Integer
+      - name: first_name
+        dataType:
+          type: String
+      - name: last_name
+        dataType:
+          type: String
+      - name: revenue
+        dataType:
+          type: Double
+    description: null
+    author: nathan@prophecy.io
+    files:
+    - models/CustomerOrders.sql
+    - .prophecy/ide/models/CustomerOrders.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-08-02 18:29:07'
   .prophecy/metadata/sqlmodels/orders:
     name: orders
     schema:
