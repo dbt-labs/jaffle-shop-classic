@@ -76,3 +76,8 @@ For more information on dbt:
 - Read the [dbt viewpoint](https://docs.getdbt.com/docs/about/viewpoint).
 - Join the [dbt community](http://community.getdbt.com/).
 ---
+
+
+*** Release notes for version: v1.1 ***
+
+Version1.1
