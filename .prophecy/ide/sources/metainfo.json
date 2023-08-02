@@ -57,7 +57,45 @@
     }, {
       "type" : "Catalog",
       "name" : "ntong",
-      "children" : [ ]
+      "children" : [ {
+        "type" : "Schema",
+        "name" : "default",
+        "tables" : {
+          "customerorders" : {
+            "providerType" : "Databricks",
+            "fields" : [ {
+              "name" : "customer_id",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "full_name",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "account_length_days",
+              "dataType" : {
+                "type" : "Integer"
+              }
+            }, {
+              "name" : "total_amount",
+              "dataType" : {
+                "type" : "Double"
+              }
+            }, {
+              "name" : "total_orders",
+              "dataType" : {
+                "type" : "Bigint"
+              }
+            } ]
+          }
+        }
+      }, {
+        "type" : "Schema",
+        "name" : "information_schema",
+        "children" : [ ]
+      } ]
     }, {
       "type" : "Catalog",
       "name" : "ntong2",

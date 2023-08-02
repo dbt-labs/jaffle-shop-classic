@@ -43,7 +43,7 @@
           }
         } ],
         "activeTab" : "conditions",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "XNLS7LhR##order_id", "mMLQKfiG##order_id", "mMLQKfiG##customer_id", "XNLS7LhR##amount" ],
         "headAlias" : "payments"
       },
       "ports" : {
@@ -202,7 +202,7 @@
           "expression" : ""
         },
         "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "fO5qrnft##customer_id", "fO5qrnft##order_date", "fO5qrnft##order_id" ],
         "groupBy" : [ {
           "expression" : {
             "expression" : "customer_id"
@@ -483,7 +483,7 @@
           "alias" : "customer_lifetime_value"
         } ],
         "activeTab" : "conditions",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "YgGVOukE##customer_id", "Ph0evFIc##customer_id", "pHvpVHtf##customer_id", "YgGVOukE##customer_id", "YgGVOukE##first_name", "YgGVOukE##last_name", "Ph0evFIc##first_order", "Ph0evFIc##most_recent_order", "Ph0evFIc##number_of_orders", "pHvpVHtf##total_amount" ],
         "headAlias" : "customers"
       },
       "ports" : {
@@ -611,7 +611,7 @@
         "macroDependencies" : [ ]
       },
       "properties" : {
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "iVitpXCi##total_orders" ],
         "orders" : [ {
           "expression" : {
             "expression" : "total_orders"
@@ -735,7 +735,7 @@
           "expression" : ""
         },
         "activeTab" : "aggregate",
-        "columnsSelector" : [ ],
+        "columnsSelector" : [ "qHkrzaNa##customer_id", "qHkrzaNa##amount" ],
         "groupBy" : [ {
           "expression" : {
             "expression" : "customer_id"

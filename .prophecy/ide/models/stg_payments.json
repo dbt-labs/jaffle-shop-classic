@@ -2,7 +2,7 @@
   "id" : "stg_payments",
   "metainfo" : {
     "label" : "stg_payments",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
@@ -19,6 +19,8 @@
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
+        "x" : 120,
+        "y" : 120,
         "phase" : 0,
         "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
       },
@@ -66,6 +68,8 @@
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
+        "x" : 320,
+        "y" : 120,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
@@ -156,6 +160,8 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_payments",
+        "x" : 520,
+        "y" : 120,
         "phase" : 0,
         "macroDependencies" : [ ]
       },
