@@ -8,30 +8,7 @@ buildSystemDetails: null
 pipelines: {}
 datasets: {}
 templates: {}
-jobs:
-  jobs/TestAirflow:
-    name: TestAirflow
-    description: ''
-    fabricUID: 3491
-    scheduler:
-      Prophecy: {}
-    cloudProvider: null
-    jobSize: null
-    scheduleCron: 0 0/1 * * *
-    timeout: null
-    alerting:
-      emails: ''
-      onStart: false
-      onSuccess: false
-      onFailure: false
-    pipelines: []
-    jobClusterMode:
-      clusterMode:
-        Single: {}
-      clusterId: null
-    enabled: null
-    createdAt: '2023-08-02 18:19:43'
-    author: nathan@prophecy.io
+jobs: {}
 functions:
   author: null
   createdAt: '2023-04-12 15:34:56'
