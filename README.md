@@ -81,3 +81,7 @@ For more information on dbt:
 *** Release notes for version: v1.1 ***
 
 Version1.1
+
+*** Release notes for version: v1 ***
+
+First Commit
