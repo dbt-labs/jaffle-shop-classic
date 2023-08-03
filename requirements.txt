@@ -1,2 +1,2 @@
-dbt-duckdb
+dbt-duckdb<1.6
 piperider[duckdb]
