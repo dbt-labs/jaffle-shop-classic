@@ -1,6 +1,27 @@
 version: 2
 
 models:
+  - name: stg_listings
+    description: contains clean listing records
+    columns:
+      - name: listing_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: host_id
+        description: Refrences stg_hosts view
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_hosts')
+              field: host_id
+      - name: room_type
+        description: accepted room type
+        tests:
+          - accepted_values:
+              values:
+                - ['Entire home/apt','Private room','Shared room','Hotel room']
   - name: customers
     description: One record per customer
     columns:

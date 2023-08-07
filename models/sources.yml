@@ -3,13 +3,17 @@ version: 2
 sources:
   - name: jaffle_shop
     database: user_pchauhan  
-    #schema: jaffle_shop  
+    schema: jaffle_shop  
     tables:
       - name: orders
-      #- name: customers
+      - name: customers
 
   - name: stripe
     database: user_pchauhan 
     #schema: stripe
     tables:
       - name: payment
+
+  
+
+

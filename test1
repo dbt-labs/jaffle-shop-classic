@@ -1,0 +1,5 @@
+SELECT * FROM USER_PCHAUHAN.jaffle_shop.fct_reviews WHERE listing_id = 3176;
+
+INSERT INTO  USER_PCHAUHAN.airbnb.RAW_REVIEWS VALUES (3176, CURRENT_TIMESTAMP(), 'Zoltan', 'excellent stay!', 'positive');
+
+SELECT * FROM USER_PCHAUHAN.jaffle_shop.fct_reviews WHERE listing_id = 3176; 
