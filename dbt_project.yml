@@ -22,12 +22,12 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 models:
   jaffle_shop:
      
-      materialized: table
-      staging:
+    materialized: table
+    staging:
+      materialized: view
+    airbnb:
+      raw:
         materialized: view
-      airbnb:
-        raw:
-          materialized: view
-          schema: airbnb
+        schema: airbnb
           
 
