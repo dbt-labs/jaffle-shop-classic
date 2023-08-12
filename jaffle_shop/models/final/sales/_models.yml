@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fnl_sales_newcustomers
+    columns:
+      - name: month
+        tests:
+          - unique
+          - not_null
+
+exposures:
+  - name: fnl_sales_newcustomers
+    description: Dashboard showing new customers by month
+    type: dashboard
+    owner:
+      email: michael.schmid@octopusev.com
+    url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/

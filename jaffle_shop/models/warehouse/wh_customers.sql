@@ -39,7 +39,7 @@ customer_payments as (
     from payments
 
     left join orders on
-         payments.order_id = orders.order_id
+        payments.order_id = orders.order_id
 
     group by orders.customer_id
 

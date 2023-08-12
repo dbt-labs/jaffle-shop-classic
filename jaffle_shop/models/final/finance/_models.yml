@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fnl_finance_returnedordervalue
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+exposures:
+  - name: fnl_finance_ordervalue
+    description: Dashboard showing order value by customer
+    type: dashboard
+    owner:
+      email: michael.schmid@octopusev.com
+    url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
