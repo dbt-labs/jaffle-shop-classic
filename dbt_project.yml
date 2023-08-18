@@ -29,5 +29,4 @@ models:
       raw:
         materialized: view
         schema: airbnb
-          
 
