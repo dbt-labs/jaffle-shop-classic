@@ -1,4 +1,4 @@
-
+use warehouse DEFAULT_USER_WH;
 with dim_listings_cleansed as (
     select * from {{ ref('stg_listings')}}
 ),
