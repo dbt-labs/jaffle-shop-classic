@@ -3,6 +3,7 @@ repos:
   - repo: meta
     hooks:
       - id: identity
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
@@ -22,30 +23,3 @@ repos:
     hooks:
       - id: prettier
         name: Make code pretty
-
-  - repo: https://github.com/asottile/pyupgrade
-    rev: v3.7.0
-    hooks:
-      - id: pyupgrade
-        args: [--py39-plus]
-        name: Align Python code to latest syntax
-
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-        name: Sort Python imports
-        args: ["--profile", "black"]
-
-  - repo: https://github.com/psf/black
-    rev: 23.3.0
-    hooks:
-      - id: black
-        name: Check Python formatting
-
-  - repo: https://github.com/hadialqattan/pycln
-    rev: v2.1.5
-    hooks:
-      - id: pycln
-        name: Remove unused imports
-        args: [--config=pyproject.toml]
