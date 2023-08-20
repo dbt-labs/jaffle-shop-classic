@@ -1,7 +1,4 @@
-black==23.3.0
-coverage-badge==1.1.0
-isort==5.12.0
 pre-commit==3.3.3
-pycln==2.1.5
-pytest==7.4.0
-pytest-cov==4.1.0
+
+# GitHub
+dbt-unit-test-coverage @ git+https://github.com/Bilbottom/dbt-unit-test-coverage@v0.0.1
