@@ -1,0 +1,56 @@
+semantic_models:
+  - name: orders
+    defaults:
+      agg_time_dimension: order_date
+    description: >
+      This is different to the underlying models?
+    model: ref('orders')
+    entities:
+      - name: order_id
+        type: primary
+      - name: customer_id
+        type: foreign
+    dimensions:
+      - name: is_completed
+        type: categorical
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+    measures:
+      - name: order_count
+        agg: count_distinct
+        expr: order_id
+      - name: first_order
+        agg: min
+        expr: order_date
+      - name: last_order
+        agg: max
+        expr: order_date
+      - name: average_order_size
+        agg: average
+        expr: amount
+      - name: total_order_amount
+        agg: sum
+        expr: amount
+
+metrics:
+  - name: order_count
+    type: simple
+    type_params:
+      measure: order_count
+    label: Order count
+  - name: completed_order_count
+    label: Completed order count
+    type: simple
+    type_params:
+      measure: order_count
+    filter: |
+      {{ Dimension('order_id__is_completed') == true }}
+  - name: fulfilment_rate
+    label: Fulfilment rate
+    type: derived
+    type_params:
+      expr: SAFE_DIVIDE(completed_order_count, order_count)
