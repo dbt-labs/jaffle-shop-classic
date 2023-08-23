@@ -71,3 +71,76 @@ models:
       - name: total_order_amount
         description: Total value (AUD) of a customer's orders
 
+semantic_models:
+  - name: orders
+    defaults:
+      agg_time_dimension: order_date
+    description: |
+      Order fact table. This table is at the order grain with one row per order.
+    model: ref('orders')
+    entities:
+      - name: order_id
+        type: primary
+      - name: customer
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: order_date
+        expr: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+    measures:
+      - name: expense
+        description: "The total expenses of our jaffle business"
+        agg: sum
+        expr: amount / 4
+      - name: revenue
+        description: "The total revenue of our jaffle business"
+        agg: sum
+        expr: amount
+      - name: average_order_amount
+        description: "The average size of a jaffle order"
+        agg: average
+        expr: amount
+
+
+metrics:
+  - name: expenses
+    description: "The total expenses of our jaffle business"
+    type: simple
+    label: Expenses
+    type_params:
+      measure: expense
+    filter: |
+      {{ Dimension('order_id__status') }} = 'completed'
+  - name: revenue
+    description: "The total revenue of our jaffle business"
+    type: simple
+    label: Revenue
+    type_params:
+      measure: revenue
+    filter: |
+      {{ Dimension('order_id__status') }} = 'completed'
+  - name: average_order_amount
+    description: "The average size of a jaffle order"
+    type: simple
+    label: Average Order Amount
+    type_params:
+      measure: average_order_amount
+  - name: profit
+    description: "The total money we get to take home from our jaffle business"
+    type: derived
+    label: Profit
+    type_params:
+      expr: revenue - expenses
+      metrics:
+        - name: revenue
+          filter: |
+            {{ Dimension('order_id__status') }} = 'completed'
+        - name: expenses
+          filter: |
+            {{ Dimension('order_id__status') }} = 'completed'
+
