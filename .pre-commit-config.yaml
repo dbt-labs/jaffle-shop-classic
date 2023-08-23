@@ -1,4 +1,9 @@
 ---
+ci:
+  skip: [dbt-compile, dbt-unit-test, dbt-unit-test-coverage]
+
+default_install_hook_types: [pre-commit, post-commit]
+
 repos:
   - repo: meta
     hooks:
@@ -13,13 +18,48 @@ repos:
       - id: trailing-whitespace
         name: Remove trailing whitespace
       - id: end-of-file-fixer
-        name: Check that files end with a newline character
+        name: Ensure files end with a newline character
         exclude_types: [svg]
+      - id: mixed-line-ending
+        name: Align mixed line ending
       - id: check-added-large-files
         name: Check for large files
+      - id: check-json
+        name: Check JSON files are valid and parseable
+      - id: check-yaml
+        name: Check YAML files are valid and parseable
+      - id: check-toml
+        name: Check TOML files are valid and parseable
+      - id: check-ast
+        name: Validate Python
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v3.0.0-alpha.0
     hooks:
       - id: prettier
         name: Make code pretty
+
+  # Testing and coverage
+  - repo: local
+    hooks:
+      - id: dbt-compile
+        name: Compile the dbt project
+        entry: dbt compile
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+        always_run: true
+      - id: dbt-unit-test
+        name: Run dbt unit tests
+        entry: dbt test --select tag:unit-test
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
+        always_run: true
+      - id: dbt-unit-test-coverage
+        name: Generate dbt coverage report
+        entry: dbt-unit-test-coverage
+        language: system
+        pass_filenames: false
+        stages: [post-commit]
+        always_run: true
