@@ -1,0 +1,74 @@
+name: PR Transformation and Comparison
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: ['main']
+    paths:
+      - models/**
+      - seeds/**
+      - tests/**
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+  SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+  SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+  SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Setup DBT + Piperider
+      run: |
+        pip install dbt-snowflake
+        pip install piperider['snowflake']
+
+    - name: Run DBT on PR environment
+      run: dbt build --target jaffle_shop_pr
+
+    - name: Profile on PR environment
+      run: piperider run --datasource jaffle_shop_pr --dbt-state target -o /tmp/pr-report/
+
+    - name: Profile on PROD environment
+      run: piperider run --datasource jaffle_shop -o /tmp/prod-report/
+
+    - name: Compare and Prepare
+      run: |
+        piperider compare-reports \
+          --debug \
+          --base /tmp/prod-report/run.json \
+          --target /tmp/pr-report/run.json \
+          --output comparison-report/ \
+          --tables-from target-only
+        zip -r comparison-report.zip comparison-report/
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: comparison-report-artifact
+        path: comparison-report.zip
+
+    - name: Prepare Comparison Summary
+      run: |
+        echo "# :bar_chart: Piperider Comparison Summary" > summary.md
+        cat comparison-report/summary.md >> summary.md
+        echo -e "\n" >> summary.md
+        echo "## :paperclip: Generated Comparison Report ZIP" >> summary.md
+        echo "Find it in the [Github Action Runs Page](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> summary.md
+
+    - name: Create PR Comment
+      uses: peter-evans/create-or-update-comment@v2.1.0
+      with:
+        issue-number: ${{ github.event.number }}
+        body-file: summary.md
+

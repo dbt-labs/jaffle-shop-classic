@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: customers
+  - name: int_customer_order_history_joined
     description: This table has basic information about a customer, as well as some derived facts based on a customer's orders
 
     columns:
@@ -29,7 +29,7 @@ models:
       - name: total_order_amount
         description: Total value (AUD) of a customer's orders
 
-  - name: orders
+  - name: int_order_payments_pivoted
     description: This table has basic information about orders, as well as some derived facts based on payments
 
     columns:
@@ -44,7 +44,7 @@ models:
         tests:
           - not_null
           - relationships:
-              to: ref('customers')
+              to: ref('int_customer_order_history_joined')
               field: customer_id
 
       - name: order_date

@@ -1,0 +1,146 @@
+version: 2
+
+models:
+  - name: orders
+    description: This table has basic information about orders, as well as some derived facts based on payments
+
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+        description: This is a unique identifier for an order
+
+      - name: customer_id
+        description: Foreign key to the customers table
+        tests:
+          - not_null
+
+      - name: order_date
+        description: Date (UTC) that the order was placed
+
+      - name: status
+        description: '{{ doc("orders_status") }}'
+        tests:
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+
+      - name: amount
+        description: Total amount (AUD) of the order
+        tests:
+          - not_null
+
+      - name: credit_card_amount
+        description: Amount of the order (AUD) paid for by credit card
+        tests:
+          - not_null
+
+      - name: coupon_amount
+        description: Amount of the order (AUD) paid for by coupon
+        tests:
+          - not_null
+
+      - name: bank_transfer_amount
+        description: Amount of the order (AUD) paid for by bank transfer
+        tests:
+          - not_null
+
+      - name: gift_card_amount
+        description: Amount of the order (AUD) paid for by gift card
+        tests:
+          - not_null
+
+      - name: customer_id
+        description: This is a unique identifier for a customer
+
+      - name: first_name
+        description: Customer's first name. PII.
+
+      - name: last_name
+        description: Customer's last name. PII.
+
+      - name: first_order
+        description: Date (UTC) of a customer's first order
+
+      - name: most_recent_order
+        description: Date (UTC) of a customer's most recent order
+
+      - name: number_of_orders
+        description: Count of the number of orders a customer has placed
+
+      - name: total_order_amount
+        description: Total value (AUD) of a customer's orders
+
+semantic_models:
+  - name: orders
+    defaults:
+      agg_time_dimension: order_date
+    description: |
+      Order fact table. This table is at the order grain with one row per order.
+    model: ref('orders')
+    entities:
+      - name: order_id
+        type: primary
+      - name: customer
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: order_date
+        expr: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+    measures:
+      - name: expense
+        description: "The total expenses of our jaffle business"
+        agg: sum
+        expr: amount / 4
+      - name: revenue
+        description: "The total revenue of our jaffle business"
+        agg: sum
+        expr: amount
+      - name: average_order_amount
+        description: "The average size of a jaffle order"
+        agg: average
+        expr: amount
+
+
+metrics:
+  - name: expenses
+    description: "The total expenses of our jaffle business"
+    type: simple
+    label: Expenses
+    type_params:
+      measure: expense
+    filter: |
+      {{ Dimension('order_id__status') }} = 'completed'
+  - name: revenue
+    description: "The total revenue of our jaffle business"
+    type: simple
+    label: Revenue
+    type_params:
+      measure: revenue
+    filter: |
+      {{ Dimension('order_id__status') }} = 'completed'
+  - name: average_order_amount
+    description: "The average size of a jaffle order"
+    type: simple
+    label: Average Order Amount
+    type_params:
+      measure: average_order_amount
+  - name: profit
+    description: "The total money we get to take home from our jaffle business"
+    type: derived
+    label: Profit
+    type_params:
+      expr: revenue - expenses
+      metrics:
+        - name: revenue
+          filter: |
+            {{ Dimension('order_id__status') }} = 'completed'
+        - name: expenses
+          filter: |
+            {{ Dimension('order_id__status') }} = 'completed'
+

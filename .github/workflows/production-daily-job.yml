@@ -1,0 +1,54 @@
+name: Daily Production Transformation
+on:
+  schedule:
+    - cron: '0 18 * * *' # run at 2 AM (UTC + 8) every day
+  workflow_dispatch:
+  pull_request:
+    types:
+      - closed
+    branches: ['main']
+    paths:
+      - models/**
+      - seeds/**
+      - tests/**
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+  SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+  SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Setup DBT + Piperider
+      run: |
+        pip install dbt-snowflake
+        pip install piperider['snowflake']
+
+    - name: Run DBT on PROD environment
+      run: dbt build --target jaffle_shop
+
+    - name: Profile on PROD environment
+      run: piperider run --datasource jaffle_shop --dbt-state target -o report/
+
+    - name: Create run artifact
+      run: zip -r run-report.zip report/
+
+    - name: Upload profiling result
+      uses: actions/upload-artifact@v3
+      with:
+        name: run-report-artifact
+        path: run-report.zip
+

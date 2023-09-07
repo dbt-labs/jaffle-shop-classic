@@ -34,7 +34,7 @@ customer_payments as (
 
     select
         orders.customer_id,
-        sum(amount) as total_amount
+        sum(amount)::bigint as total_amount
 
     from payments
 

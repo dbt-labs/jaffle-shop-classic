@@ -1,0 +1,15 @@
+base:
+  branch: main
+  dbt:
+    commands:
+    - dbt deps
+    - dbt build
+  piperider:
+    command: piperider run
+target:
+  dbt:
+    commands:
+    - dbt deps
+    - dbt build
+  piperider:
+    command: piperider run

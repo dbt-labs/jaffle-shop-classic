@@ -1,0 +1,81 @@
+name: PR Transformation and Comparison (Slim CI)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+      # Trigger when PR is created and/or head of branch is updated.
+    branches: [ "main" ]
+      # Only PR target is `main`
+    paths:
+      - models/**
+      - seeds/**
+      - tests/**
+
+env:
+  SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+  SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+  SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+  SNOWFLAKE_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+  SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+  SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+  SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+  DBT_CLOUD_API_TOKEN: ${{ secrets.DBT_CLOUD_API_TOKEN }}
+  DBT_CLOUD_ACCOUNT_ID: ${{ secrets.DBT_CLOUD_ACCOUNT_ID }}
+  DBT_CLOUD_JOB_ID: 173664
+  PIPERIDER_CLOUD_TOKEN_ID: ${{ secrets.PIPERIDER_CLOUD_TOKEN_ID }}
+  PIPERIDER_CLOUD_PROJECT_ID: ${{ secrets.PIPERIDER_CLOUD_PROJECT_ID }}
+  PIPERIDER_API_PROJECT: ${{ secrets.PIPERIDER_API_PROJECT }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Setup Piperider
+      run: |
+        pip install dbt-cloud-cli
+        pip install dbt-snowflake
+        pip install 'piperider-nightly[snowflake]'
+
+    - name: Trigger DBT Cloud Job (PR Job)
+      run: |
+        dbt-cloud job run \
+          --cause "GitHub PR Job" \
+          --git-branch ${{ github.head_ref }} \
+          --schema-override ${SNOWFLAKE_SCHEMA} \
+          --wait \
+          --file response.json
+        echo "run_id=$(cat response.json | jq -r '.data.id')" >> $GITHUB_ENV
+
+    - name: Piperider Cloud Login
+      run: piperider cloud login --token $PIPERIDER_CLOUD_TOKEN_ID --no-interaction
+
+    - name: Profile on PR environment
+      run: |
+        mkdir -p state/pr
+        dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path manifest.json -f state/pr/manifest.json
+        dbt-cloud run get-artifact --run-id ${{ env.run_id }} --path run_results.json -f state/pr/run_results.json
+        piperider run --datasource jaffle_shop_pr --dbt-state state/pr --dbt-run-results -o /tmp/pipe-target
+        piperider cloud upload-report --run .piperider/outputs/latest/run.json
+
+    - name: Generate Comparison Summary
+      run: |
+        piperider cloud compare-reports \
+          --base datasource:jaffle_shop \
+          --target datasource:jaffle_shop_pr \
+          --summary-file summary.md \
+          --tables-from target-only
+
+    - name: Create PR Comment
+      uses: peter-evans/create-or-update-comment@v2.1.0
+      with:
+        issue-number: ${{ github.event.number }}
+        body-file: summary.md
+

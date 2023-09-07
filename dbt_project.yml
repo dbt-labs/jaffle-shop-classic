@@ -22,5 +22,6 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 models:
   jaffle_shop:
       materialized: table
-      staging:
+      +tags: piperider
+      staging:      
         materialized: view

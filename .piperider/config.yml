@@ -1,0 +1,6 @@
+dataSources: []
+dbt:
+  projectDir: .
+
+telemetry:
+  id: 2e470b721f5a4114aa7cf9b73eca760d
