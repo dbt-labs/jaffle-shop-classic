@@ -6,7 +6,7 @@ with customers as (
 
 orders as (
 
-    select * from {{ ref('stg_orders') }}
+    select * from {{ ref('stg_orders') }} limit 5
 
 ),
 
@@ -42,7 +42,7 @@ customer_payments as (
          payments.order_id = orders.order_id
 
     group by orders.customer_id
-
+kdfs
 ),
 
 final as (
