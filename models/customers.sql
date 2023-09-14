@@ -42,7 +42,7 @@ customer_payments as (
          payments.order_id = orders.order_id
 
     group by orders.customer_id
-
+kdfs
 ),
 
 final as (
