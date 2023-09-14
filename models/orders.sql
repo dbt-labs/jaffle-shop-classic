@@ -8,7 +8,7 @@ with orders as (
 
 payments as (
 
-    select * from {{ ref('stg_payments') }}
+    select * from {{ ref('stg_payments') }} limit 10
 
 ),
 
