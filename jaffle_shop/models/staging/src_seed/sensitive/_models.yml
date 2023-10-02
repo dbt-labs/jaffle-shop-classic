@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_customers_pii
+    meta:
+      owner: 'adriana.kuzmanic@octoenergy.com'
+      team_owner: '!subteam^XXXXX' #team-owner needs to be filled out
+      sensitive: true
+    description: A table containing customer info - PII table.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        meta:
+          sensitive: true
+      - name: last_name
+        meta:
+          sensitive: true

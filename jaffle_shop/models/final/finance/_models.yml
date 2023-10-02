@@ -1,0 +1,31 @@
+version: 2
+
+################################################################################
+# EXPOSURES      https://docs.getdbt.com/reference/exposure-properties
+################################################################################
+exposures:
+  - name: Finance Inksacio Dashboard
+    description: The Inksacio app to view the total value returned by customer.
+    type: application
+    owner:
+      email: adriana.kuzmanic@octoenergy.com
+    depends_on:
+      - ref('fnl_finance_value_of_orders_returned')
+    url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
+
+################################################################################
+# MODELS      https://docs.getdbt.com/reference/configs-and-properties
+################################################################################
+models:
+  - name: fnl_finance_value_of_orders_returned
+    meta:
+      owner: 'adriana.kuzmanic@octoenergy.com'
+      team_owner: '!subteam^S03EE44S50E' #@procurement-uk
+    description: |
+      The total value of orders returned by customer.
+    columns:
+      - name: customer_id
+        description: Primary Key
+        tests:
+          - unique
+          - not_null

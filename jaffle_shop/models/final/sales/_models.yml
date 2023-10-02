@@ -1,0 +1,31 @@
+version: 2
+
+################################################################################
+# EXPOSURES      https://docs.getdbt.com/reference/exposure-properties
+################################################################################
+exposures:
+  - name: Sales Inksacio Dashboard
+    description: The Inksacio app to view the customer count by month making first orders.
+    type: application
+    owner:
+      email: adriana.kuzmanic@octoenergy.com
+    depends_on:
+      - ref('fnl_sales_newcustomer')
+    url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
+
+################################################################################
+# MODELS      https://docs.getdbt.com/reference/configs-and-properties
+################################################################################
+models:
+  - name: fnl_sales_newcustomer
+    meta:
+      owner: 'adriana.kuzmanic@octoenergy.com'
+      team_owner: '!subteam^S03EE44S50E' #@procurement-uk
+    description: |
+      The customer count by month for customers making their first order.
+    columns:
+      - name: order_month
+        description: Primary Key
+        tests:
+          - unique
+          - not_null

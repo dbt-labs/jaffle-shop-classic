@@ -1,0 +1,29 @@
+version: 2
+
+seeds:
+  - name: raw_customers
+    description: >
+      Raw customers info table.
+    config:
+      column_types:
+        id: string
+        first_name: string
+        last_name: string
+  - name: raw_orders
+    description: >
+      Raw orders info table.
+    config:
+      column_types:
+        id: string
+        user_id: string
+        order_date: date
+        status: string
+  - name: raw_payments
+    description: >
+      Raw payments info table.
+    config:
+      column_types:
+        id: string
+        order_id: string
+        payment_method: string
+        amount: double

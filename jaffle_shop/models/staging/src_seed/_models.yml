@@ -2,12 +2,15 @@ version: 2
 
 models:
   - name: stg_customers
+    meta:
+      owner: 'adriana.kuzmanic@octoenergy.com'
+      team_owner: '!subteam^XXXXX' #team-owner needs to be filled out
+    description: A table containing customer info.
     columns:
       - name: customer_id
         tests:
           - unique
           - not_null
-
   - name: stg_orders
     columns:
       - name: order_id
@@ -18,7 +21,6 @@ models:
         tests:
           - accepted_values:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
-
   - name: stg_payments
     columns:
       - name: payment_id
