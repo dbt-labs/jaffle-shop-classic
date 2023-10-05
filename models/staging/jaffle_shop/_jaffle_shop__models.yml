@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_customers
+  - name: stg_jaffle_shop__customers
     columns:
       - name: customer_id
         tests:
@@ -19,7 +19,7 @@ models:
           - accepted_values:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
 
-  - name: stg_payments
+  - name: stg_jaffle_shop__payments
     columns:
       - name: payment_id
         tests:
