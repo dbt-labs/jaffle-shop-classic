@@ -1,4 +1,5 @@
-
+.venv
+.user.yml
 target/
 dbt_modules/
 logs/
