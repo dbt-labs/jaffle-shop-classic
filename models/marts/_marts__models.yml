@@ -50,7 +50,7 @@ models:
       - name: order_date
         description: Date (UTC) that the order was placed
 
-      - name: status
+      - name: order_status
         description: '{{ doc("orders_status") }}'
         tests:
           - accepted_values:
