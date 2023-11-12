@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  name: fnl_returned_order_value
+  meta:
+    owner: kensuke.morris@octoenergy.com
+  description: | 
+    One row per total value of returned orders per customer
+  columns: 
+    - name: customer_id
+      description: Primary key
+      tests:
+        - unique
+        - not_null
+        
