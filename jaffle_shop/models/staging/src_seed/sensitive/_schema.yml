@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  name: stg_customers_pii
+  meta:
+    owner: kensuke.morris@octoenergy.com
+    sensitive: True
+  description: One row per customer information.
+  columns: 
+    - name: customer_id
+      description: Primary key
+      tests: 
+        - unique
+        - not_null
+    - name: first_name
+      meta: 
+        sensitive: True
+    - name: last_name
+      meta:
+        sensitive: True
