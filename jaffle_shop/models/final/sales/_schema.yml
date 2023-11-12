@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  name: fnl_monthly_customer_count
+  meta:
+    owner: kensuke.morris@octoenergy.com
+  description: | 
+    One row per customer count for each month based on their first orders. 
+  columns: 
+    - name: first_order_month
+      description: Primary key
+      tests:
+        - unique
+        - not_null
+        
