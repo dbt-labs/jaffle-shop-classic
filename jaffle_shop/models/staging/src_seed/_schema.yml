@@ -7,6 +7,10 @@ models:
         tests:
           - unique
           - not_null
+      - name: first_name_hash
+        tests: dbt_expectations.expect_columns_to_exist
+      - name: last_name_hash
+        tests: dbt_expectations.expect_columns_to_exist
 
   - name: stg_orders
     columns:
