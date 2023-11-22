@@ -26,8 +26,4 @@ models:
         materialized: view
 
 dbt-cloud:
-<<<<<<< HEAD
     project-id: 312973
-=======
-    project-id: 312973
->>>>>>> 69fb4f1538e573068416b088c81ba19a6e5ed3ab
