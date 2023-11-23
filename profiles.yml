@@ -1,0 +1,10 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: databricks
+      schema: dbt_hackdays
+      host: "{{ env_var('DBR_HOST') }}"
+      http_path: "{{ env_var('DBR_HTTP_PATH') }}"
+      token: "{{ env_var('DBR_TOKEN') }}" # Personal Access Token (PAT)
+      threads: 1
