@@ -2,10 +2,16 @@ target/
 dbt_modules/
 dbt_packages/
 logs/
+testing/
+package_projects/
 
 **/.DS_Store
 .env
+packages.yml
+selectors.yml
+
 
 # Python temp files
 *.pyc
 __pycache__
+Pipfile.lock
