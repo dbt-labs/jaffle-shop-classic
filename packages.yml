@@ -1,0 +1,9 @@
+packages:
+  - package: dbt-labs/dbt_utils
+    version: 0.8.6
+  - package: dbt-labs/spark_utils
+    version: 0.3.0
+  - package: dbt-labs/codegen
+    version: 0.7.0
+  - package: dbt-labs/dbt_project_evaluator
+    version: 0.1.3

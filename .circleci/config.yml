@@ -1,0 +1,82 @@
+version: 2.1
+
+executors:
+  standard:
+    docker:
+      - image: circleci/python:3.8
+    working_directory: "~/lib"
+
+# -----------------
+# Reusable commands
+# -----------------
+
+commands:
+  checkout_source:
+    steps:
+      - restore_cache:
+          keys:
+            - source-{{ .Branch }}-{{ .Revision }}
+            - source-{{ .Branch }}-
+            - source-
+      - checkout
+      - save_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "./.git"
+
+  update_virtualenv:
+    steps:
+      - restore_cache:
+          keys:
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-
+      - run:
+          name: Install Python packages
+          command: pipenv install --dev --system
+      - save_cache:
+          key: virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "./.venv"
+
+  prepare_dbt:
+    steps:
+      - run:
+          name: Installing Simba + UnixODBC
+          command: |
+            sudo mkdir -p /opt/simba/spark/lib/64/
+            sudo tar -xf driver/simba.tar.gz -C /opt/simba/spark/lib/64/
+            sudo apt-get install unixodbc-dev -y
+# --------------
+# Pipeline tasks
+# --------------
+
+jobs:
+  run-python-tests:
+    executor: standard
+    steps:
+      - checkout
+      - update_virtualenv
+      - run:
+          name: Run Python tests
+          command: make run-python-tests
+  run-dbt-project-evaluator:
+    executor: standard
+    environment:
+      SALT: himalayan
+      DBT_PROFILES_DIR: ~/lib/testing/
+      TESTING_PROFILE_NAME: jaffle_shop
+    steps:
+      - checkout
+      - update_virtualenv
+      - run:
+          name: Run dbt-project-evaluator package
+          command: make run-dbt-project-evaluator
+
+
+# Orchestrate our job run sequence
+workflows:
+  test:
+    jobs:
+      - run-python-tests
+      - run-dbt-project-evaluator
