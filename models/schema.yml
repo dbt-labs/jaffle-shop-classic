@@ -37,6 +37,8 @@ models:
 
     columns:
       - name: order_id
+        constraints:
+          - type: unique
         tests:
           - unique
           - not_null
@@ -44,6 +46,9 @@ models:
 
       - name: customer_id
         description: Foreign key to the customers table
+        constraints:
+          - type: foreign_key
+            expression: customers customer_id
         tests:
           - not_null
           - relationships:
