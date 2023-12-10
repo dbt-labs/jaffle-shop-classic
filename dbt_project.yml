@@ -1,7 +1,7 @@
 name: 'jaffle_shop'
 
 config-version: 2
-version: '0.1'
+version: '1.7.3'
 
 profile: 'jaffle_shop'
 

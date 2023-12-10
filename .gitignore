@@ -3,3 +3,5 @@ target/
 dbt_modules/
 logs/
 **/.DS_Store
+.vscode/settings.json
+profiles.yml
