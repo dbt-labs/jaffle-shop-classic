@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: wh_jaffle_customers
+    meta:
+      owner: "maja.cernja@krakentechnologies.ltd"
+    description: A table of customer information with one row per customer
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+      
