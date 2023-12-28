@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_orders
+    meta:
+      owner: "maja.cernja@krakentechnologies.ltd"
+    description: List of orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+      - name: order_date
+      - name: status
+
+  - name: stg_payments
+    meta:
+      owner: "maja.cernja@krakentechnologies.ltd"
+    description: List of payments
+    columns:
+      - name: payment_id
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+      - name: payment_method
+      - name: amount
+  
