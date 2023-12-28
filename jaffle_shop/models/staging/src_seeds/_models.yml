@@ -1,10 +1,20 @@
 version: 2
 
 models:
+  - name: stg_customers
+    meta:
+      owner: "maja.cernja@krakentechnologies.ltd"
+    description: List of customer ids
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
   - name: stg_orders
     meta:
       owner: "maja.cernja@krakentechnologies.ltd"
-    description: List of orders
+    description: List of customer orders
     columns:
       - name: order_id
         tests:
@@ -13,6 +23,10 @@ models:
       - name: customer_id
       - name: order_date
       - name: status
+        tests:
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+
 
   - name: stg_payments
     meta:
@@ -25,5 +39,8 @@ models:
           - not_null
       - name: order_id
       - name: payment_method
+        tests:
+          - accepted_values:
+              values: ['credit_card', 'coupon', 'bank_transfer', 'gift_card']
       - name: amount
   

@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_customers
+  - name: stg_customers_pii
     meta:
       owner: "maja.cernja@krakentechnologies.ltd"
     description: List of jaffle shop customers
