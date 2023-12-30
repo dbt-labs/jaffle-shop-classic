@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: fnl_finance_returnsvalue
+    meta:
+      owner: "maja.cernja@krakentechnologies.ltd"
+    description: |
+      Value of returns by customer id
+    columns:
+      - name: customer_id
+        description: This is a unique identifier for a customer
+        tests:
+          - unique
+          - not_null
+      - name: total_return_value
+        description: Total value of a customer's returns

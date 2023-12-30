@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: fnl_sales_newcustomers
+    meta:
+      owner: "maja.cernja@krakentechnologies.ltd"
+    description: |
+      Number of new customers by month
+    columns:
+      - name: first_order_month
+        description: |
+          This is a unique identifier for month and year
+        tests:
+          - unique
+          - not_null
+      - name: new_customers_count
+        description: Total number of new customers

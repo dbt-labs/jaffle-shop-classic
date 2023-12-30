@@ -1,0 +1,22 @@
+version: 2
+
+exposures:
+  - name: new_customers
+    label: New customers
+    description: Inksacio dashboard
+    type: dashboard
+    url: url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
+    owner:
+      email: maja.cernja@krakentechnologies.ltd
+    depends_on:
+      - ref('fnl_sales_newcustomers')
+  - name: returns_value
+    label: Value of returns per customer
+    description: Inksacio dashboard
+    type: dashboard
+    url: url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
+    owner:
+      email: maja.cernja@krakentechnologies.ltd
+    depends_on:
+      - ref('fnl_finance_returnsvalue')
+  
