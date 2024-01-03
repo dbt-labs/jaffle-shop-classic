@@ -33,8 +33,15 @@ Here are the fixes that need implementing:
 
 1) All `.yml` files should be renamed to specify what they apply to. For example each model directory should contain a `_models.yml` file (the `_` is to ensure the file is top of the directory for easy access) and may or may not contain a `_docs.yml` file for documentation. 
 2) Staging models should be split by which source they are coming from. As the sources in this repo all come from seeds, the staging models on top of them should be in the `src_seed` directory along with their respective `_models.yml` and `_sources.yml` files.
-3) stg_customers contains PII data in the `first_name` and `last_name` columns so these need to be hashed. Move this model into a `src_seed/sensitive` directory and mark each of the sensitive columns as sensitive in the `src_seed/sensitive/_models.yml` using the syntax:
+3) stg_customers contains PII data in the `first_name` and `last_name` columns so these need to be hashed. Mark the model and each of the sensitive columns as sensitive in the `src_seed/_models.yml` using the syntax:
     ```
+    models:
+      - name: stg_customers_pii
+        meta:
+          owner: 'example.email@octoenergy.com'
+          sensitive: true
+        description: |
+          Table description
         columns:
           - name: customer_id
             tests:
@@ -47,6 +54,7 @@ Here are the fixes that need implementing:
             meta:
               sensitive: true
     ```
+   You can refer to [dbt Project Architecture](https://docs.eks.octopus.engineering/explanations/dbt_project_architecture/#PII) doc for further information on handling PII.
 4) The `customers.sql` and `orders.sql` models are traditional warehouse models and should be in a `warehouse` directory with their respective `_docs.md` and `_models.yml` files.
 5) We use a package to test the structure of the dbt project called [dbt_project_evaluator](https://github.com/dbt-labs/dbt-project-evaluator) - this tests for lineage issues. One of its major checks is to see if staging models refer to other staging models which is normally not allowed. 
  
