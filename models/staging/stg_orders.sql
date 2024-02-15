@@ -21,3 +21,5 @@ renamed as (
 )
 
 select * from renamed
+    union all
+select 'test2' from teble_name_2
