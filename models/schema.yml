@@ -25,8 +25,6 @@ models:
       - name: first_name
         description: Customer's first name. PII.
         data_type: string
-        constraints:
-          - type: primary_key
 
       - name: last_name
         data_type: string
