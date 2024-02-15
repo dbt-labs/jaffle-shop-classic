@@ -20,3 +20,5 @@ renamed as (
 )
 
 select * from renamed
+    union all
+select * from renamed_1
