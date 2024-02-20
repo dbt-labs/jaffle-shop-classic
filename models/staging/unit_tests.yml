@@ -1,0 +1,12 @@
+unit_tests:
+  - name: test_dollar_conversion # this is the unique name of the test
+    model: stg_payments # name of the model I'm unit testing
+    given: # the mock data for your inputs
+      - input: ref('raw_payments')
+        rows:
+         - {id: 1, amount: 1000}
+         - {id: 2, amount: 50}
+    expect: # the expected output given the inputs above
+      rows:
+        - {payment_id: 1, amount: 100}
+        - {payment_id: 2, amount: 0.5}
