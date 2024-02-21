@@ -1,0 +1,110 @@
+{
+  "pivot" : {
+    "name" : "pivot",
+    "macroType" : "query",
+    "definition" : "\r\n\r\n  {% if values is not none %}\r\n    ,\r\n    {% for value in values %}\r\n        {{ agg }}(\r\n        {% if distinct %} distinct {% endif %}\r\n        case\r\n        when {{ column }} {{ cmp }} '{{ escape_single_quotes(value) }}'\r\n        then {{ then_value }}\r\n        else {{ else_value }}\r\n        end\r\n        )\r\n        {% if alias %}\r\n        {% if quote_identifiers %}\r\n                as {{ adapter.quote(prefix ~ value ~ suffix) }}\r\n        {% else %}\r\n            as {{ dbt_utils.slugify(prefix ~ value ~ suffix) }}\r\n        {% endif %}\r\n        {% endif %}\r\n        {% if not loop.last %},{% endif %}\r\n      {% endfor %}\r\n  {% endif %}",
+    "parameters" : {
+      "type" : "record",
+      "fields" : [ {
+        "name" : "column",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "values",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "alias",
+        "kind" : {
+          "type" : "value",
+          "value" : "True"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "agg",
+        "kind" : {
+          "type" : "value",
+          "value" : "'sum'"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "cmp",
+        "kind" : {
+          "type" : "value",
+          "value" : "'='"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "prefix",
+        "kind" : {
+          "type" : "value",
+          "value" : "''"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "suffix",
+        "kind" : {
+          "type" : "value",
+          "value" : "''"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "then_value",
+        "kind" : {
+          "type" : "value",
+          "value" : "1"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "else_value",
+        "kind" : {
+          "type" : "value",
+          "value" : "0"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "quote_identifiers",
+        "kind" : {
+          "type" : "value",
+          "value" : "True"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "distinct",
+        "kind" : {
+          "type" : "value",
+          "value" : "False"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      } ]
+    },
+    "staleState" : "none",
+    "version" : 0
+  }
+}

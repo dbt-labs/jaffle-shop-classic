@@ -1,0 +1,257 @@
+{
+  "id" : "stg_payments",
+  "metainfo" : {
+    "label" : "stg_payments",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "source##f7ksguNl" : {
+      "id" : "source##f7ksguNl",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "source",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0,
+        "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
+      },
+      "properties" : {
+        "table" : {
+          "name" : "raw_payments",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "w9PctmfR",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "payment_method",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "amount",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "renamed##ZRQUEBjQ" : {
+      "id" : "renamed##ZRQUEBjQ",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "renamed",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ "kBGLMD7B##id", "kBGLMD7B##order_id", "kBGLMD7B##payment_method", "kBGLMD7B##amount" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "id"
+          },
+          "alias" : "payment_id"
+        }, {
+          "expression" : {
+            "expression" : "order_id"
+          }
+        }, {
+          "expression" : {
+            "expression" : "payment_method"
+          }
+        }, {
+          "expression" : {
+            "expression" : "-- `amount` is currently stored in cents, so we convert it to dollars\namount / 100"
+          },
+          "alias" : "amount"
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "kBGLMD7B",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "payment_method",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "amount",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "source"
+        } ],
+        "outputs" : [ {
+          "id" : "r08wUg8m",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "PAYMENT_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "PAYMENT_METHOD",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "stg_payments##O1QuAL6E" : {
+      "id" : "stg_payments##O1QuAL6E",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "stg_payments",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM renamed\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "H6SUE9fV",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "PAYMENT_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "PAYMENT_METHOD",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "renamed"
+        } ],
+        "outputs" : [ {
+          "id" : "PqfOup15",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "PAYMENT_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "PAYMENT_METHOD",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "AMOUNT",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "bxMUaWdq",
+    "source" : "source##f7ksguNl",
+    "sourcePort" : "w9PctmfR",
+    "target" : "renamed##ZRQUEBjQ",
+    "targetPort" : "kBGLMD7B"
+  }, {
+    "id" : "Qt6Wfs38",
+    "source" : "renamed##ZRQUEBjQ",
+    "sourcePort" : "r08wUg8m",
+    "target" : "stg_payments##O1QuAL6E",
+    "targetPort" : "H6SUE9fV"
+  } ],
+  "component" : "Model"
+}

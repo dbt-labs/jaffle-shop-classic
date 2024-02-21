@@ -1,0 +1,126 @@
+{
+  "pivot_query" : {
+    "name" : "pivot_query",
+    "macroType" : "query",
+    "definition" : "\r\n    {% set comma_separated_pk = primary_keys|join(', ') %}\r\n\r\n    {% set sql %}\r\n    select {{comma_separated_pk}}\r\n    {{ HelloWorld_SQL.pivot(column, values, alias, agg, cmp, prefix, suffix, then_value, else_value, quote_identifiers, distinct) }}\r\n    from {{source}}\r\n    group by {{comma_separated_pk}}\r\n\r\n    {% endset %}",
+    "parameters" : {
+      "type" : "record",
+      "fields" : [ {
+        "name" : "source",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "primary_keys",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "column",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "values",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "alias",
+        "kind" : {
+          "type" : "value",
+          "value" : "True"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "agg",
+        "kind" : {
+          "type" : "value",
+          "value" : "'sum'"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "cmp",
+        "kind" : {
+          "type" : "value",
+          "value" : "'='"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "prefix",
+        "kind" : {
+          "type" : "value",
+          "value" : "''"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "suffix",
+        "kind" : {
+          "type" : "value",
+          "value" : "''"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "then_value",
+        "kind" : {
+          "type" : "value",
+          "value" : "1"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "else_value",
+        "kind" : {
+          "type" : "value",
+          "value" : "0"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "quote_identifiers",
+        "kind" : {
+          "type" : "value",
+          "value" : "True"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      }, {
+        "name" : "distinct",
+        "kind" : {
+          "type" : "value",
+          "value" : "False"
+        },
+        "optional" : true,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      } ]
+    },
+    "staleState" : "none",
+    "version" : 0
+  }
+}

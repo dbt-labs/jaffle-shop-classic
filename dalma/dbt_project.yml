@@ -1,0 +1,39 @@
+# ==================
+# Project Details
+# ==================
+name: "HelloWorld_SQL"
+config-version: 2
+require-dbt-version:
+- ">=1.0.0"
+- "<2.0.0"
+version: "0.1"
+profile: "HelloWorld_SQL"
+
+# ==================
+# File Path Configs
+# ==================
+test-paths:
+- "tests"
+clean-targets:
+- "target"
+- "dbt_modules"
+- "logs"
+seed-paths:
+- "seeds"
+model-paths:
+- "models"
+- "prophecy-sources"
+analysis-paths:
+- "analysis"
+macro-paths:
+- "macros"
+target-path: "target"
+
+# ==================
+# Model Configs
+# ==================
+models:
+  HelloWorld_SQL:
+    materialized: "table"
+    staging:
+      materialized: "view"

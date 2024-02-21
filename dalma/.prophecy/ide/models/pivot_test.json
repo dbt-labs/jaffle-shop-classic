@@ -1,0 +1,171 @@
+{
+  "id" : "pivot_test",
+  "metainfo" : {
+    "label" : "pivot_test",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "pivot_test##brmZhX2r" : {
+      "id" : "pivot_test##brmZhX2r",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "pivot_test",
+        "x" : -20,
+        "y" : -20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM pivot_1\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "KIfKXAJA",
+          "slug" : "pivot_1"
+        } ],
+        "outputs" : [ {
+          "id" : "qefEStvU",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "CXzo0pNJCQWnCSjlrGDdM" : {
+      "id" : "CXzo0pNJCQWnCSjlrGDdM",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "GRADES",
+        "slug" : "GRADES",
+        "x" : -380,
+        "y" : -20,
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "GRADES",
+          "sourceType" : "Source",
+          "sourceName" : "BLACKROCK.TEST",
+          "alias" : ""
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "eqvUdqMAlsHDkFd9-9rGY",
+          "schema" : {
+            "providerType" : "snowflake",
+            "fields" : [ {
+              "name" : "STUDENT",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "SUBJECT",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "MARKS",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "4Yu_KHzuX2gLRCxpCob40$$cmrm-17el4Mju2ksvXDrc" : {
+      "id" : "4Yu_KHzuX2gLRCxpCob40$$cmrm-17el4Mju2ksvXDrc",
+      "component" : "Macro",
+      "metadata" : {
+        "label" : "pivot_1",
+        "slug" : "pivot_1",
+        "x" : -200,
+        "y" : -20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "macroName" : "pivot",
+        "parameters" : [ {
+          "name" : "column",
+          "value" : "'SUBJECT'"
+        }, {
+          "name" : "values",
+          "value" : "['Mathematics', 'Science', 'Geography']"
+        }, {
+          "name" : "then_value",
+          "value" : "'MARKS'"
+        }, {
+          "name" : "else_value",
+          "value" : "'NULL'"
+        }, {
+          "name" : "agg",
+          "value" : "'max'"
+        } ],
+        "projectName" : "HelloWorld_SQL"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "cPEgobkyAY9e7jdXCfHcs$$HQn8qkoPKyR6NSVlj_rLu",
+          "schema" : {
+            "providerType" : "snowflake",
+            "fields" : [ {
+              "name" : "STUDENT",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "SUBJECT",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "MARKS",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "GRADES"
+        } ],
+        "outputs" : [ {
+          "id" : "VSoXNoYtGfp5sBsW3T0qQ$$7fFQJAzWpg1NlM6ivHP72",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "_MNb5PBbu5eXgkfrxkfM8$$DBitSEbVAzaA7nhsp9EiD",
+    "source" : "4Yu_KHzuX2gLRCxpCob40$$cmrm-17el4Mju2ksvXDrc",
+    "sourcePort" : "VSoXNoYtGfp5sBsW3T0qQ$$7fFQJAzWpg1NlM6ivHP72",
+    "target" : "pivot_test##brmZhX2r",
+    "targetPort" : "KIfKXAJA"
+  }, {
+    "id" : "Hcvs2n6jY5wlwhcprdAaK",
+    "source" : "CXzo0pNJCQWnCSjlrGDdM",
+    "sourcePort" : "eqvUdqMAlsHDkFd9-9rGY",
+    "target" : "4Yu_KHzuX2gLRCxpCob40$$cmrm-17el4Mju2ksvXDrc",
+    "targetPort" : "cPEgobkyAY9e7jdXCfHcs$$HQn8qkoPKyR6NSVlj_rLu"
+  } ],
+  "component" : "Model"
+}

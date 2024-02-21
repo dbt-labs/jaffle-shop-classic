@@ -1,0 +1,257 @@
+{
+  "id" : "stg_orders",
+  "metainfo" : {
+    "label" : "stg_orders",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "source##rSUlpcEm" : {
+      "id" : "source##rSUlpcEm",
+      "component" : "Seed",
+      "metadata" : {
+        "label" : "source",
+        "x" : 20,
+        "y" : 20,
+        "phase" : 0,
+        "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
+      },
+      "properties" : {
+        "table" : {
+          "name" : "raw_orders",
+          "sourceType" : "Seed"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "tvXUAfDl",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "user_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "status",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "renamed##f9e5VOLF" : {
+      "id" : "renamed##f9e5VOLF",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "renamed",
+        "x" : 220,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ "eFwTqPye##id", "eFwTqPye##user_id", "eFwTqPye##order_date", "eFwTqPye##status" ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "id"
+          },
+          "alias" : "order_id"
+        }, {
+          "expression" : {
+            "expression" : "user_id"
+          },
+          "alias" : "customer_id"
+        }, {
+          "expression" : {
+            "expression" : "order_date"
+          }
+        }, {
+          "expression" : {
+            "expression" : "status"
+          }
+        } ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "eFwTqPye",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "user_id",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "order_date",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "status",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "source"
+        } ],
+        "outputs" : [ {
+          "id" : "qi80E7Er",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "stg_orders##TlCSgOLV" : {
+      "id" : "stg_orders##TlCSgOLV",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "stg_orders",
+        "x" : 420,
+        "y" : 20,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM renamed\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "VXJ37NAR",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "renamed"
+        } ],
+        "outputs" : [ {
+          "id" : "BFZnmvNL",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "ORDER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "CUSTOMER_ID",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "ORDER_DATE",
+              "dataType" : {
+                "type" : "Date"
+              }
+            }, {
+              "name" : "STATUS",
+              "dataType" : {
+                "type" : "String"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "LIEyohr5",
+    "source" : "source##rSUlpcEm",
+    "sourcePort" : "tvXUAfDl",
+    "target" : "renamed##f9e5VOLF",
+    "targetPort" : "eFwTqPye"
+  }, {
+    "id" : "wNJyO378",
+    "source" : "renamed##f9e5VOLF",
+    "sourcePort" : "qi80E7Er",
+    "target" : "stg_orders##TlCSgOLV",
+    "targetPort" : "VXJ37NAR"
+  } ],
+  "component" : "Model"
+}

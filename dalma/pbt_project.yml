@@ -1,0 +1,424 @@
+name: HelloWorld_SQL
+description: ''
+version: '0.1'
+author: null
+language: sql
+buildSystem: ''
+buildSystemDetails: null
+pipelines: {}
+datasets: {}
+templates: {}
+jobs:
+  jobs/test_dag:
+    name: test_dag
+    description: ''
+    fabricUID: 9763
+    scheduler:
+      Prophecy: {}
+    cloudProvider: null
+    jobSize: null
+    scheduleCron: 0 16 * * MON,TUE,WED,THU,FRI
+    timeout: null
+    alerting:
+      emails: ''
+      onStart: false
+      onSuccess: false
+      onFailure: false
+    pipelines: []
+    jobClusterMode:
+      clusterMode:
+        Multi: {}
+      clusterId: null
+    enabled: false
+    createdAt: '2024-02-21 10:23:45'
+    author: dalma.kis@blackrock.com
+gemContainer:
+  languageVersion: ''
+  gemLibsVersion: ''
+  gems: {}
+  dependencies: null
+functions:
+  author: null
+  createdAt: '2023-12-04 21:25:04'
+  udfs: {}
+  udafs: {}
+  expressions: {}
+  airflowFunctions: {}
+subgraphs: {}
+sqlModels:
+  .prophecy/metadata/sqlmodels/stg_orders:
+    name: stg_orders
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: ORDER_DATE
+        dataType:
+          type: Date
+      - name: STATUS
+        dataType:
+          type: String
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - models/staging/stg_orders.sql
+    - .prophecy/ide/models/stg_orders.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-12-04 21:25:17'
+  .prophecy/metadata/sqlmodels/pivot_test:
+    name: pivot_test
+    schema: null
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - models/pivot_test.sql
+    - .prophecy/ide/models/pivot_test.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2024-02-19 13:35:28'
+  .prophecy/metadata/sqlmodels/pivot_test_manual_code:
+    name: pivot_test_manual_code
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: STUDENT
+        dataType:
+          type: String
+      - name: Mathematics
+        dataType:
+          type: Number
+      - name: Science
+        dataType:
+          type: Number
+      - name: Geography
+        dataType:
+          type: Number
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - models/pivot_test_manual_code.sql
+    - .prophecy/ide/models/pivot_test_manual_code.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2024-02-19 13:41:28'
+  .prophecy/metadata/sqlmodels/customers:
+    name: customers
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: FIRST_NAME
+        dataType:
+          type: String
+      - name: LAST_NAME
+        dataType:
+          type: String
+      - name: FIRST_ORDER
+        dataType:
+          type: Date
+      - name: MOST_RECENT_ORDER
+        dataType:
+          type: Date
+      - name: NUMBER_OF_ORDERS
+        dataType:
+          type: Number
+      - name: CUSTOMER_LIFETIME_VALUE
+        dataType:
+          type: Number
+    description: This table has basic information about a customer, as well as some
+      derived facts based on a customer's orders
+    author: dalma.kis@blackrock.com
+    files:
+    - models/customers.sql
+    - .prophecy/ide/models/customers.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-12-04 21:25:17'
+  .prophecy/metadata/sqlmodels/stg_payments:
+    name: stg_payments
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: PAYMENT_ID
+        dataType:
+          type: Number
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: PAYMENT_METHOD
+        dataType:
+          type: String
+      - name: AMOUNT
+        dataType:
+          type: Number
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - models/staging/stg_payments.sql
+    - .prophecy/ide/models/stg_payments.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-12-04 21:25:17'
+  .prophecy/metadata/sqlmodels/stg_customers:
+    name: stg_customers
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: FIRST_NAME
+        dataType:
+          type: String
+      - name: LAST_NAME
+        dataType:
+          type: String
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - models/staging/stg_customers.sql
+    - .prophecy/ide/models/stg_customers.json
+    - models/staging/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-12-04 21:25:17'
+  .prophecy/metadata/sqlmodels/pivot_v3:
+    name: pivot_v3
+    schema: null
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - models/pivot_v3.sql
+    - .prophecy/ide/models/pivot_v3.json
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2024-02-20 12:54:05'
+  .prophecy/metadata/sqlmodels/orders:
+    name: orders
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: ORDER_ID
+        dataType:
+          type: Number
+      - name: CUSTOMER_ID
+        dataType:
+          type: Number
+      - name: ORDER_DATE
+        dataType:
+          type: Date
+      - name: STATUS
+        dataType:
+          type: String
+      - name: CREDIT_CARD_AMOUNT
+        dataType:
+          type: Number
+      - name: COUPON_AMOUNT
+        dataType:
+          type: Number
+      - name: BANK_TRANSFER_AMOUNT
+        dataType:
+          type: Number
+      - name: GIFT_CARD_AMOUNT
+        dataType:
+          type: Number
+      - name: AMOUNT
+        dataType:
+          type: Number
+    description: This table has basic information about orders, as well as some derived
+      facts based on payments
+    author: dalma.kis@blackrock.com
+    files:
+    - models/orders.sql
+    - .prophecy/ide/models/orders.json
+    - models/schema.yml
+    sqlDependencies:
+      models: []
+      datasets: []
+    createdAt: '2023-12-04 21:25:17'
+sqlMacros:
+  .prophecy/metadata/sqlmacros/create_columns:
+    name: create_columns
+    macroType: query
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - macros/add_columns.sql
+    createdAt: '2024-02-15 14:21:46'
+  .prophecy/metadata/sqlmacros/pivot:
+    name: pivot
+    macroType: query
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - macros/pivot.sql
+    - .prophecy/ide/macros/pivot.json
+    createdAt: '2024-02-19 11:36:54'
+  .prophecy/metadata/sqlmacros/pivot_query:
+    name: pivot_query
+    macroType: query
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - macros/pivot_query.sql
+    - .prophecy/ide/macros/pivot_query.json
+    createdAt: '2024-02-20 12:01:04'
+sqlSeeds:
+  .prophecy/metadata/sqlseeds/raw_customers:
+    name: raw_customers
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: id
+        dataType:
+          type: Number
+      - name: first_name
+        dataType:
+          type: String
+      - name: last_name
+        dataType:
+          type: String
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - seeds/raw_customers.csv
+    createdAt: '2023-12-04 21:25:17'
+  .prophecy/metadata/sqlseeds/raw_orders:
+    name: raw_orders
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: id
+        dataType:
+          type: Number
+      - name: user_id
+        dataType:
+          type: Number
+      - name: order_date
+        dataType:
+          type: Date
+      - name: status
+        dataType:
+          type: String
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - seeds/raw_orders.csv
+    createdAt: '2023-12-04 21:25:17'
+  .prophecy/metadata/sqlseeds/raw_payments:
+    name: raw_payments
+    schema:
+      providerType: Snowflake
+      fields:
+      - name: id
+        dataType:
+          type: Number
+      - name: order_id
+        dataType:
+          type: Number
+      - name: payment_method
+        dataType:
+          type: String
+      - name: amount
+        dataType:
+          type: Number
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - seeds/raw_payments.csv
+    createdAt: '2023-12-04 21:25:17'
+sqlSources:
+  .prophecy/metadata/sqlsources/BLACKROCK_TEST:
+    name: BLACKROCK.TEST
+    description: null
+    author: dalma.kis@blackrock.com
+    files:
+    - prophecy-sources/sources.yml
+    createdAt: '2024-02-15 14:14:27'
+    tables:
+    - name: SCHEMA_DETECTION_RAW_TEST
+      schema:
+        providerType: snowflake
+        fields:
+        - name: ID
+          dataType:
+            type: Number
+        - name: TEST_NUMBER
+          dataType:
+            type: String
+        - name: TEST_DECIMAL
+          dataType:
+            type: String
+        - name: TEST_DATE
+          dataType:
+            type: String
+        - name: TEST_STRING
+          dataType:
+            type: String
+      description: null
+      author: dalma.kis@blackrock.com
+      createdAt: '2024-02-15 14:14:27'
+    - name: GRADES
+      schema:
+        providerType: snowflake
+        fields:
+        - name: STUDENT
+          dataType:
+            type: String
+        - name: SUBJECT
+          dataType:
+            type: String
+        - name: MARKS
+          dataType:
+            type: Number
+      description: ''
+      author: dalma.kis@blackrock.com
+      createdAt: '2024-02-19 11:47:19'
+    - name: GRADES_PIVOT
+      schema:
+        providerType: snowflake
+        fields:
+        - name: STUDENT
+          dataType:
+            type: String
+        - name: MATHEMATICS
+          dataType:
+            type: Number
+        - name: SCIENCE
+          dataType:
+            type: Number
+        - name: GEOGRAPHY
+          dataType:
+            type: Number
+      description: null
+      author: dalma.kis@blackrock.com
+      createdAt: '2024-02-19 15:05:49'
+sqlUnreferencedSources: {}
+sqlPipeline:
+  name: sqlPipeline
+  description: null
+  author: dalma.kis@blackrock.com
+  createdAt: '2023-12-04 21:25:04'
+dependencies: '[]'
+projectDependencies: {}
+flags:
+  shouldAddDefaultDependenciesIfAbsent: true
+pipelineConfigurations: {}
