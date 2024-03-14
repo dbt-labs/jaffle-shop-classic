@@ -1,0 +1,11 @@
+all_assets:
+  cleansed_customers:
+    name: cleansed_customers
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
