@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: fizz
+    database: fizz
+    schema: ci
+    tables:
+      - name: raw_customers
