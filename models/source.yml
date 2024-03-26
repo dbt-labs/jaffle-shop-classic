@@ -1,0 +1,8 @@
+version 2:
+
+sources:
+  - name: jafflestore
+    database: jafflestore  
+    schema: dbo
+    tables:
+      - name: customers
