@@ -1,3 +1,7 @@
+{{ config(
+    materialized='incremental',
+    unique_key='id',
+) }}
 with source as (
 
     {#-
@@ -17,7 +21,9 @@ renamed as (
         status
 
     from source
-
+    {% if is_incremental() %}
+    WHERE order_date >= (SELECT MAX(order_date) FROM {{ this }})
+    {% endif %}
 )
 
 select * from renamed

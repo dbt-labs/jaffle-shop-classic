@@ -1,4 +1,5 @@
-
+.venv
+.vscode
 target/
 dbt_modules/
 logs/
