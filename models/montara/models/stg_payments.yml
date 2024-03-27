@@ -1,0 +1,24 @@
+version: 2
+models:
+  - name: stg_payments
+    description: ""
+    columns:
+      - name: PAYMENT_ID
+        description: Unique identifier for the payment transaction.
+        type: NUMBER
+        tests: []
+      - name: PAYMENT_METHOD
+        description: Method by which the payment was made.
+        type: TEXT
+        tests: []
+      - name: AMOUNT
+        description: Total payment amount in dollars.
+        type: NUMBER
+        tests: []
+      - name: ORDER_ID
+        description: Identifier of the order associated with the payment.
+        type: NUMBER
+        tests: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
