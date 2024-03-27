@@ -1,6 +1,6 @@
-all_assets:
-  stg_orders:
-    name: stg_orders
+version: 2
+models:
+  - name: stg_orders
     description: Transforms data from raw_orders by renaming columns, filtering for
       new records since the last update when run incrementally, and enables the
       result to be stored as an incrementally updated table with a unique key of
