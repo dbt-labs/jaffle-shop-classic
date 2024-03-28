@@ -1,0 +1,6 @@
+version: 2
+
+sources:
+  - name: raw_something
+    tables:
+      - name: raw_something
