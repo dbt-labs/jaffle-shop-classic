@@ -1,0 +1,36 @@
+version: 2
+models:
+  - name: customers
+    description: ""
+    columns:
+      - name: CUSTOMER_ID
+        description: Unique identifier for each customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        type: TEXT
+        tests: []
+        description: ""
+      - name: NUMBER_OF_ORDERS
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: LAST_NAME
+        type: TEXT
+        tests: []
+        description: ""
+      - name: CUSTOMER_LIFETIME_VALUE
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: MOST_RECENT_ORDER
+        type: DATE
+        tests: []
+        description: ""
+      - name: FIRST_ORDER
+        type: DATE
+        tests: []
+        description: ""
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
