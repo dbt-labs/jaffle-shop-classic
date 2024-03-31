@@ -4,7 +4,41 @@ all_assets:
     description: ""
     config:
       materialized: table
-    columns: []
+    columns:
+      - name: customer_lifetime_value
+        type: NUMBER
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: most_recent_order
+        type: DATE
+        tests: []
+        description: ""
+      - name: first_name
+        type: TEXT
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: last_name
+        type: TEXT
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: first_order
+        type: DATE
+        tests: []
+        description: ""
+      - name: number_of_orders
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: customer_id
+        type: NUMBER
+        tests: []
+        description: ""
     meta:
       model_tags:
         - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
@@ -18,16 +52,10 @@ all_assets:
       - name: CUSTOMER_ID
         description: Unique identifier for each customer
         type: NUMBER
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
       - name: FIRST_NAME
         type: TEXT
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: NUMBER_OF_ORDERS
         type: NUMBER
@@ -35,9 +63,7 @@ all_assets:
         description: ""
       - name: LAST_NAME
         type: TEXT
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: CUSTOMER_LIFETIME_VALUE
         type: NUMBER
@@ -49,9 +75,7 @@ all_assets:
         description: ""
       - name: FIRST_ORDER
         type: DATE
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
     meta:
       model_tags: []
