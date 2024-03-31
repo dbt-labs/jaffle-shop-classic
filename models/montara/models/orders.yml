@@ -9,9 +9,7 @@ models:
         description: ""
       - name: CUSTOMER_ID
         type: NUMBER
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: AMOUNT
         type: NUMBER
