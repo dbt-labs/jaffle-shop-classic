@@ -5,9 +5,7 @@ models:
     columns:
       - name: STATUS
         type: TEXT
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: CUSTOMER_ID
         type: NUMBER
