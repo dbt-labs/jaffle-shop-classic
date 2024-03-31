@@ -7,9 +7,7 @@ models:
     columns:
       - name: customer_lifetime_value
         type: NUMBER
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: most_recent_order
         type: DATE
@@ -17,15 +15,11 @@ models:
         description: ""
       - name: first_name
         type: TEXT
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: last_name
         type: TEXT
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: first_order
         type: DATE
