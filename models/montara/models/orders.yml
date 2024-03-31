@@ -1,0 +1,48 @@
+version: 2
+models:
+  - name: orders
+    description: ""
+    columns:
+      - name: STATUS
+        type: TEXT
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: CUSTOMER_ID
+        type: NUMBER
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_DATE
+        type: DATE
+        tests: []
+        description: ""
+      - name: COUPON_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: CREDIT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: GIFT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: BANK_TRANSFER_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_ID
+        type: NUMBER
+        tests: []
+        description: ""
+    meta:
+      model_tags: []
+      warehouse_type: snowflake

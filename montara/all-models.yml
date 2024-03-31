@@ -1,4 +1,16 @@
 all_assets:
+  cleansed_customers:
+    name: cleansed_customers
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
   customers:
     name: customers
     description: ""
@@ -6,10 +18,16 @@ all_assets:
       - name: CUSTOMER_ID
         description: Unique identifier for each customer
         type: NUMBER
-        tests: []
+        tests:
+          - unique_tolerance:
+              tolerance: 0
       - name: FIRST_NAME
         type: TEXT
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: NUMBER_OF_ORDERS
         type: NUMBER
@@ -17,7 +35,9 @@ all_assets:
         description: ""
       - name: LAST_NAME
         type: TEXT
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
         description: ""
       - name: CUSTOMER_LIFETIME_VALUE
         type: NUMBER
@@ -29,10 +49,80 @@ all_assets:
         description: ""
       - name: FIRST_ORDER
         type: DATE
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+        description: ""
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+  orders:
+    name: orders
+    description: ""
+    columns:
+      - name: STATUS
+        type: TEXT
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: CUSTOMER_ID
+        type: NUMBER
+        tests:
+          - unique_tolerance:
+              tolerance: 0
+        description: ""
+      - name: AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_DATE
+        type: DATE
+        tests: []
+        description: ""
+      - name: COUPON_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: CREDIT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: GIFT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: BANK_TRANSFER_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_ID
+        type: NUMBER
         tests: []
         description: ""
     meta:
       model_tags: []
+      warehouse_type: snowflake
+  stg_customers:
+    name: stg_customers
+    description: ""
+    columns:
+      - name: LAST_NAME
+        description: The surname of the customer.
+        type: TEXT
+        tests: []
+      - name: CUSTOMER_ID
+        description: A unique identifier for the customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        description: The given name of the customer.
+        type: TEXT
+        tests: []
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
       warehouse_type: snowflake
   stg_orders:
     name: stg_orders

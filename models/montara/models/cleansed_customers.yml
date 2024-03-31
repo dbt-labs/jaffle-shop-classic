@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: cleansed_customers
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []

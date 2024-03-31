@@ -6,10 +6,16 @@ models:
       - name: CUSTOMER_ID
         description: Unique identifier for each customer
         type: NUMBER
-        tests: []
+        tests:
+          - unique_tolerance:
+              tolerance: 0
       - name: FIRST_NAME
         type: TEXT
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: NUMBER_OF_ORDERS
         type: NUMBER
@@ -17,7 +23,9 @@ models:
         description: ""
       - name: LAST_NAME
         type: TEXT
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
         description: ""
       - name: CUSTOMER_LIFETIME_VALUE
         type: NUMBER
@@ -29,7 +37,9 @@ models:
         description: ""
       - name: FIRST_ORDER
         type: DATE
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
         description: ""
     meta:
       model_tags: []
