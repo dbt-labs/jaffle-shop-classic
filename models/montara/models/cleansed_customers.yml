@@ -1,0 +1,41 @@
+version: 2
+models:
+  - name: cleansed_customers
+    description: ""
+    config:
+      materialized: table
+    columns:
+      - name: customer_lifetime_value
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: most_recent_order
+        type: DATE
+        tests: []
+        description: ""
+      - name: first_name
+        type: TEXT
+        tests: []
+        description: ""
+      - name: last_name
+        type: TEXT
+        tests: []
+        description: ""
+      - name: first_order
+        type: DATE
+        tests: []
+        description: ""
+      - name: number_of_orders
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: customer_id
+        type: NUMBER
+        tests: []
+        description: ""
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
