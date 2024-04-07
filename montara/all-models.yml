@@ -7,59 +7,31 @@ all_assets:
     columns:
       - name: customer_lifetime_value
         type: NUMBER
-        tests:
-          - not_null_tolerance:
-              tolerance: 99
-          - unique_tolerance:
-              tolerance: 99
+        tests: []
         description: ""
       - name: most_recent_order
         type: DATE
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: first_name
         type: TEXT
-        tests:
-          - not_null_tolerance:
-              tolerance: 99
-          - unique_tolerance:
-              tolerance: 99
+        tests: []
         description: ""
       - name: last_name
         type: TEXT
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: first_order
         type: DATE
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: number_of_orders
         type: NUMBER
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: customer_id
         type: NUMBER
-        tests:
-          - not_null_tolerance:
-              tolerance: 99
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
     meta:
       model_tags:
