@@ -31,7 +31,9 @@ all_assets:
         description: ""
       - name: customer_id
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
         description: ""
     meta:
       model_tags:
