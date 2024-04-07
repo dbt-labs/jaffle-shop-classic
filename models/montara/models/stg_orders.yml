@@ -1,0 +1,30 @@
+version: 2
+models:
+  - name: stg_orders
+    description: Transforms data from raw_orders by renaming columns, filtering for
+      new records since the last update when run incrementally, and enables the
+      result to be stored as an incrementally updated table with a unique key of
+      'id'.
+    columns:
+      - name: ORDER_DATE
+        description: The date and time when the order was placed.
+        type: DATE
+        tests: []
+      - name: CUSTOMER_ID
+        description: The unique identifier for the customer who placed the order.
+        type: NUMBER
+        tests: []
+      - name: ORDER_ID
+        description: The unique identifier for the order.
+        type: NUMBER
+        tests: []
+      - name: STATUS
+        description: The current status of the order (e.g., 'shipped', 'processing').
+        type: TEXT
+        tests: []
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
