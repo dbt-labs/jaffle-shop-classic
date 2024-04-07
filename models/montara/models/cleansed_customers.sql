@@ -2,9 +2,11 @@
 WITH customers AS (SELECT * FROM {{ ref('customers') }})
 
 select
-* from
+*
+from
 customers
 --original_sql
 --select
---  * from
+--  *
+--from
 --  customers
