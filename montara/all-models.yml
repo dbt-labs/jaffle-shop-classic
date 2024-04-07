@@ -1,0 +1,201 @@
+all_assets:
+  cleansed_customers:
+    name: cleansed_customers
+    description: ""
+    config:
+      materialized: table
+    columns:
+      - name: customer_lifetime_value
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: most_recent_order
+        type: DATE
+        tests: []
+        description: ""
+      - name: first_name
+        type: TEXT
+        tests: []
+        description: ""
+      - name: last_name
+        type: TEXT
+        tests: []
+        description: ""
+      - name: first_order
+        type: DATE
+        tests: []
+        description: ""
+      - name: number_of_orders
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: customer_id
+        type: NUMBER
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+        description: ""
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
+  customers:
+    name: customers
+    description: ""
+    columns:
+      - name: CUSTOMER_ID
+        description: Unique identifier for each customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        type: TEXT
+        tests: []
+        description: Customer's first name
+      - name: NUMBER_OF_ORDERS
+        type: NUMBER
+        tests: []
+        description: Total count of orders placed by the customer
+      - name: LAST_NAME
+        type: TEXT
+        tests: []
+        description: Customer’s last name
+      - name: CUSTOMER_LIFETIME_VALUE
+        type: NUMBER
+        tests: []
+        description: The total amount of money a customer has spent on orders
+      - name: MOST_RECENT_ORDER
+        type: DATE
+        tests: []
+        description: Date of the most recent order the customer has placed
+      - name: FIRST_ORDER
+        type: DATE
+        tests: []
+        description: Date when the customer placed their first order
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+      warehouse_type: snowflake
+    tests: []
+  orders:
+    name: orders
+    description: ""
+    columns:
+      - name: STATUS
+        type: TEXT
+        tests: []
+        description: ""
+      - name: CUSTOMER_ID
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_DATE
+        type: DATE
+        tests: []
+        description: ""
+      - name: COUPON_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: CREDIT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: GIFT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: BANK_TRANSFER_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_ID
+        type: NUMBER
+        tests: []
+        description: ""
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
+  stg_customers:
+    name: stg_customers
+    description: ""
+    columns:
+      - name: LAST_NAME
+        description: The surname of the customer.
+        type: TEXT
+        tests: []
+      - name: CUSTOMER_ID
+        description: A unique identifier for the customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        description: The given name of the customer.
+        type: TEXT
+        tests: []
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
+  stg_orders:
+    name: stg_orders
+    description: Transforms data from raw_orders by renaming columns, filtering for
+      new records since the last update when run incrementally, and enables the
+      result to be stored as an incrementally updated table with a unique key of
+      'id'.
+    columns:
+      - name: ORDER_DATE
+        description: The date and time when the order was placed.
+        type: DATE
+        tests: []
+      - name: CUSTOMER_ID
+        description: The unique identifier for the customer who placed the order.
+        type: NUMBER
+        tests: []
+      - name: ORDER_ID
+        description: The unique identifier for the order.
+        type: NUMBER
+        tests: []
+      - name: STATUS
+        description: The current status of the order (e.g., 'shipped', 'processing').
+        type: TEXT
+        tests: []
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      warehouse_type: snowflake
+    tests: []
+  stg_payments:
+    name: stg_payments
+    description: ""
+    columns:
+      - name: PAYMENT_ID
+        description: Unique identifier for the payment transaction.
+        type: NUMBER
+        tests: []
+      - name: PAYMENT_METHOD
+        description: Method by which the payment was made.
+        type: TEXT
+        tests: []
+      - name: AMOUNT
+        description: Total payment amount in dollars.
+        type: NUMBER
+        tests: []
+      - name: ORDER_ID
+        description: Identifier of the order associated with the payment.
+        type: NUMBER
+        tests: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []

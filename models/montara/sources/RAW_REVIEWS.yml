@@ -1,0 +1,29 @@
+version: 2
+sources:
+  - name: RAW_REVIEWS
+    schema: RAW
+    database: airbnb
+    tables:
+      - name: RAW_REVIEWS
+        description: ""
+        columns:
+          - name: REVIEWER_NAME
+            description: ""
+            type: TEXT
+            tests: []
+          - name: COMMENTS
+            description: ""
+            type: TEXT
+            tests: []
+          - name: DATE
+            description: ""
+            type: TIMESTAMP
+            tests: []
+          - name: SENTIMENT
+            description: ""
+            type: TEXT
+            tests: []
+          - name: LISTING_ID
+            description: ""
+            type: NUMBER
+            tests: []

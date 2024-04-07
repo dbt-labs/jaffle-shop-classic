@@ -1,0 +1,45 @@
+version: 2
+sources:
+  - name: RAW_LISTINGS
+    schema: RAW
+    database: airbnb
+    tables:
+      - name: RAW_LISTINGS
+        description: ""
+        columns:
+          - name: CREATED_AT
+            description: ""
+            type: TIMESTAMP
+            tests: []
+          - name: LISTING_URL
+            description: ""
+            type: TEXT
+            tests: []
+          - name: PRICE
+            description: ""
+            type: TEXT
+            tests: []
+          - name: NAME
+            description: ""
+            type: TEXT
+            tests: []
+          - name: ID
+            description: ""
+            type: NUMBER
+            tests: []
+          - name: MINIMUM_NIGHTS
+            description: ""
+            type: NUMBER
+            tests: []
+          - name: UPDATED_AT
+            description: ""
+            type: TIMESTAMP
+            tests: []
+          - name: ROOM_TYPE
+            description: ""
+            type: TEXT
+            tests: []
+          - name: HOST_ID
+            description: ""
+            type: NUMBER
+            tests: []

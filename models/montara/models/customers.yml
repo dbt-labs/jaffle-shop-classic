@@ -1,0 +1,38 @@
+version: 2
+models:
+  - name: customers
+    description: ""
+    columns:
+      - name: CUSTOMER_ID
+        description: Unique identifier for each customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        type: TEXT
+        tests: []
+        description: Customer's first name
+      - name: NUMBER_OF_ORDERS
+        type: NUMBER
+        tests: []
+        description: Total count of orders placed by the customer
+      - name: LAST_NAME
+        type: TEXT
+        tests: []
+        description: Customer’s last name
+      - name: CUSTOMER_LIFETIME_VALUE
+        type: NUMBER
+        tests: []
+        description: The total amount of money a customer has spent on orders
+      - name: MOST_RECENT_ORDER
+        type: DATE
+        tests: []
+        description: Date of the most recent order the customer has placed
+      - name: FIRST_ORDER
+        type: DATE
+        tests: []
+        description: Date when the customer placed their first order
+    meta:
+      model_tags:
+        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+      warehouse_type: snowflake
+    tests: []

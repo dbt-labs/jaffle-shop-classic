@@ -1,0 +1,9 @@
+version: 2
+montara_exposures:
+  - name: 025ea807-c32a-44b8-9a0d-a4ffc99cb50a
+    label: test
+    type: analysis
+    depends_on:
+      - ref('cleansed_customers')
+    owner:
+      email: 365915cf-598d-41d3-a3b5-f777659da85f
