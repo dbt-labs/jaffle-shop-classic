@@ -7,31 +7,59 @@ models:
     columns:
       - name: customer_lifetime_value
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 99
+          - unique_tolerance:
+              tolerance: 99
         description: ""
       - name: most_recent_order
         type: DATE
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: first_name
         type: TEXT
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 99
+          - unique_tolerance:
+              tolerance: 99
         description: ""
       - name: last_name
         type: TEXT
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: first_order
         type: DATE
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: number_of_orders
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: customer_id
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 99
+          - unique_tolerance:
+              tolerance: 0
         description: ""
     meta:
       model_tags:
