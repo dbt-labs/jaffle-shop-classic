@@ -6,7 +6,15 @@ models:
       - name: CUSTOMER_ID
         description: Unique identifier for each customer
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 4
+          - unique_tolerance:
+              tolerance: 0
+          - range_tolerance:
+              min: 0
+              max: 4
+              tolerance: 0
       - name: FIRST_NAME
         type: TEXT
         tests: []
@@ -21,7 +29,9 @@ models:
         description: Customer’s last name
       - name: CUSTOMER_LIFETIME_VALUE
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
         description: The total amount of money a customer has spent on orders
       - name: MOST_RECENT_ORDER
         type: DATE
