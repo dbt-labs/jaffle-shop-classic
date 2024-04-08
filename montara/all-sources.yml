@@ -1,11 +1,4 @@
 all_assets:
-  RAW_HOSTS:
-    name: RAW_HOSTS
-    schema: RAW
-    database: airbnb
-    tables:
-      - name: RAW_HOSTS
-        description: ""
   RAW_LISTINGS:
     name: RAW_LISTINGS
     schema: RAW
