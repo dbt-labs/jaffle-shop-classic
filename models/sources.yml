@@ -1,2 +1,9 @@
 version: 2
 
+sources:
+  - name: RAW_HOSTS
+    schema: RAW
+    database: airbnb
+    tables:
+      - name: RAW_HOSTS
+        
