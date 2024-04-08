@@ -42,7 +42,6 @@ models:
         tests: []
         description: Date when the customer placed their first order
     meta:
-      model_tags:
-        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+      
       warehouse_type: snowflake
     tests: []
