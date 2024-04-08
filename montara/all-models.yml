@@ -42,8 +42,7 @@ all_assets:
         tests: []
         description: Date when the customer placed their first order
     meta:
-      model_tags:
-        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
+      
       warehouse_type: snowflake
     tests: []
   orders:
@@ -87,9 +86,7 @@ all_assets:
         tests: []
         description: ""
     meta:
-      model_tags:
-        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
-        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      
       warehouse_type: snowflake
     tests: []
   stg_customers:
@@ -109,9 +106,7 @@ all_assets:
         type: TEXT
         tests: []
     meta:
-      model_tags:
-        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
-        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      
       warehouse_type: snowflake
     tests: []
   stg_orders:
@@ -138,9 +133,7 @@ all_assets:
         type: TEXT
         tests: []
     meta:
-      model_tags:
-        - 74bf3da5-488a-4b4a-b218-563ff1edc3c0
-        - 23deed54-0ff3-4789-99c3-c5701e84e730
+      
       warehouse_type: snowflake
     tests: []
   stg_payments:
