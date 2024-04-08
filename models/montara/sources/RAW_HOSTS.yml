@@ -8,22 +8,39 @@ sources:
         description: ""
         columns:
           - name: NAME
-            description: ""
             type: TEXT
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
           - name: CREATED_AT
-            description: ""
+            description: The timestamp when the host entry was created.
             type: TIMESTAMP
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
           - name: UPDATED_AT
-            description: ""
             type: TIMESTAMP
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
           - name: ID
-            description: ""
+            description: The unique identifier for the host.
             type: NUMBER
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
           - name: IS_SUPERHOST
-            description: ""
             type: TEXT
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
