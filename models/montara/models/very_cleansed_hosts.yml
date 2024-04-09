@@ -6,6 +6,7 @@ models:
       materialized: table
     columns: []
     meta:
-      model_tags: []
+      model_tags:
+        - 42aca93d-d0c5-4d00-b233-506ba0809186
       warehouse_type: snowflake
     tests: []

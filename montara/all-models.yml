@@ -28,6 +28,7 @@ all_assets:
     meta:
       model_tags:
         - 9a684041-cebe-4a73-a4a2-f454d305813e
+        - 42aca93d-d0c5-4d00-b233-506ba0809186
       warehouse_type: snowflake
   customers:
     name: customers
@@ -193,6 +194,7 @@ all_assets:
       materialized: table
     columns: []
     meta:
-      model_tags: []
+      model_tags:
+        - 42aca93d-d0c5-4d00-b233-506ba0809186
       warehouse_type: snowflake
     tests: []
