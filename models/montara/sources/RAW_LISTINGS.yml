@@ -8,37 +8,57 @@ sources:
         description: ""
         columns:
           - name: CREATED_AT
+            description: The date and time when the listing was created.
             type: TIMESTAMP
             tests: []
           - name: LISTING_URL
             type: TEXT
             tests:
+              - not_null_tolerance:
+                  tolerance: 0
               - unique_tolerance:
                   tolerance: 0
           - name: PRICE
             type: TEXT
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
           - name: NAME
             type: TEXT
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
           - name: ID
             type: NUMBER
             tests:
               - not_null_tolerance:
                   tolerance: 0
+              - unique_tolerance:
+                  tolerance: 0
           - name: MINIMUM_NIGHTS
             type: NUMBER
             tests:
+              - not_null_tolerance:
+                  tolerance: 0
               - unique_tolerance:
                   tolerance: 0
           - name: UPDATED_AT
             type: TIMESTAMP
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
           - name: ROOM_TYPE
             type: TEXT
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
           - name: HOST_ID
+            description: The unique identifier of the host for the listing.
             type: NUMBER
             tests:
               - not_null_tolerance:
+                  tolerance: 0
+              - unique_tolerance:
                   tolerance: 0
