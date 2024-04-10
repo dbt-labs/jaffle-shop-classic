@@ -15,7 +15,6 @@ models:
         description: The given name of the customer.
         type: TEXT
         tests: []
-    meta:
-      
-      warehouse_type: snowflake
     tests: []
+    meta:
+      warehouse_type: snowflake

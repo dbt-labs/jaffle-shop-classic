@@ -39,7 +39,6 @@ models:
         type: NUMBER
         tests: []
         description: ""
-    meta:
-      
-      warehouse_type: snowflake
     tests: []
+    meta:
+      warehouse_type: snowflake

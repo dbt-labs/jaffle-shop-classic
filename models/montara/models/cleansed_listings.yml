@@ -1,0 +1,11 @@
+version: 2
+models:
+  - name: cleansed_listings
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []

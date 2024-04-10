@@ -8,38 +8,37 @@ sources:
         description: ""
         columns:
           - name: CREATED_AT
-            description: ""
             type: TIMESTAMP
             tests: []
           - name: LISTING_URL
-            description: ""
             type: TEXT
-            tests: []
+            tests:
+              - unique_tolerance:
+                  tolerance: 0
           - name: PRICE
-            description: ""
             type: TEXT
             tests: []
           - name: NAME
-            description: ""
             type: TEXT
             tests: []
           - name: ID
-            description: ""
             type: NUMBER
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0
           - name: MINIMUM_NIGHTS
-            description: ""
             type: NUMBER
-            tests: []
+            tests:
+              - unique_tolerance:
+                  tolerance: 0
           - name: UPDATED_AT
-            description: ""
             type: TIMESTAMP
             tests: []
           - name: ROOM_TYPE
-            description: ""
             type: TEXT
             tests: []
           - name: HOST_ID
-            description: ""
             type: NUMBER
-            tests: []
+            tests:
+              - not_null_tolerance:
+                  tolerance: 0

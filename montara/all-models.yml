@@ -30,6 +30,17 @@ all_assets:
         - 9a684041-cebe-4a73-a4a2-f454d305813e
         - 42aca93d-d0c5-4d00-b233-506ba0809186
       warehouse_type: snowflake
+    tests: []
+  cleansed_listings:
+    name: cleansed_listings
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
   customers:
     name: customers
     description: ""
@@ -106,9 +117,9 @@ all_assets:
         type: NUMBER
         tests: []
         description: ""
+    tests: []
     meta:
       warehouse_type: snowflake
-    tests: []
   stg_customers:
     name: stg_customers
     description: ""
@@ -125,9 +136,9 @@ all_assets:
         description: The given name of the customer.
         type: TEXT
         tests: []
+    tests: []
     meta:
       warehouse_type: snowflake
-    tests: []
   stg_orders:
     name: stg_orders
     description: Transforms data from raw_orders by renaming columns, filtering for
@@ -151,9 +162,9 @@ all_assets:
         description: The current status of the order (e.g., 'shipped', 'processing').
         type: TEXT
         tests: []
+    tests: []
     meta:
       warehouse_type: snowflake
-    tests: []
   stg_payments:
     name: stg_payments
     description: ""
