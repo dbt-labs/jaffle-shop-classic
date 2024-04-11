@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: customers
+  - name: wh_customers
     description: This table has basic information about a customer, as well as some derived facts based on a customer's orders
 
     columns:
@@ -13,13 +13,14 @@ models:
 
       - name: first_name
         description: Customer's first name. PII.
-
+        meta:
+          sensitive: true
       - name: last_name
         description: Customer's last name. PII.
-
+        meta:
+          sensitive: true
       - name: first_order
         description: Date (UTC) of a customer's first order
-
       - name: most_recent_order
         description: Date (UTC) of a customer's most recent order
 
@@ -29,7 +30,7 @@ models:
       - name: total_order_amount
         description: Total value (AUD) of a customer's orders
 
-  - name: orders
+  - name: wh_orders
     description: This table has basic information about orders, as well as some derived facts based on payments
 
     columns:

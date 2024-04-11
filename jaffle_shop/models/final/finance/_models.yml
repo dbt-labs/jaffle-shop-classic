@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fnl_finance_orders_per_customer
+    description: This table contains the total value of orders per customer
+    columns:
+      - name: customer_id
+        description: This is a unique identifier for a customer
+        tests:
+          - unique
+          - not_null
+      - name: customer_lifetime_value
+        description: This is the total value of orders for a customer

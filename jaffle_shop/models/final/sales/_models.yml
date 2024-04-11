@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: fnl_sales_newcustomers
+    description: This table contains the number of new customers per month
+    columns:
+      - name: month_start_date
+        description: This is a date representing the start of a month
+        tests:
+          - unique
+          - not_null
+      - name: new_customer_count
+        description: This is the number of new customers in a given month
