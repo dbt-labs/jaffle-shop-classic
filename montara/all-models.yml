@@ -189,14 +189,3 @@ all_assets:
       model_tags: []
       warehouse_type: snowflake
     tests: []
-  very_cleansed_hosts:
-    name: very_cleansed_hosts
-    description: ""
-    config:
-      materialized: table
-    columns: []
-    meta:
-      model_tags:
-        - 42aca93d-d0c5-4d00-b233-506ba0809186
-      warehouse_type: snowflake
-    tests: []
