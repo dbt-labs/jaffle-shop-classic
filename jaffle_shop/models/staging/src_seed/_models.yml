@@ -1,14 +1,41 @@
 version: 2
 
 models:
+
   - name: stg_customers
+    meta:
+      owner: "joshua.oconnor@kraken.tech"
     columns:
       - name: customer_id
         tests:
           - unique
           - not_null
+      - name: first_name
+        tests:
+          - dbt_expectations.expect_column_to_exist
+      - name: last_name
+        tests:
+          - dbt_expectations.expect_column_to_exist
+
+  - name: stg_customers_pii
+    meta:
+      owner: "joshua.oconnor@kraken.tech"
+      sensitive: true
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        meta:
+          sensitive: true
+      - name: last_name
+        meta:
+          sensitive: true
 
   - name: stg_orders
+    meta:
+      owner: "joshua.oconnor@kraken.tech"
     columns:
       - name: order_id
         tests:
@@ -20,6 +47,8 @@ models:
               values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
 
   - name: stg_payments
+    meta:
+      owner: "joshua.oconnor@kraken.tech"
     columns:
       - name: payment_id
         tests:
