@@ -1,0 +1,6 @@
+version: 2
+
+seed:
+  - name: raw_customers
+  - name: raw_orders
+  - name: raw_payments
