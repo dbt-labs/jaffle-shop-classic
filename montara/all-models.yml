@@ -35,10 +35,51 @@ all_assets:
     name: cleansed_listings
     description: ""
     config:
-      materialized: table
-    columns: []
+      materialized: incremental
+      unique_key:
+        - id
+      incremental_strategy: merge
+    columns:
+      - name: created_at
+        type: TIMESTAMP
+        tests: []
+        description: ""
+      - name: host_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: room_type
+        type: TEXT
+        tests: []
+        description: ""
+      - name: id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: price
+        type: TEXT
+        tests: []
+        description: ""
+      - name: name
+        type: TEXT
+        tests: []
+        description: ""
+      - name: updated_at
+        type: TIMESTAMP
+        tests: []
+        description: ""
+      - name: listing_url
+        type: TEXT
+        tests: []
+        description: ""
+      - name: minimum_nights
+        type: NUMBER
+        tests: []
+        description: ""
     meta:
-      model_tags: []
+      incremental_column: updated_at
+      model_tags:
+        - 9a684041-cebe-4a73-a4a2-f454d305813e
       warehouse_type: snowflake
     tests: []
   customers:
