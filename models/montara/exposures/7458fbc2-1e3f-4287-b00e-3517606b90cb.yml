@@ -4,6 +4,6 @@ montara_exposures:
     label: test
     type: analysis
     depends_on:
-      - ref('cleansed_customers')
+      - ref('cleansed_listings')
     owner:
       email: d84e5fbf-961d-408a-909a-fab5a3582da4
