@@ -82,6 +82,54 @@ all_assets:
         - 9a684041-cebe-4a73-a4a2-f454d305813e
       warehouse_type: snowflake
     tests: []
+  cleansed_orders:
+    name: cleansed_orders
+    description: ""
+    config:
+      materialized: incremental
+      incremental_strategy: append
+    columns:
+      - name: credit_card_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: gift_card_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: bank_transfer_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: customer_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: order_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: coupon_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: status
+        type: TEXT
+        tests: []
+        description: ""
+      - name: order_date
+        type: DATE
+        tests: []
+        description: ""
+    meta:
+      incremental_column: order_date
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
   customers:
     name: customers
     description: ""
