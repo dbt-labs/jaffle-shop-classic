@@ -2,7 +2,11 @@
 WITH RAW_LISTINGS AS ( SELECT * FROM {{ source('RAW_LISTINGS', 'RAW_LISTINGS') }})
 
 SELECT * FROM ( 
-  select * from raw_listings
+  select
+*
+from
+raw_listings
+where id is not null
 ) AS montara_model
 --start_incremental
 {% if is_incremental() %}
@@ -10,4 +14,8 @@ SELECT * FROM (
 {% endif %}
 --end_incremental
 --original_sql
---select * from raw_listings
+--select
+--  *
+--from
+--  raw_listings
+--where id is not null
