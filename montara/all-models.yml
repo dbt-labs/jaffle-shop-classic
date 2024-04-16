@@ -42,11 +42,26 @@ all_assets:
     columns:
       - name: created_at
         type: TIMESTAMP
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 4
+          - unique_tolerance:
+              tolerance: 4
+          - date_range_tolerance:
+              range_type: Between
+              after: 2024-4-16
+              before: 2024-4-18
+              tolerance: 1
         description: ""
       - name: host_id
         type: NUMBER
-        tests: []
+        tests:
+          - not_null_tolerance:
+              tolerance: 0
+          - range_tolerance:
+              min: 0
+              max: 7
+              tolerance: 0
         description: ""
       - name: room_type
         type: TEXT
@@ -54,28 +69,37 @@ all_assets:
         description: ""
       - name: id
         type: NUMBER
-        tests: []
+        tests:
+          - unique_tolerance:
+              tolerance: 0
         description: ""
       - name: price
         type: TEXT
         tests: []
         description: ""
       - name: name
+        description: The name or title of the listing as provided by the host.
         type: TEXT
-        tests: []
-        description: ""
+        tests:
+          - accepted_values_tolerance:
+              value:
+                - teset
+                - test
+                - asdf
+                - fff
+              tolerance: 0
       - name: updated_at
         type: TIMESTAMP
         tests: []
         description: ""
       - name: listing_url
+        description: The URL linking directly to the listing's webpage.
         type: TEXT
         tests: []
-        description: ""
       - name: minimum_nights
+        description: The minimum number of nights a guest must book the listing for.
         type: NUMBER
         tests: []
-        description: ""
     meta:
       incremental_column: updated_at
       model_tags:
