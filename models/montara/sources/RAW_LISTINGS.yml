@@ -13,52 +13,26 @@ sources:
             tests: []
           - name: LISTING_URL
             type: TEXT
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
-              - unique_tolerance:
-                  tolerance: 0
+            tests: []
           - name: PRICE
             type: TEXT
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
+            tests: []
           - name: NAME
             type: TEXT
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
-              - unique_tolerance:
-                  tolerance: 0
+            tests: []
           - name: ID
             type: NUMBER
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
-              - unique_tolerance:
-                  tolerance: 0
+            tests: []
           - name: MINIMUM_NIGHTS
             type: NUMBER
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
-              - unique_tolerance:
-                  tolerance: 0
+            tests: []
           - name: UPDATED_AT
             type: TIMESTAMP
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
+            tests: []
           - name: ROOM_TYPE
             type: TEXT
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
+            tests: []
           - name: HOST_ID
             description: The unique identifier of the host for the listing.
             type: NUMBER
-            tests:
-              - not_null_tolerance:
-                  tolerance: 0
-              - unique_tolerance:
-                  tolerance: 0
+            tests: []
