@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> This repo is no longer actively maintained. It’s been preserved for continuity and free access. The Jaffle Shop has lived a rich life as dbt’s demo project, but has been superseded by two newer repositories: [`jaffle-shop`](https://github.com/dbt-labs/jaffle-shop), the premier demo project for dbt Cloud, and [`jaffle_shop_duckdb`](https://github.com/dbt-labs/jaffle_shop_duckdb) which supports working locally via DuckDB for those without access to a cloud warehouse. You’re welcome to continue using this repo as an open source resource, just know it will not being actively maintained moving forward.
+> This repo is no longer actively maintained. It’s been preserved for continuity and free access. The Jaffle Shop has lived a rich life as dbt’s demo project, but has been superseded by two newer repositories: [`jaffle-shop`](https://github.com/dbt-labs/jaffle-shop), the premier demo project for dbt Cloud, and [`jaffle_shop_duckdb`](https://github.com/dbt-labs/jaffle_shop_duckdb) which supports working locally via DuckDB for those without access to a cloud warehouse. You’re welcome to continue using this repo as an open source resource, just know it will not be actively maintained moving forward.
 
 ## Testing dbt project: `jaffle_shop`
 
