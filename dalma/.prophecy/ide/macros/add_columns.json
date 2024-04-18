@@ -1,0 +1,37 @@
+{
+  "create_columns" : {
+    "name" : "create_columns",
+    "macroType" : "query",
+    "definition" : "\r\n\r\n{% set relation = 'BLACKROCK.TEST.SCHEMA_DETECTION_STG_TEST' %}\r\n  \r\n\t{% for column in columns %}\r\n\r\n\t\t{% call statement() %}\r\n\t\t alter table {{ relation }} add column \"{{ column.name }}\" {{ column.data_type }};\r\n\t\t{% endcall %}\r\n\t\t\r\n\t{% endfor %}",
+    "parameters" : {
+      "type" : "record",
+      "fields" : [ {
+        "name" : "columns",
+        "kind" : {
+          "type" : "value"
+        },
+        "optional" : false,
+        "isWorkflowNodeConfiguration" : false,
+        "isReferenced" : false
+      } ]
+    },
+    "staleState" : "none",
+    "propertiesFile" : {
+      "name" : "macros",
+      "content" : "---\nversion: 2\nmacros:\n- name: \"create_columns\"\n  arguments: []\n  macroType: \"query\"\n",
+      "path" : "HelloWorld_SQL/macros/macros.yml",
+      "projectConfiguration" : null,
+      "folderConfiguration" : {
+        "version" : 2,
+        "macros" : [ {
+          "name" : "create_columns",
+          "arguments" : [ ],
+          "macroType" : "query"
+        } ]
+      },
+      "packagesYml" : null,
+      "editable" : true
+    },
+    "version" : 0
+  }
+}

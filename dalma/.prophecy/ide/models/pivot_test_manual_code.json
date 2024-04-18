@@ -1,0 +1,70 @@
+{
+  "id" : "pivot_test_manual_code",
+  "metainfo" : {
+    "label" : "pivot_test_manual_code",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "auyt99WT" : {
+      "id" : "auyt99WT",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "pivot_test_manual_code",
+        "x" : -220,
+        "y" : -380,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : false,
+        "customQuery" : true,
+        "incrementalEditorDisabled" : true,
+        "query" : "WITH GRADES AS (\n\n  SELECT * \n  \n  FROM {{ source('BLACKROCK.TEST', 'GRADES') }}\n\n)\n\nSELECT STUDENT\n{{HelloWorld_SQL.pivot(\n  column='SUBJECT',\n  values=['Mathematics', 'Science', 'Geography'],\n  agg='max',\n  then_value='MARKS',\n  else_value='NULL')}}\n\nFROM GRADES\ngroup by STUDENT\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "IHLfLUt3",
+          "schema" : {
+            "providerType" : "Snowflake",
+            "fields" : [ {
+              "name" : "STUDENT",
+              "dataType" : {
+                "type" : "String"
+              }
+            }, {
+              "name" : "Mathematics",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "Science",
+              "dataType" : {
+                "type" : "Number"
+              }
+            }, {
+              "name" : "Geography",
+              "dataType" : {
+                "type" : "Number"
+              }
+            } ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : true,
+        "autoUpdateOnRun" : true
+      }
+    }
+  },
+  "connections" : [ ],
+  "component" : "Model"
+}

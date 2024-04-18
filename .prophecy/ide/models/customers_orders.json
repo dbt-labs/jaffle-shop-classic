@@ -1,0 +1,226 @@
+{
+  "id" : "customers_orders",
+  "metainfo" : {
+    "label" : "customers_orders",
+    "autoLayout" : true,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "graphConfig" : {
+      "userDefinedConfig" : {
+        "vars" : { }
+      }
+    }
+  },
+  "processes" : {
+    "Join_1##mEspTL8w" : {
+      "id" : "Join_1##mEspTL8w",
+      "component" : "Join",
+      "metadata" : {
+        "label" : "Join_1",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "conditions" : [ {
+          "alias" : "raw_orders",
+          "expression" : {
+            "expression" : "raw_customers.id = raw_orders.id"
+          },
+          "joinType" : "INNER"
+        } ],
+        "expressions" : [ {
+          "expression" : {
+            "expression" : "raw_orders.user_id"
+          },
+          "alias" : "user_id"
+        }, {
+          "expression" : {
+            "expression" : "raw_orders.order_date"
+          },
+          "alias" : "order_date"
+        }, {
+          "expression" : {
+            "expression" : "raw_orders.status"
+          },
+          "alias" : "status"
+        }, {
+          "expression" : {
+            "expression" : "raw_customers.id"
+          },
+          "alias" : "id"
+        }, {
+          "expression" : {
+            "expression" : "raw_customers.first_name"
+          },
+          "alias" : "first_name"
+        }, {
+          "expression" : {
+            "expression" : "raw_customers.last_name"
+          },
+          "alias" : "last_name"
+        } ],
+        "activeTab" : "conditions",
+        "columnsSelector" : [ ],
+        "headAlias" : "raw_customers"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "d4xtjHVX",
+          "schema" : {
+            "providerType" : "snowflake",
+            "fields" : [ ]
+          },
+          "slug" : "raw_customers"
+        }, {
+          "id" : "iRyBrXXn",
+          "schema" : {
+            "providerType" : "snowflake",
+            "fields" : [ ]
+          },
+          "slug" : "raw_orders"
+        } ],
+        "outputs" : [ {
+          "id" : "qGbdCt22",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "raw_customers##EJEC9J5p" : {
+      "id" : "raw_customers##EJEC9J5p",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "raw_customers",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "raw_customers",
+          "sourceType" : "Source",
+          "sourceName" : "main.default"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "YC9rJJKc",
+          "schema" : {
+            "providerType" : "snowflake",
+            "fields" : [ ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "raw_orders##ARhJ1aKS" : {
+      "id" : "raw_orders##ARhJ1aKS",
+      "component" : "Source",
+      "metadata" : {
+        "label" : "raw_orders",
+        "phase" : 0
+      },
+      "properties" : {
+        "table" : {
+          "name" : "raw_orders",
+          "sourceType" : "Source",
+          "sourceName" : "main.default"
+        }
+      },
+      "ports" : {
+        "inputs" : [ ],
+        "outputs" : [ {
+          "id" : "YJgqNRIm",
+          "schema" : {
+            "providerType" : "snowflake",
+            "fields" : [ ]
+          },
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "customers_orders##SmcTorML" : {
+      "id" : "customers_orders##SmcTorML",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "customers_orders",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM Reformat_1\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "Bi93GFUz",
+          "slug" : "Reformat_1"
+        } ],
+        "outputs" : [ {
+          "id" : "vWtBVFMJ",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    },
+    "Reformat_1##wXHhcqJP" : {
+      "id" : "Reformat_1##wXHhcqJP",
+      "component" : "Reformat",
+      "metadata" : {
+        "label" : "Reformat_1",
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "columnsSelector" : [ ],
+        "expressions" : [ ]
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "fedMst8M",
+          "slug" : "Join_1"
+        } ],
+        "outputs" : [ {
+          "id" : "WM8j2xf5",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "GrjWEcUC",
+    "source" : "raw_customers##EJEC9J5p",
+    "sourcePort" : "YC9rJJKc",
+    "target" : "Join_1##mEspTL8w",
+    "targetPort" : "d4xtjHVX"
+  }, {
+    "id" : "lIKFoDIq",
+    "source" : "raw_orders##ARhJ1aKS",
+    "sourcePort" : "YJgqNRIm",
+    "target" : "Join_1##mEspTL8w",
+    "targetPort" : "iRyBrXXn"
+  }, {
+    "id" : "KiLTyGL1",
+    "source" : "Join_1##mEspTL8w",
+    "sourcePort" : "qGbdCt22",
+    "target" : "Reformat_1##wXHhcqJP",
+    "targetPort" : "fedMst8M"
+  }, {
+    "id" : "yzkSPAoE",
+    "source" : "Reformat_1##wXHhcqJP",
+    "sourcePort" : "WM8j2xf5",
+    "target" : "customers_orders##SmcTorML",
+    "targetPort" : "Bi93GFUz"
+  } ],
+  "component" : "Model"
+}

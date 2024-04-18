@@ -1,69 +1,94 @@
-with customers as (
+WITH orders AS (
 
-    select * from {{ ref('stg_customers') }}
-
-),
-
-orders as (
-
-    select * from {{ ref('stg_orders') }}
+  SELECT * 
+  
+  FROM {{ ref('stg_orders')}}
 
 ),
 
-payments as (
+payments AS (
 
-    select * from {{ ref('stg_payments') }}
-
-),
-
-customer_orders as (
-
-        select
-        customer_id,
-
-        min(order_date) as first_order,
-        max(order_date) as most_recent_order,
-        count(order_id) as number_of_orders
-    from orders
-
-    group by customer_id
+  SELECT * 
+  
+  FROM {{ ref('stg_payments')}}
 
 ),
 
-customer_payments as (
+customer_payments AS (
 
-    select
-        orders.customer_id,
-        sum(amount) as total_amount
-
-    from payments
-
-    left join orders on
-         payments.order_id = orders.order_id
-
-    group by orders.customer_id
+  SELECT 
+    orders.customer_id AS customer_id,
+    amount
+  
+  FROM payments
+  LEFT JOIN orders
+     ON payments.order_id = orders.order_id
 
 ),
 
-final as (
+amount_per_customer AS (
 
-    select
-        customers.customer_id,
-        customers.first_name,
-        customers.last_name,
-        customer_orders.first_order,
-        customer_orders.most_recent_order,
-        customer_orders.number_of_orders,
-        customer_payments.total_amount as customer_lifetime_value
+  SELECT 
+    customer_id,
+    sum(amount) AS total_amount
+  
+  FROM customer_payments
+  
+  GROUP BY customer_id
 
-    from customers
+),
 
-    left join customer_orders
-        on customers.customer_id = customer_orders.customer_id
+customer_orders AS (
 
-    left join customer_payments
-        on  customers.customer_id = customer_payments.customer_id
+  SELECT 
+    customer_id,
+    min(order_date) AS first_order,
+    max(order_date) AS most_recent_order,
+    count(order_id) AS number_of_orders
+  
+  FROM orders
+  
+  GROUP BY customer_id
+
+),
+
+customers AS (
+
+  SELECT * 
+  
+  FROM {{ ref('stg_customers')}}
+
+),
+
+customer_report AS (
+
+  SELECT 
+    customers.customer_id,
+    customers.first_name,
+    customers.last_name,
+    customer_orders.first_order,
+    customer_orders.most_recent_order,
+    customer_orders.number_of_orders AS total_orders,
+    amount_per_customer.total_amount AS customer_lifetime_value
+  
+  FROM customers
+  LEFT JOIN customer_orders
+     ON customers.customer_id = customer_orders.customer_id
+  LEFT JOIN amount_per_customer
+     ON customers.customer_id = amount_per_customer.customer_id
+
+),
+
+final_with_order AS (
+
+  SELECT * 
+  
+  FROM customer_report
+  
+  ORDER BY total_orders DESC
 
 )
 
-select * from final
+SELECT *
+
+FROM final_with_order

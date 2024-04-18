@@ -1,13 +1,13 @@
 # ==================
 # Project Details
 # ==================
-name: "jaffle_shop"
+name: "HelloWorld_SQL"
 config-version: 2
 require-dbt-version:
 - ">=1.0.0"
 - "<2.0.0"
 version: "0.1"
-profile: "prophecy-bigquery"
+profile: "HelloWorld_SQL"
 
 # ==================
 # File Path Configs
@@ -33,7 +33,7 @@ target-path: "target"
 # Model Configs
 # ==================
 models:
-  jaffle_shop:
+  HelloWorld_SQL:
     materialized: "table"
     staging:
       materialized: "view"

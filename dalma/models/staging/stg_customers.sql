@@ -1,4 +1,4 @@
-WITH source AS (
+WITH grades AS (
 
   {#-
   Normally we would select from the table here, but we are using seeds to load
@@ -10,17 +10,17 @@ WITH source AS (
 
 ),
 
-renamed AS (
+rename AS (
 
   SELECT 
     id AS customer_id,
-    first_name,
-    last_name
+    first_name AS first_name,
+    last_name AS last_name
   
-  FROM source
+  FROM grades
 
 )
 
 SELECT *
 
-FROM renamed
+FROM rename

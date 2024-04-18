@@ -1,0 +1,117 @@
+{
+  "id" : "pivot_v3",
+  "metainfo" : {
+    "label" : "pivot_v3",
+    "autoLayout" : false,
+    "staleState" : "none",
+    "sourceSuggestions" : {
+      "sources" : [ ]
+    },
+    "version" : 3
+  },
+  "processes" : {
+    "pivot_v3##z5mAMaXI" : {
+      "id" : "pivot_v3##z5mAMaXI",
+      "component" : "TargetModel",
+      "metadata" : {
+        "label" : "pivot_v3",
+        "x" : 180,
+        "y" : -320,
+        "phase" : 0,
+        "macroDependencies" : [ ]
+      },
+      "properties" : {
+        "customQueryDisabled" : true,
+        "customQuery" : false,
+        "incrementalEditorDisabled" : true,
+        "query" : "SELECT * \n\nFROM pivot_query_1\n",
+        "incrementalKey" : false,
+        "incremental" : {
+          "expression" : "true"
+        }
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "BZwy4QZX",
+          "slug" : "pivot_query_1"
+        } ],
+        "outputs" : [ {
+          "id" : "JknVEMlh",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    },
+    "2JXhM5eCIDXD_NLl_pUVA$$g3R2cKJMP-YwNJ0cZUNRp" : {
+      "id" : "2JXhM5eCIDXD_NLl_pUVA$$g3R2cKJMP-YwNJ0cZUNRp",
+      "component" : "Macro",
+      "metadata" : {
+        "label" : "pivot_query_1",
+        "slug" : "pivot_query_1",
+        "x" : -40,
+        "y" : -320,
+        "phase" : 0,
+        "macroDependencies" : [ "HelloWorld_SQL.pivot_query" ]
+      },
+      "properties" : {
+        "macroName" : "pivot_query",
+        "parameters" : [ {
+          "name" : "source",
+          "value" : "'BLACKROCK.TEST.GRADES'"
+        }, {
+          "name" : "primary_keys",
+          "value" : "['STUDENT']"
+        }, {
+          "name" : "column",
+          "value" : "'SUBJECT'"
+        }, {
+          "name" : "values",
+          "value" : "['Mathematics', 'Science', 'Geography']"
+        }, {
+          "name" : "alias"
+        }, {
+          "name" : "agg",
+          "value" : "'max'"
+        }, {
+          "name" : "cmp"
+        }, {
+          "name" : "prefix"
+        }, {
+          "name" : "suffix"
+        }, {
+          "name" : "then_value",
+          "value" : "'MARKS'"
+        }, {
+          "name" : "else_value",
+          "value" : "'NULL'"
+        }, {
+          "name" : "quote_identifiers"
+        }, {
+          "name" : "distinct"
+        } ],
+        "projectName" : "HelloWorld_SQL"
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "hp_Qw8FRW338Ht5OHl1yM$$TNJvYxG83DRLEFVkB1F9a",
+          "slug" : "GRADES"
+        } ],
+        "outputs" : [ {
+          "id" : "HZI8n0RodajKTgKJxCGGF$$GRDd0hPna6BW_SQ9-fjeq",
+          "slug" : "out"
+        } ],
+        "isCustomOutputSchema" : false,
+        "autoUpdateOnRun" : false
+      }
+    }
+  },
+  "connections" : [ {
+    "id" : "URh3vNMMuLOYJ0v_nc3qi$$afMqjMcgNTB-aNLjHyv-v",
+    "source" : "2JXhM5eCIDXD_NLl_pUVA$$g3R2cKJMP-YwNJ0cZUNRp",
+    "sourcePort" : "HZI8n0RodajKTgKJxCGGF$$GRDd0hPna6BW_SQ9-fjeq",
+    "target" : "pivot_v3##z5mAMaXI",
+    "targetPort" : "BZwy4QZX"
+  } ],
+  "component" : "Model"
+}

@@ -1,0 +1,52 @@
+---
+version: 2
+sources:
+- name: "BLACKROCK.TEST"
+  database: "BLACKROCK"
+  schema: "TEST"
+  config:
+    enabled: true
+  tables:
+  - name: "SCHEMA_DETECTION_RAW_TEST"
+    columns:
+    - name: "ID"
+      dataType:
+        type: "Number"
+    - name: "TEST_NUMBER"
+      dataType:
+        type: "String"
+    - name: "TEST_DECIMAL"
+      dataType:
+        type: "String"
+    - name: "TEST_DATE"
+      dataType:
+        type: "String"
+    - name: "TEST_STRING"
+      dataType:
+        type: "String"
+  - name: "GRADES"
+    description: ""
+    columns:
+    - name: "STUDENT"
+      dataType:
+        type: "String"
+    - name: "SUBJECT"
+      dataType:
+        type: "String"
+    - name: "MARKS"
+      dataType:
+        type: "Number"
+  - name: "GRADES_PIVOT"
+    columns:
+    - name: "STUDENT"
+      dataType:
+        type: "String"
+    - name: "MATHEMATICS"
+      dataType:
+        type: "Number"
+    - name: "SCIENCE"
+      dataType:
+        type: "Number"
+    - name: "GEOGRAPHY"
+      dataType:
+        type: "Number"

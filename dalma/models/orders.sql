@@ -43,10 +43,10 @@ final AS (
     orders.customer_id,
     orders.order_date,
     orders.status,
-    order_payments.credit_card_amount,
-    order_payments.coupon_amount,
-    order_payments.bank_transfer_amount,
-    order_payments.gift_card_amount,
+    {% for payment_method in payment_methods %}
+      order_payments.{{payment_method}}_amount,
+    {% endfor %}
+    
     order_payments.total_amount AS amount
   
   FROM orders
