@@ -1,0 +1,28 @@
+version: 2
+
+
+exposures:
+  - name: fnl_returned_order_value
+    label: Inkacio
+    description: fnl_returned_order_value
+    type: dashboard
+    url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
+    owner:
+      email: joshua.oconnor@kraken.tech
+    depends_on:
+      - ref('wh_orders')
+
+    
+models:
+- name: fnl_returned_order_value
+  meta:
+    owner: joshua.oconnor@kraken.tech
+  description: | 
+    One row per customer for total value of returns
+  columns: 
+    - name: customer_id
+      description: Primary key
+      tests:
+        - unique
+        - not_null
+        

@@ -1,0 +1,26 @@
+version: 2
+
+
+exposures:
+  - name: fnl_monthly_customer_count
+    label: Inkacio
+    description: fnl_monthly_customer_count
+    type: dashboard
+    url: https://inksacio.eks.octopus.engineering/my_certification_dashboard/
+    owner:
+      email: joshua.oconnor@kraken.tech
+    depends_on:
+      - ref('wh_customers')
+
+models:
+- name: fnl_monthly_customer_count
+  meta:
+    owner: joshua.oconnor@kraken.tech
+  description: | 
+    One row per customer count for each month based on their first orders. 
+  columns: 
+    - name: first_order_month
+      description: Primary key
+      tests:
+        - unique
+        - not_null

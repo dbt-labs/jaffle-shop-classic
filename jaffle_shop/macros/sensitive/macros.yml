@@ -1,0 +1,45 @@
+version: 2
+
+macros:
+  - name: get_meta_columns
+    description: '{{ doc("get_meta_columns") }}'
+    arguments:
+      - name: model_name
+        type: string
+        description: Name of the dbt model. Typically the file name.
+      - name: meta_key
+        type: string
+        description: The key to look for in the `meta` dictionary.
+      - name: node_type
+        type: string
+        description: Defaults to model. Could be source.
+      - name: project
+        type: string
+        description: Defaults to `datalake_models`. Could be something else.
+  - name: hash_sensitive_columns
+    description: '{{ doc("hash_sensitive_columns") }}'
+    arguments:
+      - name: source_table
+        type: string
+        description: The name of the model to select from.
+  - name: nohash_sensitive_columns
+    description: '{{ doc("nohash_sensitive_columns") }}'
+    arguments:
+      - name: source_table
+        type: string
+        description: The name of the model to select from.
+      - name: join_key
+        type: string
+        description: An optional hashed join key, if the joining key is also sensitive. 
+  - name: get_salt
+    description: '{{ doc("get_salt") }}'
+    arguments:
+      - name: column_name
+        type: string
+        description: Name of the column to get the salt for.
+  - name: hash_of_column
+    description: '{{ doc("hash_of_column") }}'
+    arguments:
+      - name: column
+        type: string
+        description: Name of the column to get SQL for to hash.

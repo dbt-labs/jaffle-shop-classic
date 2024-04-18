@@ -1,5 +1,11 @@
-
 target/
 dbt_modules/
+dbt_packages/
 logs/
+
 **/.DS_Store
+.env
+
+# Python temp files
+*.pyc
+__pycache__

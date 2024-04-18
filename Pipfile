@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+dbt-core = "==1.3.0"
+dbt-databricks = {extras = ["odbc"]}
+pytest-mock = "*"
+glob2 = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-mock = "*"
+
+[requires]
+python_version = "3.8"
