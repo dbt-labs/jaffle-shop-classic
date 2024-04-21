@@ -10,4 +10,4 @@ SELECT * FROM (
 {% endif %}
 --end_incremental
 --original_sql
---select * from orders 
+--select * from orders
