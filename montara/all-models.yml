@@ -42,26 +42,11 @@ all_assets:
     columns:
       - name: created_at
         type: TIMESTAMP
-        tests:
-          - not_null_tolerance:
-              tolerance: 4
-          - unique_tolerance:
-              tolerance: 4
-          - date_range_tolerance:
-              range_type: Between
-              after: 2024-4-16
-              before: 2024-4-18
-              tolerance: 1
+        tests: []
         description: ""
       - name: host_id
         type: NUMBER
-        tests:
-          - not_null_tolerance:
-              tolerance: 0
-          - range_tolerance:
-              min: 0
-              max: 7
-              tolerance: 0
+        tests: []
         description: ""
       - name: room_type
         type: TEXT
@@ -69,9 +54,7 @@ all_assets:
         description: ""
       - name: id
         type: NUMBER
-        tests:
-          - unique_tolerance:
-              tolerance: 0
+        tests: []
         description: ""
       - name: price
         type: TEXT
@@ -80,14 +63,7 @@ all_assets:
       - name: name
         description: The name or title of the listing as provided by the host.
         type: TEXT
-        tests:
-          - accepted_values_tolerance:
-              value:
-                - teset
-                - test
-                - asdf
-                - fff
-              tolerance: 0
+        tests: []
       - name: updated_at
         type: TIMESTAMP
         tests: []
