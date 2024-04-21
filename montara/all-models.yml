@@ -119,9 +119,9 @@ all_assets:
         tests: []
         description: ""
       - name: amount
+        description: The total amount of the order.
         type: NUMBER
         tests: []
-        description: ""
       - name: gift_card_amount
         type: NUMBER
         tests: []
