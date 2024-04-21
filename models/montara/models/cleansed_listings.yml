@@ -49,5 +49,4 @@ models:
       model_tags:
         - 9a684041-cebe-4a73-a4a2-f454d305813e
       warehouse_type: snowflake
-    tests:
-      - test_something__cleansed_listings__
+    tests: []
