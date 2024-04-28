@@ -166,6 +166,16 @@ all_assets:
       model_tags: []
       warehouse_type: snowflake
     tests: []
+  my_very_long_my_very_long_model:
+    name: my_very_long_my_very_long_model
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
   orders:
     name: orders
     description: ""
