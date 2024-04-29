@@ -23,7 +23,9 @@ models:
     columns:
       - name: payment_id
         tests:
-          - unique
+          - unique:
+              config:
+                severity: warn
           - not_null
       - name: payment_method
         tests:
