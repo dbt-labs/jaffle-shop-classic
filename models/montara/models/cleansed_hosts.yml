@@ -1,0 +1,33 @@
+version: 2
+models:
+  - name: cleansed_hosts
+    description: Retrieves all columns and records from a source named RAW_HOSTS
+      within an entity also referred to as RAW_HOSTS, which is encapsulated
+      within a WITH clause under the alias raw_hosts.
+    columns:
+      - name: IS_SUPERHOST
+        type: TEXT
+        tests: []
+        description: ""
+      - name: ID
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: UPDATED_AT
+        type: TIMESTAMP
+        tests: []
+        description: ""
+      - name: CREATED_AT
+        description: The timestamp when the host's information was first created.
+        type: TIMESTAMP
+        tests: []
+      - name: NAME
+        type: TEXT
+        tests: []
+        description: ""
+    meta:
+      model_tags:
+        - 9a684041-cebe-4a73-a4a2-f454d305813e
+        - 42aca93d-d0c5-4d00-b233-506ba0809186
+      warehouse_type: snowflake
+    tests: []

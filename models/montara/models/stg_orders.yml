@@ -22,7 +22,6 @@ models:
         description: The current status of the order (e.g., 'shipped', 'processing').
         type: TEXT
         tests: []
-    meta:
-      
-      warehouse_type: snowflake
     tests: []
+    meta:
+      warehouse_type: snowflake
