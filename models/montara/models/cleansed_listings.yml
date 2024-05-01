@@ -1,7 +1,7 @@
 version: 2
 models:
   - name: cleansed_listings
-    description: ""
+    description: cleansed listings description
     config:
       materialized: incremental
       unique_key:

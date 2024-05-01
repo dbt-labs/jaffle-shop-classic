@@ -33,7 +33,7 @@ all_assets:
     tests: []
   cleansed_listings:
     name: cleansed_listings
-    description: ""
+    description: cleansed listings description
     config:
       materialized: incremental
       unique_key:
