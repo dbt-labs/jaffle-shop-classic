@@ -31,9 +31,10 @@ models:
 
   - name: orders
     description: This table has basic information about orders, as well as some derived facts based on payments
-
     columns:
       - name: order_id
+        constraints:
+          - type: primary_key
         tests:
           - unique
           - not_null
