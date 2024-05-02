@@ -1,0 +1,33 @@
+name: dbt linter
+
+on:
+  pull_request:
+    branches:
+      - main 
+
+jobs:
+  primary_key_validation_and_warn_check:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8' 
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml 
+
+      - name: Run primary key check
+        run: python3 github_action_scripts/check_primary_keys.py
+
+      - name: warn_check
+        run: |
+          if grep -q 'severity: warn' models/schema.yml models/staging.yml; then
+            echo "Test set to warn. Please upgrade test severity or remove test. 'they'll just be ignored anyway'"
+            exit 1
+          fi
