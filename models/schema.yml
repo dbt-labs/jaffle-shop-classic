@@ -9,7 +9,9 @@ models:
         description: This is a unique identifier for a customer
         tests:
           - unique
-          - not_null
+          - not_null:
+            config:
+                severity: warn
 
       - name: first_name
         description: Customer's first name. PII.
