@@ -10,6 +10,6 @@
         FROM {{ model }}
     )
     SELECT * FROM AcceptedValuesCounts
-    WHERE ((select COUNT(*) from AcceptedValuesCounts) :: FLOAT / (select * from AllValuesCounts) :: FLOAT) * 100 >= {{ tolerance }}
+    WHERE ((select COUNT(*) from AcceptedValuesCounts) * 100.0) / (select * from AllValuesCounts) >= {{ tolerance }}
 
 {% endtest %}
