@@ -1,0 +1,11 @@
+version: 2
+models:
+  - name: another_one
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []

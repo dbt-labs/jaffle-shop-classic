@@ -1,4 +1,14 @@
 all_assets:
+  another_one:
+    name: another_one
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
   cleansed_hosts:
     name: cleansed_hosts
     description: Retrieves all columns and records from a source named RAW_HOSTS
