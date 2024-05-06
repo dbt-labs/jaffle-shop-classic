@@ -12,6 +12,6 @@
     )
     SELECT * 
     FROM OutOfRangeValues
-    WHERE (((select COUNT(*) from OutOfRangeValues) :: FLOAT / (SELECT * FROM NumberOfRecords) :: FLOAT) * 100) >= {{ tolerance }}
+    WHERE ((select COUNT(*) from OutOfRangeValues) * 100.0) / (SELECT * FROM NumberOfRecords) >= {{ tolerance }}
 
 {% endtest %}
