@@ -1,0 +1,52 @@
+version: 2
+models:
+  - name: cleansed_listings
+    description: cleansed listings description
+    config:
+      materialized: incremental
+      unique_key:
+        - id
+      incremental_strategy: merge
+    columns:
+      - name: created_at
+        description: The date and time when the listing was created.
+        type: TIMESTAMP
+        tests: []
+      - name: host_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: room_type
+        type: TEXT
+        tests: []
+        description: ""
+      - name: id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: price
+        type: TEXT
+        tests: []
+        description: ""
+      - name: name
+        description: The name or title of the listing as provided by the host.
+        type: TEXT
+        tests: []
+      - name: updated_at
+        type: TIMESTAMP
+        tests: []
+        description: ""
+      - name: listing_url
+        description: The URL linking directly to the listing's webpage.
+        type: TEXT
+        tests: []
+      - name: minimum_nights
+        description: The minimum number of nights a guest must book the listing for.
+        type: NUMBER
+        tests: []
+    meta:
+      incremental_column: updated_at
+      model_tags:
+        - 9a684041-cebe-4a73-a4a2-f454d305813e
+      warehouse_type: snowflake
+    tests: []

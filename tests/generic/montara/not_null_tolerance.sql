@@ -11,6 +11,6 @@
     )
     SELECT * 
     FROM NullValueCounts
-    WHERE ((select COUNT(*) from NullValueCounts) :: FLOAT / (select * from AllValuesCounts) :: FLOAT) * 100 >= {{ tolerance }}
+    WHERE ((select COUNT(*) from NullValueCounts) * 100.0) / (select * from AllValuesCounts) >= {{ tolerance }}
 
 {% endtest %}

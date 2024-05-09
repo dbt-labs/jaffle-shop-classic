@@ -2,11 +2,11 @@
     {% set whereClause = "" %}
     
     {% if range_type == 'Before' %}
-        {% set whereClause = column_name + ' >= ' + "'" + before + "'" %}
+        {% set whereClause = column_name + ' >= TIMESTAMP ' + "'" + before + "'" %}
     {% elif range_type == 'After' %}
-        {% set whereClause = column_name + ' < ' + "'" + after + "'" %}        
+        {% set whereClause = column_name + ' < TIMESTAMP ' + "'" + after + "'" %}        
     {% else %}
-        {% set whereClause = column_name + ' NOT BETWEEN ' +  "'" + after + "'" +' AND ' + "'" + before + "'" %}
+        {% set whereClause = column_name + ' NOT BETWEEN TIMESTAMP ' +  "'" + after + "'" + ' AND TIMESTAMP ' + "'" + before + "'" %}
     {% endif %}
 
     WITH NumberOfRecords AS (
@@ -22,6 +22,6 @@
     )
     SELECT * 
     FROM OutOfRangeValues
-    WHERE (((select COUNT(*) from OutOfRangeValues) :: FLOAT / (SELECT * FROM NumberOfRecords) :: FLOAT) * 100) >= {{ tolerance }}
+    WHERE ((select COUNT(*) from OutOfRangeValues) * 100.0) / (SELECT * FROM NumberOfRecords) >= {{ tolerance }}
 
 {% endtest %}   

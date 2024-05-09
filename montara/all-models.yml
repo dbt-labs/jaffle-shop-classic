@@ -1,0 +1,290 @@
+all_assets:
+  cleansed_hosts:
+    name: cleansed_hosts
+    description: Retrieves all columns and records from a source named RAW_HOSTS
+      within an entity also referred to as RAW_HOSTS, which is encapsulated
+      within a WITH clause under the alias raw_hosts.
+    columns:
+      - name: IS_SUPERHOST
+        type: TEXT
+        tests: []
+        description: ""
+      - name: ID
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: UPDATED_AT
+        type: TIMESTAMP
+        tests: []
+        description: ""
+      - name: CREATED_AT
+        description: The timestamp when the host's information was first created.
+        type: TIMESTAMP
+        tests: []
+      - name: NAME
+        type: TEXT
+        tests: []
+        description: ""
+    meta:
+      model_tags:
+        - 9a684041-cebe-4a73-a4a2-f454d305813e
+        - 42aca93d-d0c5-4d00-b233-506ba0809186
+      warehouse_type: snowflake
+    tests: []
+  cleansed_listings:
+    name: cleansed_listings
+    description: cleansed listings description
+    config:
+      materialized: incremental
+      unique_key:
+        - id
+      incremental_strategy: merge
+    columns:
+      - name: created_at
+        description: The date and time when the listing was created.
+        type: TIMESTAMP
+        tests: []
+      - name: host_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: room_type
+        type: TEXT
+        tests: []
+        description: ""
+      - name: id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: price
+        type: TEXT
+        tests: []
+        description: ""
+      - name: name
+        description: The name or title of the listing as provided by the host.
+        type: TEXT
+        tests: []
+      - name: updated_at
+        type: TIMESTAMP
+        tests: []
+        description: ""
+      - name: listing_url
+        description: The URL linking directly to the listing's webpage.
+        type: TEXT
+        tests: []
+      - name: minimum_nights
+        description: The minimum number of nights a guest must book the listing for.
+        type: NUMBER
+        tests: []
+    meta:
+      incremental_column: updated_at
+      model_tags:
+        - 9a684041-cebe-4a73-a4a2-f454d305813e
+      warehouse_type: snowflake
+    tests: []
+  cleansed_orders:
+    name: cleansed_orders
+    description: ""
+    config:
+      materialized: incremental
+      incremental_strategy: append
+    columns:
+      - name: credit_card_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: amount
+        description: The total amount of the order.
+        type: NUMBER
+        tests: []
+      - name: gift_card_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: bank_transfer_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: customer_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: order_id
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: coupon_amount
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: status
+        type: TEXT
+        tests: []
+        description: ""
+      - name: order_date
+        type: DATE
+        tests: []
+        description: ""
+    meta:
+      incremental_column: order_date
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
+  customers:
+    name: customers
+    description: ""
+    columns:
+      - name: CUSTOMER_ID
+        description: Unique identifier for each customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        type: TEXT
+        tests: []
+        description: Customer's first name
+      - name: NUMBER_OF_ORDERS
+        type: NUMBER
+        tests: []
+        description: Total count of orders placed by the customer
+      - name: LAST_NAME
+        type: TEXT
+        tests: []
+        description: Customer’s last name
+      - name: CUSTOMER_LIFETIME_VALUE
+        type: NUMBER
+        tests: []
+        description: The total amount of money a customer has spent on orders
+      - name: MOST_RECENT_ORDER
+        type: DATE
+        tests: []
+        description: Date of the most recent order the customer has placed
+      - name: FIRST_ORDER
+        type: DATE
+        tests: []
+        description: Date when the customer placed their first order
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
+  my_very_long_my_very_long_model:
+    name: my_very_long_my_very_long_model
+    description: ""
+    config:
+      materialized: table
+    columns: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []
+  orders:
+    name: orders
+    description: ""
+    columns:
+      - name: STATUS
+        type: TEXT
+        tests: []
+        description: ""
+      - name: CUSTOMER_ID
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_DATE
+        type: DATE
+        tests: []
+        description: ""
+      - name: COUPON_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: CREDIT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: GIFT_CARD_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: BANK_TRANSFER_AMOUNT
+        type: NUMBER
+        tests: []
+        description: ""
+      - name: ORDER_ID
+        type: NUMBER
+        tests: []
+        description: ""
+    tests: []
+    meta:
+      warehouse_type: snowflake
+  stg_customers:
+    name: stg_customers
+    description: ""
+    columns:
+      - name: LAST_NAME
+        description: The surname of the customer.
+        type: TEXT
+        tests: []
+      - name: CUSTOMER_ID
+        description: A unique identifier for the customer
+        type: NUMBER
+        tests: []
+      - name: FIRST_NAME
+        description: The given name of the customer.
+        type: TEXT
+        tests: []
+    tests: []
+    meta:
+      warehouse_type: snowflake
+  stg_orders:
+    name: stg_orders
+    description: Transforms data from raw_orders by renaming columns, filtering for
+      new records since the last update when run incrementally, and enables the
+      result to be stored as an incrementally updated table with a unique key of
+      'id'.
+    columns:
+      - name: ORDER_DATE
+        description: The date and time when the order was placed.
+        type: DATE
+        tests: []
+      - name: CUSTOMER_ID
+        description: The unique identifier for the customer who placed the order.
+        type: NUMBER
+        tests: []
+      - name: ORDER_ID
+        description: The unique identifier for the order.
+        type: NUMBER
+        tests: []
+      - name: STATUS
+        description: The current status of the order (e.g., 'shipped', 'processing').
+        type: TEXT
+        tests: []
+    tests: []
+    meta:
+      warehouse_type: snowflake
+  stg_payments:
+    name: stg_payments
+    description: ""
+    columns:
+      - name: PAYMENT_ID
+        description: Unique identifier for the payment transaction.
+        type: NUMBER
+        tests: []
+      - name: PAYMENT_METHOD
+        description: Method by which the payment was made.
+        type: TEXT
+        tests: []
+      - name: AMOUNT
+        description: Total payment amount in dollars.
+        type: NUMBER
+        tests: []
+      - name: ORDER_ID
+        description: Identifier of the order associated with the payment.
+        type: NUMBER
+        tests: []
+    meta:
+      model_tags: []
+      warehouse_type: snowflake
+    tests: []

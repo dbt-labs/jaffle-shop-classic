@@ -17,6 +17,6 @@
 		)
     SELECT * FROM {{ model }} m 
 	join NonUniqueValues on NonUniqueValues.{{ column_name }} = m.{{ column_name }}   
-	WHERE  (((select COUNT(*) from NonUniqueValues) :: FLOAT / (SELECT * FROM NumberOfRecords) :: FLOAT) * 100) >= 0	    
+	WHERE  ((select COUNT(*) from NonUniqueValues) * 100.0) / (SELECT * FROM NumberOfRecords) >= 0	    
 
 {% endtest %}
