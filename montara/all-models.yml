@@ -41,9 +41,9 @@ all_assets:
       incremental_strategy: merge
     columns:
       - name: created_at
+        description: The date and time when the listing was created.
         type: TIMESTAMP
         tests: []
-        description: ""
       - name: host_id
         type: NUMBER
         tests: []
