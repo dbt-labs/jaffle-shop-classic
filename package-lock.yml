@@ -1,0 +1,8 @@
+packages:
+- package: get-select/dbt_snowflake_monitoring
+  version: 5.1.1
+- package: dbt-labs/dbt_utils
+  version: 1.1.1
+- package: get-select/dbt_snowflake_query_tags
+  version: 2.5.0
+sha1_hash: 034bdb9ea18447d450a10ebff65285c27f495ed9
