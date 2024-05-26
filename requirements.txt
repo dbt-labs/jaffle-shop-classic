@@ -23,7 +23,7 @@ dbt-core==1.7.0
 dbt-extractor==0.5.1
 dbt-postgres==1.7.0
 dbt-redshift==1.7.0
-dbt-run-visualizer @ file:///Users/dadiatar/git/dbt_run_visualizer/dist/dbt_run_visualizer-0.0.1.tar.gz#sha256=e224b783b25d5d9959cd37366e7b304d5305cce3b36b75eba365beee170c69b4
+dbt-run-visualizer==0.1.0
 dbt-semantic-interfaces==0.4.4
 dbt-snowflake==1.7.0
 distlib==0.3.6
