@@ -4,14 +4,24 @@ on:
     branches:
       - "**"
       - "!main"
-
 jobs:
-  build:
+  main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5.1.0
+      - name: Send HTTP request
+        id: request
+        uses: tyrrrz/action-http-request@master
         with:
-          python-version: "3.11.1"
-      - run: pip install -r requirements.txt
-      - run: mnt
+          url: https://staging-hooks.montara.io/pipeline/v2/trigger/36a07953-feac-4de5-a2e8-fbcbe2373e57
+          method: POST
+          headers: |
+            Content-Type: application/json
+          retry-count: 3
+          retry-delay: 500
+
+      - name: Print outputs
+        run: |
+          echo "Status: ${{ steps.request.outputs.status }}"
+          echo "Success: ${{ steps.request.outputs.success }}"
+          echo "Headers: ${{ steps.request.outputs.headers }}"
+          echo "Body: ${{ steps.request.outputs.body }}"
