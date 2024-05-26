@@ -5,9 +5,13 @@ on:
       - "**"
       - "!main"
 jobs:
-  main:
+  montaraTestRun:
     runs-on: ubuntu-latest
     steps:
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
       - name: Send HTTP request
         id: request
         uses: tyrrrz/action-http-request@master
@@ -18,10 +22,12 @@ jobs:
             Content-Type: application/json
           retry-count: 3
           retry-delay: 500
-
       - name: Print outputs
         run: |
           echo "Status: ${{ steps.request.outputs.status }}"
           echo "Success: ${{ steps.request.outputs.success }}"
           echo "Headers: ${{ steps.request.outputs.headers }}"
-          echo "Body: ${{ steps.request.outputs.body }}"
+          echo "Body (stringified JSON):"
+          echo "${{ steps.request.outputs.body }}"
+          echo "Body (pretty-printed JSON):"
+          echo "${{ steps.request.outputs.body }}" | jq .
