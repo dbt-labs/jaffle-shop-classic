@@ -8,13 +8,12 @@ sources:
         description: ""
         columns:
           - name: CREATED_AT
-            description: The date and time when the listing was created.
             type: TIMESTAMP
             tests: []
-          - name: LISTING_URL
+          - name: PRICE
             type: TEXT
             tests: []
-          - name: PRICE
+          - name: LISTING_URL
             type: TEXT
             tests: []
           - name: NAME
@@ -26,13 +25,12 @@ sources:
           - name: MINIMUM_NIGHTS
             type: NUMBER
             tests: []
-          - name: UPDATED_AT
-            type: TIMESTAMP
-            tests: []
           - name: ROOM_TYPE
             type: TEXT
             tests: []
+          - name: UPDATED_AT
+            type: TIMESTAMP
+            tests: []
           - name: HOST_ID
-            description: The unique identifier of the host for the listing.
             type: NUMBER
             tests: []

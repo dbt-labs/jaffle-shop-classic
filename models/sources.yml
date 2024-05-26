@@ -6,4 +6,9 @@ sources:
     database: airbnb
     tables:
       - name: RAW_HOSTS
+  - name: RAW_LISTINGS
+    schema: RAW
+    database: airbnb
+    tables:
+      - name: RAW_LISTINGS
         

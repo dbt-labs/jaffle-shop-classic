@@ -6,10 +6,3 @@ all_assets:
     tables:
       - name: RAW_LISTINGS
         description: ""
-  RAW_REVIEWS:
-    name: RAW_REVIEWS
-    schema: RAW
-    database: airbnb
-    tables:
-      - name: RAW_REVIEWS
-        description: ""
