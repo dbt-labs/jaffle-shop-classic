@@ -8,26 +8,7 @@ jobs:
   montaraTestRun:
     runs-on: ubuntu-latest
     steps:
-      - name: Install jq
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq
-      - name: Send HTTP request
-        id: request
-        uses: tyrrrz/action-http-request@master
+      - name: Montara CI
+        uses: montara-io/montara-ci@v0.0.1
         with:
-          url: https://staging-hooks.montara.io/pipeline/v2/trigger/36a07953-feac-4de5-a2e8-fbcbe2373e57
-          method: POST
-          headers: |
-            Content-Type: application/json
-          retry-count: 3
-          retry-delay: 500
-      - name: Print outputs
-        run: |
-          echo "Status: ${{ steps.request.outputs.status }}"
-          echo "Success: ${{ steps.request.outputs.success }}"
-          echo "Headers: ${{ steps.request.outputs.headers }}"
-          echo "Body (stringified JSON):"
-          echo "${{ steps.request.outputs.body }}"
-          echo "Body (pretty-printed JSON):"
-          echo "${{ steps.request.outputs.body }}" | jq .
+          webhookUrl: https://staging-hooks.montara.io/pipeline/v2/trigger/36a07953-feac-4de5-a2e8-fbcbe2373e57
