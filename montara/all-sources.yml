@@ -1,1 +1,8 @@
-all_assets: {}
+all_assets:
+  RAW_LISTINGS:
+    name: RAW_LISTINGS
+    schema: RAW
+    database: airbnb
+    tables:
+      - name: RAW_LISTINGS
+        description: ""
