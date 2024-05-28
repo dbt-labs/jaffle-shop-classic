@@ -5,10 +5,10 @@ on:
       - "**"
       - "!main"
 jobs:
-  montaraTestRun:
+  montara:
     runs-on: ubuntu-latest
     steps:
       - name: Montara CI
-        uses: montara-io/montara-ci@v0.0.1
+        uses: montara-io/montara-ci@v0.0.5
         with:
           webhookUrl: https://staging-hooks.montara.io/pipeline/v2/trigger/36a07953-feac-4de5-a2e8-fbcbe2373e57
