@@ -1,0 +1,109 @@
+name: Serverless Branch Deployments
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+concurrency:
+  # Cancel in-progress deploys to same branch
+  group: ${{ github.ref }}/branch_deployments
+  cancel-in-progress: true
+env:
+  DAGSTER_CLOUD_URL: "http://easyjet.dagster.cloud"
+  DAGSTER_CLOUD_ORGANIZATION: "easyjet"
+  DAGSTER_CLOUD_API_TOKEN: ${{ secrets.DAGSTER_CLOUD_API_TOKEN }}
+  ENABLE_FAST_DEPLOYS: 'true'
+  PYTHON_VERSION: '3.8'
+  DAGSTER_CLOUD_FILE: 'dagster_cloud.yaml'
+  DAGSTER_PROJECT_NAME: "jaffle_shop_classic"
+
+jobs:
+  dagster_cloud_default_deploy:
+    name: Dagster Serverless Deploy
+    runs-on: ubuntu-20.04
+    outputs:
+      build_info: ${{ steps.parse-workspace.outputs.build_info }}
+
+    steps:
+      - name: Prerun Checks
+        id: prerun
+        uses: dagster-io/dagster-cloud-action/actions/utils/prerun@v0.1
+
+      - name: Launch Docker Deploy
+        if: steps.prerun.outputs.result == 'docker-deploy'
+        id: parse-workspace
+        uses: dagster-io/dagster-cloud-action/actions/utils/parse_workspace@v0.1
+        with:
+          dagster_cloud_file: $DAGSTER_CLOUD_FILE
+
+      - name: Checkout
+        if: steps.prerun.outputs.result == 'pex-deploy'
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          path: project-repo
+
+      - name: Validate configuration
+        id: ci-validate
+        if: steps.prerun.outputs.result == 'pex-deploy'
+        uses: dagster-io/dagster-cloud-action/actions/utils/dagster-cloud-cli@v0.1
+        with:
+          command: "ci check --project-dir project-repo --dagster-cloud-yaml-path ${{ env.DAGSTER_CLOUD_FILE }}"
+        env:
+          DAGSTER_PROJECT_DIR: "jaffle_shop_classic"
+
+
+      - name: Initialize build session
+        id: ci-init
+        if: steps.prerun.outputs.result == 'pex-deploy'
+        uses: dagster-io/dagster-cloud-action/actions/utils/ci-init@v0.1
+        with:
+          project_dir: project-repo
+          dagster_cloud_yaml_path: ${{ env.DAGSTER_CLOUD_FILE }}
+
+      - name: Prepare DBT project for deployment
+        if: steps.prerun.outputs.result == 'pex-deploy'
+        # --upgrade-strategy eager picks up newer packages that are required for things to work
+        run: |
+          pip install pip --upgrade
+          cd project-repo/${{ env.DAGSTER_PROJECT_NAME }}
+          pip install . --upgrade --upgrade-strategy eager
+          dagster-dbt project prepare-for-deployment --file ${{ env.DAGSTER_PROJECT_NAME }}/project.py
+          # The cli command below can be used to manage syncing the prod manifest to branches if state_path is set on the DbtProject
+          # dagster-cloud ci dagster-dbt project manage-state --file ${{ env.DAGSTER_PROJECT_NAME }}/project.py
+        shell: bash
+
+      - name: Python Executable Deploy
+        if: steps.prerun.outputs.result == 'pex-deploy'
+        uses: dagster-io/dagster-cloud-action/actions/build_deploy_python_executable@v0.1
+        with:
+          dagster_cloud_file: "$GITHUB_WORKSPACE/project-repo/$DAGSTER_CLOUD_FILE"
+          build_output_dir: "$GITHUB_WORKSPACE/build"
+          python_version: "${{ env.PYTHON_VERSION }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  dagster_cloud_docker_deploy:
+    name: Docker Deploy
+    runs-on: ubuntu-20.04
+    if: needs.dagster_cloud_default_deploy.outputs.build_info
+    needs: dagster_cloud_default_deploy
+    strategy:
+      fail-fast: false
+      matrix:
+        location: ${{ fromJSON(needs.dagster_cloud_default_deploy.outputs.build_info) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Build and deploy to Dagster Cloud serverless
+        uses: dagster-io/dagster-cloud-action/actions/serverless_branch_deploy@v0.1
+        with:
+          dagster_cloud_api_token: ${{ secrets.DAGSTER_CLOUD_API_TOKEN }}
+          location: ${{ toJson(matrix.location) }}
+          base_image: "python:${{ env.PYTHON_VERSION }}-slim"
+          # Uncomment to pass through Github Action secrets as a JSON string of key-value pairs
+          # env_vars: ${{ toJson(secrets) }}
+          organization_id: ${{ secrets.ORGANIZATION_ID }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
